@@ -95,15 +95,15 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport implements I
 
     @PostConstruct
     public void freeMarkerConfigurer() {
-    		configuration.setSharedVariable("attr", new AttributeTemplateDirectiveModelBean());
-    		configuration.setSharedVariable("i18n", new I18NTemplateDirectiveModelBean(properties));
-    		configuration.setSharedVariable("property", new PropertiesTemplateDirectiveModelBean(properties));
-    		configuration.setSharedVariable("locale", new LocaleTemplateDirectiveModelBean());
-    		configuration.setSharedVariable("input", new InputTemplateDirectiveModelBean());
-    		configuration.setSharedVariable("a", new HyperlinkTemplateDirectiveModelBean());
-    		configuration.setSharedVariable("button", new ButtonTemplateDirectiveModelBean());
-    		configuration.setSharedVariable("div", new DivTemplateDirectiveModelBean());
-    		configuration.setSharedVariable("p", new PaginationTemplateDirectiveModelBean());
+    	configuration.setSharedVariable("attr", new AttributeTemplateDirectiveModelBean());
+    	configuration.setSharedVariable("i18n", new I18NTemplateDirectiveModelBean(properties));
+    	configuration.setSharedVariable("property", new PropertiesTemplateDirectiveModelBean(properties));
+    	configuration.setSharedVariable("locale", new LocaleTemplateDirectiveModelBean());
+    	configuration.setSharedVariable("input", new InputTemplateDirectiveModelBean());
+    	configuration.setSharedVariable("a", new HyperlinkTemplateDirectiveModelBean());
+    	configuration.setSharedVariable("button", new ButtonTemplateDirectiveModelBean());
+    	configuration.setSharedVariable("div", new DivTemplateDirectiveModelBean());
+    	configuration.setSharedVariable("p", new PaginationTemplateDirectiveModelBean());
     }
 
     /*@Bean
