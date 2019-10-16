@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>springboot</artifactId>
+	<packaging>jar</packaging>
+	<name>springboot</name>
+	<description>HCE DUCATI Project</description>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.4.RELEASE</version>
+		<relativePath/><!-- lookup parent from repository -->
+	</parent>
+	<properties>
+    	<argLine>-Dfile.encoding=UTF-8</argLine>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <version.spring>5.1.7.RELEASE</version.spring>
+	</properties>
+    <build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
+					<executable>true</executable>
+					<!-- 包含引入的非maven库jar包 -->
+					<includeSystemScope>true</includeSystemScope>
+				</configuration>
+				<!-- 显示/actuator/info内容 -->
+				<executions>
+                	<execution>
+                    	<goals>
+                        	<goal>build-info</goal>
+                    	</goals>
+                	</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.plexus</groupId>
+						<artifactId>plexus-compiler-javac</artifactId>
+						<version>1.8.1</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>utf-8</encoding>
+					<!-- 使profile生效 -->
+					<useDefaultDelimiters>true</useDefaultDelimiters>
+				</configuration>
+			</plugin>
+			<!--plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<echo>${project.basedir}</echo>
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin-->
+		</plugins>
+		<resources>
+	        <resource>
+	            <directory>src/main/resources</directory>
+	            <filtering>true</filtering>
+				<!-- <excludes>
+					<exclude>**/*.ftl</exclude>
+				</excludes> -->
+			</resource>
+ 		</resources>
+	</build>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<path.log.logback>D:/logs/ducati</path.log.logback>
+				<log.level>INFO</log.level>
+				<spring.freemarker.cache>false</spring.freemarker.cache>
+				<prefix.resource>/static</prefix.resource>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<path.log.logback>/app/logs/ducati</path.log.logback>
+				<log.level>INFO</log.level>
+				<spring.freemarker.cache>true</spring.freemarker.cache>
+				<prefix.resource>http://172.16.80.12/ducati</prefix.resource>
+			</properties>
+		</profile>
+		<profile>
+			<id>pro</id>
+			<properties>
+				<path.log.logback>/app/ducati/logs</path.log.logback>
+				<log.level>WARN</log.level>
+				<spring.freemarker.cache>true</spring.freemarker.cache>
+				<prefix.resource>http://static.xxx.com</prefix.resource>
+			</properties>
+		</profile>
+	</profiles>
+    <repositories>
+        <repository>
+            <id>aliyun</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <!-- <repository>
+            <id>hce-nexus</id>
+            <url>http://172.16.80.12:8081/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository> -->
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/libs-milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <!-- <build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${version.spring.boot}</version>
+				<configuration>
+					<jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
+					<executable>true</executable>
+					包含引入的非maven库jar包
+					<includeSystemScope>true</includeSystemScope>
+				</configuration>
+				显示/actuator/info内容
+				<executions>
+                	<execution>
+                    	<goals>
+                        	<goal>build-info</goal>
+                    	</goals>
+                	</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build> -->
+	<dependencyManagement>
+	    <dependencies>
+	        <dependency>
+	            <groupId>org.springframework.cloud</groupId>
+	            <artifactId>spring-cloud-dependencies</artifactId>
+	            <version>Finchley.SR1</version>
+	            <type>pom</type>
+	            <scope>import</scope>
+	        </dependency>
+	    </dependencies>
+	</dependencyManagement>
+	<dependencies>
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-feign</artifactId>
+		    <version>1.4.7.RELEASE</version>
+		</dependency>
+		<!-- <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<version>${version.spring.boot}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+			<version>${version.spring.boot}</version>
+		</dependency> -->
+		<!-- 加载Dubbo -->
+		<!-- <dependency>
+		    <groupId>io.dubbo.springboot</groupId>
+		    <artifactId>spring-boot-starter-dubbo</artifactId>
+		    <version>1.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.hce</groupId>
+		    <artifactId>banking-dubbo-server</artifactId>
+		    <version>0.0.1-SNAPSHOT</version>
+		</dependency> -->
+		<!-- 加载Dubbo结束 -->
+		<!-- 加载springcloud -->
+		<!-- <dependency>
+	        <groupId>org.springframework.cloud</groupId>
+	        <artifactId>spring-cloud-starter-config</artifactId>
+	    </dependency> -->
+	    <!-- <dependency>
+	        <groupId>org.springframework.cloud</groupId>
+	        <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+	    </dependency> -->
+	    <!-- 加载springcloud结束 -->
+	    <dependency>
+		    <groupId>com.hce</groupId>
+		    <artifactId>ducati-service</artifactId>
+		    <version>0.0.1-SNAPSHOT</version>
+		</dependency>
+    </dependencies>
+</project>

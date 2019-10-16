@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hce.ducati.mapper.CreditMapper" >
+	<resultMap id="creditResultMap" type="com.hce.ducati.o.CreditDTO">
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="company_cn_name" property="companyCnName" jdbcType="VARCHAR" />
+		<result column="company_en_name" property="companyEnName" jdbcType="VARCHAR" />
+		<result column="currency" property="currency" jdbcType="VARCHAR" />
+		<result column="amount" property="amount" jdbcType="DECIMAL" />
+		<result column="max_limit_one_day" property="maxLimitOneDay" jdbcType="DECIMAL" />
+		<result column="used_amount" property="usedAmount" jdbcType="DECIMAL" />
+		<result column="ratio" property="ratio" jdbcType="INTEGER" />
+		<result column="valid_from" property="validFrom" jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="creditMarginResultMap" type="com.hce.ducati.o.CreditMarginDTO">
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="company_cn_name" property="companyCnName" jdbcType="VARCHAR" />
+		<result column="company_en_name" property="companyEnName" jdbcType="VARCHAR" />
+		<result column="currency" property="currency" jdbcType="VARCHAR" />
+		<result column="amount" property="amount" jdbcType="DECIMAL" />
+		<result column="price" property="price" jdbcType="DECIMAL" />
+		<result column="credit_currency" property="creditCurrency" jdbcType="VARCHAR" />
+		<result column="credit_amount" property="creditAmount" jdbcType="DECIMAL" />
+		<result column="margin_amount" property="marginAmount" jdbcType="DECIMAL" />
+		<result column="ratio" property="ratio" jdbcType="INTEGER" />
+		<result column="valid_from" property="validFrom" jdbcType="TIMESTAMP" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="approver_user_name" property="approverUserName" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="displayed_status" property="displayedStatus" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="findCredits" resultMap="creditResultMap">
+		SELECT credit.id,company.cn_name AS company_cn_name,company.en_name AS company_en_name,credit.currency,credit.amount,credit.max_limit_one_day,credit.ratio,DATE_FORMAT(credit.valid_from, '%Y-%m-%d %H:%i:%s') AS valid_from,u.name AS user_name 
+		FROM b_credit credit 
+		INNER JOIN b_company company ON credit.company_id=company.id 
+		INNER JOIN s_user u ON credit.user_id=u.id
+	</select>
+	<select id="countCreditHisotrys" resultType="INTEGER">
+		SELECT COUNT(*) FROM b_credit_history 
+		<where>
+			credit_id=#{creditId, jdbcType=INTEGER} 
+			<if test="from!=null">
+				AND valid_from &gt;= #{from, jdbcType=TIMESTAMP} 
+			</if>
+			<if test="to!=null">
+				AND valid_from &lt;= #{to, jdbcType=TIMESTAMP} 
+			</if>
+		</where>
+	</select>
+	<select id="findCreditHisotrys" resultMap="creditResultMap">
+		SELECT h.amount,DATE_FORMAT(h.valid_from, '%Y-%m-%d %H:%i:%s') AS valid_from,u.name AS user_name 
+		FROM (SELECT amount,valid_from,user_id FROM b_credit_history WHERE credit_id=#{creditId, jdbcType=INTEGER} 
+		<if test="from!=null">
+			AND valid_from &gt;= #{from, jdbcType=TIMESTAMP} 
+		</if>
+		<if test="to!=null">
+			AND valid_from &lt;= #{to, jdbcType=TIMESTAMP} 
+		</if>
+		) h 
+		INNER JOIN s_user u ON h.user_id=u.id 
+		LIMIT #{start, jdbcType=INTEGER}, #{size, jdbcType=INTEGER}
+	</select>
+	<update id="auditCreditMargin">
+		UPDATE b_credit_margin 
+		<set>
+			status=1,
+			valid_from=NOW(),
+			approver_user_id=#{approverUserId, jdbcType=INTEGER} 
+		</set>
+		<where>
+			id=#{id, jdbcType=INTEGER} 
+			AND status=0 
+			AND currency=#{currency, jdbcType=VARCHAR} 
+			AND amount=#{amount, jdbcType=DECIMAL}
+		</where>
+	</update>
+	<delete id="deleteCreditMargin">
+		DELETE FROM b_credit_margin 
+		<where>
+			id=#{id, jdbcType=INTEGER} AND status&lt;1
+		</where>
+	</delete>
+	<select id="countCreditMargins" resultType="INTEGER">
+		SELECT COUNT(m.id) FROM b_credit_margin m INNER JOIN b_credit c ON m.credit_id=c.id 
+		<where>
+			1=1 
+			<if test="currency!=null and currency!=''">
+				AND m.currency=#{currency, jdbcType=VARCHAR} 
+			</if>
+			<if test="from!=null">
+				AND m.valid_from &gt;= #{from, jdbcType=TIMESTAMP} 
+			</if>
+			<if test="to!=null">
+				AND m.valid_from &lt;= #{to, jdbcType=TIMESTAMP} 
+			</if>
+			<if test="companyId!=null">
+				AND c.company_id=#{companyId, jdbcType=INTEGER} 
+			</if>
+		</where>
+	</select>
+	<select id="findCreditMargins" resultMap="creditMarginResultMap">
+		SELECT m.id,company.cn_name AS company_cn_name,company.en_name AS company_en_name,m.credit_currency,m.credit_amount,m.ratio,m.currency,m.amount,m.price,m.margin_amount,DATE_FORMAT(m.valid_from, '%Y-%m-%d %H:%i:%s') AS valid_from,m.status,d.value AS displayed_status,user.name AS user_name,approver.name AS approver_user_name
+		FROM (
+			SELECT m.id,m.currency,m.amount,m.ratio,m.price,m.credit_amount AS margin_amount,m.valid_from,m.user_id,m.approver_user_id,m.status,c.company_id,c.currency AS credit_currency,c.amount AS credit_amount 
+			FROM b_credit_margin m INNER JOIN b_credit c ON m.credit_id=c.id 
+			<where>
+				1=1 
+				<if test="currency!=null and currency!=''">
+					AND m.currency=#{currency, jdbcType=VARCHAR} 
+				</if>
+				<if test="from!=null">
+					AND m.valid_from &gt;= #{from, jdbcType=TIMESTAMP} 
+				</if>
+				<if test="to!=null">
+					AND m.valid_from &lt;= #{to, jdbcType=TIMESTAMP} 
+				</if>
+				<if test="companyId!=null">
+					AND c.company_id=#{companyId, jdbcType=INTEGER} 
+				</if>
+			</where>
+			ORDER BY m.status DESC,m.valid_from DESC
+			LIMIT #{start, jdbcType=INTEGER}, #{size, jdbcType=INTEGER}
+		) m 
+		INNER JOIN b_company company ON m.company_id=company.id 
+		INNER JOIN s_user user ON m.user_id=user.id 
+		LEFT OUTER JOIN s_user approver ON m.approver_user_id=approver.id 
+		INNER JOIN b_dictionary_item d ON m.status=d._key AND d.p_id=3
+	</select>
+</mapper>

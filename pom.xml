@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.hce</groupId>
+	<artifactId>ducati</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>ducati</name>
+	<properties>
+    	<argLine>-Dfile.encoding=UTF-8</argLine>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <version.spring>5.1.8.RELEASE</version.spring>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+					<compilerArgument>-Xlint:deprecation</compilerArgument>
+					<!-- <compilerArguments>
+						<extdirs>${pom.basedir}/src/main/lib</extdirs>
+					</compilerArguments> -->
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.plexus</groupId>
+						<artifactId>plexus-compiler-javac</artifactId>
+						<version>2.8.5</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+		<resources>
+	        <resource>
+	            <directory>src/main/resources</directory>
+	            <filtering>true</filtering>
+			</resource>
+ 		</resources>
+	</build>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<env>dev</env>
+				<server.port>12081</server.port>
+				<spring.datasource.url>172.16.80.12:3306/ducati</spring.datasource.url>
+				<spring.datasource.username>payment</spring.datasource.username>
+				<spring.datasource.password>pgw@321</spring.datasource.password>
+				<spring.datasource.url.slave>172.16.80.12:3306/ducati</spring.datasource.url.slave>
+				<spring.datasource.username.slave>payment</spring.datasource.username.slave>
+				<spring.datasource.password.slave>pgw@321</spring.datasource.password.slave>
+				<!-- <spring.rocketmq.nameServer>172.16.80.32:9876</spring.rocketmq.nameServer> -->
+				<spring.jpa.show-sql>true</spring.jpa.show-sql>
+				<expire.session>10</expire.session><!-- minutes -->
+				<redis.host>172.16.80.12</redis.host>
+				<redis.port>6379</redis.port>
+				<redis.pwd>foobared</redis.pwd>
+				<domain>127.0.0.1</domain><!-- 种cookie识别session, ajax跨域 -->
+				<mail.user>maqiang@hce-haier.com</mail.user>
+				<mail.to>mq7253181@126.com</mail.to>
+				<zk.url>172.16.80.12:2181</zk.url>
+				<nexus.url>172.16.80.38:8082</nexus.url>
+				<cfca.platid>8949665AA3D9699DE05311016B0A2A11</cfca.platid>
+				<cfca.addr>210.74.42.33:9443</cfca.addr>
+				<cfca.jks.location>D:/secret/anxinsign-test.jks</cfca.jks.location>
+				<cfca.sealid>8BA4765BB92A202FE05312016B0AB766</cfca.sealid>
+				<location.accounts>D:/ducati/tmp</location.accounts>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>maqiangmacpro</id>
+			<properties>
+				<env>dev</env>
+				<server.port>12081</server.port>
+				<spring.datasource.url>172.16.80.12:3306/ducati</spring.datasource.url>
+				<spring.datasource.username>payment</spring.datasource.username>
+				<spring.datasource.password>pgw@321</spring.datasource.password>
+				<spring.datasource.url.slave>172.16.80.12:3306/ducati</spring.datasource.url.slave>
+				<spring.datasource.username.slave>payment</spring.datasource.username.slave>
+				<spring.datasource.password.slave>pgw@321</spring.datasource.password.slave>
+				<!-- <spring.rocketmq.nameServer>172.16.80.32:9876</spring.rocketmq.nameServer> -->
+				<spring.jpa.show-sql>true</spring.jpa.show-sql>
+				<expire.session>10</expire.session><!-- minutes -->
+				<redis.host>172.16.80.12</redis.host>
+				<redis.port>6379</redis.port>
+				<redis.pwd>foobared</redis.pwd>
+				<domain>127.0.0.1</domain><!-- 种cookie识别session, ajax跨域 -->
+				<mail.user>maqiang@hce-haier.com</mail.user>
+				<mail.to>mq7253181@126.com</mail.to>
+				<zk.url>172.16.80.12:2181</zk.url>
+				<nexus.url>172.16.80.38:8082</nexus.url>
+				<cfca.platid>8949665AA3D9699DE05311016B0A2A11</cfca.platid>
+				<cfca.addr>210.74.42.33:9443</cfca.addr>
+				<cfca.jks.location>/Users/maqiang/secret/anxinsign-test.jks</cfca.jks.location>
+				<cfca.sealid>8BA4765BB92A202FE05312016B0AB766</cfca.sealid>
+				<location.accounts>D:/ducati/tmp</location.accounts>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<env>test</env>
+				<server.port>18081</server.port>
+				<spring.datasource.url>localhost:3306/ducati</spring.datasource.url>
+				<spring.datasource.username>payment</spring.datasource.username>
+				<spring.datasource.password>pgw@321</spring.datasource.password>
+				<spring.datasource.url.slave>localhost:3306/ducati</spring.datasource.url.slave>
+				<spring.datasource.username.slave>payment</spring.datasource.username.slave>
+				<spring.datasource.password.slave>pgw@321</spring.datasource.password.slave>
+				<!-- <spring.rocketmq.nameServer>172.16.80.32:9876</spring.rocketmq.nameServer> -->
+				<spring.jpa.show-sql>false</spring.jpa.show-sql>
+				<expire.session>30</expire.session><!-- minutes -->
+				<redis.host>localhost</redis.host>
+				<redis.port>6379</redis.port>
+				<redis.pwd>foobared</redis.pwd>
+				<domain>172.16.80.12</domain><!-- 种cookie识别session, ajax跨域 -->
+				<mail.user>maqiang@hce-haier.com</mail.user>
+				<mail.to>mq7253181@126.com</mail.to>
+				<zk.url>172.16.80.12:2181</zk.url>
+				<nexus.url>172.16.80.38:8082</nexus.url>
+				<cfca.platid>8949665AA3D9699DE05311016B0A2A11</cfca.platid>
+				<cfca.addr>210.74.42.33:9443</cfca.addr>
+				<cfca.jks.location>/app/secret/anxinsign-test.jks</cfca.jks.location>
+				<cfca.sealid>8BA4765BB92A202FE05312016B0AB766</cfca.sealid>
+				<location.accounts>/home/wsh/accounts</location.accounts>
+			</properties>
+		</profile>
+		<profile>
+			<id>pro</id>
+			<properties>
+				<env>pro</env>
+				<server.port>18081</server.port>
+				<spring.datasource.url>10.50.1.14:3306/ducati</spring.datasource.url>
+				<spring.datasource.username>fxc</spring.datasource.username>
+				<spring.datasource.password>xxx</spring.datasource.password>
+				<spring.datasource.url.slave>10.50.1.14:3306/ducati</spring.datasource.url.slave>
+				<spring.datasource.username.slave>fxc</spring.datasource.username.slave>
+				<spring.datasource.password.slave>xxx</spring.datasource.password.slave>
+				<!-- <spring.rocketmq.nameServer>10.30.1.11:9876</spring.rocketmq.nameServer> -->
+				<spring.jpa.show-sql>false</spring.jpa.show-sql>
+				<expire.session>60</expire.session><!-- minutes -->
+				<redis.host>localhost</redis.host>
+				<redis.port>6379</redis.port>
+				<redis.pwd>3Xu+czctTmUIjZos</redis.pwd>
+				<domain>xxx.hce.com</domain><!-- 种cookie识别session, ajax跨域 -->
+				<mail.user>noreply@hce-haier.com</mail.user>
+				<mail.to></mail.to>
+				<zk.url></zk.url>
+				<nexus.url>172.16.80.38:8082</nexus.url>
+				<cfca.platid></cfca.platid>
+				<cfca.addr>cs.anxinsign.com</cfca.addr>
+				<cfca.jks.location></cfca.jks.location>
+				<cfca.sealid></cfca.sealid>
+				<location.accounts></location.accounts>
+			</properties>
+		</profile>
+	</profiles>
+	<modules>
+		<module>core</module>
+		<module>core-auth</module>
+		<module>cfca-api</module>
+		<module>service</module>
+		<module>springboot</module>
+	</modules>
+</project>

@@ -1,0 +1,1 @@
+{"status":-2, "msg":"<@i18n key="status.error.500"/>"<#if exception?exists>, "data":"${exception}"</#if>}
