@@ -12,7 +12,7 @@ import com.hce.auth.AuthConstants;
 import com.hce.auth.entity.User;
 import com.hce.auth.o.DSession;
 import com.hce.auth.service.UserService;
-import com.hce.global.Constants;
+import com.quincy.global.Constants;
 
 @Service("authorizationSessionServiceImpl")
 public class AuthorizationSessionServiceImpl extends AuthorizationAbstract {

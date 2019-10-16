@@ -25,9 +25,9 @@ import com.hce.ducati.ServiceConstants;
 import com.hce.ducati.entity.CreditMargin;
 import com.hce.ducati.service.CompanyService;
 import com.hce.ducati.service.CreditMarginService;
-import com.hce.global.Pagination;
-import com.hce.global.Result;
-import com.hce.global.helper.CommonHelper;
+import com.quincy.global.Pagination;
+import com.quincy.global.Result;
+import com.quincy.global.helper.CommonHelper;
 
 @Controller
 @RequestMapping("/credit/margin")

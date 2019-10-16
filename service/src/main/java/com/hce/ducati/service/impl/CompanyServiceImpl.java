@@ -41,9 +41,9 @@ import com.hce.ducati.entity.Company;
 import com.hce.ducati.entity.Enterprise;
 import com.hce.ducati.entity.Individual;
 import com.hce.ducati.service.CompanyService;
-import com.hce.global.Constants;
-import com.hce.global.annotation.ReadOnly;
-import com.hce.global.helper.CommonHelper;
+import com.quincy.global.Constants;
+import com.quincy.global.annotation.ReadOnly;
+import com.quincy.global.helper.CommonHelper;
 
 import cfca.sadk.algorithm.common.PKIException;
 import cfca.sadk.org.bouncycastle.util.encoders.Base64;

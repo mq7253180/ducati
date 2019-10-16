@@ -19,12 +19,14 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
-import com.hce.core.db.DataSourceHolder;
-import com.hce.core.db.RoutingDataSource;
+import com.quincy.core.db.DataSourceHolder;
+import com.quincy.core.db.RoutingDataSource;
 
+import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+@Slf4j
 @Configuration
 public class CoreApplicationContext {//implements TransactionManagementConfigurer {
 	@Bean
@@ -103,12 +105,14 @@ public class CoreApplicationContext {//implements TransactionManagementConfigure
 
 	@Bean
     public JedisPool jedisPool() {
+		log.warn("===============Initializing Jedis================");
 		GenericObjectPoolConfig<Jedis> cfg = new GenericObjectPoolConfig<Jedis>();
 		cfg.setMaxTotal(redisMaxTotal);
 		cfg.setMaxIdle(redisMaxIdle);
 		cfg.setMinIdle(redisMinIdle);
 		cfg.setMaxWaitMillis(redisMaxWait);
 		JedisPool pool = new JedisPool(cfg, redisHost, redisPort, redisTimeout, redisPwd);
+		log.warn("===============Initialized Jedis================");
 		return pool;
 	}
 
@@ -153,6 +157,7 @@ public class CoreApplicationContext {//implements TransactionManagementConfigure
 
 	@Bean(name = "dataSource")
     public DataSource routingDataSource() {
+		log.warn("===============Initializing DB================");
 		BasicDataSource masterDB = new BasicDataSource();
 		masterDB.setDriverClassName(driverClassName);
 		masterDB.setUrl(masterUrl);
@@ -193,6 +198,7 @@ public class CoreApplicationContext {//implements TransactionManagementConfigure
 		RoutingDataSource  db = new RoutingDataSource();
 		db.setTargetDataSources(targetDataSources);
 		db.setDefaultTargetDataSource(masterDB);
+		log.warn("===============Initialized DB================");
 		return db;
 	}
 /*

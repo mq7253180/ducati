@@ -17,9 +17,9 @@ import com.hce.auth.entity.User;
 import com.hce.auth.o.DSession;
 import com.hce.auth.service.AuthorizationService;
 import com.hce.auth.service.UserService;
-import com.hce.global.Constants;
-import com.hce.global.Result;
-import com.hce.global.helper.CommonHelper;
+import com.quincy.global.Constants;
+import com.quincy.global.Result;
+import com.quincy.global.helper.CommonHelper;
 
 @Controller
 @RequestMapping("/auth")

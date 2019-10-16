@@ -24,7 +24,7 @@ import com.hce.cfca.o.ContractVO2Wrapper;
 import com.hce.cfca.o.ContractVOWrapper;
 import com.hce.cfca.service.CFCAService;
 import com.hce.cfca.service.ContractService;
-import com.hce.global.helper.CommonHelper;
+import com.quincy.global.helper.CommonHelper;
 
 import cfca.sadk.algorithm.common.PKIException;
 import cfca.trustsign.common.vo.cs.ContractVO;

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.hce.auth.dao.CountryRepository;
 import com.hce.auth.entity.Country;
 import com.hce.auth.service.ZoneService;
-import com.hce.global.annotation.Cache;
+import com.quincy.global.annotation.Cache;
 
 @Service
 public class ZoneServiceImpl implements ZoneService {

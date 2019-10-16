@@ -5,8 +5,8 @@ import java.util.Date;
 
 import com.hce.ducati.entity.Credit;
 import com.hce.ducati.entity.CreditMargin;
-import com.hce.global.Pagination;
-import com.hce.global.Result;
+import com.quincy.global.Pagination;
+import com.quincy.global.Result;
 
 public interface CreditMarginService {
 	public void updateCreditAmount(Credit credit);

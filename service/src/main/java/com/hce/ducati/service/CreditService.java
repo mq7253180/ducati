@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.hce.ducati.entity.Credit;
 import com.hce.ducati.o.CreditDTO;
-import com.hce.global.Pagination;
+import com.quincy.global.Pagination;
 
 public interface CreditService {
 	public Credit add(Credit credit);

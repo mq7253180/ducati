@@ -26,7 +26,7 @@ import com.hce.auth.entity.Role;
 import com.hce.auth.entity.User;
 import com.hce.auth.service.UserService;
 import com.hce.ducati.service.CompanyService;
-import com.hce.global.helper.CommonHelper;
+import com.quincy.global.helper.CommonHelper;
 
 import cfca.sadk.algorithm.common.PKIException;
 

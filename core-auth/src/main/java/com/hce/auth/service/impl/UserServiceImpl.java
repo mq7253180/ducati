@@ -20,7 +20,7 @@ import com.hce.auth.entity.User;
 import com.hce.auth.mapper.AuthMapper;
 import com.hce.auth.o.DSession;
 import com.hce.auth.service.UserService;
-import com.hce.global.annotation.ReadOnly;
+import com.quincy.global.annotation.ReadOnly;
 
 @Service
 public class UserServiceImpl implements UserService {

@@ -8,8 +8,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.hce.auth.o.DSession;
-import com.hce.global.Constants;
-import com.hce.global.helper.CommonHelper;
+import com.quincy.global.Constants;
+import com.quincy.global.helper.CommonHelper;
 
 import freemarker.core.Environment;
 import freemarker.template.TemplateDirectiveBody;

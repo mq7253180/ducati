@@ -29,8 +29,8 @@ import com.hce.ducati.entity.Credit;
 import com.hce.ducati.o.CreditDTO;
 import com.hce.ducati.service.CompanyService;
 import com.hce.ducati.service.CreditService;
-import com.hce.global.Result;
-import com.hce.global.helper.CommonHelper;
+import com.quincy.global.Result;
+import com.quincy.global.helper.CommonHelper;
 
 @Controller
 @RequestMapping("/credit")

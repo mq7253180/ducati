@@ -27,16 +27,16 @@ import com.hce.auth.freemarker.DivTemplateDirectiveModelBean;
 import com.hce.auth.freemarker.HyperlinkTemplateDirectiveModelBean;
 import com.hce.auth.freemarker.InputTemplateDirectiveModelBean;
 import com.hce.auth.service.AuthorizationService;
-import com.hce.core.view.GlobalHandlerMethodReturnValueHandler;
-import com.hce.core.view.GlobalLocaleResolver;
-import com.hce.core.view.I18NInterceptor;
-import com.hce.core.view.StaticInterceptor;
-import com.hce.core.view.freemarker.AttributeTemplateDirectiveModelBean;
-import com.hce.core.view.freemarker.I18NTemplateDirectiveModelBean;
-import com.hce.core.view.freemarker.LocaleTemplateDirectiveModelBean;
-import com.hce.core.view.freemarker.PropertiesTemplateDirectiveModelBean;
 import com.hce.ducati.freemarker.PaginationTemplateDirectiveModelBean;
-import com.hce.global.Constants;
+import com.quincy.core.view.GlobalHandlerMethodReturnValueHandler;
+import com.quincy.core.view.GlobalLocaleResolver;
+import com.quincy.core.view.I18NInterceptor;
+import com.quincy.core.view.StaticInterceptor;
+import com.quincy.core.view.freemarker.AttributeTemplateDirectiveModelBean;
+import com.quincy.core.view.freemarker.I18NTemplateDirectiveModelBean;
+import com.quincy.core.view.freemarker.LocaleTemplateDirectiveModelBean;
+import com.quincy.core.view.freemarker.PropertiesTemplateDirectiveModelBean;
+import com.quincy.global.Constants;
 
 import freemarker.template.Configuration;
 
