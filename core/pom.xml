@@ -13,7 +13,7 @@
 	<dependencies>
 		<dependency>
 		    <groupId>com.maqiangcgq</groupId>
-		    <artifactId>sdk</artifactId>
+		    <artifactId>quincy-sdk</artifactId>
 		    <version>1.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
