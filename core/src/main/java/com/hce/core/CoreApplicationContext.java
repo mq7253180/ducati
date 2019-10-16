@@ -49,6 +49,39 @@ public class CoreApplicationContext {//implements TransactionManagementConfigure
         return messageSource;
     }
 
+	@Bean("propertiesFactoryBean")
+	public PropertiesFactoryBean properties() throws IOException {
+		List<Resource> resourceList = new ArrayList<Resource>();
+		new ClassPathHandler() {
+			@Override
+			protected void run(List<Resource> resources) {
+				resourceList.addAll(resources);
+			}
+		}.start("classpath*:application.properties", "classpath*:application-*.properties");
+		Resource[] locations = new Resource[resourceList.size()];
+		locations = resourceList.toArray(locations);
+		PropertiesFactoryBean bean = new PropertiesFactoryBean();
+		bean.setLocations(locations);
+		bean.afterPropertiesSet();
+		return bean;
+	}
+
+	private abstract class ClassPathHandler {
+		protected abstract void run(List<Resource> resources);
+
+		public void start(String... locationPatterns) throws IOException {
+			PathMatchingResourcePatternResolver r = new PathMatchingResourcePatternResolver();
+			List<Resource> resourceList = new ArrayList<Resource>(50);
+			for(String locationPattern:locationPatterns) {
+				Resource[] resources = r.getResources(locationPattern);
+				for(Resource resource:resources) {
+					resourceList.add(resource);
+				}
+			}
+			this.run(resourceList);
+		}
+	}
+
 	@Value("${spring.redis.host}")
 	private String redisHost;
 	@Value("${spring.redis.port}")
@@ -162,40 +195,6 @@ public class CoreApplicationContext {//implements TransactionManagementConfigure
 		db.setDefaultTargetDataSource(masterDB);
 		return db;
 	}
-
-	@Bean("propertiesFactoryBean")
-	public PropertiesFactoryBean properties() throws IOException {
-		List<Resource> resourceList = new ArrayList<Resource>();
-		new ClassPathHandler() {
-			@Override
-			protected void run(List<Resource> resources) {
-				resourceList.addAll(resources);
-			}
-		}.start("classpath*:application.properties", "classpath*:application-*.properties");
-		Resource[] locations = new Resource[resourceList.size()];
-		locations = resourceList.toArray(locations);
-		PropertiesFactoryBean bean = new PropertiesFactoryBean();
-		bean.setLocations(locations);
-		bean.afterPropertiesSet();
-		return bean;
-	}
-
-	private abstract class ClassPathHandler {
-		protected abstract void run(List<Resource> resources);
-
-		public void start(String... locationPatterns) throws IOException {
-			PathMatchingResourcePatternResolver r = new PathMatchingResourcePatternResolver();
-			List<Resource> resourceList = new ArrayList<Resource>(50);
-			for(String locationPattern:locationPatterns) {
-				Resource[] resources = r.getResources(locationPattern);
-				for(Resource resource:resources) {
-					resourceList.add(resource);
-				}
-			}
-			this.run(resourceList);
-		}
-	}
-
 /*
 	@Bean(name = "dataSourceMaster")
     public DataSource masterDataSource() {
