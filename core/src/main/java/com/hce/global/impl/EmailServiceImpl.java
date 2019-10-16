@@ -67,7 +67,7 @@ public class EmailServiceImpl implements EmailService {
 					}
 					Properties properties = new Properties();
 					properties.put("mail.smtp.auth", "true");
-					properties.put("mail.smtp.starttls.enable","false");
+					properties.put("mail.smtp.starttls.enable", "false");
 					properties.put("mail.smtp.host", emailSMTP);
 					Session session = Session.getInstance(properties, new Authenticator() {
 						@Override 
