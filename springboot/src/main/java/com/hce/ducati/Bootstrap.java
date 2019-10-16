@@ -27,7 +27,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @SpringBootApplication/*(exclude = {
         DataSourceAutoConfiguration.class
 })*/
-@ComponentScan(basePackages= {"com.hce"})
+@ComponentScan(basePackages= {"com.*"})
 public class Bootstrap {
     public static void main(String[] args) {
         SpringApplication.run(Bootstrap.class, args);
