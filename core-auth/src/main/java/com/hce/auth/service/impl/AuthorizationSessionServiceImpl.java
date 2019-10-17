@@ -1,17 +1,17 @@
 package com.hce.auth.service.impl;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hce.auth.AuthConstants;
-import com.hce.auth.entity.User;
 import com.hce.auth.o.DSession;
-import com.hce.auth.service.UserService;
+import com.hce.auth.o.User;
+import com.hce.auth.service.AuthCallback;
 import com.quincy.global.Constants;
 
 @Service("authorizationSessionServiceImpl")
@@ -23,25 +23,28 @@ public class AuthorizationSessionServiceImpl extends AuthorizationAbstract {
 	}
 
 	@Override
-	public DSession setSession(HttpServletRequest request, User user) {
-		String originalJsessionid = user.getJsessionid();
+	public String setSession(HttpServletRequest request, String originalJsessionid, Long userId, AuthCallback callback) {
 		if(originalJsessionid!=null&&originalJsessionid.length()>0) {//同一user不同客户端登录互踢
 			HttpSession httpSession = AuthConstants.SESSIONS.get(originalJsessionid);
 			if(httpSession!=null) {
 				DSession session = (DSession)httpSession.getAttribute(Constants.ATTR_SESSION);
-				if(session.getUser().getId().intValue()==user.getId().intValue())
+				if(session.getUser().getId().equals(userId))
 					httpSession.invalidate();
 			}
 		}
 		HttpSession httpSession = request.getSession();
 		String jsessionid = httpSession.getId();
-		user.setPassword(null);
-		user.setJsessionid(jsessionid);
-		DSession session = userService.getSession(user.getId());
-		session.setUser(user);
+		DSession session = callback.createSession();
+		session.getUser().setJsessionid(jsessionid);
 		httpSession.setAttribute(Constants.ATTR_SESSION, session);
-		this.updateLastLogined(session.getUser().getId(), jsessionid);
-		return session;
+		callback.updateLastLogined(jsessionid);
+		return jsessionid;
+	}
+
+	@Override
+	public void setSession(String jsessionid, String originalJsessionid, Long userId, AuthCallback callback)
+			throws IOException, ClassNotFoundException {
+		
 	}
 
 	public void logout(HttpServletRequest request) {
@@ -70,19 +73,16 @@ public class AuthorizationSessionServiceImpl extends AuthorizationAbstract {
 		return null;
 	}
 
-	@Autowired
-	private UserService userService;
-
 	@Override
-	protected void updateSession(User user) {
+	public void updateSession(User user) {
 		HttpSession httpSession = AuthConstants.SESSIONS.get(user.getJsessionid());
-		DSession dSession = userService.getSession(user.getId());
+		DSession dSession = this.getSession(user.getId());
 		dSession.setUser(user);
 		httpSession.setAttribute(Constants.ATTR_SESSION, dSession);
 	}
 
 	@Override
-	protected void updateSession(List<User> users) {
+	public <T extends User> void updateSession(List<T> users) throws IOException {
 		for(User user:users) {
 			this.updateSession(user);
 		}

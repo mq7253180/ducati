@@ -6,8 +6,13 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -15,17 +20,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.hce.auth.entity.User;
+import com.hce.auth.entity.Menu;
+import com.hce.auth.entity.Permission;
+import com.hce.auth.entity.Role;
 import com.hce.auth.mapper.AuthMapper;
 import com.hce.auth.o.DSession;
 import com.hce.auth.service.AuthorizationService;
-import com.hce.auth.service.UserService;
 
 public abstract class AuthorizationAbstract implements AuthorizationService {
 	protected abstract Object getUserObject(HttpServletRequest request) throws Exception;
 	protected abstract void saveVcode(HttpServletRequest request, String vcode) throws Exception;
-	protected abstract void updateSession(User user) throws IOException;
-	protected abstract void updateSession(List<User> users) throws IOException;
 
 	public DSession getSession(HttpServletRequest request) throws Exception {
 		Object obj = this.getUserObject(request);
@@ -75,22 +79,64 @@ public abstract class AuthorizationAbstract implements AuthorizationService {
 
 	@Autowired
 	private AuthMapper authMapper;
-	@Autowired
-	private UserService userService;
 
-	protected void updateLastLogined(Long userId, String jsessionid) {
-		authMapper.updateLastLogined(userId, jsessionid);
+	protected DSession getSession(Long userId) {
+		DSession session = new DSession();
+		//角色
+		List<Role> roleList = authMapper.findRolesByUserId(userId);
+		Map<Long, String> roleMap = new HashMap<Long, String>(roleList.size());
+		for(Role role:roleList) {//去重
+			roleMap.put(role.getId(), role.getName());
+		}
+		List<String> roles = new ArrayList<String>(roleMap.size());
+		roles.addAll(roleMap.values());
+		session.setRoles(roles);
+		//权限
+		List<Permission> permissionList = authMapper.findPermissionsByUserId(userId);
+		Map<Long, String> permissionMap = new HashMap<Long, String>(permissionList.size());
+		for(Permission permission:permissionList) {//去重
+			permissionMap.put(permission.getId(), permission.getName());
+		}
+		List<String> permissions = new ArrayList<String>(permissionMap.size());
+		permissions.addAll(permissionMap.values());
+		session.setPermissions(permissions);
+		//菜单
+		List<Menu> rootMenus = this.findMenusByUserId(userId);
+		session.setMenus(rootMenus);
+		return session;
 	}
 
-	@Override
-	public void updateSessionByUserId(Long userId) throws IOException {
-		User user = userService.find(userId);
-		this.updateSession(user);
+	private List<Menu> findMenusByUserId(Long userId) {
+		List<Menu> allMenus = authMapper.findMenusByUserId(userId);
+		Map<Long, Menu> duplicateRemovedMenus = new HashMap<Long, Menu>(allMenus.size());
+		for(Menu menu:allMenus) {
+			duplicateRemovedMenus.put(menu.getId(), menu);
+		}
+		List<Menu> rootMenus = new ArrayList<Menu>(duplicateRemovedMenus.size());
+		Set<Entry<Long, Menu>> entrySet = duplicateRemovedMenus.entrySet();
+		for(Entry<Long, Menu> entry:entrySet) {
+			Menu menu = entry.getValue();
+			if(menu.getPId()==null) {
+				rootMenus.add(menu);
+				this.loadChildrenMenus(menu, entrySet);
+			}
+		}
+		return rootMenus;
 	}
 
-	@Override
-	public void updateSessionByRoleId(Long roleId) throws IOException {
-		List<User> users = authMapper.findUsers(roleId);
-		this.updateSession(users);
+	private void loadChildrenMenus(Menu parent, Set<Entry<Long, Menu>> entrySet) {
+		for(Entry<Long, Menu> entry:entrySet) {
+			Menu menu = entry.getValue();
+			if(parent.getId()==menu.getPId()) {
+				if(parent.getChildren()==null)
+					parent.setChildren(new ArrayList<Menu>(10));
+				parent.getChildren().add(menu);
+			}
+		}
+		if(parent.getChildren()!=null&&parent.getChildren().size()>0) {
+			for(Menu child:parent.getChildren()) {
+				this.loadChildrenMenus(child, entrySet);
+			}
+		}
 	}
 }

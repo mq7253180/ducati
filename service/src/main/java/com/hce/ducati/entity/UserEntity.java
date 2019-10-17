@@ -1,4 +1,4 @@
-package com.hce.auth.entity;
+package com.hce.ducati.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,6 +14,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.hce.auth.o.User;
 
 import lombok.Data;
 
@@ -22,7 +23,7 @@ import lombok.Data;
 @DynamicUpdate
 @EntityListeners({AuditingEntityListener.class})
 @Entity(name = "s_user")
-public class User implements Serializable {
+public class UserEntity implements Serializable, User {
 	private static final long serialVersionUID = 3068671906589197352L;
 	@Id
 	@Column(name="id")

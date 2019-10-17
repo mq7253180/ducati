@@ -11,8 +11,6 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 
 @Data
@@ -29,10 +27,14 @@ public class Country implements Serializable {
 	private String enName;
 	@Column(name="cn_name")
 	private String cnName;
-	@JsonIgnore
-	@Column(name="i18n_key")
-	private String i18nKey;
-	@JsonIgnore
+	@Column(name="tel_prefix")
+	private String telPrefix;
+	@Column(name="code")
+	private String code;
+	@Column(name="code2")
+	private String code2;
 	@Column(name="currency")
-	private Integer currency;
+	private String currency;
+	@Column(name="locale")
+	private String locale;
 }

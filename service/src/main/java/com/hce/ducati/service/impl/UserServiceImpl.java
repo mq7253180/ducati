@@ -1,0 +1,102 @@
+package com.hce.ducati.service.impl;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
+import java.util.Set;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hce.auth.dao.RoleRepository;
+import com.hce.auth.entity.Menu;
+import com.hce.auth.entity.Permission;
+import com.hce.auth.entity.Role;
+import com.hce.auth.mapper.AuthMapper;
+import com.hce.auth.o.DSession;
+import com.hce.ducati.dao.UserRepository;
+import com.hce.ducati.entity.UserEntity;
+import com.hce.ducati.service.UserService;
+import com.quincy.global.annotation.ReadOnly;
+import com.quincy.global.helper.CommonHelper;
+
+@Service
+public class UserServiceImpl implements UserService {
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private AuthMapper authMapper;
+	@Autowired
+	private RoleRepository roleRepository;
+
+	@Transactional
+	@Override
+	public UserEntity update(UserEntity vo) {
+		UserEntity po = userRepository.findById(vo.getId()).get();
+		String username = CommonHelper.trim(vo.getUsername());
+		if(username!=null) {
+			po.setUsername(username);
+		}
+		String password = CommonHelper.trim(vo.getPassword());
+		if(password!=null) {
+			po.setPassword(password);
+		}
+		String email = CommonHelper.trim(vo.getEmail());
+		if(email!=null) {
+			po.setEmail(email);
+		}
+		String mobilePhone = CommonHelper.trim(vo.getMobilePhone());
+		if(mobilePhone!=null) {
+			po.setMobilePhone(mobilePhone);
+		}
+		String name = CommonHelper.trim(vo.getName());
+		if(name!=null) {
+			po.setName(name);
+		}
+		String jsessionid = CommonHelper.trim(vo.getJsessionid());
+		if(jsessionid!=null) {
+			po.setJsessionid(jsessionid);
+		}
+		Date lastLogined = vo.getLastLogined();
+		if(lastLogined!=null) {
+			po.setLastLogined(lastLogined);
+		}
+		userRepository.save(po);
+		return po;
+	}
+
+	@Override
+	@ReadOnly
+	public UserEntity find(String loginName) {
+		UserEntity user = userRepository.findByUsernameOrEmailOrMobilePhone(loginName, loginName, loginName);
+		return user;
+	}
+
+	@Override
+	@ReadOnly
+	public UserEntity find(Long id) {
+		UserEntity user = null;
+		Optional<UserEntity> optional = userRepository.findById(id);
+		if(optional.isPresent())
+			user = optional.get();
+		return user;
+	}
+
+	@Override
+	@ReadOnly
+	public List<Role> findAllRoles() {
+		return roleRepository.findAll();
+	}
+
+	@Override
+	@ReadOnly
+	public List<UserEntity> findAllUsers() {
+		return userRepository.findAll();
+	}
+}

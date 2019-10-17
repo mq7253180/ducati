@@ -23,9 +23,9 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.hce.auth.annotation.PermissionNeeded;
 import com.hce.auth.entity.Role;
-import com.hce.auth.entity.User;
-import com.hce.auth.service.UserService;
+import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.CompanyService;
+import com.hce.ducati.service.UserService;
 import com.quincy.global.helper.CommonHelper;
 
 import cfca.sadk.algorithm.common.PKIException;
@@ -44,7 +44,7 @@ public class SystemController {
 	@GetMapping(value = "/admin")
 	public ModelAndView menu() {
 		List<Role> roles = userService.findAllRoles();
-		List<User> users = userService.findAllUsers();
+		List<UserEntity> users = userService.findAllUsers();
 		ModelAndView mv = new ModelAndView("/content/root");
 		mv.addObject("roles", roles);
 		mv.addObject("users", users);

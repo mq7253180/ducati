@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.hce.auth.entity.User;
 import com.hce.auth.o.DSession;
-import com.hce.auth.service.UserService;
+import com.hce.auth.o.User;
+import com.hce.auth.service.AuthCallback;
 import com.quincy.global.Constants;
 import com.quincy.global.helper.CommonHelper;
 
@@ -25,8 +25,6 @@ import redis.clients.jedis.JedisPool;
 public class AuthorizationCacheServiceImpl extends AuthorizationAbstract {
 	@Autowired
 	private JedisPool jedisPool;
-	@Autowired
-	private UserService userService;
 	@Value("${expire.session}")
 	private int sessionExpire;
 	@Value("${domain}")
@@ -52,13 +50,9 @@ public class AuthorizationCacheServiceImpl extends AuthorizationAbstract {
 	}
 
 	@Override
-	public DSession setSession(HttpServletRequest request, User user) throws IOException, ClassNotFoundException {
-		String originalJsessionid = user.getJsessionid();
-		String jsessionid = this.createOrGetToken(request);
-		user.setPassword(null);
-		user.setJsessionid(jsessionid);
-		DSession session = userService.getSession(user.getId());
-		session.setUser(user);
+	public void setSession(String jsessionid, String originalJsessionid, Long userId, AuthCallback callback) throws IOException, ClassNotFoundException {
+		DSession session = callback.createSession();
+		session.getUser().setJsessionid(jsessionid);
 		byte[] key = (SESSION_KEY_PREFIX+jsessionid).getBytes();
 		Jedis jedis = null;
 		try {
@@ -68,20 +62,25 @@ public class AuthorizationCacheServiceImpl extends AuthorizationAbstract {
 				byte[] b = jedis.get(originalKey);
 				if(b!=null&&b.length>0) {
 					DSession originalSession = (DSession)CommonHelper.unSerialize(b);
-					if(originalSession.getUser().getId().longValue()==user.getId().longValue()) {
+					if(originalSession.getUser().getId().equals(userId))
 						jedis.del(originalKey);
-					}
 				}
 			}
 			jedis.set(key, CommonHelper.serialize(session));
 			int seconds = sessionExpire*60;
 			jedis.expire(key, seconds);
-			this.updateLastLogined(session.getUser().getId(), jsessionid);
-			return session;
+			callback.updateLastLogined(jsessionid);
 		} finally {
 			if(jedis!=null)
 				jedis.close();
 		}
+	}
+
+	@Override
+	public String setSession(HttpServletRequest request, String originalJsessionid, Long userId, AuthCallback callback) throws IOException, ClassNotFoundException {
+		String jsessionid = this.createOrGetToken(request);
+		this.setSession(jsessionid, originalJsessionid, userId, callback);
+		return jsessionid;
 	}
 
 	public void logout(HttpServletRequest request) throws Exception {
@@ -171,7 +170,7 @@ public class AuthorizationCacheServiceImpl extends AuthorizationAbstract {
 		byte[] key = (SESSION_KEY_PREFIX+user.getJsessionid()).getBytes();
 		byte[] b = jedis.get(key);
 		if(b!=null&&b.length>0) {
-			DSession session = userService.getSession(user.getId());
+			DSession session = this.getSession(user.getId());
 			session.setUser(user);
 			b = CommonHelper.serialize(session);
 			jedis.set(key, b);
@@ -179,7 +178,7 @@ public class AuthorizationCacheServiceImpl extends AuthorizationAbstract {
 	}
 
 	@Override
-	protected void updateSession(User user) throws IOException {
+	public void updateSession(User user) throws IOException {
 		Jedis jedis = null;
 		try {
 			jedis = jedisPool.getResource();
@@ -191,7 +190,7 @@ public class AuthorizationCacheServiceImpl extends AuthorizationAbstract {
 	}
 
 	@Override
-	protected void updateSession(List<User> users) throws IOException {
+	public <T extends User> void updateSession(List<T> users) throws IOException {
 		Jedis jedis = null;
 		try {
 			jedis = jedisPool.getResource();

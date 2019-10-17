@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.hce.auth.entity.Menu;
-import com.hce.auth.entity.User;
 
 import lombok.Data;
 
