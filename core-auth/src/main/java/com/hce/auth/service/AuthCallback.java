@@ -1,8 +1,8 @@
 package com.hce.auth.service;
 
-import com.hce.auth.o.DSession;
+import com.hce.auth.o.User;
 
 public interface AuthCallback {
 	public void updateLastLogined(String jsessionid);
-	public DSession createSession();
+	public User getUser();
 }

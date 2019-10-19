@@ -49,10 +49,10 @@ public class AuthorizationCacheServiceImpl extends AuthorizationAbstract {
 		}.start(request);
 	}
 
-	@Override
-	public void setSession(String jsessionid, String originalJsessionid, Long userId, AuthCallback callback) throws IOException, ClassNotFoundException {
-		DSession session = callback.createSession();
-		session.getUser().setJsessionid(jsessionid);
+	private DSession setSession(String jsessionid, String originalJsessionid, Long userId, AuthCallback callback) throws IOException, ClassNotFoundException {
+		User user = callback.getUser();
+		user.setJsessionid(jsessionid);
+		DSession session = this.createSession(user);
 		byte[] key = (SESSION_KEY_PREFIX+jsessionid).getBytes();
 		Jedis jedis = null;
 		try {
@@ -70,6 +70,7 @@ public class AuthorizationCacheServiceImpl extends AuthorizationAbstract {
 			int seconds = sessionExpire*60;
 			jedis.expire(key, seconds);
 			callback.updateLastLogined(jsessionid);
+			return session;
 		} finally {
 			if(jedis!=null)
 				jedis.close();
@@ -77,10 +78,10 @@ public class AuthorizationCacheServiceImpl extends AuthorizationAbstract {
 	}
 
 	@Override
-	public String setSession(HttpServletRequest request, String originalJsessionid, Long userId, AuthCallback callback) throws IOException, ClassNotFoundException {
+	public DSession setSession(HttpServletRequest request, String originalJsessionid, Long userId, AuthCallback callback) throws IOException, ClassNotFoundException {
 		String jsessionid = this.createOrGetToken(request);
-		this.setSession(jsessionid, originalJsessionid, userId, callback);
-		return jsessionid;
+		DSession session = this.setSession(jsessionid, originalJsessionid, userId, callback);
+		return session;
 	}
 
 	public void logout(HttpServletRequest request) throws Exception {
@@ -170,8 +171,7 @@ public class AuthorizationCacheServiceImpl extends AuthorizationAbstract {
 		byte[] key = (SESSION_KEY_PREFIX+user.getJsessionid()).getBytes();
 		byte[] b = jedis.get(key);
 		if(b!=null&&b.length>0) {
-			DSession session = this.getSession(user.getId());
-			session.setUser(user);
+			DSession session = this.createSession(user);
 			b = CommonHelper.serialize(session);
 			jedis.set(key, b);
 		}

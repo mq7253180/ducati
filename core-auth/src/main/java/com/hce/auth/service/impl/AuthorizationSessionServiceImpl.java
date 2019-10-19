@@ -23,7 +23,7 @@ public class AuthorizationSessionServiceImpl extends AuthorizationAbstract {
 	}
 
 	@Override
-	public String setSession(HttpServletRequest request, String originalJsessionid, Long userId, AuthCallback callback) {
+	public DSession setSession(HttpServletRequest request, String originalJsessionid, Long userId, AuthCallback callback) {
 		if(originalJsessionid!=null&&originalJsessionid.length()>0) {//同一user不同客户端登录互踢
 			HttpSession httpSession = AuthConstants.SESSIONS.get(originalJsessionid);
 			if(httpSession!=null) {
@@ -34,17 +34,12 @@ public class AuthorizationSessionServiceImpl extends AuthorizationAbstract {
 		}
 		HttpSession httpSession = request.getSession();
 		String jsessionid = httpSession.getId();
-		DSession session = callback.createSession();
-		session.getUser().setJsessionid(jsessionid);
+		User user = callback.getUser();
+		user.setJsessionid(jsessionid);
+		DSession session = this.createSession(user);
 		httpSession.setAttribute(Constants.ATTR_SESSION, session);
 		callback.updateLastLogined(jsessionid);
-		return jsessionid;
-	}
-
-	@Override
-	public void setSession(String jsessionid, String originalJsessionid, Long userId, AuthCallback callback)
-			throws IOException, ClassNotFoundException {
-		
+		return session;
 	}
 
 	public void logout(HttpServletRequest request) {
@@ -76,8 +71,7 @@ public class AuthorizationSessionServiceImpl extends AuthorizationAbstract {
 	@Override
 	public void updateSession(User user) {
 		HttpSession httpSession = AuthConstants.SESSIONS.get(user.getJsessionid());
-		DSession dSession = this.getSession(user.getId());
-		dSession.setUser(user);
+		DSession dSession = this.createSession(user);
 		httpSession.setAttribute(Constants.ATTR_SESSION, dSession);
 	}
 

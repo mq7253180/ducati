@@ -25,6 +25,7 @@ import com.hce.auth.entity.Permission;
 import com.hce.auth.entity.Role;
 import com.hce.auth.mapper.AuthMapper;
 import com.hce.auth.o.DSession;
+import com.hce.auth.o.User;
 import com.hce.auth.service.AuthorizationService;
 
 public abstract class AuthorizationAbstract implements AuthorizationService {
@@ -80,7 +81,7 @@ public abstract class AuthorizationAbstract implements AuthorizationService {
 	@Autowired
 	private AuthMapper authMapper;
 
-	protected DSession getSession(Long userId) {
+	protected DSession createSession(Long userId) {
 		DSession session = new DSession();
 		//角色
 		List<Role> roleList = authMapper.findRolesByUserId(userId);
@@ -103,6 +104,12 @@ public abstract class AuthorizationAbstract implements AuthorizationService {
 		//菜单
 		List<Menu> rootMenus = this.findMenusByUserId(userId);
 		session.setMenus(rootMenus);
+		return session;
+	}
+
+	protected DSession createSession(User user) {
+		DSession session = this.createSession(user.getId());
+		session.setUser(user);
 		return session;
 	}
 
