@@ -3,7 +3,6 @@ package com.hce.ducati.service;
 import java.util.List;
 
 import com.hce.auth.entity.Role;
-import com.hce.auth.o.DSession;
 import com.hce.ducati.entity.UserEntity;
 
 public interface UserService {

@@ -1,13 +1,8 @@
 package com.hce.ducati.service.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -15,11 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hce.auth.dao.RoleRepository;
-import com.hce.auth.entity.Menu;
-import com.hce.auth.entity.Permission;
 import com.hce.auth.entity.Role;
-import com.hce.auth.mapper.AuthMapper;
-import com.hce.auth.o.DSession;
 import com.hce.ducati.dao.UserRepository;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.UserService;
@@ -30,8 +21,6 @@ import com.quincy.global.helper.CommonHelper;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
-	@Autowired
-	private AuthMapper authMapper;
 	@Autowired
 	private RoleRepository roleRepository;
 
