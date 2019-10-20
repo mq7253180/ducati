@@ -72,9 +72,6 @@
 				<cfca.sealid>8BA4765BB92A202FE05312016B0AB766</cfca.sealid>
 				<location.accounts>D:/ducati/tmp</location.accounts>
 			</properties>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 		</profile>
 		<profile>
 			<id>maqiangmacpro</id>
@@ -104,6 +101,9 @@
 				<cfca.sealid>8BA4765BB92A202FE05312016B0AB766</cfca.sealid>
 				<location.accounts>D:/ducati/tmp</location.accounts>
 			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 		</profile>
 		<profile>
 			<id>test</id>

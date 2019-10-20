@@ -4,7 +4,6 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hce.auth.controller.AuthorizationControllerAbstract;
 import com.hce.auth.o.User;
@@ -12,7 +11,6 @@ import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.UserService;
 
 @Controller
-@RequestMapping("/auth")
 public class AuthorizationController extends AuthorizationControllerAbstract {
 	@Autowired
 	private UserService userService;
