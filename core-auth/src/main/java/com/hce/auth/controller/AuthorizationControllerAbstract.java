@@ -3,7 +3,6 @@ package com.hce.auth.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,8 +19,6 @@ import com.quincy.global.Constants;
 import com.quincy.global.Result;
 import com.quincy.global.helper.CommonHelper;
 
-@Controller
-@RequestMapping("/auth")
 public abstract class AuthorizationControllerAbstract {
 	@Resource(name = "${impl.auth.service}")
 	private AuthorizationService authorizationService;
