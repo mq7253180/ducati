@@ -100,7 +100,7 @@
 				<nexus.url>172.16.80.38:8082</nexus.url>
 				<cfca.platid>8949665AA3D9699DE05311016B0A2A11</cfca.platid>
 				<cfca.addr>210.74.42.33:9443</cfca.addr>
-				<cfca.jks.location>/Users/maqiang/secret/anxinsign-test.jks</cfca.jks.location>
+				<cfca.jks.location>/Users/maqiang/secret/anxinsign.jks</cfca.jks.location>
 				<cfca.sealid>8BA4765BB92A202FE05312016B0AB766</cfca.sealid>
 				<location.accounts>D:/ducati/tmp</location.accounts>
 			</properties>
