@@ -165,9 +165,6 @@
 		</profile>
 	</profiles>
 	<modules>
-		<module>core</module>
-		<module>core-auth</module>
-		<module>cfca-api</module>
 		<module>service</module>
 		<module>springboot</module>
 	</modules>

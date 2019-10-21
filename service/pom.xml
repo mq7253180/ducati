@@ -12,19 +12,47 @@
 	</parent>
 	<dependencies>
 		<dependency>
-			<groupId>com.hce</groupId>
-			<artifactId>core-auth</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.hce</groupId>
-			<artifactId>cfca-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+		    <groupId>com.maqiangcgq</groupId>
+		    <artifactId>quincy-auth</artifactId>
+		    <version>1.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.apache.poi</groupId>
 		    <artifactId>poi-ooxml</artifactId>
 		    <version>4.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.hce.ducati</groupId>
+			<artifactId>pw-swift-core</artifactId>
+			<version>SRU2017-7.9.7</version>
+			<scope>system</scope>
+			<systemPath>${pom.basedir}/src/main/lib/pw-swift-core-SRU2017-7.9.7.jar</systemPath>
+		</dependency>
+		<dependency>
+		    <groupId>com.hcehk</groupId>
+		    <artifactId>cfca-api</artifactId>
+		    <version>1.0.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.hce</groupId>
+			<artifactId>cfca-logback-jdk6</artifactId>
+			<version>3.2.0.0</version>
+			<scope>system</scope>
+			<systemPath>${pom.basedir}/src/main/lib/cfca/logback-cfca-jdk1.6-3.2.0.0.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.hce</groupId>
+			<artifactId>cfca-common-tsvo</artifactId>
+			<version>3.4.12.3</version>
+			<scope>system</scope>
+			<systemPath>${pom.basedir}/src/main/lib/cfca/common-3.4.12.3-tsvo.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.hce</groupId>
+			<artifactId>cfca-sdk</artifactId>
+			<version>3.4.1.2</version>
+			<scope>system</scope>
+			<systemPath>${pom.basedir}/src/main/lib/cfca/sadk-3.4.1.2.jar</systemPath>
 		</dependency>
     </dependencies>
 </project>
