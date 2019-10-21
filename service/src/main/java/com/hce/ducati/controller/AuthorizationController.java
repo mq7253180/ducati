@@ -5,13 +5,13 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.hce.auth.controller.AuthorizationControllerAbstract;
+import com.hce.auth.controller.AbstractAuthorizationController;
 import com.hce.auth.o.User;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.UserService;
 
 @Controller
-public class AuthorizationController extends AuthorizationControllerAbstract {
+public class AuthorizationController extends AbstractAuthorizationController {
 	@Autowired
 	private UserService userService;
 

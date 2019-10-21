@@ -20,7 +20,7 @@ import com.quincy.global.Result;
 import com.quincy.global.helper.CommonHelper;
 
 @RequestMapping("/auth")
-public abstract class AuthorizationControllerAbstract {
+public abstract class AbstractAuthorizationController {
 	@Resource(name = "${impl.auth.service}")
 	private AuthorizationService authorizationService;
 
