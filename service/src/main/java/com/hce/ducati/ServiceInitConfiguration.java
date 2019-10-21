@@ -6,7 +6,7 @@ import javax.annotation.PreDestroy;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-@PropertySource("classpath:application-service.properties")
+@PropertySource(value = {"classpath:application-auth.properties", "classpath:application-service.properties"})
 @Configuration
 public class ServiceInitConfiguration {
 	@PostConstruct
