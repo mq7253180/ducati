@@ -17,7 +17,7 @@ public class SpringBootConfiguration {
     private freemarker.template.Configuration configuration;
 
     @PostConstruct
-    public void freeMarkerConfigurer() {
+    public void init() {
     	configuration.setSharedVariable("p", new PaginationTemplateDirectiveModelBean());
     }
 }
