@@ -31,7 +31,6 @@ import com.quincy.auth.AuthConstants;
         DataSourceAutoConfiguration.class
 })*/
 @ComponentScan(basePackages= {"com.*"})
-@PropertySource("classpath:application-springboot.properties")
 public class Bootstrap {
     public static void main(String[] args) {
         SpringApplication.run(Bootstrap.class, args);
