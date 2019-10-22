@@ -10,10 +10,10 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringBootConfiguration;
+//import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -27,28 +27,23 @@ import com.quincy.auth.freemarker.ButtonTemplateDirectiveModelBean;
 import com.quincy.auth.freemarker.DivTemplateDirectiveModelBean;
 import com.quincy.auth.freemarker.HyperlinkTemplateDirectiveModelBean;
 import com.quincy.auth.freemarker.InputTemplateDirectiveModelBean;
-import com.quincy.auth.service.AuthorizationService;
-import com.quincy.core.view.GlobalHandlerMethodReturnValueHandler;
-import com.quincy.core.view.GlobalLocaleResolver;
-import com.quincy.core.view.I18NInterceptor;
-import com.quincy.core.view.StaticInterceptor;
-import com.quincy.core.view.freemarker.AttributeTemplateDirectiveModelBean;
-import com.quincy.core.view.freemarker.I18NTemplateDirectiveModelBean;
-import com.quincy.core.view.freemarker.LocaleTemplateDirectiveModelBean;
-import com.quincy.core.view.freemarker.PropertiesTemplateDirectiveModelBean;
-import com.quincy.global.Constants;
+import com.quincy.sdk.Constants;
+import com.quincy.sdk.view.GlobalHandlerMethodReturnValueHandler;
+import com.quincy.sdk.view.GlobalLocaleResolver;
+import com.quincy.sdk.view.I18NInterceptor;
+import com.quincy.sdk.view.StaticInterceptor;
+import com.quincy.sdk.view.freemarker.AttributeTemplateDirectiveModelBean;
+import com.quincy.sdk.view.freemarker.I18NTemplateDirectiveModelBean;
+import com.quincy.sdk.view.freemarker.LocaleTemplateDirectiveModelBean;
+import com.quincy.sdk.view.freemarker.PropertiesTemplateDirectiveModelBean;
 
-import freemarker.template.Configuration;
-
-@PropertySource("classpath:application-springboot.properties")
-@SpringBootConfiguration
+//@SpringBootConfiguration
+@Configuration
 public class WebMvcConfiguration extends WebMvcConfigurationSupport implements InitializingBean {
 	@Autowired
     private RequestMappingHandlerAdapter adapter;
 	@Autowired
 	private ApplicationContext applicationContext;
-	@Resource(name = "${impl.auth.service}")
-	private AuthorizationService authorizationService;
 	@Resource(name = "${impl.auth.interceptor}")
 	private HandlerInterceptorAdapter handlerInterceptorAdapter;
 	@Value("${env}")
@@ -91,7 +86,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport implements I
     @Resource(name = "propertiesFactoryBean")
     private Properties properties;
     @Autowired
-    private Configuration configuration;
+    private freemarker.template.Configuration configuration;
 
     @PostConstruct
     public void freeMarkerConfigurer() {

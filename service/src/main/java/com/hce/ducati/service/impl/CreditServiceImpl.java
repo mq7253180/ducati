@@ -19,9 +19,9 @@ import com.hce.ducati.mapper.CreditMapper;
 import com.hce.ducati.o.CreditDTO;
 import com.hce.ducati.service.CreditMarginService;
 import com.hce.ducati.service.CreditService;
-import com.quincy.global.Pagination;
-import com.quincy.global.annotation.ReadOnly;
-import com.quincy.global.helper.CommonHelper;
+import com.quincy.sdk.Pagination;
+import com.quincy.sdk.annotation.ReadOnly;
+import com.quincy.sdk.helper.CommonHelper;
 
 @Service
 public class CreditServiceImpl implements CreditService {

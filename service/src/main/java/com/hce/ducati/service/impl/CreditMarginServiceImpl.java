@@ -21,9 +21,9 @@ import com.hce.ducati.entity.Price;
 import com.hce.ducati.mapper.CreditMapper;
 import com.hce.ducati.o.CreditMarginDTO;
 import com.hce.ducati.service.CreditMarginService;
-import com.quincy.global.Pagination;
-import com.quincy.global.Result;
-import com.quincy.global.annotation.ReadOnly;
+import com.quincy.sdk.Pagination;
+import com.quincy.sdk.Result;
+import com.quincy.sdk.annotation.ReadOnly;
 
 @Service
 public class CreditMarginServiceImpl implements CreditMarginService {

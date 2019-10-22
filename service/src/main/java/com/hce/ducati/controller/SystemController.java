@@ -26,7 +26,7 @@ import com.hce.ducati.service.CompanyService;
 import com.hce.ducati.service.UserService;
 import com.quincy.auth.annotation.PermissionNeeded;
 import com.quincy.auth.entity.Role;
-import com.quincy.global.helper.CommonHelper;
+import com.quincy.sdk.helper.CommonHelper;
 
 import cfca.sadk.algorithm.common.PKIException;
 

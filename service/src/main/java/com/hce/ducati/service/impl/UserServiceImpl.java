@@ -14,8 +14,8 @@ import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.UserService;
 import com.quincy.auth.dao.RoleRepository;
 import com.quincy.auth.entity.Role;
-import com.quincy.global.annotation.ReadOnly;
-import com.quincy.global.helper.CommonHelper;
+import com.quincy.sdk.annotation.ReadOnly;
+import com.quincy.sdk.helper.CommonHelper;
 
 @Service
 public class UserServiceImpl implements UserService {

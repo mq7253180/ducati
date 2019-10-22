@@ -29,8 +29,8 @@ import com.hce.ducati.service.CreditService;
 import com.quincy.auth.annotation.PermissionNeeded;
 import com.quincy.auth.o.DSession;
 import com.quincy.auth.service.AuthorizationService;
-import com.quincy.global.Result;
-import com.quincy.global.helper.CommonHelper;
+import com.quincy.sdk.Result;
+import com.quincy.sdk.helper.CommonHelper;
 
 @Controller
 @RequestMapping("/credit")
