@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>springboot</artifactId>
+	<artifactId>ducati-springboot</artifactId>
 	<packaging>jar</packaging>
 	<name>springboot</name>
 	<description>HCE DUCATI Project</description>
@@ -101,6 +101,15 @@
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
+		</profile>
+		<profile>
+			<id>maqiangmacpro</id>
+			<properties>
+				<path.log.logback>/User/maqiang/tmp/logs/ducati</path.log.logback>
+				<log.level>INFO</log.level>
+				<spring.freemarker.cache>false</spring.freemarker.cache>
+				<prefix.resource>/static</prefix.resource>
+			</properties>
 		</profile>
 		<profile>
 			<id>test</id>
