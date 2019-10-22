@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -18,9 +17,9 @@ import com.quincy.auth.AuthConstants;
 
 //@EnableDiscoveryClient
 //@EnableEurekaClient
-@MapperScan(basePackages = {AuthConstants.PACKAGE_NAME_MAPPER, "com.hce.auth.mapper", "com.hce.ducati.mapper"})
-@EntityScan(basePackages = {AuthConstants.PACKAGE_NAME_ENTITY, "com.hce.auth.entity", "com.hce.ducati.entity"})
-@EnableJpaRepositories(basePackages = {AuthConstants.PACKAGE_NAME_REPOSITORY, "com.hce.auth.dao", "com.hce.ducati.dao"})
+@MapperScan(basePackages = {AuthConstants.PACKAGE_NAME_MAPPER, "com.hce.ducati.mapper"})
+@EntityScan(basePackages = {AuthConstants.PACKAGE_NAME_ENTITY, "com.hce.ducati.entity"})
+@EnableJpaRepositories(basePackages = {AuthConstants.PACKAGE_NAME_REPOSITORY, "com.hce.ducati.dao"})
 @EnableTransactionManagement
 @EnableFeignClients
 @EnableWebMvc
