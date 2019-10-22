@@ -22,12 +22,12 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 
-import com.hce.auth.freemarker.ButtonTemplateDirectiveModelBean;
-import com.hce.auth.freemarker.DivTemplateDirectiveModelBean;
-import com.hce.auth.freemarker.HyperlinkTemplateDirectiveModelBean;
-import com.hce.auth.freemarker.InputTemplateDirectiveModelBean;
-import com.hce.auth.service.AuthorizationService;
 import com.hce.ducati.freemarker.PaginationTemplateDirectiveModelBean;
+import com.quincy.auth.freemarker.ButtonTemplateDirectiveModelBean;
+import com.quincy.auth.freemarker.DivTemplateDirectiveModelBean;
+import com.quincy.auth.freemarker.HyperlinkTemplateDirectiveModelBean;
+import com.quincy.auth.freemarker.InputTemplateDirectiveModelBean;
+import com.quincy.auth.service.AuthorizationService;
 import com.quincy.core.view.GlobalHandlerMethodReturnValueHandler;
 import com.quincy.core.view.GlobalLocaleResolver;
 import com.quincy.core.view.I18NInterceptor;

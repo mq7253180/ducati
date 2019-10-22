@@ -9,11 +9,11 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hce.auth.dao.RoleRepository;
-import com.hce.auth.entity.Role;
 import com.hce.ducati.dao.UserRepository;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.UserService;
+import com.quincy.auth.dao.RoleRepository;
+import com.quincy.auth.entity.Role;
 import com.quincy.global.annotation.ReadOnly;
 import com.quincy.global.helper.CommonHelper;
 

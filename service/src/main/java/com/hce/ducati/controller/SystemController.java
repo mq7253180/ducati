@@ -21,11 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.hce.auth.annotation.PermissionNeeded;
-import com.hce.auth.entity.Role;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.CompanyService;
 import com.hce.ducati.service.UserService;
+import com.quincy.auth.annotation.PermissionNeeded;
+import com.quincy.auth.entity.Role;
 import com.quincy.global.helper.CommonHelper;
 
 import cfca.sadk.algorithm.common.PKIException;

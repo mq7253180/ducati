@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hce.auth.annotation.PermissionNeeded;
-import com.hce.auth.o.DSession;
-import com.hce.auth.service.AuthorizationService;
 import com.hce.ducati.ServiceConstants;
 import com.hce.ducati.entity.CreditMargin;
 import com.hce.ducati.service.CompanyService;
 import com.hce.ducati.service.CreditMarginService;
+import com.quincy.auth.annotation.PermissionNeeded;
+import com.quincy.auth.o.DSession;
+import com.quincy.auth.service.AuthorizationService;
 import com.quincy.global.Pagination;
 import com.quincy.global.Result;
 import com.quincy.global.helper.CommonHelper;

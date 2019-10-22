@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hce.auth.annotation.PermissionNeeded;
-import com.hce.auth.service.AuthorizationService;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.mapper.UserMapper;
 import com.hce.ducati.service.UserService;
+import com.quincy.auth.annotation.PermissionNeeded;
+import com.quincy.auth.service.AuthorizationService;
 
 @Controller
 @RequestMapping("/admin")

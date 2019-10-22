@@ -13,11 +13,13 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.quincy.auth.AuthConstants;
+
 //@EnableDiscoveryClient
 //@EnableEurekaClient
-@MapperScan(basePackages = {"com.hce.auth.mapper", "com.hce.ducati.mapper"})
-@EntityScan(basePackages = {"com.hce.auth.entity", "com.hce.ducati.entity"})
-@EnableJpaRepositories(basePackages = {"com.hce.auth.dao", "com.hce.ducati.dao"})
+@MapperScan(basePackages = {AuthConstants.PACKAGE_NAME_MAPPER, "com.hce.auth.mapper", "com.hce.ducati.mapper"})
+@EntityScan(basePackages = {AuthConstants.PACKAGE_NAME_ENTITY, "com.hce.auth.entity", "com.hce.ducati.entity"})
+@EnableJpaRepositories(basePackages = {AuthConstants.PACKAGE_NAME_REPOSITORY, "com.hce.auth.dao", "com.hce.ducati.dao"})
 @EnableTransactionManagement
 @EnableFeignClients
 @EnableWebMvc
