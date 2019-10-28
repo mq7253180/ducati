@@ -14,7 +14,7 @@
 		<dependency>
 		    <groupId>com.maqiangcgq</groupId>
 		    <artifactId>quincy-auth</artifactId>
-		    <version>1.0.1-SNAPSHOT</version>
+		    <version>1.0.1</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.apache.poi</groupId>
