@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,7 @@ public class CreditController {
 	private CompanyService companyService;
 	@Autowired
 	private CreditService creditService;
-	@Resource(name = "${impl.auth.service}")
+	@Autowired
 	private AuthorizationService authorizationService;
 
 	@PermissionNeeded("creditSeach")

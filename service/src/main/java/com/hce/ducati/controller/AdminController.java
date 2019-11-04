@@ -3,8 +3,6 @@ package com.hce.ducati.controller;
 import java.io.IOException;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +19,7 @@ import com.quincy.auth.service.AuthorizationService;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	@Resource(name = "${impl.auth.service}")
+	@Autowired
 	private AuthorizationService authorizationService;
 	@Autowired
 	private UserMapper userMapper;

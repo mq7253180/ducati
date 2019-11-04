@@ -5,7 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ import com.quincy.sdk.helper.CommonHelper;
 @Controller
 @RequestMapping("/credit/margin")
 public class CreditMarginController {
-	@Resource(name = "${impl.auth.service}")
+	@Autowired
 	private AuthorizationService authorizationService;
 	@Autowired
 	private CompanyService companyService;
