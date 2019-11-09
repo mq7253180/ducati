@@ -72,21 +72,18 @@
 				<cfca.sealid>8BA4765BB92A202FE05312016B0AB766</cfca.sealid>
 				<location.accounts>D:/ducati/tmp</location.accounts>
 			</properties>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 		</profile>
 		<profile>
 			<id>maqiangmacpro</id>
 			<properties>
 				<env>dev</env>
 				<server.port>12081</server.port>
-				<spring.datasource.url>172.16.80.12:3306/ducati</spring.datasource.url>
-				<spring.datasource.username>payment</spring.datasource.username>
-				<spring.datasource.password>pgw@321</spring.datasource.password>
-				<spring.datasource.url.slave>172.16.80.12:3306/ducati</spring.datasource.url.slave>
-				<spring.datasource.username.slave>payment</spring.datasource.username.slave>
-				<spring.datasource.password.slave>pgw@321</spring.datasource.password.slave>
+				<spring.datasource.url>47.93.89.0:3306/ducati</spring.datasource.url>
+				<spring.datasource.username>admin</spring.datasource.username>
+				<spring.datasource.password>nimda</spring.datasource.password>
+				<spring.datasource.url.slave>47.93.89.0:3306/ducati</spring.datasource.url.slave>
+				<spring.datasource.username.slave>jlcedu</spring.datasource.username.slave>
+				<spring.datasource.password.slave>xxx</spring.datasource.password.slave>
 				<!-- <spring.rocketmq.nameServer>172.16.80.32:9876</spring.rocketmq.nameServer> -->
 				<spring.jpa.show-sql>true</spring.jpa.show-sql>
 				<expire.session>10</expire.session><!-- minutes -->
@@ -104,6 +101,9 @@
 				<cfca.sealid>8BA4765BB92A202FE05312016B0AB766</cfca.sealid>
 				<location.accounts>D:/ducati/tmp</location.accounts>
 			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 		</profile>
 		<profile>
 			<id>test</id>
