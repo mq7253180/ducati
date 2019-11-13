@@ -218,7 +218,7 @@ public class CompanyServiceImpl implements CompanyService {
 							String companyName = this.extractStringFromCell(row, 3);
 							String gender = this.extractStringFromCell(row, 5);
 							String birthDate = this.extractStringFromCell(row, 6);
-							String country = this.extractStringFromCell(row, 7);
+							String region = this.extractStringFromCell(row, 7);
 							String addr = this.extractStringFromCell(row, 9);
 							String productCategory = this.extractStringFromCell(row, 10);
 							String creditCurrency = this.extractStringFromCell(row, 11);
@@ -246,7 +246,7 @@ public class CompanyServiceImpl implements CompanyService {
 							individual.setCompany(companyName);
 							individual.setGender(gender);
 							individual.setBirthDate(birthDate);
-							individual.setCountry(country);
+							individual.setRegion(region);
 							individual.setAddr(addr);
 							individual.setProductCategory(productCategory);
 							individual.setCreditCurrency(creditCurrency);

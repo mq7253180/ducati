@@ -14,12 +14,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.quincy.auth.AuthConstants;
+import com.quincy.sdk.Constants;
 
 //@EnableDiscoveryClient
 //@EnableEurekaClient
 @MapperScan(basePackages = {AuthConstants.PACKAGE_NAME_MAPPER, "com.hce.ducati.mapper"})
-@EntityScan(basePackages = {AuthConstants.PACKAGE_NAME_ENTITY, "com.hce.ducati.entity"})
-@EnableJpaRepositories(basePackages = {AuthConstants.PACKAGE_NAME_REPOSITORY, "com.hce.ducati.dao"})
+@EntityScan(basePackages = {Constants.PACKAGE_NAME_ENTITY, AuthConstants.PACKAGE_NAME_ENTITY, "com.hce.ducati.entity"})
+@EnableJpaRepositories(basePackages = {Constants.PACKAGE_NAME_REPOSITORY, AuthConstants.PACKAGE_NAME_REPOSITORY, "com.hce.ducati.dao"})
 @EnableTransactionManagement
 @EnableFeignClients
 @EnableWebMvc

@@ -60,8 +60,8 @@ public class Individual {
 	private String gender;
 	@Column(name="birth_date")
 	private String birthDate;
-	@Column(name="country")
-	private String country;
+	@Column(name="region")
+	private String region;
 	@Column(name="mobile_phone")
 	private String mobilePhone;
 	@Column(name="addr")
