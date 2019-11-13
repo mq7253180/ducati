@@ -29,7 +29,6 @@
         <appender-ref ref="stdout"/>
         <appender-ref ref="Roll"/>
     </root>
-    
 	<appender name="RocketmqClientAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${path.log.logback}/rocketmq_client.log</file>
         <append>true</append>

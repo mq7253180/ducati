@@ -93,6 +93,7 @@
 		<profile>
 			<id>dev</id>
 			<properties>
+				<spring.pid.file>/Users/maqiang/tmp/ducati.pid</spring.pid.file>
 				<path.log.logback>/Users/maqiang/tmp/logs/ducati</path.log.logback>
 				<log.level>INFO</log.level>
 				<spring.freemarker.cache>false</spring.freemarker.cache>
@@ -105,6 +106,7 @@
 		<profile>
 			<id>pro1</id>
 			<properties>
+				<spring.pid.file>/quincy/tmp/ducati1.pid</spring.pid.file>
 				<path.log.logback>/quincy/github/logs/ducati</path.log.logback>
 				<log.level>WARN</log.level>
 				<spring.freemarker.cache>true</spring.freemarker.cache>
@@ -114,6 +116,7 @@
 		<profile>
 			<id>pro2</id>
 			<properties>
+				<spring.pid.file>/quincy/tmp/ducati2.pid</spring.pid.file>
 				<path.log.logback>/quincy/github/logs/ducati</path.log.logback>
 				<log.level>WARN</log.level>
 				<spring.freemarker.cache>true</spring.freemarker.cache>
