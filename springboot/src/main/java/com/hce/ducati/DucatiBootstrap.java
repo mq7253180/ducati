@@ -32,9 +32,9 @@ import com.quincy.sdk.Constants;
         DataSourceAutoConfiguration.class
 })*/
 @ComponentScan(basePackages= {"com.*"})
-public class Bootstrap {
+public class DucatiBootstrap {
     public static void main(String[] args) {
-    		SpringApplication sa = new SpringApplication(Bootstrap.class);
+    		SpringApplication sa = new SpringApplication(DucatiBootstrap.class);
         sa.addListeners(new ApplicationPidFileWriter());
         sa.run(args);
 //        SpringApplication.run(Bootstrap.class, args);
