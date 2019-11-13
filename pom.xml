@@ -100,7 +100,7 @@
 				<nexus.url>172.16.80.38:8082</nexus.url>
 				<cfca.platid>8F09B7F146D84B75E053025B210A1949</cfca.platid>
 				<cfca.addr>cs.anxinsign.com</cfca.addr>
-				<cfca.jks.location>/app/secret/anxinsign.jks</cfca.jks.location>
+				<cfca.jks.location>/quincy/secret/anxinsign.jks</cfca.jks.location>
 				<cfca.sealid>95394B7F3279445BE053025B210AE261</cfca.sealid>
 				<location.accounts></location.accounts>
 			</properties>
@@ -129,7 +129,7 @@
 				<nexus.url>172.16.80.38:8082</nexus.url>
 				<cfca.platid>8F09B7F146D84B75E053025B210A1949</cfca.platid>
 				<cfca.addr>cs.anxinsign.com</cfca.addr>
-				<cfca.jks.location>/app/secret/anxinsign.jks</cfca.jks.location>
+				<cfca.jks.location>/quincy/secret/anxinsign.jks</cfca.jks.location>
 				<cfca.sealid>95394B7F3279445BE053025B210AE261</cfca.sealid>
 				<location.accounts></location.accounts>
 			</properties>

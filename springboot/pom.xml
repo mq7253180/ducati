@@ -93,7 +93,7 @@
 		<profile>
 			<id>dev</id>
 			<properties>
-				<path.log.logback>D:/logs/ducati</path.log.logback>
+				<path.log.logback>/Users/maqiang/tmp/logs/ducati</path.log.logback>
 				<log.level>INFO</log.level>
 				<spring.freemarker.cache>false</spring.freemarker.cache>
 				<prefix.resource>/static</prefix.resource>
@@ -103,30 +103,21 @@
 			</activation>
 		</profile>
 		<profile>
-			<id>maqiangmacpro</id>
+			<id>pro1</id>
 			<properties>
-				<path.log.logback>/Users/maqiang/tmp/logs/ducati</path.log.logback>
-				<log.level>INFO</log.level>
-				<spring.freemarker.cache>false</spring.freemarker.cache>
-				<prefix.resource>/static</prefix.resource>
-			</properties>
-		</profile>
-		<profile>
-			<id>test</id>
-			<properties>
-				<path.log.logback>/app/logs/ducati</path.log.logback>
-				<log.level>INFO</log.level>
-				<spring.freemarker.cache>true</spring.freemarker.cache>
-				<prefix.resource>http://172.16.80.12/ducati</prefix.resource>
-			</properties>
-		</profile>
-		<profile>
-			<id>pro</id>
-			<properties>
-				<path.log.logback>/app/ducati/logs</path.log.logback>
+				<path.log.logback>/quincy/github/logs/ducati</path.log.logback>
 				<log.level>WARN</log.level>
 				<spring.freemarker.cache>true</spring.freemarker.cache>
-				<prefix.resource>http://static.xxx.com</prefix.resource>
+				<prefix.resource>https://xxx.maqiangcgq.com/ducati</prefix.resource>
+			</properties>
+		</profile>
+		<profile>
+			<id>pro2</id>
+			<properties>
+				<path.log.logback>/quincy/github/logs/ducati</path.log.logback>
+				<log.level>WARN</log.level>
+				<spring.freemarker.cache>true</spring.freemarker.cache>
+				<prefix.resource>https://xxx.maqiangcgq.com/ducati</prefix.resource>
 			</properties>
 		</profile>
 	</profiles>
