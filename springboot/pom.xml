@@ -107,7 +107,7 @@
 			<id>pro1</id>
 			<properties>
 				<spring.pid.file>/quincy/tmp/ducati1.pid</spring.pid.file>
-				<path.log.logback>/quincy/github/logs/ducati1</path.log.logback>
+				<path.log.logback>/quincy/tmp/logs/ducati1</path.log.logback>
 				<log.level>WARN</log.level>
 				<spring.freemarker.cache>true</spring.freemarker.cache>
 				<prefix.resource>https://xxx.maqiangcgq.com/ducati</prefix.resource>
@@ -117,7 +117,7 @@
 			<id>pro2</id>
 			<properties>
 				<spring.pid.file>/quincy/tmp/ducati2.pid</spring.pid.file>
-				<path.log.logback>/quincy/github/logs/ducati2</path.log.logback>
+				<path.log.logback>/quincy/tmp/logs/ducati2</path.log.logback>
 				<log.level>WARN</log.level>
 				<spring.freemarker.cache>true</spring.freemarker.cache>
 				<prefix.resource>https://xxx.maqiangcgq.com/ducati</prefix.resource>
