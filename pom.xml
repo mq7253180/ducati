@@ -58,7 +58,7 @@
 				<!-- <spring.rocketmq.nameServer>172.16.80.32:9876</spring.rocketmq.nameServer> -->
 				<spring.jpa.show-sql>true</spring.jpa.show-sql>
 				<expire.session>10</expire.session><!-- minutes -->
-				<redis.host>172.16.80.12</redis.host>
+				<redis.host>47.93.89.0</redis.host>
 				<redis.port>6379</redis.port>
 				<redis.pwd>foobared</redis.pwd>
 				<domain>127.0.0.1</domain><!-- 种cookie识别session, ajax跨域 -->
@@ -92,7 +92,7 @@
 				<expire.session>60</expire.session><!-- minutes -->
 				<redis.host>localhost</redis.host>
 				<redis.port>6379</redis.port>
-				<redis.pwd>3Xu+czctTmUIjZos</redis.pwd>
+				<redis.pwd>foobared</redis.pwd>
 				<domain>ducati.maqiangcgq.com</domain><!-- 种cookie识别session, ajax跨域 -->
 				<mail.user>mq7253180@126.com</mail.user>
 				<mail.to></mail.to>
@@ -121,7 +121,7 @@
 				<expire.session>60</expire.session><!-- minutes -->
 				<redis.host>localhost</redis.host>
 				<redis.port>6379</redis.port>
-				<redis.pwd>3Xu+czctTmUIjZos</redis.pwd>
+				<redis.pwd>foobared</redis.pwd>
 				<domain>ducati.maqiangcgq.com</domain><!-- 种cookie识别session, ajax跨域 -->
 				<mail.user>mq7253180@126.com</mail.user>
 				<mail.to></mail.to>
