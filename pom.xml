@@ -81,7 +81,7 @@
 			<properties>
 				<env>pro</env>
 				<server.port>8080</server.port>
-				<spring.datasource.url>47.93.89.0:3306/ducati</spring.datasource.url>
+				<spring.datasource.url>localhost:3306/ducati</spring.datasource.url>
 				<spring.datasource.username>admin</spring.datasource.username>
 				<spring.datasource.password>nimda</spring.datasource.password>
 				<spring.datasource.url.slave>localhost:3306/ducati</spring.datasource.url.slave>
@@ -110,7 +110,7 @@
 			<properties>
 				<env>pro</env>
 				<server.port>8090</server.port>
-				<spring.datasource.url>47.93.89.0:3306/ducati</spring.datasource.url>
+				<spring.datasource.url>localhost:3306/ducati</spring.datasource.url>
 				<spring.datasource.username>admin</spring.datasource.username>
 				<spring.datasource.password>nimda</spring.datasource.password>
 				<spring.datasource.url.slave>localhost:3306/ducati</spring.datasource.url.slave>
