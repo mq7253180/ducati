@@ -5,7 +5,7 @@
 	<artifactId>ducati-springboot</artifactId>
 	<packaging>jar</packaging>
 	<name>springboot</name>
-	<description>HCE DUCATI Project</description>
+	<description>DUCATI Project</description>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -13,7 +13,7 @@
 		<relativePath/><!-- lookup parent from repository -->
 	</parent>
 	<properties>
-    	<argLine>-Dfile.encoding=UTF-8</argLine>
+		<argLine>-Dfile.encoding=UTF-8</argLine>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <version.spring>5.1.7.RELEASE</version.spring>
@@ -31,11 +31,11 @@
 				</configuration>
 				<!-- 显示/actuator/info内容 -->
 				<executions>
-                	<execution>
-                    	<goals>
-                        	<goal>build-info</goal>
-                    	</goals>
-                	</execution>
+					<execution>
+						<goals>
+							<goal>build-info</goal>
+						</goals>
+					</execution>
 				</executions>
 			</plugin>
 			<plugin>
@@ -58,7 +58,7 @@
 				<artifactId>maven-resources-plugin</artifactId>
 				<configuration>
 					<encoding>utf-8</encoding>
-					<!-- 使profile生效 -->
+					<!-- springboot加了这个才能使profile生效 -->
 					<useDefaultDelimiters>true</useDefaultDelimiters>
 				</configuration>
 			</plugin>
@@ -154,29 +154,6 @@
             </snapshots>
         </repository>
     </repositories>
-    <!-- <build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${version.spring.boot}</version>
-				<configuration>
-					<jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
-					<executable>true</executable>
-					包含引入的非maven库jar包
-					<includeSystemScope>true</includeSystemScope>
-				</configuration>
-				显示/actuator/info内容
-				<executions>
-                	<execution>
-                    	<goals>
-                        	<goal>build-info</goal>
-                    	</goals>
-                	</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build> -->
 	<dependencyManagement>
 	    <dependencies>
 	        <dependency>
