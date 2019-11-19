@@ -99,6 +99,7 @@
 				<spring.freemarker.cache>false</spring.freemarker.cache>
 				<prefix.resource>/static</prefix.resource>
 				<eureka.addr>localhost:8761</eureka.addr>
+				<eureka.instance.hostname>localhost</eureka.instance.hostname>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
@@ -113,6 +114,7 @@
 				<spring.freemarker.cache>true</spring.freemarker.cache>
 				<prefix.resource>https://xxx.maqiangcgq.com/ducati</prefix.resource>
 				<eureka.addr>localhost:8761</eureka.addr>
+				<eureka.instance.hostname>localhost</eureka.instance.hostname>
 			</properties>
 		</profile>
 		<profile>
@@ -124,6 +126,7 @@
 				<spring.freemarker.cache>true</spring.freemarker.cache>
 				<prefix.resource>https://xxx.maqiangcgq.com/ducati</prefix.resource>
 				<eureka.addr>localhost:8761</eureka.addr>
+				<eureka.instance.hostname>localhost</eureka.instance.hostname>
 			</properties>
 		</profile>
 	</profiles>
