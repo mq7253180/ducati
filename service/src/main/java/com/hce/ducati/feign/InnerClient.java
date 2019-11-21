@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hce.ducati.o.RegionResultDTO;
 
-@FeignClient("HCE-DUCATI")
+@FeignClient("${spring.application.name}")
 public interface InnerClient {
 	@RequestMapping(method = RequestMethod.GET, value = "/region/all2")
     public RegionResultDTO getRegions();
