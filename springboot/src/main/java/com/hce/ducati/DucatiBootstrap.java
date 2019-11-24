@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.ApplicationPidFileWriter;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 //import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 //import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import com.quincy.auth.AuthConstants;
 import com.quincy.sdk.Constants;
 
+@EnableCircuitBreaker
 @EnableFeignClients
 //@EnableDiscoveryClient
 //@EnableEurekaClient

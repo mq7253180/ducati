@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hce.ducati.feign.InnerClient;
 import com.hce.ducati.feign.QuincyClient;
 import com.hce.ducati.o.RegionResultDTO;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.quincy.sdk.entity.Region;
 
 @Controller
@@ -33,5 +35,21 @@ public class XxxController {
 	public List<Region> finaRegionsByInner() {
 		RegionResultDTO dto = innerClient.getRegions();
 		return dto.getData();
+	}
+
+	@HystrixCommand(fallbackMethod = "hystrixFailure", commandProperties = {
+//			@HystrixProperty(name="execution.isolation.strategy", value="SEMAPHORE"), 
+			@HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds", value="2000"), 
+			@HystrixProperty(name="circuitBreaker.requestVolumeThreshold", value="60")
+	})
+	@GetMapping("/hystrix/normal")
+	@ResponseBody
+	public String hystrixNormal() throws InterruptedException {
+		Thread.sleep(1500);
+		return "NORMAL";
+	}
+
+	public String hystrixFailure() {
+		return "FAILURE";
 	}
 }
