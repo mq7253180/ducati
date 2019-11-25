@@ -45,6 +45,8 @@ public class XxxController {
 	@GetMapping("/hystrix/normal")
 	@ResponseBody
 	public String hystrixNormal() throws InterruptedException {
+		/*if(true)
+			throw new RuntimeException("wwwww");*/
 		Thread.sleep(1500);
 		return "NORMAL";
 	}
