@@ -193,11 +193,6 @@
 		    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		    <version>${version.spring-cloud}</version>
 		</dependency>
-		<dependency>
-		    <groupId>org.springframework.cloud</groupId>
-		    <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
-		    <version>${version.spring-cloud}</version>
-		</dependency>
 		<!-- 加载Dubbo -->
 		<!-- <dependency>
 		    <groupId>io.dubbo.springboot</groupId>
