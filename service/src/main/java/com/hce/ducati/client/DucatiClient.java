@@ -30,26 +30,25 @@ import lombok.extern.slf4j.Slf4j;
 public class DucatiClient {
 	private final static String CHANNEL_NAME = "myChannel";
 	@Autowired
-	private DucatiBound source;
+	private DucatiBound processor;
 	/*@Autowired
 	@Qualifier(CHANNEL_NAME)
 	private MessageChannel output;*/
 
-	@StreamListener(DucatiBound.NAME)
+	@StreamListener(DucatiBound.INPUT)
 	public void sink(Account2O o) {
-		log.warn("SINK_HANDLER===========ID: {}---------AMOUNT: {}", o.getId(), o.getAmount());
+		log.warn("SINK_HANDLER========================ID: {}--------------------AMOUNT: {}", o.getId(), o.getAmount());
 	}
 
 //	@StreamListener(Processor.INPUT)
-	@SendTo(DucatiBound.NAME)
-	public AccountO process(AccountO o) {
-		log.warn("PROCESSOR_HANDLER===========ID: {}---------AMOUNT: {}", o.getId(), o.getAmount());
+	@SendTo(DucatiBound.OUTPUT)
+	public AccountO sendto(AccountO o) {
 		return o;
 	}
 
-	public String deduct(AccountO o) {
+	public String output(AccountO o) {
 		Message<AccountO> m = MessageBuilder.withPayload(o).build();
-		boolean r1 = source.output().send(m);
+		boolean r1 = processor.output().send(m);
 //		boolean r2 = output.send(m);
 		return r1+", ";
 	}

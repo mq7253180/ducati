@@ -73,22 +73,22 @@ public class XxxController {
 		return host;
 	}
 
-	@GetMapping("/stream/source/{id}/{amount}")
+	@GetMapping("/stream/output/{id}/{amount}")
 	@ResponseBody
 	public String streamSource(@PathVariable(required = true, name = "id")String id, @PathVariable(required = true, name = "amount")BigDecimal amount) {
 		AccountO o = new AccountO();
 		o.setId(id);
 		o.setAmount(amount);
-		String r = ducatiClient.deduct(o);
+		String r = ducatiClient.output(o);
 		return r;
 	}
 
-	@GetMapping("/stream/process/{id}/{amount}")
+	@GetMapping("/stream/sendto/{id}/{amount}")
 	@ResponseBody
 	public AccountO streamProcess(@PathVariable(required = true, name = "id")String id, @PathVariable(required = true, name = "amount")BigDecimal amount) {
 		AccountO o = new AccountO();
 		o.setId(id);
 		o.setAmount(amount);
-		return ducatiClient.process(o);
+		return ducatiClient.sendto(o);
 	}
 }

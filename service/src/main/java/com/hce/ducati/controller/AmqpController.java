@@ -6,6 +6,7 @@ import java.util.concurrent.TimeoutException;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,12 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/amqp")
 public class AmqpController {
 	private final static ConnectionFactory connectionFactory = new ConnectionFactory();
+	@Value("${spring.rabbitmq.host}")
+	private String host;
+	@Value("${spring.rabbitmq.username}")
+	private String username;
+	@Value("${spring.rabbitmq.password}")
+	private String password;
 	private static Connection conn = null;
 	private static Channel channel = null;
 	private final static String QUEUE_NAME = "ducati.origin";
@@ -48,9 +55,9 @@ public class AmqpController {
 
 	@PostConstruct
 	public void init() throws IOException, TimeoutException {
-		connectionFactory.setHost("47.93.89.0");
-		connectionFactory.setUsername("guest");
-		connectionFactory.setPassword("guest");
+		connectionFactory.setHost(host);
+		connectionFactory.setUsername(username);
+		connectionFactory.setPassword(password);
 		log.info("DEFAULT_RQBBITMQ_PORT================{}", connectionFactory.getPort());
 		conn = connectionFactory.newConnection();
 		channel = conn.createChannel(1);
