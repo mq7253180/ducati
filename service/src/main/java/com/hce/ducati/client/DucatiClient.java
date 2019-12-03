@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.cloud.stream.messaging.Processor;
+//import org.springframework.cloud.stream.messaging.Processor;
 //import org.springframework.cloud.stream.messaging.Sink;
-import org.springframework.cloud.stream.messaging.Source;
+//import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
 import org.springframework.integration.annotation.InboundChannelAdapter;
 import org.springframework.integration.annotation.Poller;
@@ -26,22 +26,22 @@ import com.hce.ducati.o.AccountO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@EnableBinding({Source.class})
-public class QuincyStream {
+@EnableBinding({DucatiBound.class})
+public class DucatiClient {
 	private final static String CHANNEL_NAME = "myChannel";
 	@Autowired
-	private Source source;
+	private DucatiBound source;
 	/*@Autowired
 	@Qualifier(CHANNEL_NAME)
 	private MessageChannel output;*/
 
-	@StreamListener(Source.OUTPUT)
+	@StreamListener(DucatiBound.NAME)
 	public void sink(Account2O o) {
 		log.warn("SINK_HANDLER===========ID: {}---------AMOUNT: {}", o.getId(), o.getAmount());
 	}
 
 //	@StreamListener(Processor.INPUT)
-	@SendTo(Processor.OUTPUT)
+	@SendTo(DucatiBound.NAME)
 	public AccountO process(AccountO o) {
 		log.warn("PROCESSOR_HANDLER===========ID: {}---------AMOUNT: {}", o.getId(), o.getAmount());
 		return o;

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hce.ducati.client.InnerFeign;
 import com.hce.ducati.client.QuincyFeign;
-import com.hce.ducati.client.QuincyStream;
+import com.hce.ducati.client.DucatiClient;
 import com.hce.ducati.o.AccountO;
 import com.hce.ducati.o.RegionResultDTO;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -30,7 +30,7 @@ public class XxxController {
 	@Autowired
 	private InnerFeign innerFeign;
 	@Autowired
-	private QuincyStream quincyStream;
+	private DucatiClient ducatiClient;
 
 	@GetMapping("/regions/quincy")
 	@ResponseBody
@@ -79,7 +79,7 @@ public class XxxController {
 		AccountO o = new AccountO();
 		o.setId(id);
 		o.setAmount(amount);
-		String r = quincyStream.deduct(o);
+		String r = ducatiClient.deduct(o);
 		return r;
 	}
 
@@ -89,6 +89,6 @@ public class XxxController {
 		AccountO o = new AccountO();
 		o.setId(id);
 		o.setAmount(amount);
-		return quincyStream.process(o);
+		return ducatiClient.process(o);
 	}
 }

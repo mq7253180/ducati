@@ -28,9 +28,9 @@ public class AmqpController {
 	private final static ConnectionFactory connectionFactory = new ConnectionFactory();
 	private static Connection conn = null;
 	private static Channel channel = null;
-	private final static String QUEUE_NAME = "queue_test";
+	private final static String QUEUE_NAME = "ducati.origin";
 	private final static String ROUTING_KEY = QUEUE_NAME.substring(QUEUE_NAME.indexOf("_")+1, QUEUE_NAME.length());
-	private final static String EXCHANGE_NAME = "exchange_test";
+	private final static String EXCHANGE_NAME = "ducati.origin";
 
 	@RequestMapping("/send")
 	@ResponseBody
