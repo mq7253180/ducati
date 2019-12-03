@@ -42,7 +42,7 @@ public class DucatiClient {
 
 //	@StreamListener(Processor.INPUT)
 	@SendTo(DucatiBound.OUTPUT)
-	public AccountO sendto(AccountO o) {
+	public AccountO sendTo(AccountO o) {
 		return o;
 	}
 

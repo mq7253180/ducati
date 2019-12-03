@@ -89,6 +89,6 @@ public class XxxController {
 		AccountO o = new AccountO();
 		o.setId(id);
 		o.setAmount(amount);
-		return ducatiClient.sendto(o);
+		return ducatiClient.sendTo(o);
 	}
 }
