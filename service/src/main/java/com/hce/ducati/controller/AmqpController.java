@@ -31,20 +31,6 @@ public class AmqpController {
 	private final static String QUEUE_NAME = "queue_test";
 	private final static String ROUTING_KEY = QUEUE_NAME.substring(QUEUE_NAME.indexOf("_")+1, QUEUE_NAME.length());
 	private final static String EXCHANGE_NAME = "exchange_test";
-	static {
-		connectionFactory.setHost("47.93.89.0");
-		connectionFactory.setUsername("guest");
-		connectionFactory.setPassword("guest");
-		try {
-			conn = connectionFactory.newConnection();
-			channel = conn.createChannel(1);
-			channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-			channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
-			channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, ROUTING_KEY);
-		} catch (Exception e) {
-			log.error("AMQP_ERR: ", e);
-		}
-	}
 
 	@RequestMapping("/send")
 	@ResponseBody
@@ -62,6 +48,15 @@ public class AmqpController {
 
 	@PostConstruct
 	public void init() throws IOException, TimeoutException {
+		connectionFactory.setHost("47.93.89.0");
+		connectionFactory.setUsername("guest");
+		connectionFactory.setPassword("guest");
+		log.info("DEFAULT_RQBBITMQ_PORT================{}", connectionFactory.getPort());
+		conn = connectionFactory.newConnection();
+		channel = conn.createChannel(1);
+		channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+		channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
+		channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, ROUTING_KEY);
 		Consumer consumer = new DefaultConsumer(channel) {
 			@Override
 			public void handleDelivery(String consumerTag, Envelope envelope, BasicProperties properties, byte[] body) throws IOException {
