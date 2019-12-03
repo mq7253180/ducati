@@ -14,4 +14,13 @@ public interface DucatiBound {
 
 	@Input(INPUT)
 	SubscribableChannel input();
+
+	String OUTPUT2 = "ducati_output2";
+	String INPUT2 = "ducati_input2";
+
+	@Output(OUTPUT2)
+	MessageChannel output2();
+
+	@Input(INPUT2)
+	SubscribableChannel input2();
 }

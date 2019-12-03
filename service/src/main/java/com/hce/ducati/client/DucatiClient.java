@@ -1,5 +1,7 @@
 package com.hce.ducati.client;
 
+import java.math.BigDecimal;
+
 //import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,21 +30,23 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @EnableBinding({DucatiBound.class})
 public class DucatiClient {
-	private final static String CHANNEL_NAME = "myChannel";
 	@Autowired
 	private DucatiBound processor;
-	/*@Autowired
+	/*private final static String CHANNEL_NAME = "myChannel";
+	@Autowired
 	@Qualifier(CHANNEL_NAME)
 	private MessageChannel output;*/
 
-	@StreamListener(DucatiBound.INPUT)
+	@StreamListener(DucatiBound.INPUT2)
 	public void sink(Account2O o) {
 		log.warn("SINK_HANDLER========================ID: {}--------------------AMOUNT: {}", o.getId(), o.getAmount());
 	}
 
-//	@StreamListener(Processor.INPUT)
-	@SendTo(DucatiBound.OUTPUT)
+	@StreamListener(DucatiBound.INPUT)
+	@SendTo(DucatiBound.OUTPUT2)
 	public AccountO sendTo(AccountO o) {
+		log.warn("BROKER_HANDLER========================ID: {}--------------------AMOUNT: {}", o.getId(), o.getAmount());
+		o.setAmount(o.getAmount().add(new BigDecimal("123.456")));
 		return o;
 	}
 
