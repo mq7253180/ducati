@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hce.ducati.client.InnerFeign;
 import com.hce.ducati.client.QuincyFeign;
+import com.hce.ducati.mapper.RegionMapper;
 import com.hce.ducati.client.DucatiClient;
 import com.hce.ducati.o.AccountO;
 import com.hce.ducati.o.RegionResultDTO;
@@ -90,5 +91,14 @@ public class XxxController {
 		o.setId(id);
 		o.setAmount(amount);
 		return ducatiClient.sendTo(o);
+	}
+
+	@Autowired
+	private RegionMapper regionMapper;
+
+	@GetMapping("/regions")
+	@ResponseBody
+	public List<Region> findRegions() {
+		return regionMapper.find("on");
 	}
 }

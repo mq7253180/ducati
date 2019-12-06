@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hce.ducati.mapper.RegionMapper" >
+	<resultMap id="regionResultMap" type="com.quincy.sdk.entity.Region">
+		<result column="en_name" property="enName" jdbcType="VARCHAR" />
+		<result column="cn_name" property="cnName" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="find" resultMap="regionResultMap">
+		SELECT en_name,cn_name FROM b_regi${suffix}
+	</select>
+</mapper>
