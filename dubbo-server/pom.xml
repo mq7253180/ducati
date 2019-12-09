@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>dubbo-server</artifactId>
+	<name>service</name>
+	<url>http://maven.apache.org</url>
+	<parent>
+		<groupId>com.hce</groupId>
+		<artifactId>ducati</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<dependencies>
+		<dependency>
+		    <groupId>com.maqiangcgq</groupId>
+		    <artifactId>quincy-sdk</artifactId>
+		    <version>1.0.6</version>
+		</dependency>
+		<!-- 加载Dubbo -->
+		<!-- <dependency>
+		    <groupId>io.dubbo.springboot</groupId>
+		    <artifactId>spring-boot-starter-dubbo</artifactId>
+		    <version>1.0.0</version>
+		</dependency> -->
+		<dependency>
+		    <groupId>org.apache.dubbo</groupId>
+		    <artifactId>dubbo-spring-boot-starter</artifactId>
+		    <version>2.7.3</version>
+		    <!-- <exclusions>
+				<exclusion>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</exclusion>
+			</exclusions> -->
+		</dependency>
+		<!-- 加载Dubbo结束 -->
+		<dependency>
+		    <groupId>com.hce</groupId>
+		    <artifactId>ducati-client</artifactId>
+		    <version>0.0.1-SNAPSHOT</version>
+		</dependency>
+    </dependencies>
+</project>

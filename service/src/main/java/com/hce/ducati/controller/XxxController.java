@@ -3,6 +3,7 @@ package com.hce.ducati.controller;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -16,6 +17,7 @@ import com.hce.ducati.client.InnerFeign;
 import com.hce.ducati.client.QuincyFeign;
 import com.hce.ducati.mapper.RegionMapper;
 import com.hce.ducati.client.DucatiClient;
+import com.hce.ducati.client.DucatiSpringCloudClient;
 import com.hce.ducati.o.AccountO;
 import com.hce.ducati.o.RegionResultDTO;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -31,7 +33,7 @@ public class XxxController {
 	@Autowired
 	private InnerFeign innerFeign;
 	@Autowired
-	private DucatiClient ducatiClient;
+	private DucatiSpringCloudClient ducatiSpringCloudClient;
 
 	@GetMapping("/regions/quincy")
 	@ResponseBody
@@ -80,7 +82,7 @@ public class XxxController {
 		AccountO o = new AccountO();
 		o.setId(id);
 		o.setAmount(amount);
-		String r = ducatiClient.output(o);
+		String r = ducatiSpringCloudClient.output(o);
 		return r;
 	}
 
@@ -90,7 +92,7 @@ public class XxxController {
 		AccountO o = new AccountO();
 		o.setId(id);
 		o.setAmount(amount);
-		return ducatiClient.sendTo(o);
+		return ducatiSpringCloudClient.sendTo(o);
 	}
 
 	@Autowired
@@ -100,5 +102,14 @@ public class XxxController {
 	@ResponseBody
 	public List<Region> findRegions() {
 		return regionMapper.find("on");
+	}
+
+//	@Reference(version = "1.0.0")
+	private DucatiClient ducatiClient;
+
+	@GetMapping("/regions/dubbo")
+	@ResponseBody
+	public List<com.hce.ducati.client.o.Region> findRegionsViaDubbo() {
+		return ducatiClient.fineAllZones();
 	}
 }

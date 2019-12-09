@@ -206,18 +206,6 @@
 		    <artifactId>spring-cloud-starter-config</artifactId>
 		    <version>${version.spring-cloud}</version>
 		</dependency>
-		<!-- 加载Dubbo -->
-		<!-- <dependency>
-		    <groupId>io.dubbo.springboot</groupId>
-		    <artifactId>spring-boot-starter-dubbo</artifactId>
-		    <version>1.0.0</version>
-		</dependency>
-		<dependency>
-		    <groupId>com.hce</groupId>
-		    <artifactId>banking-dubbo-server</artifactId>
-		    <version>0.0.1-SNAPSHOT</version>
-		</dependency> -->
-		<!-- 加载Dubbo结束 -->
 	    <dependency>
 		    <groupId>com.hce</groupId>
 		    <artifactId>ducati-service</artifactId>

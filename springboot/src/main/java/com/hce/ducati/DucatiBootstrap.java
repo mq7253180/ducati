@@ -1,5 +1,6 @@
 package com.hce.ducati;
 
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import com.quincy.auth.AuthConstants;
 import com.quincy.sdk.Constants;
 
+@EnableDubbo
 @EnableCircuitBreaker
 @EnableFeignClients
 //@EnableDiscoveryClient

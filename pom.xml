@@ -65,7 +65,8 @@
 				<domain>127.0.0.1</domain><!-- 种cookie识别session, ajax跨域 -->
 				<mail.user>mq7253180@126.com</mail.user>
 				<mail.to>mq7253181@126.com</mail.to>
-				<zk.url>172.16.80.12:2181</zk.url>
+				<zk.url>47.93.89.0:2181,47.93.89.0:2182,47.93.89.0:2183</zk.url>
+				<dubbo.protocol.port>20880</dubbo.protocol.port>
 				<nexus.url>172.16.80.38:8082</nexus.url>
 				<cfca.platid>8949665AA3D9699DE05311016B0A2A11</cfca.platid>
 				<cfca.addr>210.74.42.33:9443</cfca.addr>
@@ -97,7 +98,8 @@
 				<domain>ducati.maqiangcgq.com</domain><!-- 种cookie识别session, ajax跨域 -->
 				<mail.user>mq7253180@126.com</mail.user>
 				<mail.to></mail.to>
-				<zk.url></zk.url>
+				<zk.url>localhost:2181,localhost:2182,localhost:2183</zk.url>
+				<dubbo.protocol.port>20880</dubbo.protocol.port>
 				<nexus.url>172.16.80.38:8082</nexus.url>
 				<cfca.platid>8F09B7F146D84B75E053025B210A1949</cfca.platid>
 				<cfca.addr>cs.anxinsign.com</cfca.addr>
@@ -126,7 +128,8 @@
 				<domain>ducati.maqiangcgq.com</domain><!-- 种cookie识别session, ajax跨域 -->
 				<mail.user>mq7253180@126.com</mail.user>
 				<mail.to></mail.to>
-				<zk.url></zk.url>
+				<zk.url>localhost:2181,localhost:2182,localhost:2183</zk.url>
+				<dubbo.protocol.port>20880</dubbo.protocol.port>
 				<nexus.url>172.16.80.38:8082</nexus.url>
 				<cfca.platid>8F09B7F146D84B75E053025B210A1949</cfca.platid>
 				<cfca.addr>cs.anxinsign.com</cfca.addr>
@@ -139,5 +142,7 @@
 	<modules>
 		<module>service</module>
 		<module>springboot</module>
+		<module>client</module>
+		<module>dubbo-server</module>
 	</modules>
 </project>

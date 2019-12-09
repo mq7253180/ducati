@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @EnableBinding({DucatiBound.class})
-public class DucatiClient {
+public class DucatiSpringCloudClient {
 	@Autowired
 	private DucatiBound processor;
 	/*private final static String CHANNEL_NAME = "myChannel";
