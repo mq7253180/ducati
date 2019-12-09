@@ -104,7 +104,7 @@ public class XxxController {
 		return regionMapper.find("on");
 	}
 
-//	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0")
 	private DucatiClient ducatiClient;
 
 	@GetMapping("/regions/dubbo")
