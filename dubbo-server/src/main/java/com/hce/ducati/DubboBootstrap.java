@@ -10,8 +10,8 @@ public class DubboBootstrap {
 		ClassPathXmlApplicationContext context = null;
 		try {
 			long start = System.currentTimeMillis();
-//			context = new ClassPathXmlApplicationContext("applicationContext.xml");
-			context = new ClassPathXmlApplicationContext("applicationContext-dubbo.xml");
+			context = new ClassPathXmlApplicationContext("applicationContext.xml");
+//			context = new ClassPathXmlApplicationContext("applicationContext-dubbo.xml");
 			context.start();
 			System.out.println("服务已经启动("+(System.currentTimeMillis()-start)+"ms)...");
 			System.in.read();

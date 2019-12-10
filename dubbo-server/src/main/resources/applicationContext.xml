@@ -32,7 +32,7 @@
         </property>
     </bean> -->
 	<tx:annotation-driven transaction-manager="dataSourceTransactionManager" proxy-target-class="true"/>
-	<jpa:repositories base-package="com.quincy.sdk.dao" repository-impl-postfix="Impl" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="dataSourceTransactionManager" />
+	<jpa:repositories base-package="com.quincy.sdk.dao" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="dataSourceTransactionManager" repository-impl-postfix="Impl" />
 	<bean id="mybatisSqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dynamicDataSource"/>
         <property name="configLocation" value="classpath*:mybatis.xml"/>
@@ -47,11 +47,12 @@
         <property name="basePackage" value="com.hce.ducati.mapper"/>
     </bean>
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<!-- <property name="persistenceUnitName" value="zUnit" /> -->
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan" value="com.quincy.sdk.entity" />
-		<!-- <property name="persistenceProvider">
-			<bean class="org.hibernate.ejb.HibernatePersistence" />
-		</property> -->
+		<property name="persistenceProvider">
+			<bean class="org.hibernate.jpa.HibernatePersistenceProvider"/>
+		</property>
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="generateDdl" value="false" />
@@ -60,10 +61,10 @@
 				<property name="showSql" value="true" />
 			</bean>
 		</property>
-		<property name="jpaDialect">
+		<!-- <property name="jpaDialect">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
-		</property>
-		<property name="jpaPropertyMap">
+		</property> -->
+		<!-- <property name="jpaPropertyMap">
 			<map>
 				<entry key="hibernate.query.substitutions" value="true 1, false 0" />
 				<entry key="hibernate.default_batch_fetch_size" value="16" />
@@ -73,6 +74,6 @@
 				<entry key="hibernate.cache.use_second_level_cache" value="false" />
 				<entry key="hibernate.cache.use_query_cache" value="false" />
 			</map>
-		</property>
+		</property> -->
 	</bean>
 </beans>
