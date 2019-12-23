@@ -19,6 +19,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Consumer;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
+import com.rabbitmq.client.MessageProperties;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,6 +47,7 @@ public class AmqpController {
 		try {
 			channel = conn.createChannel(2);
 //			channel.basicPublish("", QUEUE_NAME, null, content.getBytes());
+//			channel.basicPublish(EXCHANGE_NAME, "xxx", MessageProperties.PERSISTENT_TEXT_PLAIN, content.getBytes());
 			channel.basicPublish(EXCHANGE_NAME, "xxx", null, content.getBytes());
 		} finally {
 			if(channel!=null)
