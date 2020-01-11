@@ -4,6 +4,11 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.apache.dubbo.config.annotation.Reference;
+import org.apache.zookeeper.CreateMode;
+import org.apache.zookeeper.KeeperException;
+import org.apache.zookeeper.WatchedEvent;
+import org.apache.zookeeper.ZooDefs;
+import org.apache.zookeeper.ZooKeeper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -20,10 +25,17 @@ import com.hce.ducati.client.DucatiClient;
 import com.hce.ducati.client.DucatiSpringCloudClient;
 import com.hce.ducati.o.AccountO;
 import com.hce.ducati.o.RegionResultDTO;
+import com.hce.ducati.service.XxxService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import com.quincy.sdk.annotation.OriginalZooKeeperInjector;
 import com.quincy.sdk.entity.Region;
+import com.quincy.sdk.zookeeper.Context;
+import com.quincy.sdk.zookeeper.Handler;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RefreshScope
 @Controller
 @RequestMapping("/xxx")
@@ -111,5 +123,14 @@ public class XxxController {
 	@ResponseBody
 	public List<com.hce.ducati.client.o.Region> findRegionsViaDubbo() {
 		return ducatiClient.fineAllZones();
+	}
+
+	@Autowired
+	private XxxService xxxService;
+
+	@GetMapping("/zk/{arg}/{duration}")
+	@ResponseBody
+	public String testZk(@PathVariable(required = true, name = "arg")String arg, @PathVariable(required = true, name = "duration")long duration) throws KeeperException, InterruptedException {
+		return xxxService.testZk(arg, null, duration);
 	}
 }
