@@ -15,6 +15,7 @@ import com.hce.ducati.service.XxxService;
 import com.quincy.sdk.annotation.Cache;
 import com.quincy.sdk.annotation.OriginalZooKeeperInjector;
 import com.quincy.sdk.annotation.Synchronized;
+import com.quincy.sdk.annotation.DeprecatedSynchronized;
 import com.quincy.sdk.zookeeper.Context;
 import com.quincy.sdk.zookeeper.Handler;
 
@@ -29,7 +30,8 @@ public class XxxServiceImpl implements XxxService {
 	private String appName;
 
 	@Cache(expire = 30)
-//	@Synchronized("xxx")
+	@Synchronized("xxx")
+//	@DeprecatedSynchronized("xxx")
 	@OriginalZooKeeperInjector
 	@Override
 	public String testZk(String arg, ZooKeeper zk, long duration) throws KeeperException, InterruptedException {
