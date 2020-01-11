@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.hce.ducati.service.XxxService;
+import com.quincy.sdk.annotation.Cache;
 import com.quincy.sdk.annotation.OriginalZooKeeperInjector;
 import com.quincy.sdk.annotation.Synchronized;
 import com.quincy.sdk.zookeeper.Context;
@@ -27,7 +28,8 @@ public class XxxServiceImpl implements XxxService {
 	@Value("${spring.application.name}")
 	private String appName;
 
-	@Synchronized("xxx")
+	@Cache(expire = 30)
+//	@Synchronized("xxx")
 	@OriginalZooKeeperInjector
 	@Override
 	public String testZk(String arg, ZooKeeper zk, long duration) throws KeeperException, InterruptedException {
@@ -52,6 +54,6 @@ public class XxxServiceImpl implements XxxService {
 			log.info("---------------{}", path);
 		}*/
 		Thread.sleep(duration);
-		return null;
+		return "sss";
 	}
 }
