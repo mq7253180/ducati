@@ -29,7 +29,7 @@ public class XxxServiceImpl implements XxxService {
 	@Value("${spring.application.name}")
 	private String appName;
 
-	@Cache(expire = 30)
+//	@Cache(expire = 30)
 	@Synchronized("xxx")
 //	@DeprecatedSynchronized("xxx")
 	@OriginalZooKeeperInjector
