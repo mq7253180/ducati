@@ -16,6 +16,7 @@ import com.quincy.sdk.annotation.Cache;
 import com.quincy.sdk.annotation.ZooKeeperInjector;
 import com.quincy.sdk.annotation.Synchronized;
 import com.quincy.sdk.annotation.DeprecatedSynchronized;
+import com.quincy.sdk.annotation.DurationLog;
 import com.quincy.sdk.zookeeper.Context;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,8 +29,9 @@ public class XxxServiceImpl implements XxxService {
 	@Value("${spring.application.name}")
 	private String appName;
 
-//	@Cache(expire = 30)
-	@Synchronized("xxx")
+	@DurationLog
+	@Cache(expire = 30)
+//	@Synchronized("xxx")
 //	@DeprecatedSynchronized("xxx")
 	@ZooKeeperInjector
 	@Override
