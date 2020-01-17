@@ -36,22 +36,7 @@ public class XxxServiceImpl implements XxxService {
 	@ZooKeeperInjector
 	@Override
 	public String testZk(String arg, ZooKeeper zk, long duration) throws KeeperException, InterruptedException {
-		/*String path = "/"+appName+"/test";
-		if(!zkContext.handlerExists(path)) {
-			zkContext.addHandler(new Handler() {
-				@Override
-				public String getPath() {
-					return path;
-				}
-
-				@Override
-				public void process(WatchedEvent event) {
-					log.info(event.getPath()+"---"+event.getType().name()+"---"+event.getState().name()+"---"+event.getState().getIntValue()+"---"+event.getState().ordinal()+"---"+event.toString());
-				}
-			});
-		} else
-			log.info("=====================Handler has been added.");
-		String result = zk.create(path, arg.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);*/
+//		String result = zk.create(path, arg.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
 		/*List<String> list = zk.getChildren(zkContext.getSynPath(), false);
 		for(String path:list) {
 			log.info("---------------{}", path);
