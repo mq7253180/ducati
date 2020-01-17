@@ -13,11 +13,10 @@ import org.springframework.stereotype.Service;
 
 import com.hce.ducati.service.XxxService;
 import com.quincy.sdk.annotation.Cache;
-import com.quincy.sdk.annotation.OriginalZooKeeperInjector;
+import com.quincy.sdk.annotation.ZooKeeperInjector;
 import com.quincy.sdk.annotation.Synchronized;
 import com.quincy.sdk.annotation.DeprecatedSynchronized;
 import com.quincy.sdk.zookeeper.Context;
-import com.quincy.sdk.zookeeper.Handler;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,7 +31,7 @@ public class XxxServiceImpl implements XxxService {
 //	@Cache(expire = 30)
 	@Synchronized("xxx")
 //	@DeprecatedSynchronized("xxx")
-	@OriginalZooKeeperInjector
+	@ZooKeeperInjector
 	@Override
 	public String testZk(String arg, ZooKeeper zk, long duration) throws KeeperException, InterruptedException {
 		/*String path = "/"+appName+"/test";
@@ -56,6 +55,7 @@ public class XxxServiceImpl implements XxxService {
 			log.info("---------------{}", path);
 		}*/
 		Thread.sleep(duration);
+//		zk.delete("/quincy-ducati/synchronization/xxx/execution1", -1);
 		return "sss";
 	}
 }
