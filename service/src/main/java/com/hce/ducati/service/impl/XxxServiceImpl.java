@@ -60,6 +60,7 @@ public class XxxServiceImpl implements XxxService {
 		pp[0] = p;
 		pp[2] = p;
 		pp[4] = p;
+		zzzService.callDubbo(987l, "sdfdssd");
 		zzzService.updateDB(s, p);
 		zzzService.callHttp(321, new int[] {1, 5, 8}, pp);
 		return "XXX";
