@@ -20,6 +20,7 @@ import com.hce.ducati.mapper.RegionMapper;
 import com.hce.ducati.client.DucatiClient;
 import com.hce.ducati.client.DucatiSpringCloudClient;
 import com.hce.ducati.o.AccountO;
+import com.hce.ducati.o.Params;
 import com.hce.ducati.o.RegionResultDTO;
 import com.hce.ducati.service.XxxService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -122,5 +123,13 @@ public class XxxController {
 	@ResponseBody
 	public String testZk(@PathVariable(required = true, name = "arg")String arg, @PathVariable(required = true, name = "duration")long duration) throws KeeperException, InterruptedException {
 		return xxxService.testZk(arg, null, duration);
+	}
+
+	@GetMapping("/testTx")
+	@ResponseBody
+	public String testTx() {
+		String s = "sss";
+		Params p = new Params("ABC", "DEF");
+		return xxxService.testTx(s, p);
 	}
 }

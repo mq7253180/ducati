@@ -26,9 +26,9 @@ import com.quincy.sdk.Constants;
 @EnableFeignClients
 //@EnableDiscoveryClient
 //@EnableEurekaClient
-@MapperScan(basePackages = {AuthConstants.PACKAGE_NAME_MAPPER, "com.hce.ducati.mapper"})
-@EntityScan(basePackages = {Constants.PACKAGE_NAME_ENTITY, AuthConstants.PACKAGE_NAME_ENTITY, "com.hce.ducati.entity"})
-@EnableJpaRepositories(basePackages = {Constants.PACKAGE_NAME_REPOSITORY, AuthConstants.PACKAGE_NAME_REPOSITORY, "com.hce.ducati.dao"})
+@MapperScan(basePackages = {AuthConstants.PACKAGE_NAME_MAPPER, "com.quincy.core.mapper", "com.hce.ducati.mapper"})
+@EntityScan(basePackages = {Constants.PACKAGE_NAME_ENTITY, "com.quincy.core.entity", AuthConstants.PACKAGE_NAME_ENTITY, "com.hce.ducati.entity"})
+@EnableJpaRepositories(basePackages = {Constants.PACKAGE_NAME_REPOSITORY, "com.quincy.core.dao", AuthConstants.PACKAGE_NAME_REPOSITORY, "com.hce.ducati.dao"})
 @EnableTransactionManagement
 @EnableWebMvc
 @EnableJpaAuditing
