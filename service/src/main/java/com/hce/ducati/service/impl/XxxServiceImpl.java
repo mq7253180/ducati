@@ -52,6 +52,11 @@ public class XxxServiceImpl implements XxxService {
 	@Autowired
 	private ZzzService zzzService;
 
+	@Override
+	public String testTx0(String s, Params p) {
+		return this.testTx(s, p);
+	}
+
 	@DistributedTransactional
 	@Override
 	public String testTx(String s, Params p) {

@@ -132,4 +132,12 @@ public class XxxController {
 		Params p = new Params("ABC", "DEF");
 		return xxxService.testTx(s, p);
 	}
+
+	@GetMapping("/testTx0")
+	@ResponseBody
+	public String testTx0() {
+		String s = "sss";
+		Params p = new Params("ABC", "DEF");
+		return xxxService.testTx0(s, p);
+	}
 }
