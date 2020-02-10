@@ -26,6 +26,7 @@ import com.hce.ducati.service.XxxService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.quincy.sdk.entity.Region;
+import com.quincy.sdk.service.RegionService;
 
 @RefreshScope
 @Controller
@@ -139,5 +140,20 @@ public class XxxController {
 		String s = "sss";
 		Params p = new Params("ABC", "DEF");
 		return xxxService.testTx0(s, p);
+	}
+
+	@Autowired
+	private RegionService regionService;
+
+	@GetMapping("/region/all")
+	@ResponseBody
+	public List<Region> findAllRegions() {
+		return regionService.findAll();
+	}
+
+	@GetMapping("/region/countries")
+	@ResponseBody
+	public List<Region> findCountries() {
+		return regionService.findCountries();
 	}
 }

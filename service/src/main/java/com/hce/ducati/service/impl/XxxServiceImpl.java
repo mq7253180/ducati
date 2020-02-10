@@ -60,7 +60,7 @@ public class XxxServiceImpl implements XxxService {
 	@DistributedTransactional
 	@Override
 	public String testTx(String s, Params p) {
-		log.info("====================DO_TX");
+		log.info("DO_TX===================={}---{}---{}---{}", this.getClass().getName(), this.getClass().getCanonicalName(), this.getClass().getSimpleName(), this.getClass().getTypeName());
 		Params[] pp = new Params[5];
 		pp[0] = p;
 		pp[2] = p;
