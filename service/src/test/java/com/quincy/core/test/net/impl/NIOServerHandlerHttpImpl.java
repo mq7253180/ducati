@@ -24,7 +24,9 @@ public class NIOServerHandlerHttpImpl extends NIOServerHandlerShort {
 			baos.write(buf);
 		}
 		System.out.println(infoPrefix+new String(baos.toByteArray()));
-		String http = "Server: Quincy\r\nStatus-String: OK\r\nStatus-Integer: 200\r\nProtocol: HTTP/1.1\r\nContent-Type: text/html; charset="+CHARSET+"\r\n\r\n<html><head></head><body><font color=\"blue\">"+this.getId()+"处理的:</font> <font color=\"red\">内容WWW</font><br/><input type=\"text\"/><input type=\"button\" value=\"提交\"/></body></html>";
+		String http = "";
+//		String http = "Server: Quincy\r\nStatus-String: OK\r\nStatus-Integer: 200\r\nProtocol: HTTP/1.1\r\nContent-Type: text/html; charset="+CHARSET+"\r\n\r\n";
+		http += "<html><head></head><body><font color=\"blue\">"+this.getId()+"处理的:</font> <font color=\"red\">内容WWW</font><br/><input type=\"text\"/><input type=\"button\" value=\"提交\"/></body></html>";
 		buffer.clear();
 		byte[] bufTmp = http.getBytes(CHARSET);
 		buffer = ByteBuffer.allocate(bufTmp.length);

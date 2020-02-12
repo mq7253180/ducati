@@ -26,9 +26,18 @@ public class BIOClientHttp extends BIOClient {
 		@Override
 		public void run() {
 			BIOClient client = new BIOClientHttp();
-			String request = "a=a1&index="+index;
+			StringBuilder request = new StringBuilder();
+			request.append("GET /favicon.ico HTTP/1.1\r\n");
+			request.append("Host: localhost:8080\r\n");
+			request.append("User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:72.0) Gecko/20100101 Firefox/72.0\r\n");
+			request.append("Accept: image/webp,*/*\r\n");
+			request.append("Accept-Language: en-US,en;q=0.5\r\n");
+			request.append("Accept-Encoding: gzip, deflate\r\n");
+			request.append("Connection: keep-alive\r\n");
+			request.append("Cache-Control: max-age=0\r\n");
+			request.append("\r\n");
 			try {
-				client.send("localhost", port, request);
+				client.send("jlcedu.maqiangcgq.com", port, request.toString());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
