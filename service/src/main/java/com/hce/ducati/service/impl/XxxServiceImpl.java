@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.hce.ducati.o.Params;
 import com.hce.ducati.service.XxxService;
 import com.hce.ducati.service.ZzzService;
+import com.hce.ducati.service.ZzzzService;
 import com.quincy.sdk.annotation.Cache;
 import com.quincy.sdk.annotation.ZooKeeperInjector;
 import com.quincy.sdk.annotation.transaction.DistributedTransactional;
@@ -51,6 +52,8 @@ public class XxxServiceImpl implements XxxService {
 
 	@Autowired
 	private ZzzService zzzService;
+	@Autowired
+	private ZzzzService zzzzService;
 
 	@Override
 	public String testTx0(String s, Params p) {
@@ -60,7 +63,10 @@ public class XxxServiceImpl implements XxxService {
 	@DistributedTransactional
 	@Override
 	public String testTx(String s, Params p) {
-		log.info("DO_TX===================={}---{}---{}---{}", this.getClass().getName(), this.getClass().getCanonicalName(), this.getClass().getSimpleName(), this.getClass().getTypeName());
+		log.info("DO_TX===================={}---{}---{}---{}", zzzService.getClass().getName(), zzzService.getClass().getCanonicalName(), zzzService.getClass().getSimpleName(), zzzService.getClass().getTypeName());
+		log.info("DO_TX===================={}---{}---{}---{}", zzzService.getClass().getSuperclass().getName(), zzzService.getClass().getSuperclass().getCanonicalName(), zzzService.getClass().getSuperclass().getSimpleName(), zzzService.getClass().getSuperclass().getTypeName());
+		log.info("DO_TX===================={}---{}---{}---{}", zzzzService.getClass().getName(), zzzzService.getClass().getCanonicalName(), zzzzService.getClass().getSimpleName(), zzzzService.getClass().getTypeName());
+		log.info("DO_TX===================={}---{}---{}---{}", zzzzService.getClass().getSuperclass().getName(), zzzzService.getClass().getSuperclass().getCanonicalName(), zzzzService.getClass().getSuperclass().getSimpleName(), zzzzService.getClass().getSuperclass().getTypeName());
 		Params[] pp = new Params[5];
 		pp[0] = p;
 		pp[2] = p;

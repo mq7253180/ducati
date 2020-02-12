@@ -23,8 +23,10 @@ import com.hce.ducati.o.AccountO;
 import com.hce.ducati.o.Params;
 import com.hce.ducati.o.RegionResultDTO;
 import com.hce.ducati.service.XxxService;
+import com.hce.ducati.service.ZzzService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import com.quincy.sdk.annotation.transaction.DistributedTransactional;
 import com.quincy.sdk.entity.Region;
 import com.quincy.sdk.service.RegionService;
 
@@ -140,6 +142,25 @@ public class XxxController {
 		String s = "sss";
 		Params p = new Params("ABC", "DEF");
 		return xxxService.testTx0(s, p);
+	}
+
+	@Autowired
+	private ZzzService zzzService;
+
+	@DistributedTransactional
+	@GetMapping("/testTx1")
+	@ResponseBody
+	public String testTx1() {
+		String s = "sss";
+		Params p = new Params("ABC", "DEF");
+		Params[] pp = new Params[5];
+		pp[0] = p;
+		pp[2] = p;
+		pp[4] = p;
+		zzzService.callDubbo(987l, "sdfdssd");
+		zzzService.updateDB(s, p);
+		zzzService.callHttp(321, new int[] {1, 5, 8}, pp);
+		return "XXX";
 	}
 
 	@Autowired
