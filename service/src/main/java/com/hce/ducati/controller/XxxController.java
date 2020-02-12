@@ -26,10 +26,14 @@ import com.hce.ducati.service.XxxService;
 import com.hce.ducati.service.ZzzService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import com.quincy.sdk.annotation.Cache;
 import com.quincy.sdk.annotation.transaction.DistributedTransactional;
 import com.quincy.sdk.entity.Region;
 import com.quincy.sdk.service.RegionService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RefreshScope
 @Controller
 @RequestMapping("/xxx")
@@ -166,15 +170,19 @@ public class XxxController {
 	@Autowired
 	private RegionService regionService;
 
+	@Cache(expire = 30)
 	@GetMapping("/region/all")
 	@ResponseBody
 	public List<Region> findAllRegions() {
+		log.info("===============findAllRegions");
 		return regionService.findAll();
 	}
 
+	@Cache(expire = 15)
 	@GetMapping("/region/countries")
 	@ResponseBody
 	public List<Region> findCountries() {
+		log.info("===============findCountries");
 		return regionService.findCountries();
 	}
 }
