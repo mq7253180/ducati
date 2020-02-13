@@ -61,8 +61,7 @@
 				<expire.session>10</expire.session><!-- minutes -->
 				<redis.nodes>47.93.89.0:26379,47.93.89.0:26389,47.93.89.0:26399</redis.nodes>
 				<redis.sentinel.master>mymaster</redis.sentinel.master>
-				<redis.host>47.93.89.0</redis.host>
-				<redis.port>6379</redis.port>
+				<!-- <redis.nodes>47.93.89.0:6379</redis.nodes> -->
 				<redis.pwd>foobared</redis.pwd>
 				<domain>127.0.0.1</domain><!-- 种cookie识别session, ajax跨域 -->
 				<mail.user>mq7253180@126.com</mail.user>
@@ -97,8 +96,6 @@
 				<expire.session>60</expire.session><!-- minutes -->
 				<redis.nodes>localhost:26379,localhost:26389,localhost:26399</redis.nodes>
 				<redis.sentinel.master>mymaster</redis.sentinel.master>
-				<redis.host>localhost</redis.host>
-				<redis.port>6379</redis.port>
 				<redis.pwd>foobared</redis.pwd>
 				<domain>ducati.maqiangcgq.com</domain><!-- 种cookie识别session, ajax跨域 -->
 				<mail.user>mq7253180@126.com</mail.user>
@@ -130,8 +127,6 @@
 				<expire.session>60</expire.session><!-- minutes -->
 				<redis.nodes>localhost:26379,localhost:26389,localhost:26399</redis.nodes>
 				<redis.sentinel.master>mymaster</redis.sentinel.master>
-				<redis.host>localhost</redis.host>
-				<redis.port>6379</redis.port>
 				<redis.pwd>foobared</redis.pwd>
 				<domain>ducati.maqiangcgq.com</domain><!-- 种cookie识别session, ajax跨域 -->
 				<mail.user>mq7253180@126.com</mail.user>
