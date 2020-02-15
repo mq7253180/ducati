@@ -21,9 +21,11 @@ import com.quincy.sdk.annotation.transaction.DistributedTransactional;
 import com.quincy.sdk.annotation.Synchronized;
 import com.quincy.sdk.annotation.DeprecatedSynchronized;
 import com.quincy.sdk.annotation.DurationLog;
+import com.quincy.sdk.annotation.JedisInjector;
 import com.quincy.sdk.zookeeper.Context;
 
 import lombok.extern.slf4j.Slf4j;
+import redis.clients.jedis.JedisCluster;
 
 @Slf4j
 @Service
@@ -75,5 +77,21 @@ public class XxxServiceImpl implements XxxService {
 		zzzService.updateDB(s, p);
 		zzzService.callHttp(321, new int[] {1, 5, 8}, pp);
 		return "XXX";
+	}
+
+	@JedisInjector
+	@Override
+	public void testRedisCluster(String arg0, JedisCluster jedis, String arg1, JedisCluster jedis2, String arg2) {
+		String key = "kkk";
+		String value = "vvv";
+		jedis.set(key, value);
+		jedis.expire(key, 3);
+		log.info("testRedisCluster==================={}", jedis2.get(key));
+	}
+
+	@DeprecatedSynchronized(value = "ttt")
+	@Override
+	public void testDeprecatedSynchronized(long millis) throws InterruptedException {
+		Thread.sleep(millis);
 	}
 }

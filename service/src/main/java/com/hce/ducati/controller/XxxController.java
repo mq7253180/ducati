@@ -27,11 +27,14 @@ import com.hce.ducati.service.ZzzService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.quincy.sdk.annotation.Cache;
+import com.quincy.sdk.annotation.JedisInjector;
 import com.quincy.sdk.annotation.transaction.DistributedTransactional;
 import com.quincy.sdk.entity.Region;
 import com.quincy.sdk.service.RegionService;
 
 import lombok.extern.slf4j.Slf4j;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisCluster;
 
 @Slf4j
 @RefreshScope
@@ -184,5 +187,34 @@ public class XxxController {
 	public List<Region> findCountries() {
 		log.info("===============findCountries");
 		return regionService.findCountries();
+	}
+
+	@JedisInjector
+	@GetMapping("/redis")
+	@ResponseBody
+	public void testRedis(Jedis jedis) {
+		String key = "www";
+		String value = "xxxx";
+		jedis.set(key, value);
+		jedis.expire(key, 5);
+		log.info("testRedis==============={}", jedis.get(key));
+	}
+
+//	@JedisInjector
+	@GetMapping("/redis2")
+	@ResponseBody
+	public void testRedisCluster2() {
+	/*public void testRedisCluster(JedisCluster jedis) {
+		String key = "kkk";
+		String value = "vvv";
+		jedis.set(key, value);
+		jedis.expire(key, 2);*/
+		xxxService.testRedisCluster("aaa", null, "bbb", null, "ccc");
+	}
+
+	@GetMapping("/redis3")
+	@ResponseBody
+	public void testRedisCluster3() throws InterruptedException {
+		xxxService.testDeprecatedSynchronized(3000);
 	}
 }
