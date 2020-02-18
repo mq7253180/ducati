@@ -36,8 +36,8 @@ public class XxxServiceImpl implements XxxService {
 	private String appName;
 
 	@DurationLog
-	@Cache(expire = 30)
-//	@Synchronized("xxx")
+//	@Cache(expire = 30)
+	@Synchronized("xxx")
 //	@DeprecatedSynchronized("xxx")
 	@ZooKeeperInjector
 	@Override
