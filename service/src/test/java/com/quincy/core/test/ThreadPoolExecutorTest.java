@@ -46,6 +46,32 @@ public class ThreadPoolExecutorTest {
 	}
 
 	public static void main(String[] args) {
-		new ThreadPoolExecutorTest().test();
+//		new ThreadPoolExecutorTest().test();
+		BlockingQueue<Runnable> blockingQueue = new LinkedBlockingQueue<Runnable>(3);
+		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(2, 4, 3, TimeUnit.SECONDS, blockingQueue);
+		for(int i=0;i<10;i++) {
+			QuincyTask t = new QuincyTask(i);
+			threadPoolExecutor.execute(t);
+			System.out.println(i+"===ActiveCount: "+threadPoolExecutor.getActiveCount()+", CompletedTaskCount: "+threadPoolExecutor.getCompletedTaskCount()+", CorePoolSize: "+threadPoolExecutor.getCorePoolSize()+", LargestPoolSize: "+threadPoolExecutor.getLargestPoolSize()+", MaximumPoolSize: "+threadPoolExecutor.getMaximumPoolSize()+", PoolSize: "+threadPoolExecutor.getPoolSize()+", TaskCount: "+threadPoolExecutor.getTaskCount());
+		}
+		threadPoolExecutor.shutdown();
+	}
+
+	public static class QuincyTask implements Runnable {
+		private int i;
+
+		public QuincyTask(int i) {
+			this.i = i;
+		}
+
+		@Override
+		public void run() {
+			System.out.println("-----------"+i);
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
