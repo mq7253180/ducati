@@ -164,7 +164,7 @@ public class XxxController {
 		pp[0] = p;
 		pp[2] = p;
 		pp[4] = p;
-		zzzService.callDubbo(987l, "sdfdssd");
+		zzzService.callDubbo(987l, null);
 		zzzService.updateDB(s, p);
 		zzzService.callHttp(321, new int[] {1, 5, 8}, pp);
 		return "XXX";
@@ -216,5 +216,19 @@ public class XxxController {
 	@ResponseBody
 	public void testRedisCluster3() throws InterruptedException {
 		xxxService.testDeprecatedSynchronized(3000);
+	}
+
+	private String sss;
+
+	@GetMapping("/ttt/{arg}")
+	@ResponseBody
+	public void testSingleton(@PathVariable(required = true, name = "arg")String arg) {
+		this.sss = arg;
+	}
+
+	@GetMapping("/ttt")
+	@ResponseBody
+	public String testSingleton() {
+		return this.sss;
 	}
 }

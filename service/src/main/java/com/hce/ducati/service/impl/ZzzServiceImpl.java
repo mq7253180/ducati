@@ -17,19 +17,22 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class ZzzServiceImpl implements ZzzService {
-	@AtomicOperational(confirm = "confirmCallHttp", cancel = "cancelCallHttp")
+	@AtomicOperational(confirm = "confirmCallHttp")
+//	@AtomicOperational(confirm = "confirmCallHttp", cancel = "cancelCallHttp")
 	@Override
 	public void callHttp(int i, int[] ii, Params[] ps) {
 		log.info("==============CALL_HTTP");
 	}
 
-	@AtomicOperational(confirm = "confirmUpdateDB", cancel = "cancelUpdateDB")
+	@AtomicOperational(confirm = "confirmUpdateDB")
+//	@AtomicOperational(confirm = "confirmUpdateDB", cancel = "cancelUpdateDB")
 	@Override
 	public void updateDB(String s, Params p) {
 		log.info("==============UPDATE_DB");
 	}
 
-	@AtomicOperational(confirm = "confirmCallDubbo", cancel = "cancelCallDubbo")
+	@AtomicOperational(confirm = "confirmCallDubbo")
+//	@AtomicOperational(confirm = "confirmCallDubbo", cancel = "cancelCallDubbo")
 	@Override
 	public void callDubbo(Long id, String val) {
 		log.info("==============CALL_DUBBO");
@@ -51,6 +54,8 @@ public class ZzzServiceImpl implements ZzzService {
 	}
 
 	public void confirmUpdateDB(String s, Params p) {
+		if(true)
+			throw new RuntimeException("测试提交失败");
 		log.info("CONFIRM_UPDATE_DB=============={}--------{}", s, p.getB());
 		Company c= companyRepository.findById(1l).get();
 		c.setCnName(c.getCnName()+"-"+p.getA()+"-"+p.getB());
@@ -58,6 +63,8 @@ public class ZzzServiceImpl implements ZzzService {
 	}
 
 	public void confirmCallDubbo(Long id, String val) {
+		if(true)
+			throw new RuntimeException("测试提交失败");
 		log.info("==============CONFIRM_CALL_DUBBO");
 	}
 
@@ -72,6 +79,8 @@ public class ZzzServiceImpl implements ZzzService {
 	}
 
 	public void cancelUpdateDB(String s, Params p) {
+		/*if(true)
+			throw new RuntimeException("测试撤消失败");*/
 		log.info("CANCEL_UPDATE_DB=============={}--------{}", s, p.getB());
 		Company c= companyRepository.findById(1l).get();
 		c.setCnName(c.getCnName().substring(0, 2));
