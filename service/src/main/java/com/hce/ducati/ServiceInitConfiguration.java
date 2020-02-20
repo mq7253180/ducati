@@ -9,15 +9,17 @@ import org.springframework.context.annotation.PropertySource;
 
 import com.quincy.sdk.DistributedTransactionContext;
 import com.quincy.sdk.DistributedTransactionFailure;
+import com.quincy.sdk.EmailService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @PropertySource(value = {"classpath:application-core.properties", "classpath:application-auth.properties", "classpath:application-service.properties"})
 @Configuration
 public class ServiceInitConfiguration {
 	@Autowired
 	private DistributedTransactionContext transactionContext;
+	@Autowired
+	private EmailService emailService;
 
 	@PostConstruct
 	public void init() {
@@ -29,7 +31,7 @@ public class ServiceInitConfiguration {
 
 			@Override
 			public void inform(String message) {
-				log.info("DISTRIBUTED_TRANSACTION_MESSAGE==================Size: {}, Content: \r\n{}", message.length(), message);
+				emailService.send("mq7253180@126.com", "转账失败", message, "", null, "UTF-8", null, null);
 			}
 		});
 	}
