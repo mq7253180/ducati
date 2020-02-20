@@ -11,8 +11,6 @@ import com.quincy.sdk.DistributedTransactionContext;
 import com.quincy.sdk.DistributedTransactionFailure;
 import com.quincy.sdk.EmailService;
 
-import lombok.extern.slf4j.Slf4j;
-
 @PropertySource(value = {"classpath:application-core.properties", "classpath:application-auth.properties", "classpath:application-service.properties"})
 @Configuration
 public class ServiceInitConfiguration {
