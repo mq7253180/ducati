@@ -38,6 +38,12 @@ public class ZzzServiceImpl implements ZzzService {
 		log.info("==============CALL_DUBBO");
 	}
 
+	@AtomicOperational(confirm = "confirmCallDubbo")
+	@Override
+	public void callDubbo() {
+		log.info("==============CALL_DUBBO");
+	}
+
 	@Autowired
 	private CompanyRepository companyRepository;
 
@@ -65,6 +71,12 @@ public class ZzzServiceImpl implements ZzzService {
 	public void confirmCallDubbo(Long id, String val) {
 		if(true)
 			throw new RuntimeException("测试提交失败");
+		log.info("==============CONFIRM_CALL_DUBBO");
+	}
+
+	public void confirmCallDubbo() {
+		if(true)
+			throw new RuntimeException("测试提交失败wwwww");
 		log.info("==============CONFIRM_CALL_DUBBO");
 	}
 
