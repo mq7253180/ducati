@@ -108,13 +108,10 @@ public class XxxController {
 		return ducatiSpringCloudClient.sendTo(o);
 	}
 
-	@Autowired
-	private RegionMapper regionMapper;
-
 	@GetMapping("/regions")
 	@ResponseBody
 	public List<Region> findRegions() {
-		return regionMapper.find("on");
+		return xxxService.findRegions();
 	}
 
 	@Reference(version = "1.0.0")

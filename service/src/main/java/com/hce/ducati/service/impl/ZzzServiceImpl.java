@@ -60,8 +60,8 @@ public class ZzzServiceImpl implements ZzzService {
 	}
 
 	public void confirmUpdateDB(String s, Params p) {
-		if(true)
-			throw new RuntimeException("测试提交失败");
+		/*if(true)
+			throw new RuntimeException("测试提交失败");*/
 		log.info("CONFIRM_UPDATE_DB=============={}--------{}", s, p.getB());
 		Company c= companyRepository.findById(1l).get();
 		c.setCnName(c.getCnName()+"-"+p.getA()+"-"+p.getB());
@@ -69,14 +69,14 @@ public class ZzzServiceImpl implements ZzzService {
 	}
 
 	public void confirmCallDubbo(Long id, String val) {
-		if(true)
-			throw new RuntimeException("测试提交失败");
+		/*if(true)
+			throw new RuntimeException("测试提交失败");*/
 		log.info("==============CONFIRM_CALL_DUBBO");
 	}
 
 	public void confirmCallDubbo() {
-		if(true)
-			throw new RuntimeException("测试提交失败wwwww");
+		/*if(true)
+			throw new RuntimeException("测试提交失败wwwww");*/
 		log.info("==============CONFIRM_CALL_DUBBO");
 	}
 

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.hce.ducati.mapper.RegionMapper;
 import com.hce.ducati.o.Params;
 import com.hce.ducati.service.XxxService;
 import com.hce.ducati.service.ZzzService;
@@ -18,10 +19,12 @@ import com.hce.ducati.service.ZzzzService;
 import com.quincy.sdk.annotation.Cache;
 import com.quincy.sdk.annotation.ZooKeeperInjector;
 import com.quincy.sdk.annotation.transaction.DistributedTransactional;
+import com.quincy.sdk.entity.Region;
 import com.quincy.sdk.annotation.Synchronized;
 import com.quincy.sdk.annotation.DeprecatedSynchronized;
 import com.quincy.sdk.annotation.DurationLog;
 import com.quincy.sdk.annotation.JedisInjector;
+import com.quincy.sdk.annotation.ReadOnly;
 import com.quincy.sdk.zookeeper.Context;
 
 import lombok.extern.slf4j.Slf4j;
@@ -94,5 +97,13 @@ public class XxxServiceImpl implements XxxService {
 	@Override
 	public void testDeprecatedSynchronized(long millis) throws InterruptedException {
 		Thread.sleep(millis);
+	}
+
+	@Autowired
+	private RegionMapper regionMapper;
+
+	@ReadOnly
+	public List<Region> findRegions() {
+		return regionMapper.find("on");
 	}
 }
