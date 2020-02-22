@@ -88,14 +88,14 @@
 				<spring.datasource.url>localhost:3306/ducati</spring.datasource.url>
 				<spring.datasource.username>admin</spring.datasource.username>
 				<spring.datasource.password>nimda</spring.datasource.password>
-				<spring.datasource.url.slave>localhost:3306/ducati</spring.datasource.url.slave>
+				<spring.datasource.url.slave>10.27.74.126:6603/ducati</spring.datasource.url.slave>
 				<spring.datasource.username.slave>jlcedu</spring.datasource.username.slave>
 				<spring.datasource.password.slave>xxx</spring.datasource.password.slave>
 				<!-- <spring.rocketmq.nameServer>10.30.1.11:9876</spring.rocketmq.nameServer> -->
 				<spring.jpa.show-sql>false</spring.jpa.show-sql>
 				<expire.session>60</expire.session><!-- minutes -->
-				<!-- <redis.nodes>localhost:6379,localhost:6389,localhost:6399</redis.nodes> -->
-				<redis.nodes>localhost:26379,localhost:26389,localhost:26399</redis.nodes>
+				<redis.nodes>localhost:6379,localhost:6389,localhost:6399</redis.nodes>
+				<!-- <redis.nodes>localhost:26379,localhost:26389,localhost:26399</redis.nodes> -->
 				<redis.pwd>foobared</redis.pwd>
 				<domain>ducati.maqiangcgq.com</domain><!-- 种cookie识别session, ajax跨域 -->
 				<mail.user>mq7253180@126.com</mail.user>
@@ -119,14 +119,14 @@
 				<spring.datasource.url>localhost:3306/ducati</spring.datasource.url>
 				<spring.datasource.username>admin</spring.datasource.username>
 				<spring.datasource.password>nimda</spring.datasource.password>
-				<spring.datasource.url.slave>localhost:3306/ducati</spring.datasource.url.slave>
+				<spring.datasource.url.slave>10.27.74.126:6603/ducati</spring.datasource.url.slave>
 				<spring.datasource.username.slave>jlcedu</spring.datasource.username.slave>
 				<spring.datasource.password.slave>xxx</spring.datasource.password.slave>
 				<!-- <spring.rocketmq.nameServer>10.30.1.11:9876</spring.rocketmq.nameServer> -->
 				<spring.jpa.show-sql>false</spring.jpa.show-sql>
 				<expire.session>60</expire.session><!-- minutes -->
-				<!-- <redis.nodes>localhost:6379,localhost:6389,localhost:6399</redis.nodes> -->
-				<redis.nodes>localhost:26379,localhost:26389,localhost:26399</redis.nodes>
+				<redis.nodes>localhost:6379,localhost:6389,localhost:6399</redis.nodes>
+				<!-- <redis.nodes>localhost:26379,localhost:26389,localhost:26399</redis.nodes> -->
 				<redis.pwd>foobared</redis.pwd>
 				<domain>ducati.maqiangcgq.com</domain><!-- 种cookie识别session, ajax跨域 -->
 				<mail.user>mq7253180@126.com</mail.user>
