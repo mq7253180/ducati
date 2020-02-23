@@ -170,7 +170,7 @@ public class XxxController {
 	@Autowired
 	private RegionService regionService;
 
-	@Cache(expire = 30)
+//	@Cache(expire = 30)
 	@GetMapping("/region/all")
 	@ResponseBody
 	public List<Region> findAllRegions() {
@@ -178,7 +178,7 @@ public class XxxController {
 		return regionService.findAll();
 	}
 
-	@Cache(expire = 15)
+//	@Cache(expire = 15)
 	@GetMapping("/region/countries")
 	@ResponseBody
 	public List<Region> findCountries() {
