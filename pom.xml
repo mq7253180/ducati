@@ -139,7 +139,7 @@
 				<mail.to></mail.to>
 				<zk.url>localhost:2181,localhost:2182,localhost:2183</zk.url>
 				<zk.timeout>5000</zk.timeout>
-				<dubbo.protocol.port>20880</dubbo.protocol.port>
+				<dubbo.protocol.port>20890</dubbo.protocol.port>
 				<nexus.url>172.16.80.38:8082</nexus.url>
 				<cfca.platid>8F09B7F146D84B75E053025B210A1949</cfca.platid>
 				<cfca.addr>cs.anxinsign.com</cfca.addr>
