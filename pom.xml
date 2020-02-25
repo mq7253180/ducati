@@ -87,13 +87,13 @@
 				<server.port>8080</server.port>
 				<spring.datasource.url>localhost:3306/ducati</spring.datasource.url>
 				<spring.datasource.username>admin</spring.datasource.username>
-				<spring.datasource.password>nimda</spring.datasource.password>
+				<spring.datasource.password>xxxx</spring.datasource.password>
 				<!-- HAProxy负载 -->
 				<spring.datasource.url.slave>192.168.0.1:6603/ducati</spring.datasource.url.slave>
 				<!-- Keepalived负载 -->
 				<!-- <spring.datasource.url.slave>172.16.0.1:3306/ducati</spring.datasource.url.slave> -->
 				<spring.datasource.username.slave>jlcedu</spring.datasource.username.slave>
-				<spring.datasource.password.slave>xxx</spring.datasource.password.slave>
+				<spring.datasource.password.slave>xxxx</spring.datasource.password.slave>
 				<!-- <spring.rocketmq.nameServer>10.30.1.11:9876</spring.rocketmq.nameServer> -->
 				<spring.jpa.show-sql>false</spring.jpa.show-sql>
 				<expire.session>60</expire.session><!-- minutes -->
@@ -121,13 +121,13 @@
 				<server.port>8090</server.port>
 				<spring.datasource.url>localhost:3306/ducati</spring.datasource.url>
 				<spring.datasource.username>admin</spring.datasource.username>
-				<spring.datasource.password>nimda</spring.datasource.password>
+				<spring.datasource.password>xxxx</spring.datasource.password>
 				<!-- HAProxy负载 -->
 				<!-- <spring.datasource.url.slave>192.168.0.1:6603/ducati</spring.datasource.url.slave> -->
 				<!-- Keepalived负载 -->
 				<spring.datasource.url.slave>172.16.0.1:3306/ducati</spring.datasource.url.slave>
 				<spring.datasource.username.slave>jlcedu</spring.datasource.username.slave>
-				<spring.datasource.password.slave>xxx</spring.datasource.password.slave>
+				<spring.datasource.password.slave>xxxx</spring.datasource.password.slave>
 				<!-- <spring.rocketmq.nameServer>10.30.1.11:9876</spring.rocketmq.nameServer> -->
 				<spring.jpa.show-sql>false</spring.jpa.show-sql>
 				<expire.session>60</expire.session><!-- minutes -->
