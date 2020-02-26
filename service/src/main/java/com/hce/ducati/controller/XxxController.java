@@ -28,7 +28,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.quincy.sdk.annotation.Cache;
 import com.quincy.sdk.annotation.JedisInjector;
-import com.quincy.sdk.annotation.transaction.DistributedTransactional;
+import com.quincy.sdk.annotation.transaction.DTransactional;
 import com.quincy.sdk.entity.Region;
 import com.quincy.sdk.service.RegionService;
 
@@ -151,7 +151,7 @@ public class XxxController {
 	@Autowired
 	private ZzzService zzzService;
 
-	@DistributedTransactional
+	@DTransactional
 	@GetMapping("/testTx1")
 	@ResponseBody
 	public String testTx1() {

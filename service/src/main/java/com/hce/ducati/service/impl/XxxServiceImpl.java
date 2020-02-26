@@ -18,7 +18,7 @@ import com.hce.ducati.service.ZzzService;
 import com.hce.ducati.service.ZzzzService;
 import com.quincy.sdk.annotation.Cache;
 import com.quincy.sdk.annotation.ZooKeeperInjector;
-import com.quincy.sdk.annotation.transaction.DistributedTransactional;
+import com.quincy.sdk.annotation.transaction.DTransactional;
 import com.quincy.sdk.entity.Region;
 import com.quincy.sdk.annotation.Synchronized;
 import com.quincy.sdk.annotation.DeprecatedSynchronized;
@@ -65,7 +65,7 @@ public class XxxServiceImpl implements XxxService {
 		return this.testTx(s, p);
 	}
 
-	@DistributedTransactional
+	@DTransactional
 	@Override
 	public String testTx(String s, Params p) {
 		log.info("DO_TX===================={}---{}---{}---{}", zzzService.getClass().getName(), zzzService.getClass().getCanonicalName(), zzzService.getClass().getSimpleName(), zzzService.getClass().getTypeName());
