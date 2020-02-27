@@ -45,10 +45,7 @@ public class SystemController {
 	public ModelAndView menu() {
 		List<Role> roles = userService.findAllRoles();
 		List<UserEntity> users = userService.findAllUsers();
-		ModelAndView mv = new ModelAndView("/content/root");
-		mv.addObject("roles", roles);
-		mv.addObject("users", users);
-		return mv;
+		return new ModelAndView("/content/root").addObject("roles", roles).addObject("users", users);
 	}
 
 	private final static int BUFFER = 2*1024*1024;

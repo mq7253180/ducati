@@ -45,12 +45,11 @@ public class CreditController {
 	@GetMapping(value = "")
 	public ModelAndView menu(HttpServletRequest request) {
 		List<CreditDTO> credits = creditService.findCredits();
-		ModelAndView mv = new ModelAndView("/content/credit/index");
-		mv.addObject("currencies", ServiceConstants.CURRENCIES);
-		mv.addObject("credits", credits);
-		mv.addObject("companies", companyService.findAll());
-		mv.addObject("pageSize", ServiceConstants.PAGE_SIZE);
-		return mv;
+		return new ModelAndView("/content/credit/index")
+				.addObject("currencies", ServiceConstants.CURRENCIES)
+				.addObject("credits", credits)
+				.addObject("companies", companyService.findAll())
+				.addObject("pageSize", ServiceConstants.PAGE_SIZE);
 	}
 
 	@PermissionNeeded("creditAdd")
@@ -110,11 +109,10 @@ public class CreditController {
 		creditDTO.setCompanyCnName(company.getCnName());
 		creditDTO.setCurrency(credit.getCurrency());
 		creditDTO.setRatio(credit.getRatio());
-		ModelAndView mv = new ModelAndView("/content/credit/history");
-		mv.addObject("pagination", creditService.findHistorys(id, page, size, from, to, df));
-		mv.addObject("credit", creditDTO);
-		mv.addObject("criterionFrom", _from);
-		mv.addObject("criterionTo", _to);
-		return mv;
+		return new ModelAndView("/content/credit/history")
+				.addObject("pagination", creditService.findHistorys(id, page, size, from, to, df))
+				.addObject("credit", creditDTO)
+				.addObject("criterionFrom", _from)
+				.addObject("criterionTo", _to);
 	}
 }

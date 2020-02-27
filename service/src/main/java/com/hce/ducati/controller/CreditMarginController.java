@@ -47,16 +47,15 @@ public class CreditMarginController {
 		Date from = _from==null?null:df.parse(_from+" 00:00:00");
 		Date to = _to==null?null:df.parse(_to+" 23:59:59");
 		Pagination pagination = creditMarginService.find(page, size, from, to, companyId, currency);
-		ModelAndView mv = new ModelAndView("/content/credit/margin");
-		mv.addObject("pageSize", ServiceConstants.PAGE_SIZE);
-		mv.addObject("currencies", ServiceConstants.CURRENCIES);
-		mv.addObject("companies", companyService.findAll());
-		mv.addObject("pagination", pagination);
-		mv.addObject("criterionFrom", _from);
-		mv.addObject("criterionTo", _to);
-		mv.addObject("criterionCompanyId", companyId);
-		mv.addObject("criterionCurrency", currency);
-		return mv;
+		return new ModelAndView("/content/credit/margin")
+				.addObject("pageSize", ServiceConstants.PAGE_SIZE)
+				.addObject("currencies", ServiceConstants.CURRENCIES)
+				.addObject("companies", companyService.findAll())
+				.addObject("pagination", pagination)
+				.addObject("criterionFrom", _from)
+				.addObject("criterionTo", _to)
+				.addObject("criterionCompanyId", companyId)
+				.addObject("criterionCurrency", currency);
 	}
 
 	@PermissionNeeded("creditMarginAdd")
