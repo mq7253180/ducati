@@ -152,20 +152,19 @@ public class HttpTest {
 	}
 
 	private static String appendHttp(String domain, int port, String uri, String[][] REQUEST_PROPERTIES_PAIR) {
-		StringBuffer http = new StringBuffer(2000);
-		http.append("GET ");
-		http.append(uri!=null&&uri.trim().length()>0?uri:"/");
-		http.append(" HTTP/1.1\r\n");
-		for(int i=1;i<REQUEST_PROPERTIES_PAIR.length;i++) {
-			http.append(REQUEST_PROPERTIES_PAIR[i][0]);
-			http.append(":");
-			http.append(REQUEST_PROPERTIES_PAIR[i][1]);
-			http.append("\r\n");
-		}
-		http.append("Host:");
-		http.append(domain);
-		http.append("\r\n\r\n");
-		return http.toString();
+		StringBuffer http = new StringBuffer(2000)
+				.append("GET ")
+				.append(uri!=null&&uri.trim().length()>0?uri:"/")
+				.append(" HTTP/1.1\r\n");
+		for(int i=1;i<REQUEST_PROPERTIES_PAIR.length;i++)
+			http.append(REQUEST_PROPERTIES_PAIR[i][0])
+			.append(":")
+			.append(REQUEST_PROPERTIES_PAIR[i][1])
+			.append("\r\n");
+		return http.append("Host:")
+				.append(domain)
+				.append("\r\n\r\n")
+				.toString();
 	}
 	
 	public static String extract(String str) throws IOException {   
@@ -236,10 +235,8 @@ public class HttpTest {
 		in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 		String line = null;
 		StringBuffer sb = new StringBuffer();
-		while ((line = in.readLine()) != null) {
-			sb.append(line);
-			sb.append("\r\n");
-        }
+		while ((line = in.readLine()) != null)
+			sb.append(line).append("\r\n");
 		System.out.println("Result: "+sb.toString());
 	}
 	

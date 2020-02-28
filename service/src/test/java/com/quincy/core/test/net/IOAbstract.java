@@ -13,17 +13,14 @@ public abstract class IOAbstract {
 
 	protected String getExceptioinStackTrace(Throwable e) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        StringBuffer msg = new StringBuffer("***********");
-        msg.append(df.format(new Date()));
-        msg.append("***********\n");
-        msg.append(e.toString());
+        StringBuffer msg = new StringBuffer(500)
+        		.append("***********")
+        		.append(df.format(new Date()))
+        		.append("***********\n")
+        		.append(e.toString());
         StackTraceElement[] elements = e.getStackTrace();
-        for(int j=0;j<elements.length;j++) {
-            msg.append("\n\tat ");
-            msg.append(elements[j].toString());
-        }
-        msg.append("\n==========================");
-        return msg.toString();
+        for(int j=0;j<elements.length;j++)
+            msg.append("\n\tat ").append(elements[j].toString());
+        return msg.append("\n==========================").toString();
     }
-
 }
