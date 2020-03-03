@@ -14,7 +14,6 @@
 	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd 
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
 ">
-    <dubbo:application name="quincy-ducati" owner="Hce" organization="Haier"/>
     <dubbo:registry address="zookeeper://${zk.url}"/>
     <dubbo:reference id="docatiClient" interface="com.hce.ducati.client.DucatiClient"/>
 
