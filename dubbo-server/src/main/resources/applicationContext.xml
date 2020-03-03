@@ -34,8 +34,8 @@
 	<tx:annotation-driven transaction-manager="dataSourceTransactionManager" proxy-target-class="true"/>
 	<jpa:repositories base-package="com.quincy.*.dao" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="dataSourceTransactionManager" repository-impl-postfix="Impl" />
 	<bean id="mybatisSqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dynamicDataSource"/>
-        <property name="configLocation" value="classpath*:mybatis.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis.xml"/>
         <property name="mapperLocations">
         	<array>
                 <value>classpath*:mybatis/*.xml</value>

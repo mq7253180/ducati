@@ -10,13 +10,14 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.quincy.core.WebMvcConfiguration;
 import com.quincy.sdk.DTransactionContext;
 import com.quincy.sdk.DTransactionFailure;
 import com.quincy.sdk.EmailService;
 
 @PropertySource(value = {"classpath:application-core.properties", "classpath:application-auth.properties", "classpath:application-service.properties"})
 @Configuration
-public class ServiceInitConfiguration {
+public class ServiceInitConfiguration extends WebMvcConfiguration {
 	@Autowired
 	private DTransactionContext transactionContext;
 	@Autowired
