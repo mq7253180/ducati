@@ -10,6 +10,9 @@ import com.hce.ducati.client.DucatiClient;
 import com.quincy.sdk.entity.Region;
 import com.quincy.sdk.service.RegionService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service(version = "1.0.0", interfaceClass = DucatiClient.class, timeout = 2000, retries = 3)
 public class DucatiClientImpl implements DucatiClient {
 	@Autowired
@@ -32,6 +35,7 @@ public class DucatiClientImpl implements DucatiClient {
 			toReturn.add(tr);
 		}
 //		List<com.hce.ducati.client.o.Region> toReturn = new ArrayList<com.hce.ducati.client.o.Region>();
+		log.info("=======================FIND_ALL_REGIONS_BY_DUBBO");
 		return toReturn;
 	}
 
