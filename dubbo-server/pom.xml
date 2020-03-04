@@ -39,5 +39,15 @@
 		    <artifactId>ducati-client</artifactId>
 		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+		    <groupId>com.maqiangcgq</groupId>
+		    <artifactId>quincy-redis</artifactId>
+		    <version>1.0.8</version>
+		</dependency>
+		<!-- <dependency>
+		    <groupId>com.maqiangcgq</groupId>
+		    <artifactId>quincy-zookeeper</artifactId>
+		    <version>1.0.8</version>
+		</dependency> -->
     </dependencies>
 </project>
