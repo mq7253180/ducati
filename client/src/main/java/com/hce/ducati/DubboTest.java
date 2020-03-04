@@ -17,11 +17,11 @@ public class DubboTest {
 			DucatiClient client = context.getBean(DucatiClient.class);
 			System.out.println("==================GOT_BEAN");
 			String s = client.test();
-			/*List<Region> regions = client.fineAllZones();
+			List<Region> regions = client.fineAllZones();
 			System.out.println("RESULT=================="+s+"----------------"+regions.size());
 			for(Region g:regions) {
 				System.out.println(g.getCnName()+"---"+g.getEnName());
-			}*/
+			}
 		} finally {
 			context.close();
 		}

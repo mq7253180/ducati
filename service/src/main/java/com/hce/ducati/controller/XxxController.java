@@ -120,6 +120,7 @@ public class XxxController {
 	@GetMapping("/regions/dubbo")
 	@ResponseBody
 	public List<com.hce.ducati.client.o.Region> findRegionsViaDubbo() {
+		log.info("============================SPRINGBOOT_DUBBO");
 		return ducatiClient.fineAllZones();
 	}
 
