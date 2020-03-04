@@ -17,6 +17,6 @@
 	<dubbo:application name="quincy-xxx" owner="HCE" organization="Haier"/>
 
     <dubbo:registry address="zookeeper://${zk.url}"/>
-    <dubbo:reference id="docatiClient" interface="com.hce.ducati.client.DucatiClient"/>
+    <dubbo:reference loadbalance="roundrobin" id="docatiClient" interface="com.hce.ducati.client.DucatiClient"/>
 
 </beans>
