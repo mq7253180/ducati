@@ -15,8 +15,9 @@
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
 ">
 	<dubbo:application name="quincy-xxx" owner="HCE" organization="Haier"/>
-
     <dubbo:registry address="zookeeper://${zk.url}"/>
+
+	<!-- cache="lru" cluster="failover" mock="" async="true" onreturn="" onthrow="" -->
     <dubbo:reference loadbalance="roundrobin" id="docatiClient" interface="com.hce.ducati.client.DucatiClient"/>
 
 </beans>
