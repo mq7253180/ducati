@@ -16,8 +16,8 @@
 ">
 	<!--定义了提供方应用信息，用于计算依赖关系；在 dubbo-admin 或 dubbo-monitor 会显示这个名字，方便辨识-->
 	<dubbo:application name="quincy-xxx" owner="HCE" organization="Haier"/>
-	<dubbo:registry address="zookeeper://${zk.url}"/>
-	<dubbo:protocol name="dubbo" port="20882" />
+	<dubbo:registry address="zookeeper://${zk.url}" check="true"/>
+	<dubbo:protocol name="dubbo" port="20882"/>
 
 	<dubbo:service timeout="2000" retries="3" interface="com.hce.ducati.client.DucatiClient" ref="ducatiClient" />
 	<bean id="ducatiClient" class="com.hce.ducati.service.impl.DucatiClientImpl"/>
