@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hce.ducati.client.InnerFeign;
 import com.hce.ducati.client.QuincyFeign;
-import com.hce.ducati.mapper.RegionMapper;
 import com.hce.ducati.client.DucatiClient;
 import com.hce.ducati.client.DucatiSpringCloudClient;
 import com.hce.ducati.o.AccountO;
@@ -34,7 +33,6 @@ import com.quincy.sdk.service.RegionService;
 
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisCluster;
 
 @Slf4j
 @RefreshScope
@@ -47,6 +45,14 @@ public class XxxController {
 	private InnerFeign innerFeign;
 	@Autowired
 	private DucatiSpringCloudClient ducatiSpringCloudClient;
+
+	@GetMapping("/proxy")
+	@ResponseBody
+	public String testProxy() {
+		String info = xxxService.classInfo();
+		log.info("\r\n"+info);
+		return info.replaceAll("\r\n", "<br/>");
+	}
 
 	@GetMapping("/regions/quincy")
 	@ResponseBody

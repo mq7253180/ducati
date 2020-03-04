@@ -17,4 +17,5 @@ public interface XxxService {
 	public void testRedisCluster(String arg0, JedisCluster jedis, String arg1, JedisCluster jedis2, String arg2);
 	public void testDeprecatedSynchronized(long millis) throws InterruptedException;
 	public List<Region> findRegions();
+	public String classInfo();
 }
