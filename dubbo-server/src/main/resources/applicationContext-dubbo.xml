@@ -19,7 +19,7 @@
 	<dubbo:registry address="zookeeper://${zk.url}" check="true"/>
 	<dubbo:protocol name="dubbo" port="20882"/>
 
-	<dubbo:service timeout="2000" retries="3" interface="com.hce.ducati.client.DucatiClient" ref="ducatiClient" />
+	<dubbo:service timeout="2000" retries="3" interface="com.hce.ducati.client.DucatiClient" ref="ducatiClient" version="1.0.0" />
 	<bean id="ducatiClient" class="com.hce.ducati.service.impl.DucatiClientImpl"/>
 
 </beans>

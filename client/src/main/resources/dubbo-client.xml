@@ -18,6 +18,6 @@
     <dubbo:registry address="zookeeper://${zk.url}"/>
 
 	<!-- cache="lru" cluster="failover" mock="" async="true" onreturn="" onthrow="" -->
-    <dubbo:reference loadbalance="roundrobin" id="docatiClient" interface="com.hce.ducati.client.DucatiClient"/>
+    <dubbo:reference loadbalance="roundrobin" id="docatiClient" interface="com.hce.ducati.client.DucatiClient" version="1.0.0"/>
 
 </beans>
