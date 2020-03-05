@@ -2,10 +2,12 @@ package com.hce.ducati;
 
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
+import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Component
 public class ZKOnCreationWatcher implements Watcher {
 	@Override
 	public void process(WatchedEvent event) {
