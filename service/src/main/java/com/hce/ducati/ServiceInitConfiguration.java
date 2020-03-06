@@ -1,5 +1,7 @@
 package com.hce.ducati;
 
+import java.io.IOException;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
@@ -8,8 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.quincy.sdk.DTransactionContext;
 import com.quincy.sdk.DTransactionFailure;
 import com.quincy.sdk.EmailService;
@@ -24,7 +24,7 @@ public class ServiceInitConfiguration extends WebMvcConfiguration {
 	private EmailService emailService;
 
 	@Scheduled(cron = "0 0/2 * * * ?")
-	public void retry() throws JsonMappingException, ClassNotFoundException, JsonProcessingException, NoSuchMethodException, SecurityException {
+	public void retry() throws ClassNotFoundException, NoSuchMethodException, SecurityException, IOException {
 		transactionContext.compensate();
 	}
 
