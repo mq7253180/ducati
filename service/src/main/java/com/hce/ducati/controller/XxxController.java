@@ -46,6 +46,17 @@ public class XxxController {
 	@Autowired
 	private DucatiSpringCloudClient ducatiSpringCloudClient;
 
+	@GetMapping("/error/json")
+	@ResponseBody
+	public String testErrJson() {
+		throw new RuntimeException("WWWWXXXXX");
+	}
+
+	@GetMapping("/error/page")
+	public String testErrPage() {
+		throw new RuntimeException("WWWWXXXXX");
+	}
+
 	@GetMapping("/proxy")
 	@ResponseBody
 	public String testProxy() {
