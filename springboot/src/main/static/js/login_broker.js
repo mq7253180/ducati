@@ -1,2 +1,2 @@
 alert($("#tip").html());
-$(top.location).attr("href", "/auth/signin?backto="+$("#backto").val());
+$(top.location).attr("href", "/auth/signin?backto="+encodeURIComponent($("#backto").val()));
