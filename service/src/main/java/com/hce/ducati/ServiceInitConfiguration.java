@@ -12,12 +12,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.quincy.auth.AuthContext;
 import com.quincy.auth.AuthHandler;
 import com.quincy.sdk.DTransactionContext;
 import com.quincy.sdk.DTransactionFailure;
 import com.quincy.sdk.EmailService;
+import com.quincy.sdk.RedisProcessor;
 import com.quincy.sdk.WebMvcConfiguration;
 
 @PropertySource(value = {"classpath:application-core.properties", "classpath:application-auth.properties", "classpath:application-service.properties"})
@@ -54,6 +57,15 @@ public class ServiceInitConfiguration extends WebMvcConfiguration {
 				return new ModelAndView("/index");
 			}
 		});
+	}
+
+	@Autowired
+	private RedisProcessor redisProcessor;
+
+	@Override
+	protected void addInterceptors(InterceptorRegistry registry) {
+		super.addInterceptors(registry);
+		registry.addInterceptor((HandlerInterceptorAdapter)redisProcessor).addPathPatterns("/**");
 	}
 
 	@PreDestroy

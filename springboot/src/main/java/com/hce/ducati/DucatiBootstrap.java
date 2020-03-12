@@ -39,7 +39,7 @@ import com.quincy.sdk.Constants;
 @ComponentScan(basePackages= {"com.*"})
 public class DucatiBootstrap {
     public static void main(String[] args) {
-    		SpringApplication sa = new SpringApplication(DucatiBootstrap.class);
+    	SpringApplication sa = new SpringApplication(DucatiBootstrap.class);
         sa.addListeners(new ApplicationPidFileWriter());
         sa.run(args);
 //        SpringApplication.run(Bootstrap.class, args);

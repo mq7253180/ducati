@@ -27,6 +27,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.quincy.sdk.annotation.Cache;
 import com.quincy.sdk.annotation.JedisInjector;
+import com.quincy.sdk.annotation.VCodeRequired;
 import com.quincy.sdk.annotation.transaction.DTransactional;
 import com.quincy.sdk.entity.Region;
 import com.quincy.sdk.service.RegionService;
@@ -245,5 +246,12 @@ public class XxxController {
 	@ResponseBody
 	public String testSingleton() {
 		return this.sss;
+	}
+
+	@VCodeRequired
+	@GetMapping("/vcode/do")
+	@ResponseBody
+	public String testRequireVcode() {
+		return "xxxx";
 	}
 }
