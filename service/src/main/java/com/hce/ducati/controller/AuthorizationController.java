@@ -7,11 +7,11 @@ import org.springframework.stereotype.Controller;
 
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.UserService;
-import com.quincy.auth.controller.AbstractAuthorizationController;
+import com.quincy.auth.controller.AuthorizationControllerSupport;
 import com.quincy.auth.o.User;
 
 @Controller
-public class AuthorizationController extends AbstractAuthorizationController {
+public class AuthorizationController extends AuthorizationControllerSupport {
 	@Autowired
 	private UserService userService;
 
