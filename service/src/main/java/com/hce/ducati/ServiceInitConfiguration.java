@@ -11,12 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.quincy.auth.AuthContext;
 import com.quincy.auth.AuthHandler;
+import com.quincy.core.web.SignatureInterceptor;
+import com.quincy.core.web.SignaturePubKeyExchanger;
 import com.quincy.sdk.DTransactionContext;
 import com.quincy.sdk.DTransactionFailure;
 import com.quincy.sdk.EmailService;
@@ -65,7 +67,14 @@ public class ServiceInitConfiguration extends WebMvcConfiguration {
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
 		super.addInterceptors(registry);
-		registry.addInterceptor((HandlerInterceptorAdapter)redisProcessor).addPathPatterns("/**");
+		registry.addInterceptor(new SignatureInterceptor(new SignaturePubKeyExchanger() {
+			@Override
+			public String getPublicKeyById(String id) {
+//				return null;
+				return "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCMYDMqMFSJL+nUMzF7MQjCYe/Y3P26wjVn90CdrSE8H9Ed4dg0/BteWn5+ZK65DwWev2F79hBIpprPrtVe+wplCTkpyR+mPiNL+WKkvo7miMegRYJFZLvh9QrFuDzMJZ+rAiu4ldxkVB0CMKfYEWbukKGmAinxVAqUr/HcW2mWjwIDAQAB";
+			}
+		})).addPathPatterns("/**");
+		registry.addInterceptor((HandlerInterceptor)redisProcessor).addPathPatterns("/**");
 	}
 
 	@PreDestroy
