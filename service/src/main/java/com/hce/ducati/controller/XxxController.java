@@ -30,6 +30,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.quincy.sdk.RedisProcessor;
 import com.quincy.sdk.annotation.Cache;
 import com.quincy.sdk.annotation.JedisInjector;
+import com.quincy.sdk.annotation.SignatureRequired;
 import com.quincy.sdk.annotation.VCodeRequired;
 import com.quincy.sdk.annotation.transaction.DTransactional;
 import com.quincy.sdk.entity.Region;
@@ -256,6 +257,13 @@ public class XxxController {
 	@ResponseBody
 	public String testRequireVcode() {
 		return "xxxx";
+	}
+
+	@SignatureRequired
+	@GetMapping("/testsign")
+	@ResponseBody
+	public String testSignature() {
+		return "wwwww";
 	}
 
 	@Autowired
