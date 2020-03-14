@@ -30,7 +30,7 @@ import com.quincy.sdk.helper.CommonHelper;
 
 import cfca.sadk.algorithm.common.PKIException;
 
-@Controller
+@Controller("sssccc")
 @RequestMapping("/sys")
 public class SystemController {
 	@Autowired

@@ -26,7 +26,7 @@ import com.quincy.sdk.RedisProcessor;
 import com.quincy.sdk.WebMvcConfiguration;
 
 @PropertySource(value = {"classpath:application-core.properties", "classpath:application-auth.properties", "classpath:application-service.properties"})
-@Configuration
+@Configuration("sssiiiccc")
 public class ServiceInitConfiguration extends WebMvcConfiguration {
 	@Autowired
 	private DTransactionContext transactionContext;

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hce.ducati.client.InnerFeign;
 import com.hce.ducati.client.QuincyFeign;
+import com.hce.ducati.ServiceInitConfiguration;
 import com.hce.ducati.client.DucatiClient;
 import com.hce.ducati.client.DucatiSpringCloudClient;
 import com.hce.ducati.o.AccountO;
@@ -299,6 +300,8 @@ public class XxxController {
 		printBeanNameInfo(applicationContext, A.class);
 		printBeanNameInfo(applicationContext, aBcd.class);
 		printBeanNameInfo(applicationContext, UserServiceImpl.class);
+		printBeanNameInfo(applicationContext, SystemController.class);
+		printBeanNameInfo(applicationContext, ServiceInitConfiguration.class);
 	}
 
 	private static void printBeanNameInfo(ApplicationContext applicationContext, Class<?> clazz) {
