@@ -2,6 +2,7 @@ package com.hce.ducati.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,6 +11,7 @@ import org.apache.zookeeper.KeeperException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +27,12 @@ import com.hce.ducati.o.Params;
 import com.hce.ducati.o.RegionResultDTO;
 import com.hce.ducati.service.XxxService;
 import com.hce.ducati.service.ZzzService;
+import com.hce.ducati.service.impl.A;
+import com.hce.ducati.service.impl.ABCdefg;
+import com.hce.ducati.service.impl.ABdefgh;
+import com.hce.ducati.service.impl.Abefghi;
+import com.hce.ducati.service.impl.UserServiceImpl;
+import com.hce.ducati.service.impl.aBcd;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.quincy.sdk.RedisProcessor;
@@ -34,6 +42,7 @@ import com.quincy.sdk.annotation.SignatureRequired;
 import com.quincy.sdk.annotation.VCodeRequired;
 import com.quincy.sdk.annotation.transaction.DTransactional;
 import com.quincy.sdk.entity.Region;
+import com.quincy.sdk.helper.AopHelper;
 import com.quincy.sdk.service.RegionService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -276,5 +285,26 @@ public class XxxController {
 	public String vcode(HttpServletRequest request) throws Exception {
 		redisProcessor.vcode(request, "mq7253180@126.com", "验证码", "验证码为{0}，"+vcodeExpire+"分钟后失效，请尽快操作！");
 		return "验证码发送成功，请查收邮件";
+	}
+
+	@Autowired
+	private ApplicationContext applicationContext;
+
+	@GetMapping("/bean")
+	@ResponseBody
+	public void testBean() {
+		printBeanNameInfo(applicationContext, ABCdefg.class);
+		printBeanNameInfo(applicationContext, ABdefgh.class);
+		printBeanNameInfo(applicationContext, Abefghi.class);
+		printBeanNameInfo(applicationContext, A.class);
+		printBeanNameInfo(applicationContext, aBcd.class);
+		printBeanNameInfo(applicationContext, UserServiceImpl.class);
+	}
+
+	private static void printBeanNameInfo(ApplicationContext applicationContext, Class<?> clazz) {
+		Map<String, ?> map = applicationContext.getBeansOfType(clazz);
+		String beanName0 = map.keySet().iterator().next();
+		String beanName1 = AopHelper.extractBeanName(clazz);
+		log.info("BEAN_NAME============={}---------{}----------{}", beanName0, beanName1, beanName0.equals(beanName1));
 	}
 }
