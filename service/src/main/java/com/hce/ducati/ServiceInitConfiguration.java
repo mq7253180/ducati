@@ -67,6 +67,7 @@ public class ServiceInitConfiguration extends WebMvcConfiguration {
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
 		super.addInterceptors(registry);
+		registry.addInterceptor((HandlerInterceptor)redisProcessor).addPathPatterns("/**");
 		registry.addInterceptor(new SignatureInterceptor(new SignaturePubKeyExchanger() {
 			@Override
 			public String getPublicKeyById(String id) {
@@ -74,7 +75,6 @@ public class ServiceInitConfiguration extends WebMvcConfiguration {
 				return "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCMYDMqMFSJL+nUMzF7MQjCYe/Y3P26wjVn90CdrSE8H9Ed4dg0/BteWn5+ZK65DwWev2F79hBIpprPrtVe+wplCTkpyR+mPiNL+WKkvo7miMegRYJFZLvh9QrFuDzMJZ+rAiu4ldxkVB0CMKfYEWbukKGmAinxVAqUr/HcW2mWjwIDAQAB";
 			}
 		})).addPathPatterns("/**");
-		registry.addInterceptor((HandlerInterceptor)redisProcessor).addPathPatterns("/**");
 	}
 
 	@PreDestroy

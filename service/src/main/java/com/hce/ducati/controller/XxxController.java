@@ -269,6 +269,7 @@ public class XxxController {
 		return "xxxx";
 	}
 
+//	@VCodeRequired
 	@SignatureRequired
 	@GetMapping("/testsign")
 	@ResponseBody
