@@ -28,3 +28,13 @@ $(document).keyup(function(event) {
 	}
 });
 $("#ajaxLoginBtn").click(login);
+$("#testBtn").click(function() {
+	$.ajaxProxy({
+		url: "/xxx/bean",
+		type: "GET",
+		dataType: "JSON",
+		handle: function(result) {
+			alert("成功");
+		}
+	});
+});

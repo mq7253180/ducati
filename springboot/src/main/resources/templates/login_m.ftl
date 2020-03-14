@@ -3,13 +3,7 @@
 		<title>循环授信再保理</title>
 	</head>
 	<body>
-		<div align="center" valign="top">
-			<font color="blue" size="3">循环授信再保理平台</font><br/>
-			Username: <input type="input" name="username" id="uname"><br/>
-			Password: <input type="password" name="password" id="pwd"><br/>
-			<input type="button" id="ajaxLoginBtn" value="Signin"/>
-			<input type="button" id="testBtn" value="Test"/>
-		</div>
+		<input type="button" id="testBtn" value="Test"/>
 		<input type="hidden" id="locale" value="<@locale/>"/>
 		<input type="hidden" id="uri" value="<@attr key="uri_without_first" />"/>
 		<input type="hidden" id="resourcePrefix" value="<@property key="prefix.resource"/>"/>
