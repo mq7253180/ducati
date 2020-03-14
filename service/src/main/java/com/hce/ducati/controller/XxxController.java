@@ -1,6 +1,7 @@
 package com.hce.ducati.controller;
 
 import java.math.BigDecimal;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
@@ -294,7 +295,14 @@ public class XxxController {
 
 	@GetMapping("/bean")
 	@ResponseBody
-	public void testBean() {
+	public void testBean(HttpServletRequest request) {
+		Enumeration<String> headerNames = request.getHeaderNames();
+		log.info("==========================");
+		while(headerNames.hasMoreElements()) {
+			String headerName = headerNames.nextElement();
+			log.warn("{}-------{}", headerName, request.getHeader(headerName));
+		}
+		log.info("==========================");
 		printBeanNameInfo(applicationContext, ABCdefg.class);
 		printBeanNameInfo(applicationContext, ABdefgh.class);
 		printBeanNameInfo(applicationContext, Abefghi.class);
