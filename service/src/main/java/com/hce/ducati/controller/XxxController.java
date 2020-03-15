@@ -287,7 +287,7 @@ public class XxxController {
 	@GetMapping("/vcode")
 	@ResponseBody
 	public String vcode(HttpServletRequest request) throws Exception {
-		redisProcessor.vcode(request, VCodeCharsFrom.MIXED, "mq7253180@126.com", "验证码", "验证码为{0}，"+vcodeExpire+"分钟后失效，请尽快操作！");
+		redisProcessor.vcode(request, VCodeCharsFrom.MIXED, 6, "mq7253180@126.com", "验证码", "验证码为{0}，"+vcodeExpire+"分钟后失效，请尽快操作！");
 		return "验证码发送成功，请查收邮件";
 	}
 
