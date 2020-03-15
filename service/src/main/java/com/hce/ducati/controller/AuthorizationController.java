@@ -17,7 +17,7 @@ public class AuthorizationController extends AuthorizationControllerSupport {
 	private UserService userService;
 
 	@Override
-	protected User findUser(String username) {
+	protected User findUser(String username, Client client) {
 		UserEntity user = userService.find(username);
 		return user;
 	}
