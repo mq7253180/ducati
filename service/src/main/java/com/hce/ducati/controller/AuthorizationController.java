@@ -9,6 +9,7 @@ import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.UserService;
 import com.quincy.auth.controller.AuthorizationControllerSupport;
 import com.quincy.auth.o.User;
+import com.quincy.sdk.Client;
 
 @Controller
 public class AuthorizationController extends AuthorizationControllerSupport {
@@ -22,7 +23,7 @@ public class AuthorizationController extends AuthorizationControllerSupport {
 	}
 
 	@Override
-	protected void updateLastLogin(Long userId, String jsessionid) {
+	protected void updateLastLogin(Long userId, Client client, String jsessionid) {
 		UserEntity vo = new UserEntity();
 		vo.setId(userId);
 		vo.setJsessionid(jsessionid);
