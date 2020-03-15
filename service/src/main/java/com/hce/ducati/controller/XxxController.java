@@ -38,6 +38,7 @@ import com.hce.ducati.service.impl.aBcd;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.quincy.sdk.RedisProcessor;
+import com.quincy.sdk.VCodeCharsFrom;
 import com.quincy.sdk.annotation.Cache;
 import com.quincy.sdk.annotation.JedisInjector;
 import com.quincy.sdk.annotation.SignatureRequired;
@@ -286,7 +287,7 @@ public class XxxController {
 	@GetMapping("/vcode")
 	@ResponseBody
 	public String vcode(HttpServletRequest request) throws Exception {
-		redisProcessor.vcode(request, "mq7253180@126.com", "验证码", "验证码为{0}，"+vcodeExpire+"分钟后失效，请尽快操作！");
+		redisProcessor.vcode(request, VCodeCharsFrom.MIXED, "mq7253180@126.com", "验证码", "验证码为{0}，"+vcodeExpire+"分钟后失效，请尽快操作！");
 		return "验证码发送成功，请查收邮件";
 	}
 
