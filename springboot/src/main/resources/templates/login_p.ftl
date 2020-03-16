@@ -8,6 +8,7 @@
 			Username: <input type="input" name="username" id="uname"><br/>
 			Password: <input type="password" name="password" id="pwd"><br/>
 			<input type="button" id="ajaxLoginBtn" value="Signin"/>
+			<input type="button" id="ajaxVCodeLoginBtn" value="Signin"/>
 			<input type="button" id="testBtn" value="Test"/>
 		</div>
 		<input type="hidden" id="locale" value="<@locale/>"/>

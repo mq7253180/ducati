@@ -2,7 +2,7 @@ $("#uname").focus();
 var login = function() {
 //	alert(resourcePrefix+"-"+uri+"-"+$.i18n.prop("demo"));
 	$.ajaxProxy({
-		url: "/auth/signin/do",
+		url: "/auth/signin/pwd",
 		type: "POST",
 		dataType: "JSON",
 		data: {
@@ -35,6 +35,26 @@ $("#testBtn").click(function() {
 		dataType: "JSON",
 		handle: function(result) {
 			alert("成功");
+		}
+	});
+});
+$("#ajaxVCodeLoginBtn").click(function() {
+	$.ajaxProxy({
+		url: "/auth/signin/vcode",
+		type: "POST",
+		dataType: "JSON",
+		data: {
+			"username": $("#uname").val(),
+			"vcode": $("#pwd").val()
+		},
+		handle: function(result) {
+			if(result.status==1) {
+				var backto = $.trim($("#backto").val());
+				$(location).attr("href", backto.length==0?"/index":backto);
+			} else {
+				alert(result.msg);
+				$("#"+(result.status==-2||result.status==-4)?"pwd":"uname").focus();
+			}
 		}
 	});
 });
