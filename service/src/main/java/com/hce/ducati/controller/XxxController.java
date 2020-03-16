@@ -304,17 +304,17 @@ public class XxxController {
 			log.warn("{}-------{}", headerName, request.getHeader(headerName));
 		}
 		log.info("==========================");
-		printBeanNameInfo(applicationContext, ABCdefg.class);
-		printBeanNameInfo(applicationContext, ABdefgh.class);
-		printBeanNameInfo(applicationContext, Abefghi.class);
-		printBeanNameInfo(applicationContext, A.class);
-		printBeanNameInfo(applicationContext, aBcd.class);
-		printBeanNameInfo(applicationContext, UserServiceImpl.class);
-		printBeanNameInfo(applicationContext, SystemController.class);
-		printBeanNameInfo(applicationContext, ServiceInitConfiguration.class);
+		printBeanNameInfo(ABCdefg.class);
+		printBeanNameInfo(ABdefgh.class);
+		printBeanNameInfo(Abefghi.class);
+		printBeanNameInfo(A.class);
+		printBeanNameInfo(aBcd.class);
+		printBeanNameInfo(UserServiceImpl.class);
+		printBeanNameInfo(SystemController.class);
+		printBeanNameInfo(ServiceInitConfiguration.class);
 	}
 
-	private static void printBeanNameInfo(ApplicationContext applicationContext, Class<?> clazz) {
+	private void printBeanNameInfo(Class<?> clazz) {
 		Map<String, ?> map = applicationContext.getBeansOfType(clazz);
 		String beanName0 = map.keySet().iterator().next();
 		String beanName1 = AopHelper.extractBeanName(clazz);
