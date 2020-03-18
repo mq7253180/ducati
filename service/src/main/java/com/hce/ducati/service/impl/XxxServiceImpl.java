@@ -3,7 +3,9 @@ package com.hce.ducati.service.impl;
 import java.util.List;
 
 import org.apache.dubbo.config.annotation.Reference;
+import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
+import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +23,7 @@ import com.quincy.sdk.annotation.transaction.DTransactional;
 import com.quincy.sdk.dao.RegionRepository;
 import com.quincy.sdk.entity.Region;
 import com.quincy.sdk.annotation.Synchronized;
+import com.quincy.sdk.ZKContext;
 import com.quincy.sdk.annotation.DeprecatedSynchronized;
 import com.quincy.sdk.annotation.DurationLog;
 import com.quincy.sdk.annotation.JedisInjector;
@@ -32,8 +35,8 @@ import redis.clients.jedis.JedisCluster;
 @Slf4j
 @Service
 public class XxxServiceImpl implements XxxService {
-	/*@Autowired
-	private Context zkContext;*/
+	@Autowired
+	private ZKContext zkContext;
 	@Value("${spring.application.name}")
 	private String appName;
 	@Autowired
@@ -47,16 +50,17 @@ public class XxxServiceImpl implements XxxService {
 
 	@DurationLog
 //	@Cache(expire = 30)
-	@Synchronized("xxx")
+//	@Synchronized("xxx")
 //	@DeprecatedSynchronized("xxx")
 	@ZooKeeperInjector
 	@Override
 	public String testZk(String arg, ZooKeeper zk, long duration) throws KeeperException, InterruptedException {
-//		String result = zk.create(path, arg.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
-		/*List<String> list = zk.getChildren(zkContext.getSynPath(), false);
+		String result = zk.create("/qqq", arg.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
+		log.info("==============={}", result);
+		List<String> list = zk.getChildren(zkContext.getSynPath(), false);
 		for(String path:list) {
 			log.info("---------------{}", path);
-		}*/
+		}
 		Thread.sleep(duration);
 //		zk.delete("/quincy-ducati/synchronization/xxx/execution1", -1);
 		return "sss";
