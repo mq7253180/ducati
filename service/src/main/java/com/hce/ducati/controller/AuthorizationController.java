@@ -2,8 +2,11 @@ package com.hce.ducati.controller;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.UserService;
@@ -29,5 +32,10 @@ public class AuthorizationController extends VCodeAuthControllerSupport {
 		vo.setJsessionid(jsessionid);
 		vo.setLastLogined(new Date());
 		userService.update(vo);
+	}
+
+	@Override
+	protected ModelAndView signinView(HttpServletRequest request) {
+		return null;
 	}
 }
