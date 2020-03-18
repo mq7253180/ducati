@@ -7,7 +7,8 @@ var login = function() {
 		dataType: "JSON",
 		data: {
 			"username": $("#uname").val(),
-			"password": $.md5($("#pwd").val())
+			"password": $.md5($("#pwd").val()),
+			"vcode": $("#vcode").val()
 		},
 		handle: function(result) {
 			if(result.status==1) {
@@ -16,8 +17,12 @@ var login = function() {
 				var backto = $.trim($("#backto").val());
 				$(location).attr("href", backto.length==0?"/index":backto);
 			} else {
+				if(result.status<-3) {
+					alert(result.status);
+					$("#_vcode").attr("src", "/auth/vcode/25/10/25/110/35?random="+Math.random());
+				}
 				alert(result.msg);
-				$("#"+(result.status==-2||result.status==-4)?"pwd":"uname").focus();
+				$("#"+(result.status==0||result.status==-3)?"pwd":"uname").focus();
 			}
 		}
 	});
@@ -45,7 +50,7 @@ $("#ajaxVCodeLoginBtn").click(function() {
 		dataType: "JSON",
 		data: {
 			"username": $("#uname").val(),
-			"vcode": $("#pwd").val()
+			"vcode": $("#vcode").val()
 		},
 		handle: function(result) {
 			if(result.status==1) {
@@ -53,7 +58,7 @@ $("#ajaxVCodeLoginBtn").click(function() {
 				$(location).attr("href", backto.length==0?"/index":backto);
 			} else {
 				alert(result.msg);
-				$("#"+(result.status==-2||result.status==-4)?"pwd":"uname").focus();
+				$("#uname").focus();
 			}
 		}
 	});

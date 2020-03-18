@@ -7,6 +7,7 @@
 			<font color="blue" size="3">循环授信再保理平台</font><br/>
 			Username: <input type="input" name="username" id="uname"><br/>
 			Password: <input type="password" name="password" id="pwd"><br/>
+			Verification Code: <input type="input" name="vcode" id="vcode"><img id="_vcode" src=""/><br/>
 			<input type="button" id="ajaxLoginBtn" value="Signin"/>
 			<input type="button" id="ajaxVCodeLoginBtn" value="Signin"/>
 			<input type="button" id="testBtn" value="Test"/>
