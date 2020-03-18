@@ -23,7 +23,7 @@ var login = function() {
 				var inputKey = null;
 				if(result.status==0||result.status==-3||result.status==-4)
 					inputKey = "pwd";
-				else if(result.status==-2)
+				else if(result.status==-1||result.status==-2)
 					inputKey = "uname";
 				else
 					inputKey = "vcode";
