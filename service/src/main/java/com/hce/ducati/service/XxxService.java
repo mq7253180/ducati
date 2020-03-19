@@ -19,6 +19,8 @@ public interface XxxService {
 	public void testDeprecatedSynchronized(long millis) throws InterruptedException;
 	public List<Region> findRegions();
 	public String classInfo();
-	public void update(Long id, String mobilePhone);
+	public int update(Long id, String mobilePhone);
 	public List<Enterprise> select(Long id);
+	public int updateIndividualBatch(Long companyId, String region, long delay) throws InterruptedException;
+	public int updateIndividualOne(Long id1, Long id2, String region, long delay) throws InterruptedException;
 }

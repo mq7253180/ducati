@@ -30,4 +30,18 @@
 	<select id="findOne" resultMap="resultMap">
 		SELECT * FROM b_enterprise WHERE id=#{id, jdbcType=INTEGER}
 	</select>
+	<update id="updateIndividualBatch">
+		UPDATE b_individual 
+		<set>
+			region = #{region, jdbcType=VARCHAR},
+		</set>
+		WHERE company_id=#{companyId, jdbcType=INTEGER}
+	</update>
+	<update id="updateIndividualOne">
+		UPDATE b_individual 
+		<set>
+			region = #{region, jdbcType=VARCHAR},
+		</set>
+		WHERE id=#{id, jdbcType=INTEGER}
+	</update>
 </mapper>

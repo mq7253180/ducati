@@ -154,9 +154,10 @@ public class XxxServiceImpl implements XxxService {
 
 	@Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
 	@Override
-	public void update(Long id, String mobilePhone) {
-		enterpriseMapper.update(id, mobilePhone);
+	public int update(Long id, String mobilePhone) {
+		int effected = enterpriseMapper.update(id, mobilePhone);
 		log.info("==============NOT_COMMITED");
+		return effected;
 	}
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
@@ -168,5 +169,23 @@ public class XxxServiceImpl implements XxxService {
 		for(Enterprise e:list)
 			log.info("---------------{}", e.getMobilePhone());
 		return list;
+	}
+
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
+	public int updateIndividualBatch(Long companyId, String region, long delay) throws InterruptedException {
+		int effected = enterpriseMapper.updateIndividualBatch(companyId, region);
+		Thread.sleep(delay);
+		return effected;
+	}
+
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
+	public int updateIndividualOne(Long id1, Long id2, String region, long delay) throws InterruptedException {
+		enterpriseMapper.updateIndividualOne(id1, region);
+		Thread.sleep(delay);
+		enterpriseMapper.updateIndividualOne(id2, region);
+		Thread.sleep(delay);
+		return 1;
 	}
 }

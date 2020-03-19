@@ -326,13 +326,47 @@ public class XxxController {
 
 	@GetMapping("/tx/update/{id}/{mobilePhone}")
 	@ResponseBody
-	public void update(@PathVariable(required = true, name = "id")Long id, @PathVariable(required = true, name = "mobilePhone")String mobilePhone) {
-		xxxService.update(id, mobilePhone);
+	public int update(@PathVariable(required = true, name = "id")Long id, @PathVariable(required = true, name = "mobilePhone")String mobilePhone) {
+		return xxxService.update(id, mobilePhone);
 	}
 
 	@GetMapping("/tx/select/{id}")
 	@ResponseBody
 	public List<Enterprise> select(@PathVariable(required = true, name = "id")Long id) {
 		return xxxService.select(id);
+	}
+
+	@GetMapping("/concurrent/batch/{companyId}/{region}/{delay}")
+	@ResponseBody
+	public int concurrentBatch(@PathVariable(required = true, name = "companyId")Long companyId, @PathVariable(required = true, name = "region")String region, @PathVariable(required = true, name = "delay")long delay) throws InterruptedException {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					xxxService.updateIndividualBatch(companyId, region+"XXX", delay);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}).start();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					xxxService.updateIndividualBatch(companyId, region+"WWW", delay);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}).start();
+		return 1;
+	}
+
+	@GetMapping("/concurrent/one/{id1}/{id2}/{region}/{delay}")
+	@ResponseBody
+	public int concurrentOne(@PathVariable(required = true, name = "id1")Long id1, @PathVariable(required = true, name = "id2")Long id2, @PathVariable(required = true, name = "region")String region, @PathVariable(required = true, name = "delay")long delay) throws InterruptedException {
+		return xxxService.updateIndividualOne(id1, id2, region, delay);
 	}
 }
