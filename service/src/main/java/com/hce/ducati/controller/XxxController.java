@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hce.ducati.client.InnerFeign;
 import com.hce.ducati.client.QuincyFeign;
+import com.hce.ducati.entity.Enterprise;
 import com.hce.ducati.ServiceInitConfiguration;
 import com.hce.ducati.client.DucatiClient;
 import com.hce.ducati.client.DucatiSpringCloudClient;
@@ -321,5 +322,17 @@ public class XxxController {
 		String beanName0 = map.keySet().iterator().next();
 		String beanName1 = AopHelper.extractBeanName(clazz);
 		log.info("BEAN_NAME============={}---------{}----------{}", beanName0, beanName1, beanName0.equals(beanName1));
+	}
+
+	@GetMapping("/tx/update/{id}/{mobilePhone}")
+	@ResponseBody
+	public void update(@PathVariable(required = true, name = "id")Long id, @PathVariable(required = true, name = "mobilePhone")String mobilePhone) {
+		xxxService.update(id, mobilePhone);
+	}
+
+	@GetMapping("/tx/select/{id}")
+	@ResponseBody
+	public List<Enterprise> select(@PathVariable(required = true, name = "id")Long id) {
+		return xxxService.select(id);
 	}
 }

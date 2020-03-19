@@ -10,9 +10,14 @@ import org.apache.zookeeper.ZooKeeper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hce.ducati.client.DucatiClient;
 import com.hce.ducati.client.InnerFeign;
+import com.hce.ducati.entity.Enterprise;
+import com.hce.ducati.mapper.EnterpriseMapper;
 import com.hce.ducati.mapper.RegionMapper;
 import com.hce.ducati.o.Params;
 import com.hce.ducati.service.XxxService;
@@ -22,7 +27,6 @@ import com.quincy.sdk.annotation.ZooKeeperInjector;
 import com.quincy.sdk.annotation.transaction.DTransactional;
 import com.quincy.sdk.dao.RegionRepository;
 import com.quincy.sdk.entity.Region;
-import com.quincy.sdk.annotation.Synchronized;
 import com.quincy.sdk.ZKContext;
 import com.quincy.sdk.annotation.DeprecatedSynchronized;
 import com.quincy.sdk.annotation.DurationLog;
@@ -143,5 +147,26 @@ public class XxxServiceImpl implements XxxService {
 	@ReadOnly
 	public List<Region> findRegions() {
 		return regionMapper.find("on");
+	}
+
+	@Autowired
+	private EnterpriseMapper enterpriseMapper;
+
+	@Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
+	public void update(Long id, String mobilePhone) {
+		enterpriseMapper.update(id, mobilePhone);
+		log.info("==============NOT_COMMITED");
+	}
+
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
+	public List<Enterprise> select(Long id) {
+		Enterprise enterprise = enterpriseMapper.findOne(id);
+		log.info("===================={}", enterprise.getMobilePhone());
+		List<Enterprise> list = enterpriseMapper.findAll();
+		for(Enterprise e:list)
+			log.info("---------------{}", e.getMobilePhone());
+		return list;
 	}
 }

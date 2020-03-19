@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hce.ducati.mapper.EnterpriseMapper" >
+	<resultMap id="resultMap" type="com.hce.ducati.entity.Enterprise">
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="company_id" property="companyId" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="userid" property="userid" jdbcType="VARCHAR" />
+		<result column="sealid" property="sealid" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="id_type" property="idType" jdbcType="VARCHAR" />
+		<result column="id_no" property="idNo" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
+		<result column="landline_phone" property="landlinePhone" jdbcType="VARCHAR" />
+		<result column="transactor_name" property="transactorName" jdbcType="VARCHAR" />
+		<result column="transactor_id_type" property="transactorIdType" jdbcType="VARCHAR" />
+		<result column="transactor_id_no" property="transactorIdNo" jdbcType="VARCHAR" />
+	</resultMap>
+	<update id="update">
+		UPDATE b_enterprise 
+		<set>
+			mobile_phone = #{mobilePhone, jdbcType=VARCHAR},
+		</set>
+		WHERE id=#{id, jdbcType=INTEGER}
+	</update>
+	<select id="findAll" resultMap="resultMap">
+		SELECT * FROM b_enterprise
+	</select>
+	<select id="findOne" resultMap="resultMap">
+		SELECT * FROM b_enterprise WHERE id=#{id, jdbcType=INTEGER}
+	</select>
+</mapper>

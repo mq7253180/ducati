@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.ZooKeeper;
 
+import com.hce.ducati.entity.Enterprise;
 import com.hce.ducati.o.Params;
 import com.quincy.sdk.entity.Region;
 
@@ -18,4 +19,6 @@ public interface XxxService {
 	public void testDeprecatedSynchronized(long millis) throws InterruptedException;
 	public List<Region> findRegions();
 	public String classInfo();
+	public void update(Long id, String mobilePhone);
+	public List<Enterprise> select(Long id);
 }
