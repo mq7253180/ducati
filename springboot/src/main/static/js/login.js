@@ -14,8 +14,8 @@ var login = function() {
 			if(result.status==1) {
 //				alert("Auth: "+result.msg+"-------"+result.data.user.name);
 //				$.cookie("JSESSIONID_DUCATI", result.data.jsessionid, {expires: 1, path: "/"});
-				var backto = $.trim($("#backto").val());
-				$(location).attr("href", backto.length==0?"/index":backto);
+				var redirectTo = $.trim($("#redirectTo").val());
+				$(location).attr("href", redirectTo.length==0?"/index":redirectTo);
 			} else {
 				alert(result.msg);
 				if(result.status<-3)
@@ -62,8 +62,8 @@ $("#ajaxVCodeLoginBtn").click(function() {
 		},
 		handle: function(result) {
 			if(result.status==1) {
-				var backto = $.trim($("#backto").val());
-				$(location).attr("href", backto.length==0?"/index":backto);
+				var redirectTo = $.trim($("#redirectTo").val());
+				$(location).attr("href", redirectTo.length==0?"/index":redirectTo);
 			} else {
 				alert(result.msg);
 				$("#uname").focus();
