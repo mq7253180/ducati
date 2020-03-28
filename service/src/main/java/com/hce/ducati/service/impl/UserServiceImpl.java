@@ -29,33 +29,26 @@ public class UserServiceImpl implements UserService {
 	public UserEntity update(UserEntity vo) {
 		UserEntity po = userRepository.findById(vo.getId()).get();
 		String username = CommonHelper.trim(vo.getUsername());
-		if(username!=null) {
+		if(username!=null)
 			po.setUsername(username);
-		}
 		String password = CommonHelper.trim(vo.getPassword());
-		if(password!=null) {
+		if(password!=null)
 			po.setPassword(password);
-		}
 		String email = CommonHelper.trim(vo.getEmail());
-		if(email!=null) {
+		if(email!=null)
 			po.setEmail(email);
-		}
 		String mobilePhone = CommonHelper.trim(vo.getMobilePhone());
-		if(mobilePhone!=null) {
+		if(mobilePhone!=null)
 			po.setMobilePhone(mobilePhone);
-		}
 		String name = CommonHelper.trim(vo.getName());
-		if(name!=null) {
+		if(name!=null)
 			po.setName(name);
-		}
 		String jsessionid = CommonHelper.trim(vo.getJsessionid());
-		if(jsessionid!=null) {
+		if(jsessionid!=null)
 			po.setJsessionid(jsessionid);
-		}
 		Date lastLogined = vo.getLastLogined();
-		if(lastLogined!=null) {
+		if(lastLogined!=null)
 			po.setLastLogined(lastLogined);
-		}
 		userRepository.save(po);
 		return po;
 	}
