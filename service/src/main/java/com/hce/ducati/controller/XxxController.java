@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hce.ducati.client.InnerFeign;
@@ -40,6 +41,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.quincy.sdk.RedisProcessor;
 import com.quincy.sdk.Result;
+import com.quincy.sdk.VCcodeSender;
 import com.quincy.sdk.VCodeCharsFrom;
 import com.quincy.sdk.annotation.Cache;
 import com.quincy.sdk.annotation.JedisInjector;
@@ -266,7 +268,7 @@ public class XxxController {
 		return this.sss;
 	}
 
-	@VCodeRequired
+	@VCodeRequired(clientTokenName = "mobilePhone")
 	@GetMapping("/vcode/do")
 	@ResponseBody
 	public String testRequireVcode() {
@@ -288,8 +290,21 @@ public class XxxController {
 
 	@GetMapping("/vcode")
 	@ResponseBody
+	public Result vcodeAsMobile(HttpServletRequest request) throws Exception {
+		String token = redisProcessor.vcode(request, VCodeCharsFrom.DIGITS, 6, "mobilePhone", new VCcodeSender() {
+			@Override
+			public void send(char[] vcode) throws Exception {
+				log.info("已通过阿里云短信接口发送验证码: {}", new String(vcode));
+			}
+		});
+		Result result = new Result(1, "验证码发送成功", token);
+		return result;
+	}
+
+	@GetMapping("/vcode/email")
+	@ResponseBody
 	public Result vcode(HttpServletRequest request) throws Exception {
-		String token = redisProcessor.vcode(request, VCodeCharsFrom.MIXED, 6, "mq7253180@126.com", "验证码", "验证码为{0}，"+vcodeExpire+"分钟后失效，请尽快操作！");
+		String token = redisProcessor.vcode(request, VCodeCharsFrom.MIXED, 6, null, "mq7253180@126.com", "验证码", "验证码为{0}，"+vcodeExpire+"分钟后失效，请尽快操作！");
 		Result result = new Result(1, "验证码发送成功，请查收邮件", token);
 		return result;
 	}
