@@ -38,6 +38,7 @@ import com.hce.ducati.service.impl.UserServiceImpl;
 import com.hce.ducati.service.impl.aBcd;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import com.quincy.auth.annotation.PermissionNeeded;
 import com.quincy.sdk.RedisProcessor;
 import com.quincy.sdk.Result;
 import com.quincy.sdk.VCcodeSender;
@@ -382,5 +383,11 @@ public class XxxController {
 	@ResponseBody
 	public int concurrentOne(@PathVariable(required = true, name = "id1")Long id1, @PathVariable(required = true, name = "id2")Long id2, @PathVariable(required = true, name = "region")String region, @PathVariable(required = true, name = "delay")long delay) throws InterruptedException {
 		return xxxService.updateIndividualOne(id1, id2, region, delay);
+	}
+
+	@PermissionNeeded(value = "test")
+	@GetMapping("/test/permission")
+	public String testPermission() {
+		return "/content/test_permission";
 	}
 }
