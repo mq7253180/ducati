@@ -1,5 +1,6 @@
 package com.hce.ducati.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.util.Enumeration;
@@ -39,6 +40,7 @@ import com.hce.ducati.service.impl.UserServiceImpl;
 import com.hce.ducati.service.impl.aBcd;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import com.quincy.auth.annotation.LoginRequired;
 import com.quincy.auth.annotation.PermissionNeeded;
 import com.quincy.core.InnerConstants;
 import com.quincy.sdk.RedisProcessor;
@@ -311,12 +313,13 @@ public class XxxController {
 	public Result vcode(HttpServletRequest request) throws Exception {
 		String email = "mq7253180@126.com";
 //		String token = redisProcessor.vcode(request, VCodeCharsFrom.MIXED, 6, null, "mq7253180@126.com", "验证码", "验证码为{0}，"+vcodeExpire+"分钟后失效，请尽快操作！");
-		String url = "http://127.0.0.1:12081/auth/signin/vcode?username="+email+"&"+clientTokenName+"={1}&vcode={0}&"+InnerConstants.PARAM_REDIRECT_TO+"="+URLEncoder.encode("/xxx/pwd/set", "UTF-8");
+		String url = "http://127.0.0.1:12081/auth/signin/vcode?username="+URLEncoder.encode(email, "UTF-8")+"&"+clientTokenName+"={1}&vcode={0}&"+InnerConstants.PARAM_REDIRECT_TO+"="+URLEncoder.encode("/xxx/pwd/set", "UTF-8");
 		String token = redisProcessor.vcode(request, VCodeCharsFrom.MIXED, 32, null, email, "密码重置", url);
 		Result result = new Result(1, "验证码发送成功，请查收邮件", token);
 		return result;
 	}
 
+	@LoginRequired
 	@GetMapping("/pwd/set")
 	public String setPwd() {
 		return "/content/password";
