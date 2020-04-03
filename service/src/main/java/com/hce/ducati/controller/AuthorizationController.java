@@ -51,7 +51,7 @@ public class AuthorizationController extends VCodeAuthControllerSupport {
 		return null;
 	}
 
-	@VCodeRequired(timeoutForwardTo = "/auth/resetpwd/timeout")
+	@VCodeRequired(clientTokenName = "username", timeoutForwardTo = "/auth/resetpwd/timeout")
 	@RequestMapping("/signin/vcode2")
 	public ModelAndView doLogin2(HttpServletRequest request, 
 			@RequestParam(required = false, value = "username")String username, 
@@ -75,8 +75,8 @@ public class AuthorizationController extends VCodeAuthControllerSupport {
 	@ResponseBody
 	public Result vcode(HttpServletRequest request, @RequestParam(required = true, name = "email")String email) throws Exception {
 //		String token = redisProcessor.vcode(request, VCodeCharsFrom.MIXED, 6, null, "mq7253180@126.com", "验证码", "验证码为{0}，"+vcodeExpire+"分钟后失效，请尽快操作！");
-		String url = "http://127.0.0.1:12081/auth/signin/vcode2?username="+URLEncoder.encode(email, "UTF-8")+"&"+clientTokenName+"={1}&vcode={0}&"+InnerConstants.PARAM_REDIRECT_TO+"="+URLEncoder.encode("/auth/pwd/set", "UTF-8");
-		String token = redisProcessor.vcode(request, VCodeCharsFrom.MIXED, 32, null, email, "密码重置", url);
+		String url = "http://127.0.0.1:12081/auth/signin/vcode2?username="+URLEncoder.encode(email, "UTF-8")+"&vcode={0}&"+InnerConstants.PARAM_REDIRECT_TO+"="+URLEncoder.encode("/auth/pwd/set", "UTF-8");
+		String token = redisProcessor.vcode(request, VCodeCharsFrom.MIXED, 32, "email", email, "密码重置", url);
 		Result result = new Result(1, "验证码发送成功，请查收邮件", token);
 		return result;
 	}
