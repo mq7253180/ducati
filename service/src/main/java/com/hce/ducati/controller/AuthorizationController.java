@@ -71,7 +71,7 @@ public class AuthorizationController extends VCodeAuthControllerSupport {
 	@Value("${clientTokenName}")
 	private String clientTokenName;
 
-	@GetMapping("/vcode")
+	@RequestMapping("/vcode")
 	@ResponseBody
 	public Result vcode(HttpServletRequest request, @RequestParam(required = true, name = "email")String email) throws Exception {
 //		String token = redisProcessor.vcode(request, VCodeCharsFrom.MIXED, 6, null, "mq7253180@126.com", "验证码", "验证码为{0}，"+vcodeExpire+"分钟后失效，请尽快操作！");

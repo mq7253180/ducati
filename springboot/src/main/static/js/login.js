@@ -71,3 +71,20 @@ $("#ajaxVCodeLoginBtn").click(function() {
 		}
 	});
 });
+$("#pwdResetBtn").click(function() {
+	$.ajaxProxy({
+		url: "/auth/vcode",
+		type: "POST",
+		dataType: "JSON",
+		data: {
+			"email": $("#uname").val()
+		},
+		handle: function(result) {
+			if(result.status==1) {
+				alert("请登录邮箱点击链接后继续操作");
+			} else
+				alert(result.msg);
+		}
+	});
+	return false;
+});

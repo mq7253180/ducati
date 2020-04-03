@@ -11,6 +11,7 @@
 			<input type="button" id="ajaxLoginBtn" value="Signin"/>
 			<input type="button" id="ajaxVCodeLoginBtn" value="Signin"/>
 			<input type="button" id="testBtn" value="Test"/>
+			<a id="pwdResetBtn" href="javacript:void(0);">重置密码</a>
 		</div>
 		<input type="hidden" id="locale" value="<@locale/>"/>
 		<input type="hidden" id="uri" value="<@attr key="uri_without_first" />"/>
