@@ -46,7 +46,23 @@ public class AuthorizationController extends VCodeAuthControllerSupport {
 
 	@Override
 	protected String getPwdSetEmailContent(String uri) {
-		String url = "http://127.0.0.1:12081"+uri;
-		return url;
+		return new StringBuilder(500)
+				.append("<html>")
+				.append("\n\t<head>")
+				.append("\n\t\t<meta charset=\"UTF-8\">")
+				.append("\n\t\t<title>密码重置</title>")
+				.append("\n\t</head>")
+				.append("\n\t<body>")
+				.append("\n\t\t<font color=\"purple\">请</font>")
+				.append("<a href=\"")
+				.append("http://127.0.0.1:12081")
+				.append(uri)
+				.append("\">点击</a>")
+				.append("<font color=\"purple\">继续操作，如果无法自动打开，请复制此链接至浏览器地址栏敲回车: ")
+				.append("http://127.0.0.1:12081")
+				.append(uri)
+				.append("</font>")
+				.append("\n\t</body>")
+				.append("\n</html>").toString();
 	}
 }
