@@ -1,2 +1,3 @@
 alert($("#tip").html());
-$(top.location).attr("href", "/auth/signin?redirectTo="+encodeURIComponent($("#redirectTo").val()));
+var redirectTo = $("#redirectTo").val();
+$(top.location).attr("href", "/auth/signin"+(redirectTo.length>0?("?redirectTo="+encodeURIComponent(redirectTo)):""));

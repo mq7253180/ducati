@@ -15,7 +15,7 @@ var login = function() {
 //				alert("Auth: "+result.msg+"-------"+result.data.user.name);
 //				$.cookie("JSESSIONID_DUCATI", result.data.jsessionid, {expires: 1, path: "/"});
 				var redirectTo = $.trim($("#redirectTo").val());
-				$(location).attr("href", redirectTo.length==0?"/index":redirectTo);
+				$(location).attr("href", redirectTo.length==0?"/":redirectTo);
 			} else {
 				alert(result.msg);
 				if(result.status<-3)
