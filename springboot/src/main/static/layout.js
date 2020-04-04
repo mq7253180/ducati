@@ -4,7 +4,7 @@ $("#logoutA").click(function() {
 		type: "GET",
 		dataType: "JSON",
 		handle: function(data) {
-			alert(data.msg);
+			alert("您已登出");
 			$(top.location).attr("href", "/auth/signin");
 		}
 	});
