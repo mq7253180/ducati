@@ -80,7 +80,7 @@ $("#pwdResetBtn").click(function() {
 			"email": $("#uname").val()
 		},
 		handle: function(result) {
-			alert("请登录邮箱点击链接后继续操作");
+			alert(result.status+"======"+result.msg);
 		}
 	});
 	return false;
