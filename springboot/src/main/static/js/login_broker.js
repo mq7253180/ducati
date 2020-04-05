@@ -1,3 +1,14 @@
 alert($("#tip").html());
 var redirectTo = $("#redirectTo").val();
-$(top.location).attr("href", "/auth/signin"+(redirectTo.length>0?("?redirectTo="+encodeURIComponent(redirectTo)):""));
+var locale = $("#locale").val();
+var uri = "/auth/signin";
+if(locale.length>0) {
+	uri += "?locale=";
+	uri += locale;
+}
+if(redirectTo.length>0) {
+	uri += uri.indexOf("?")>=0?'&':'?';
+	uri += "redirectTo=";
+	uri += encodeURIComponent(redirectTo);
+}
+$(top.location).attr("href", uri);

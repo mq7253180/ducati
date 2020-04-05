@@ -6,7 +6,7 @@
 	<body>
 		<font color="red"><label id="tip"><@i18n key="auth.timeout.broker"/></label></font>
 	</body>
-	<input type="hidden" id="locale" value="<@locale/>"/>
+	<input type="hidden" id="locale" value="${locale?if_exists}"/>
 	<input type="hidden" id="uri" value="<@attr key="uri_without_first" />"/>
 	<input type="hidden" id="resourcePrefix" value="<@property key="prefix.resource"/>"/>
 	<input type="hidden" id="redirectTo" value="${redirectTo?if_exists}"/>
