@@ -55,7 +55,7 @@ public class ServiceInitConfiguration extends WebMvcConfiguration {
 		});
 		authContext.setAuthHandler(new AuthHandler() {
 			@Override
-			public ModelAndView indexView(HttpServletRequest request, HttpServletResponse response) {
+			public ModelAndView rootView(HttpServletRequest request, HttpServletResponse response) {
 				return new ModelAndView("/index");
 			}
 		});
