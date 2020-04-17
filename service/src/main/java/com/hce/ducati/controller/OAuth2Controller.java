@@ -6,18 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hce.ducati.entity.UserEntity;
+import com.hce.ducati.service.UserService;
 import com.quincy.auth.controller.OAuth2ControllerSupport;
 import com.quincy.auth.o.OAuth2Info;
-import com.quincy.auth.service.GeneralService;
 
 @Controller
 public class OAuth2Controller extends OAuth2ControllerSupport {
 	@Autowired
-	private GeneralService generalService;
+	private UserService userService;
 
 	@Override
-	public OAuth2Info getOAuth2Info(String clientId, String scope, String username) {
-		return null;
+	protected OAuth2Info getOAuth2Info(Long clientSystemId, String username, String scope) {
+		OAuth2Info oauth2Info = new OAuth2Info();
+		UserEntity user = userService.find(username);
+		if(user!=null)
+			oauth2Info.setUserId(user.getId());
+		return oauth2Info;
 	}
 
 	@Override
