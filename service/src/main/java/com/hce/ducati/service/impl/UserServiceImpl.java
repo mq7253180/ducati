@@ -9,7 +9,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hce.ducati.dao.OAuth2InfoRepository;
 import com.hce.ducati.dao.UserRepository;
+import com.hce.ducati.entity.OAuth2InfoEntity;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.UserService;
 import com.quincy.auth.dao.RoleRepository;
@@ -23,6 +25,8 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 	@Autowired
 	private RoleRepository roleRepository;
+	@Autowired
+	private OAuth2InfoRepository oauth2InfoRepository;
 
 	@Transactional
 	@Override
@@ -80,5 +84,11 @@ public class UserServiceImpl implements UserService {
 	@ReadOnly
 	public List<UserEntity> findAllUsers() {
 		return userRepository.findAll();
+	}
+
+	@Override
+	@ReadOnly
+	public OAuth2InfoEntity findOAuth2Info(Long userId, Long clientSystemId, String scope) {
+		return oauth2InfoRepository.findByUserIdAndClientSystemIdAndScope(userId, clientSystemId, scope);
 	}
 }
