@@ -14,4 +14,5 @@ public interface UserService {
 	public List<Role> findAllRoles();
 	public List<UserEntity> findAllUsers();
 	public OAuth2InfoEntity findOAuth2Info(Long userId, Long clientSystemId, String scope);
+	public OAuth2InfoEntity saveOAuth2Info(Long userId, Long clientSystemId, String scope, String authorizationCode);
 }

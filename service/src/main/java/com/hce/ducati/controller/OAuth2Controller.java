@@ -31,8 +31,8 @@ public class OAuth2Controller extends OAuth2ControllerSupport {
 	}
 
 	@Override
-	public void saveInfo(Long clientSystemId, Long userId, String scope, String authorizationCode) {
-		
+	protected void saveOAuth2Info(Long clientSystemId, Long userId, String scope, String authorizationCode) {
+		userService.saveOAuth2Info(userId, clientSystemId, scope, authorizationCode);
 	}
 
 	@Override
