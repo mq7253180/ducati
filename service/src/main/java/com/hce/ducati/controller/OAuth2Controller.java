@@ -1,9 +1,14 @@
 package com.hce.ducati.controller;
 
+import java.net.URISyntaxException;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
+import org.apache.oltu.oauth2.common.message.OAuthResponse.OAuthResponseBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hce.cfca.CommonHelper;
@@ -31,12 +36,17 @@ public class OAuth2Controller extends OAuth2ControllerSupport {
 	}
 
 	@Override
-	protected void saveOAuth2Info(Long clientSystemId, Long userId, String scope, String authorizationCode) {
-		userService.saveOAuth2Info(userId, clientSystemId, scope, authorizationCode);
+	protected void saveOAuth2Info(Long clientSystemId, String username, String scope, String authorizationCode) {
+		userService.saveOAuth2Info(username, clientSystemId, scope, authorizationCode);
 	}
 
 	@Override
 	protected ModelAndView signinView(HttpServletRequest request) {
 		return null;
+	}
+
+	@RequestMapping("/signin/do")
+	public void doSignin(HttpServletRequest request) {
+//		OAuthResponseBuilder builder = this.generateAuthorizationCode(request, userId, scope);
 	}
 }

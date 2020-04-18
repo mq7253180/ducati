@@ -93,11 +93,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public OAuth2InfoEntity saveOAuth2Info(Long userId, Long clientSystemId, String scope, String authorizationCode) {
-		OAuth2InfoEntity vo = oauth2InfoRepository.findByUserIdAndClientSystemIdAndScope(userId, clientSystemId, scope);
+	public OAuth2InfoEntity saveOAuth2Info(String username, Long clientSystemId, String scope, String authorizationCode) {
+		UserEntity user = userRepository.findByUsernameOrEmailOrMobilePhone(username, username, username);
+		OAuth2InfoEntity vo = oauth2InfoRepository.findByUserIdAndClientSystemIdAndScope(user.getId(), clientSystemId, scope);
 		if(vo==null) {
 			vo = new OAuth2InfoEntity();
-			vo.setUserId(userId);
+			vo.setUserId(user.getId());
 			vo.setClientSystemId(clientSystemId);
 			vo.setScope(scope);
 		}
