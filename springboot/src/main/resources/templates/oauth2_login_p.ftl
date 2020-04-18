@@ -4,7 +4,7 @@
 	</head>
 	<body>
 		<div align="center" valign="top">
-			<font color="blue" size="3">${client.name?if_exists}想要获取您(${userInfo?if_exists})的${scope?if_exists}，请授权</font><br/>
+			<font color="blue" size="3">${client?if_exists}想要获取您(${userInfo?if_exists})的${scope?if_exists}，请授权</font><br/>
 			<input type="button" id="authBtn" value="授权"/>
 			<a id="authA" href="javacript:void(0);">授权</a>
 		</div>

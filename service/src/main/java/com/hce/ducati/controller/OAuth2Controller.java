@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hce.cfca.CommonHelper;
 import com.hce.ducati.entity.OAuth2InfoEntity;
 import com.hce.ducati.entity.UserEntity;
+import com.hce.ducati.o.OAuth2DTO;
 import com.hce.ducati.service.UserService;
 import com.quincy.auth.controller.OAuth2ControllerSupport;
 import com.quincy.auth.o.OAuth2Info;
@@ -36,17 +37,24 @@ public class OAuth2Controller extends OAuth2ControllerSupport {
 	}
 
 	@Override
-	protected void saveOAuth2Info(Long clientSystemId, String username, String scope, String authorizationCode) {
-		userService.saveOAuth2Info(username, clientSystemId, scope, authorizationCode);
+	protected String saveOAuth2Info(Long clientSystemId, String username, String scope, String authorizationCode) {
+		OAuth2InfoEntity oauth2InfoEntity = userService.saveOAuth2Info(username, clientSystemId, scope, authorizationCode);
+		return oauth2InfoEntity.getId().toString();
 	}
 
 	@Override
-	protected ModelAndView signinView(HttpServletRequest request, Long userId, String _scope) {
-		UserEntity user = userService.find(userId);
-		String scope = SCOPES.get(_scope);
+	protected String saveOAuth2Info(Long clientSystemId, String username, String scope) {
+		return this.saveOAuth2Info(clientSystemId, username, scope, null);
+	}
+
+	@Override
+	protected ModelAndView signinView(HttpServletRequest request, String oauth2Id) {
+		OAuth2DTO oauth2DTO = userService.findOAuth2(Long.valueOf(oauth2Id));
+		String scope = SCOPES.get(oauth2DTO.getScope());
 		return new ModelAndView("/oauth2_login")
-				.addObject("scope", scope==null?_scope:scope)
-				.addObject("userInfo", user.getName()+", "+user.getMobilePhone()+", "+user.getEmail());
+				.addObject("client", oauth2DTO.getClientName())
+				.addObject("scope", scope==null?oauth2DTO.getScope():scope)
+				.addObject("userInfo", oauth2DTO.getUName()+", "+oauth2DTO.getMobilePhone()+", "+oauth2DTO.getEmail());
 	}
 
 	@RequestMapping("/signin/do")

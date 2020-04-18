@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -21,6 +23,7 @@ import lombok.Data;
 public class OAuth2InfoEntity implements Serializable {
 	private static final long serialVersionUID = 6829594433533198471L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private Long id;
 	@Column(name="user_id")

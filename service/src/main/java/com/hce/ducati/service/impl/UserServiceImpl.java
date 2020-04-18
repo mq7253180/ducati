@@ -13,6 +13,8 @@ import com.hce.ducati.dao.OAuth2InfoRepository;
 import com.hce.ducati.dao.UserRepository;
 import com.hce.ducati.entity.OAuth2InfoEntity;
 import com.hce.ducati.entity.UserEntity;
+import com.hce.ducati.mapper.UserMapper;
+import com.hce.ducati.o.OAuth2DTO;
 import com.hce.ducati.service.UserService;
 import com.quincy.auth.dao.RoleRepository;
 import com.quincy.auth.entity.Role;
@@ -27,6 +29,8 @@ public class UserServiceImpl implements UserService {
 	private RoleRepository roleRepository;
 	@Autowired
 	private OAuth2InfoRepository oauth2InfoRepository;
+	@Autowired
+	private  UserMapper userMapper;
 
 	@Transactional
 	@Override
@@ -93,7 +97,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public OAuth2InfoEntity saveOAuth2Info(String username, Long clientSystemId, String scope, String authorizationCode) {
+	public OAuth2InfoEntity saveOAuth2Info(String username, Long clientSystemId, String scope, String _authorizationCode) {
 		UserEntity user = userRepository.findByUsernameOrEmailOrMobilePhone(username, username, username);
 		OAuth2InfoEntity vo = oauth2InfoRepository.findByUserIdAndClientSystemIdAndScope(user.getId(), clientSystemId, scope);
 		if(vo==null) {
@@ -102,7 +106,14 @@ public class UserServiceImpl implements UserService {
 			vo.setClientSystemId(clientSystemId);
 			vo.setScope(scope);
 		}
-		vo.setAuthorizationCode(authorizationCode);
+		String authorizationCode = CommonHelper.trim(_authorizationCode);
+		if(authorizationCode!=null)
+			vo.setAuthorizationCode(authorizationCode);
 		return oauth2InfoRepository.save(vo);
+	}
+
+	@Override
+	public OAuth2DTO findOAuth2(Long id) {
+		return userMapper.findOAuth2(id);
 	}
 }
