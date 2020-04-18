@@ -17,4 +17,5 @@ public interface UserService {
 	public OAuth2InfoEntity findOAuth2Info(Long userId, Long clientSystemId, String scope);
 	public OAuth2DTO findOAuth2(Long id);
 	public OAuth2InfoEntity saveOAuth2Info(String username, Long clientSystemId, String scope, String authorizationCode);
+	public OAuth2InfoEntity saveOAuth2Info(Long id, String authorizationCode);
 }

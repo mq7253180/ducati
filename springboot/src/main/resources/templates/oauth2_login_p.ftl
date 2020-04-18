@@ -6,7 +6,7 @@
 		<div align="center" valign="top">
 			<font color="blue" size="3">${client?if_exists}想要获取您(${userInfo?if_exists})的${scope?if_exists}，请授权</font><br/>
 			<input type="button" id="authBtn" value="授权"/>
-			<a id="authA" href="javacript:void(0);">授权</a>
+			<a target="_self" href="/oauth2/signin/do?oauth2_id=${oauth2Id?if_exists}">授权</a>
 		</div>
 		<input type="hidden" id="locale" value="<@locale/>"/>
 		<input type="hidden" id="uri" value="<@attr key="uri_without_first" />"/>

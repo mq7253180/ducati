@@ -1,13 +1,17 @@
 package com.hce.ducati.controller;
 
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hce.cfca.CommonHelper;
@@ -37,14 +41,15 @@ public class OAuth2Controller extends OAuth2ControllerSupport {
 	}
 
 	@Override
-	protected String saveOAuth2Info(Long clientSystemId, String username, String scope, String authorizationCode) {
-		OAuth2InfoEntity oauth2InfoEntity = userService.saveOAuth2Info(username, clientSystemId, scope, authorizationCode);
+	protected String saveOAuth2Info(String oauth2Id, String authorizationCode) {
+		OAuth2InfoEntity oauth2InfoEntity = userService.saveOAuth2Info(Long.valueOf(oauth2Id), authorizationCode);
 		return oauth2InfoEntity.getId().toString();
 	}
 
 	@Override
 	protected String saveOAuth2Info(Long clientSystemId, String username, String scope) {
-		return this.saveOAuth2Info(clientSystemId, username, scope, null);
+		OAuth2InfoEntity oauth2InfoEntity = userService.saveOAuth2Info(username, clientSystemId, scope, null);
+		return oauth2InfoEntity.getId().toString();
 	}
 
 	@Override
@@ -58,8 +63,8 @@ public class OAuth2Controller extends OAuth2ControllerSupport {
 	}
 
 	@RequestMapping("/signin/do")
-	public void doSignin(HttpServletRequest request) {
-//		OAuthResponseBuilder builder = this.generateAuthorizationCode(request, userId, scope);
+	public ResponseEntity<?> doSignin(HttpServletRequest request, @RequestParam(required = true, value = "oauth2_id")Long oauth2Id) throws URISyntaxException, OAuthSystemException {
+		return this.generateAuthorizationCode(request, oauth2Id.toString());
 	}
 
 	private final static Map<String, String> SCOPES = new HashMap<String, String>();

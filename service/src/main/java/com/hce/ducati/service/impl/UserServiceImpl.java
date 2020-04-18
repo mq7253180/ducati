@@ -113,6 +113,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public OAuth2InfoEntity saveOAuth2Info(Long id, String authorizationCode) {
+		OAuth2InfoEntity oauth2InfoEntity = oauth2InfoRepository.findById(id).get();
+		oauth2InfoEntity.setAuthorizationCode(authorizationCode);
+		return oauth2InfoRepository.save(oauth2InfoEntity);
+	}
+
+	@Override
 	public OAuth2DTO findOAuth2(Long id) {
 		return userMapper.findOAuth2(id);
 	}
