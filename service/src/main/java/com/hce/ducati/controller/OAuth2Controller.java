@@ -1,11 +1,10 @@
 package com.hce.ducati.controller;
 
-import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
-import org.apache.oltu.oauth2.common.message.OAuthResponse.OAuthResponseBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,11 +26,12 @@ public class OAuth2Controller extends OAuth2ControllerSupport {
 	protected OAuth2Info getOAuth2Info(Long clientSystemId, String username, String scope) {
 		OAuth2Info oauth2Info = new OAuth2Info();
 		UserEntity user = userService.find(username);
-		if(user!=null)
+		if(user!=null) {
 			oauth2Info.setUserId(user.getId());
-		OAuth2InfoEntity oauth2InfoEntity = userService.findOAuth2Info(user.getId(), clientSystemId, scope);
-		if(oauth2InfoEntity!=null)
-			oauth2Info.setAuthorizationCode(CommonHelper.trim(oauth2InfoEntity.getAuthorizationCode()));
+			OAuth2InfoEntity oauth2InfoEntity = userService.findOAuth2Info(user.getId(), clientSystemId, scope);
+			if(oauth2InfoEntity!=null)
+				oauth2Info.setAuthorizationCode(CommonHelper.trim(oauth2InfoEntity.getAuthorizationCode()));
+		}
 		return oauth2Info;
 	}
 
@@ -41,12 +41,23 @@ public class OAuth2Controller extends OAuth2ControllerSupport {
 	}
 
 	@Override
-	protected ModelAndView signinView(HttpServletRequest request) {
-		return null;
+	protected ModelAndView signinView(HttpServletRequest request, Long userId, String _scope) {
+		UserEntity user = userService.find(userId);
+		String scope = SCOPES.get(_scope);
+		return new ModelAndView("/oauth2_login")
+				.addObject("scope", scope==null?_scope:scope)
+				.addObject("userInfo", user.getName()+", "+user.getMobilePhone()+", "+user.getEmail());
 	}
 
 	@RequestMapping("/signin/do")
 	public void doSignin(HttpServletRequest request) {
 //		OAuthResponseBuilder builder = this.generateAuthorizationCode(request, userId, scope);
+	}
+
+	private final static Map<String, String> SCOPES = new HashMap<String, String>();
+	static {
+		SCOPES.put("xxx", "某权限");
+		SCOPES.put("www", "甲权限");
+		SCOPES.put("ooo", "个人信息");
 	}
 }
