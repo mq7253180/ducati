@@ -94,10 +94,15 @@ public class OAuth2Controller extends OAuth2ControllerSupport {
 		return this.buildResponse(request, dto.getAuthCode());
 	}
 
+	@Override
+	protected int accessTokenExpireSeconds() {
+		return 120;
+	}
+
 	private final static Map<String, String> SCOPES = new HashMap<String, String>();
 	static {
 		SCOPES.put("xxx", "某权限");
 		SCOPES.put("www", "甲权限");
-		SCOPES.put("ooo", "个人信息");
+		SCOPES.put("usrInfo", "个人信息");
 	}
 }

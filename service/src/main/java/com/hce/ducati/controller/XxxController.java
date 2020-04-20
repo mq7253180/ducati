@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.dubbo.config.annotation.Reference;
+import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.zookeeper.KeeperException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,17 +18,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hce.ducati.client.InnerFeign;
 import com.hce.ducati.client.QuincyFeign;
 import com.hce.ducati.entity.Enterprise;
+import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.ServiceInitConfiguration;
 import com.hce.ducati.client.DucatiClient;
 import com.hce.ducati.client.DucatiSpringCloudClient;
 import com.hce.ducati.o.AccountO;
 import com.hce.ducati.o.Params;
 import com.hce.ducati.o.RegionResultDTO;
+import com.hce.ducati.service.UserService;
 import com.hce.ducati.service.XxxService;
 import com.hce.ducati.service.ZzzService;
 import com.hce.ducati.service.impl.A;
@@ -38,6 +42,7 @@ import com.hce.ducati.service.impl.UserServiceImpl;
 import com.hce.ducati.service.impl.aBcd;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import com.quincy.auth.annotation.OAuth2Resource;
 import com.quincy.auth.annotation.PermissionNeeded;
 import com.quincy.sdk.RedisProcessor;
 import com.quincy.sdk.Result;
@@ -66,6 +71,17 @@ public class XxxController {
 	private InnerFeign innerFeign;
 	@Autowired
 	private DucatiSpringCloudClient ducatiSpringCloudClient;
+	@Autowired
+	private UserService userService;
+
+	@OAuth2Resource("usrInfo")
+	@GetMapping("/usrinfo")
+	@ResponseBody
+	public UserEntity getUserInfo(@RequestParam(required = true, value = OAuth.OAUTH_USERNAME)String username) {
+		UserEntity user = userService.find(username);
+		user.setPassword(null);
+		return user;
+	}
 
 	@GetMapping("/error/json")
 	@ResponseBody
