@@ -9,9 +9,11 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hce.ducati.dao.OAuth2InfoRepository;
+import com.hce.ducati.dao.OAuth2CodeRepository;
+import com.hce.ducati.dao.OAuth2ScopeRepository;
 import com.hce.ducati.dao.UserRepository;
-import com.hce.ducati.entity.OAuth2InfoEntity;
+import com.hce.ducati.entity.OAuth2Code;
+import com.hce.ducati.entity.OAuth2Scope;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.mapper.UserMapper;
 import com.hce.ducati.o.OAuth2DTO;
@@ -28,7 +30,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private RoleRepository roleRepository;
 	@Autowired
-	private OAuth2InfoRepository oauth2InfoRepository;
+	private OAuth2CodeRepository oauth2CodeRepository;
+	@Autowired
+	private OAuth2ScopeRepository oauth2ScopeRepository;
 	@Autowired
 	private  UserMapper userMapper;
 
@@ -92,35 +96,40 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@ReadOnly
-	public OAuth2InfoEntity findOAuth2Info(Long userId, Long clientSystemId, String scope) {
-		return oauth2InfoRepository.findByUserIdAndClientSystemIdAndScope(userId, clientSystemId, scope);
+	public OAuth2Code findOAuth2Info(Long userId, Long clientSystemId) {
+		return oauth2CodeRepository.findByUserIdAndClientSystemId(userId, clientSystemId);
 	}
 
 	@Override
-	public OAuth2InfoEntity saveOAuth2Info(String username, Long clientSystemId, String scope, String _authorizationCode) {
-		UserEntity user = userRepository.findByUsernameOrEmailOrMobilePhone(username, username, username);
-		OAuth2InfoEntity vo = oauth2InfoRepository.findByUserIdAndClientSystemIdAndScope(user.getId(), clientSystemId, scope);
+	public OAuth2Code saveOAuth2Info(Long clientSystemId, Long userId, String _authorizationCode) {
+		OAuth2Code vo = oauth2CodeRepository.findByUserIdAndClientSystemId(userId, clientSystemId);
 		if(vo==null) {
-			vo = new OAuth2InfoEntity();
-			vo.setUserId(user.getId());
+			vo = new OAuth2Code();
+			vo.setUserId(userId);
 			vo.setClientSystemId(clientSystemId);
-			vo.setScope(scope);
 		}
 		String authorizationCode = CommonHelper.trim(_authorizationCode);
 		if(authorizationCode!=null)
-			vo.setAuthorizationCode(authorizationCode);
-		return oauth2InfoRepository.save(vo);
-	}
-
-	@Override
-	public OAuth2InfoEntity saveOAuth2Info(Long id, String authorizationCode) {
-		OAuth2InfoEntity oauth2InfoEntity = oauth2InfoRepository.findById(id).get();
-		oauth2InfoEntity.setAuthorizationCode(authorizationCode);
-		return oauth2InfoRepository.save(oauth2InfoEntity);
+			vo.setCode(authorizationCode);
+		return oauth2CodeRepository.save(vo);
 	}
 
 	@Override
 	public OAuth2DTO findOAuth2(Long id) {
 		return userMapper.findOAuth2(id);
+	}
+
+	@ReadOnly
+	@Override
+	public List<OAuth2Scope> findOAuth2Scopes(Long codeId) {
+		return oauth2ScopeRepository.findByCodeId(codeId);
+	}
+
+	@Override
+	public OAuth2Scope saveOAuth2Scope(Long codeId, String scope) {
+		OAuth2Scope oauth2Scope = new OAuth2Scope();
+		oauth2Scope.setCodeId(codeId);
+		oauth2Scope.setScope(scope);
+		return oauth2ScopeRepository.save(oauth2Scope);
 	}
 }

@@ -19,8 +19,8 @@ import lombok.Data;
 @DynamicInsert
 @DynamicUpdate
 @EntityListeners({AuditingEntityListener.class})
-@Entity(name = "s_oauth2")
-public class OAuth2InfoEntity implements Serializable {
+@Entity(name = "s_oauth2_code")
+public class OAuth2Code implements Serializable {
 	private static final long serialVersionUID = 6829594433533198471L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +30,6 @@ public class OAuth2InfoEntity implements Serializable {
 	private Long userId;
 	@Column(name="client_system_id")
 	private Long clientSystemId;
-	@Column(name="scope")
-	private String scope;
-	@Column(name="auth_code")
-	private String authorizationCode;
+	@Column(name="code")
+	private String code;
 }

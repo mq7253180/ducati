@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 public class OAuth2DTO {
 	private String clientName;
-	private String scope;
 	private String authCode;
 	private String username;
 	private String uName;

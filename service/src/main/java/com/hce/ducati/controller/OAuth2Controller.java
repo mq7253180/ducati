@@ -1,8 +1,11 @@
 package com.hce.ducati.controller;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,7 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hce.cfca.CommonHelper;
-import com.hce.ducati.entity.OAuth2InfoEntity;
+import com.hce.ducati.entity.OAuth2Code;
+import com.hce.ducati.entity.OAuth2Scope;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.o.OAuth2DTO;
 import com.hce.ducati.service.UserService;
@@ -28,43 +32,66 @@ public class OAuth2Controller extends OAuth2ControllerSupport {
 	private UserService userService;
 
 	@Override
-	protected OAuth2Info getOAuth2Info(Long clientSystemId, String username, String scope) {
+	protected OAuth2Info getOAuth2Info(Long clientSystemId, String username) {
 		OAuth2Info oauth2Info = new OAuth2Info();
 		UserEntity user = userService.find(username);
 		if(user!=null) {
 			oauth2Info.setUserId(user.getId());
-			OAuth2InfoEntity oauth2InfoEntity = userService.findOAuth2Info(user.getId(), clientSystemId, scope);
-			if(oauth2InfoEntity!=null)
-				oauth2Info.setAuthorizationCode(CommonHelper.trim(oauth2InfoEntity.getAuthorizationCode()));
+			OAuth2Code oauth2Code = userService.findOAuth2Info(user.getId(), clientSystemId);
+			if(oauth2Code!=null) {
+				oauth2Info.setId(oauth2Code.getId().toString());
+				oauth2Info.setAuthorizationCode(CommonHelper.trim(oauth2Code.getCode()));
+			}
 		}
 		return oauth2Info;
 	}
 
 	@Override
-	protected String saveOAuth2Info(String oauth2Id, String authorizationCode) {
-		OAuth2InfoEntity oauth2InfoEntity = userService.saveOAuth2Info(Long.valueOf(oauth2Id), authorizationCode);
+	protected String saveOAuth2Info(Long clientSystemId, Long userId, String authorizationCode) {
+		OAuth2Code oauth2InfoEntity = userService.saveOAuth2Info(clientSystemId, userId, authorizationCode);
 		return oauth2InfoEntity.getId().toString();
 	}
 
 	@Override
-	protected String saveOAuth2Info(Long clientSystemId, String username, String scope) {
-		OAuth2InfoEntity oauth2InfoEntity = userService.saveOAuth2Info(username, clientSystemId, scope, null);
-		return oauth2InfoEntity.getId().toString();
+	protected List<String> notAuthorizedScopes(String codeId, Set<String> scopes) {
+		List<OAuth2Scope> authorizedScopes = userService.findOAuth2Scopes(Long.valueOf(codeId));
+		List<String> notAuthorizedScopes = new ArrayList<String>(authorizedScopes.size());
+		for(String scope:scopes) {
+			boolean authorized = false;
+			for(OAuth2Scope authorizedScope:authorizedScopes) {
+				if(scope.equals(authorizedScope.getScope())) {
+					authorized = true;
+					break;
+				}
+			}
+			if(!authorized)
+				notAuthorizedScopes.add(scope);
+		}
+		return notAuthorizedScopes;
 	}
 
 	@Override
-	protected ModelAndView signinView(HttpServletRequest request, String oauth2Id) {
-		OAuth2DTO oauth2DTO = userService.findOAuth2(Long.valueOf(oauth2Id));
-		String scope = SCOPES.get(oauth2DTO.getScope());
+	protected ModelAndView signinView(HttpServletRequest request, String codeId, String _scopes) {
+		OAuth2DTO oauth2DTO = userService.findOAuth2(Long.valueOf(codeId));
+		String[] scopes = _scopes.split(",");
+		StringBuilder displayedScopes = new StringBuilder(100);
+		for(String scope:scopes) {
+			String displayedScope = SCOPES.get(scope);
+			displayedScopes.append("、").append(displayedScope==null?scope:displayedScope);
+		}
 		return new ModelAndView("/oauth2_login")
 				.addObject("client", oauth2DTO.getClientName())
-				.addObject("scope", scope==null?oauth2DTO.getScope():scope)
+				.addObject("displayedScopes", displayedScopes.substring(1, displayedScopes.length()))
 				.addObject("userInfo", oauth2DTO.getUName()+", "+oauth2DTO.getMobilePhone()+", "+oauth2DTO.getEmail());
 	}
 
 	@RequestMapping("/signin/do")
-	public ResponseEntity<?> doSignin(HttpServletRequest request, @RequestParam(required = true, value = "oauth2_id")Long oauth2Id) throws URISyntaxException, OAuthSystemException {
-		return this.generateAuthorizationCode(request, oauth2Id.toString());
+	public ResponseEntity<?> doSignin(HttpServletRequest request, 
+			@RequestParam(required = true, value = "code_id")Long codeId, 
+			@RequestParam(required = true, value = "scope")String scope) throws URISyntaxException, OAuthSystemException {
+		userService.saveOAuth2Scope(codeId, scope);
+		OAuth2DTO dto = userService.findOAuth2(codeId);
+		return this.buildResponse(request, dto.getAuthCode());
 	}
 
 	private final static Map<String, String> SCOPES = new HashMap<String, String>();
