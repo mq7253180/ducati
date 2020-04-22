@@ -75,7 +75,7 @@ public class XxxController {
 	private UserService userService;
 
 	@OAuth2Resource("usrInfo")
-	@GetMapping("/usrinfo")
+	@RequestMapping("/usrinfo")
 	@ResponseBody
 	public UserEntity getUserInfo(@RequestParam(required = true, value = OAuth.OAUTH_USERNAME)String username) {
 		UserEntity user = userService.find(username);
