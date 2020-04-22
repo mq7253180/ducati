@@ -133,6 +133,12 @@ public class UserServiceImpl implements UserService {
 			}
 			info.setScopes(list);
 		}
+		UserEntity userEntity = userRepository.findById(info.getUserId()).get();
+		List<String> accounts = new ArrayList<String>(3);
+		accounts.add(userEntity.getUsername());
+		accounts.add(userEntity.getMobilePhone());
+		accounts.add(userEntity.getEmail());
+		info.setAccounts(accounts);
 		return info;
 	}
 
