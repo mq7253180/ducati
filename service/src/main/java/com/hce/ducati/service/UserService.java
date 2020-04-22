@@ -7,6 +7,7 @@ import com.hce.ducati.entity.OAuth2Scope;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.o.OAuth2DTO;
 import com.quincy.auth.entity.Role;
+import com.quincy.auth.o.OAuth2Info;
 
 public interface UserService {
 	public UserEntity update(UserEntity vo);
@@ -17,6 +18,7 @@ public interface UserService {
 	public List<UserEntity> findAllUsers();
 	public OAuth2Code findOAuth2Info(Long userId, Long clientSystemId);
 	public OAuth2DTO findOAuth2(Long id);
+	public OAuth2Info findOAuth2(String authorizationCode);
 	public OAuth2Code saveOAuth2Info(Long clientSystemId, Long userId, String authorizationCode);
 	public List<OAuth2Scope> findOAuth2Scopes(Long codeId);
 	public OAuth2Scope saveOAuth2Scope(Long codeId, String scope);

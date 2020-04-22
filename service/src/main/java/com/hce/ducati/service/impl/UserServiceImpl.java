@@ -1,5 +1,6 @@
 package com.hce.ducati.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,7 @@ import com.hce.ducati.o.OAuth2DTO;
 import com.hce.ducati.service.UserService;
 import com.quincy.auth.dao.RoleRepository;
 import com.quincy.auth.entity.Role;
+import com.quincy.auth.o.OAuth2Info;
 import com.quincy.sdk.annotation.ReadOnly;
 import com.quincy.sdk.helper.CommonHelper;
 
@@ -116,7 +118,22 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public OAuth2DTO findOAuth2(Long id) {
-		return userMapper.findOAuth2(id);
+		return userMapper.findOAuth2ById(id);
+	}
+
+	@ReadOnly
+	@Override
+	public OAuth2Info findOAuth2(String authorizationCode) {
+		OAuth2Info info = userMapper.findOAuth2ByCode(authorizationCode);
+		List<OAuth2Scope> scopes = oauth2ScopeRepository.findByCodeId(Long.valueOf(info.getId()));
+		if(scopes!=null&&scopes.size()>0) {
+			List<String> list = new ArrayList<String>(scopes.size());;
+			for(OAuth2Scope scope:scopes) {
+				list.add(scope.getScope());
+			}
+			info.setScopes(list);
+		}
+		return info;
 	}
 
 	@ReadOnly

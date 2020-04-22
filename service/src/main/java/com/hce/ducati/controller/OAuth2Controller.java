@@ -95,8 +95,13 @@ public class OAuth2Controller extends OAuth2ControllerSupport {
 	}
 
 	@Override
-	protected int accessTokenExpireSeconds() {
-		return 120;
+	protected long accessTokenExpireMillis() {
+		return 120000;
+	}
+
+	@Override
+	protected int refreshTokenExpireDays() {
+		return 1;
 	}
 
 	private final static Map<String, String> SCOPES = new HashMap<String, String>();
@@ -104,5 +109,15 @@ public class OAuth2Controller extends OAuth2ControllerSupport {
 		SCOPES.put("xxx", "某权限");
 		SCOPES.put("www", "甲权限");
 		SCOPES.put("usrInfo", "个人信息");
+	}
+
+	@Override
+	protected boolean authenticateSecret(String inputed, String dbStored) {
+		return inputed.equals(dbStored);
+	}
+
+	@Override
+	protected OAuth2Info getOAuth2Info(String authorizationCode) {
+		return userService.findOAuth2(authorizationCode);
 	}
 }
