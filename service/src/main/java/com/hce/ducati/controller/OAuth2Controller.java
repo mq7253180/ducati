@@ -112,7 +112,7 @@ public class OAuth2Controller extends OAuth2ControllerSupport {
 	}
 
 	@Override
-	protected boolean authenticateSecret(String inputed, String dbStored) {
+	protected boolean authenticateSecret(String inputed, String dbStored, String content) {
 		return inputed.equals(dbStored);
 	}
 
