@@ -19,6 +19,7 @@ public interface UserService {
 	public OAuth2Code findOAuth2Info(Long userId, Long clientSystemId);
 	public OAuth2DTO findOAuth2(Long id);
 	public OAuth2Info findOAuth2(String authorizationCode);
+	public OAuth2Info findOAuth2(String clientId, String username);
 	public OAuth2Code saveOAuth2Info(Long clientSystemId, Long userId, String authorizationCode);
 	public List<OAuth2Scope> findOAuth2Scopes(Long codeId);
 	public OAuth2Scope saveOAuth2Scope(Long codeId, String scope);

@@ -85,6 +85,13 @@ public class OAuth2Controller extends OAuth2ControllerSupport {
 				.addObject("userInfo", oauth2DTO.getUName()+", "+oauth2DTO.getMobilePhone()+", "+oauth2DTO.getEmail());
 	}
 
+	@Override
+	protected ModelAndView signinView(HttpServletRequest request, String clientId, String username, String scopes) {
+		OAuth2Info info = userService.findOAuth2(clientId, username);
+		return this.signinView(request, info.getId(), scopes)
+				.addObject("codeId", info.getId());
+	}
+
 	@RequestMapping("/signin/do")
 	public ResponseEntity<?> doSignin(HttpServletRequest request, 
 			@RequestParam(required = true, value = "code_id")Long codeId, 

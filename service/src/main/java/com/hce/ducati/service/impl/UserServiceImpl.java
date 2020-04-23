@@ -19,7 +19,9 @@ import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.mapper.UserMapper;
 import com.hce.ducati.o.OAuth2DTO;
 import com.hce.ducati.service.UserService;
+import com.quincy.auth.dao.ClientSystemRepository;
 import com.quincy.auth.dao.RoleRepository;
+import com.quincy.auth.entity.ClientSystem;
 import com.quincy.auth.entity.Role;
 import com.quincy.auth.o.OAuth2Info;
 import com.quincy.sdk.annotation.ReadOnly;
@@ -31,6 +33,8 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 	@Autowired
 	private RoleRepository roleRepository;
+	@Autowired
+	private ClientSystemRepository clientSystemRepository;
 	@Autowired
 	private OAuth2CodeRepository oauth2CodeRepository;
 	@Autowired
@@ -139,6 +143,19 @@ public class UserServiceImpl implements UserService {
 		accounts.add(userEntity.getMobilePhone());
 		accounts.add(userEntity.getEmail());
 		info.setAccounts(accounts);
+		return info;
+	}
+
+	@ReadOnly
+	@Override
+	public OAuth2Info findOAuth2(String clientId, String username) {
+		UserEntity userEntity = userRepository.findByUsernameOrEmailOrMobilePhone(username, username, username);
+		ClientSystem clientSystem = clientSystemRepository.findByClientId(clientId);
+		OAuth2Code oauth2Code = oauth2CodeRepository.findByUserIdAndClientSystemId(userEntity.getId(), clientSystem.getId());
+		OAuth2Info info = new OAuth2Info();
+		info.setId(oauth2Code.getId().toString());
+		info.setUserId(userEntity.getId());
+		info.setClientId(clientId);
 		return info;
 	}
 
