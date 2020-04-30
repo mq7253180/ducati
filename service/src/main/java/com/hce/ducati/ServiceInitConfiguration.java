@@ -26,7 +26,7 @@ import com.quincy.sdk.EmailService;
 import com.quincy.sdk.RedisProcessor;
 import com.quincy.sdk.WebMvcConfiguration;
 
-@PropertySource(value = {"classpath:application-core.properties", "classpath:application-auth.properties", "classpath:application-service.properties"})
+@PropertySource(value = {"classpath:application-core.properties", "classpath:application-auth.properties", "classpath:application-service.properties", "classpath:application-oauth2.properties"})
 @Configuration("sssiiiccc")
 public class ServiceInitConfiguration extends WebMvcConfiguration {
 	@Autowired
