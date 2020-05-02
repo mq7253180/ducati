@@ -401,8 +401,8 @@ public class XxxController {
 
 	@GetMapping("/test/request")
 	@ResponseBody
-	public String testRequest(HttpServletRequest request) {
-		return new StringBuilder(500)
+	public HttpServletRequest testRequest(HttpServletRequest request) {
+		log.warn(new StringBuilder(500)
 				.append("getRemoteAddr: ")
 				.append(request.getRemoteAddr())
 				.append("\r\ngetRemoteHost: ")
@@ -443,6 +443,7 @@ public class XxxController {
 				.append(request.getServletPath())
 				.append("\r\ngetContextPath: ")
 				.append(request.getContextPath())
-				.toString();
+				.toString());
+		return request;
 	}
 }
