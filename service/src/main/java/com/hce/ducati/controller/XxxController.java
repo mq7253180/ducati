@@ -400,6 +400,7 @@ public class XxxController {
 	}
 
 	@GetMapping("/test/request")
+	@ResponseBody
 	public String testRequest(HttpServletRequest request) {
 		return new StringBuilder(500)
 				.append("getRemoteAddr: ")
