@@ -32,7 +32,7 @@ public class OAuth2Controller extends OAuth2ControllerSupport {
 	private UserService userService;
 
 	@Override
-	protected OAuth2Info getOAuth2Info(Long clientSystemId, String username) {
+	protected OAuth2Info getOAuth2Info(Long clientSystemId, String username, HttpServletRequest request) {
 		OAuth2Info oauth2Info = new OAuth2Info();
 		UserEntity user = userService.find(username);
 		if(user!=null) {
