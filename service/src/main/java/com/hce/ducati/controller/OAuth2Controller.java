@@ -23,11 +23,11 @@ import com.hce.ducati.entity.OAuth2Scope;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.o.OAuth2DTO;
 import com.hce.ducati.service.UserService;
-import com.quincy.auth.controller.OAuth2ControllerSupport;
+import com.quincy.auth.controller.OAuth2TokenControllerSupport;
 import com.quincy.auth.o.OAuth2Info;
 
 @Controller
-public class OAuth2Controller extends OAuth2ControllerSupport {
+public class OAuth2Controller extends OAuth2TokenControllerSupport {
 	@Autowired
 	private UserService userService;
 
