@@ -12,6 +12,16 @@
 	</parent>
 	<dependencies>
 		<dependency>
+		    <groupId>javax.xml.bind</groupId>
+		    <artifactId>jaxb-api</artifactId>
+		    <version>2.3.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.javassist</groupId>
+		    <artifactId>javassist</artifactId>
+		    <version>3.27.0-GA</version>
+		</dependency>
+		<dependency>
 		    <groupId>com.maqiangcgq</groupId>
 		    <artifactId>quincy-db</artifactId>
 		    <version>1.0.8</version>
