@@ -40,7 +40,7 @@ public class ServiceInitConfiguration extends WebMvcConfiguration {
 
 	@Scheduled(cron = "0 0/2 * * * ?")
 	public void retry() throws ClassNotFoundException, NoSuchMethodException, SecurityException, IOException {
-		transactionContext.compensate();
+		transactionContext.compensate("xxx");
 	}
 
 	@PostConstruct

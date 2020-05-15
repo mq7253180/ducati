@@ -24,22 +24,22 @@ public class ZzzServiceImpl implements ZzzService {
 		log.info("==============CALL_HTTP");
 	}
 
-//	@AtomicOperational(confirm = "confirmUpdateDB")
-	@AtomicOperational(confirm = "confirmUpdateDB", cancel = "cancelUpdateDB")
+	@AtomicOperational(confirm = "confirmUpdateDB")
+//	@AtomicOperational(confirm = "confirmUpdateDB", cancel = "cancelUpdateDB")
 	@Override
 	public void updateDB(String s, Params p) {
 		log.info("==============UPDATE_DB");
 	}
 
-//	@AtomicOperational(confirm = "confirmCallDubbo")
-	@AtomicOperational(confirm = "confirmCallDubbo", cancel = "cancelCallDubbo")
+	@AtomicOperational(confirm = "confirmCallDubbo")
+//	@AtomicOperational(confirm = "confirmCallDubbo", cancel = "cancelCallDubbo")
 	@Override
 	public void callDubbo(Long id, String val) {
 		log.info("==============CALL_DUBBO");
 	}
 
-//	@AtomicOperational(confirm = "confirmCallDubbo")
-	@AtomicOperational(confirm = "confirmCallDubbo", cancel = "cancelCallDubbo")
+	@AtomicOperational(confirm = "confirmCallDubbo")
+//	@AtomicOperational(confirm = "confirmCallDubbo", cancel = "cancelCallDubbo")
 	@Override
 	public void callDubbo() {
 		log.info("==============CALL_DUBBO");

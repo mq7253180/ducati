@@ -114,7 +114,7 @@ public class XxxServiceImpl implements XxxService {
 		System.out.println(String.format(CLASS_INFO, "xxx", "www", "xxx", "www"));
 	}
 
-	@DTransactional
+	@DTransactional(frequencyBatch = "xxx")
 	@Override
 	public String testTx(String s, Params p) {
 		Params[] pp = new Params[5];
@@ -123,8 +123,8 @@ public class XxxServiceImpl implements XxxService {
 		pp[4] = p;
 		zzzService.callDubbo(987l, null);
 		zzzService.callDubbo();
-		zzzService.updateDB(s, p);
-		zzzService.callHttp(321, new int[] {1, 5, 8}, pp);
+//		zzzService.updateDB(s, p);
+//		zzzService.callHttp(321, new int[] {1, 5, 8}, pp);
 		return "XXX";
 	}
 
