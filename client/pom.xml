@@ -10,6 +10,20 @@
 		<artifactId>ducati</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>quincy</id>
+			<url>https://nexus.maqiangcgq.com/repository/maven-snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>quincy</id>
+			<url>https://nexus.maqiangcgq.com/repository/maven-releases/</url>
+		</repository>
+		<!-- repository>
+			<id>quincy</id>
+			<url>https://nexus.maqiangcgq.com/repository/maven-public/</url>
+		</repository-->
+	</distributionManagement>
 	<dependencies>
 		<dependency>
 		    <groupId>org.springframework</groupId>
