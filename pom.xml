@@ -103,7 +103,7 @@
 				<redis.nodes>localhost:6379,localhost:6389,localhost:6399</redis.nodes>
 				<!-- <redis.nodes>localhost:26379,localhost:26389,localhost:26399</redis.nodes> -->
 				<redis.pwd>foobared</redis.pwd>
-				<domain>ducati.maqiangcgq.com</domain><!-- 种cookie识别session, ajax跨域 -->
+				<domain>maqiangcgq.com</domain><!-- 种cookie识别session, ajax跨域 -->
 				<mail.user>mq7253180@126.com</mail.user>
 				<mail.to></mail.to>
 				<zk.url>localhost:2181,localhost:2182,localhost:2183</zk.url>
