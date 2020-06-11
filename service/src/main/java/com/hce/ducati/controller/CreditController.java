@@ -27,7 +27,7 @@ import com.hce.ducati.service.CompanyService;
 import com.hce.ducati.service.CreditService;
 import com.quincy.auth.annotation.PermissionNeeded;
 import com.quincy.auth.o.DSession;
-import com.quincy.auth.service.AuthorizationService;
+import com.quincy.auth.service.AuthorizationCommonService;
 import com.quincy.sdk.Result;
 import com.quincy.sdk.helper.CommonHelper;
 
@@ -39,7 +39,7 @@ public class CreditController {
 	@Autowired
 	private CreditService creditService;
 	@Autowired
-	private AuthorizationService authorizationService;
+	private AuthorizationCommonService authorizationService;
 
 	@PermissionNeeded("creditSeach")
 	@GetMapping(value = "")

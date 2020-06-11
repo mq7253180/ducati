@@ -14,13 +14,13 @@ import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.mapper.UserMapper;
 import com.hce.ducati.service.UserService;
 import com.quincy.auth.annotation.PermissionNeeded;
-import com.quincy.auth.service.AuthorizationService;
+import com.quincy.auth.service.AuthorizationServerService;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 	@Autowired
-	private AuthorizationService authorizationService;
+	private AuthorizationServerService authorizationServerService;
 	@Autowired
 	private UserMapper userMapper;
 	@Autowired
@@ -31,7 +31,7 @@ public class AdminController {
 	@ResponseBody
 	public void updateSessionByUserId(@PathVariable(required = true, name = "id")Long id) throws ClassNotFoundException, IOException {
 		UserEntity user = userService.find(id);
-		authorizationService.updateSession(user);
+		authorizationServerService.updateSession(user);
 	}
 
 	@PermissionNeeded("reloadSessionsByRole")
@@ -39,6 +39,6 @@ public class AdminController {
 	@ResponseBody
 	public void updateSessionByRole(@PathVariable(required = true, name = "roleId")Long roleId) throws ClassNotFoundException, IOException {
 		List<UserEntity> users = userMapper.findUsers(roleId);
-		authorizationService.updateSession(users);
+		authorizationServerService.updateSession(users);
 	}
 }

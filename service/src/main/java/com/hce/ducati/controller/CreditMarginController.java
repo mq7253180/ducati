@@ -23,7 +23,7 @@ import com.hce.ducati.service.CompanyService;
 import com.hce.ducati.service.CreditMarginService;
 import com.quincy.auth.annotation.PermissionNeeded;
 import com.quincy.auth.o.DSession;
-import com.quincy.auth.service.AuthorizationService;
+import com.quincy.auth.service.AuthorizationCommonService;
 import com.quincy.sdk.Pagination;
 import com.quincy.sdk.Result;
 import com.quincy.sdk.helper.CommonHelper;
@@ -32,7 +32,7 @@ import com.quincy.sdk.helper.CommonHelper;
 @RequestMapping("/credit/margin")
 public class CreditMarginController {
 	@Autowired
-	private AuthorizationService authorizationService;
+	private AuthorizationCommonService authorizationService;
 	@Autowired
 	private CompanyService companyService;
 	@Autowired
