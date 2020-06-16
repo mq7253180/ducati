@@ -18,14 +18,14 @@ public class SpringBootConfiguration {
 
     @PostConstruct
     public void init() {
-    		configuration.setSharedVariable("p", new PaginationTemplateDirectiveModelBean());
+    	configuration.setSharedVariable("p", new PaginationTemplateDirectiveModelBean());
     }
 
 //    @Bean
     public ServletRegistrationBean<HystrixMetricsStreamServlet> getServlet() {
-    		HystrixMetricsStreamServlet streamServlet =new HystrixMetricsStreamServlet();
+    	HystrixMetricsStreamServlet streamServlet =new HystrixMetricsStreamServlet();
         ServletRegistrationBean<HystrixMetricsStreamServlet> registrationBean = new ServletRegistrationBean<HystrixMetricsStreamServlet>(streamServlet);
-    		/*ServletRegistrationBean<HystrixMetricsStreamServlet> registrationBean = new ServletRegistrationBean<HystrixMetricsStreamServlet>();
+        /*ServletRegistrationBean<HystrixMetricsStreamServlet> registrationBean = new ServletRegistrationBean<HystrixMetricsStreamServlet>();
         registrationBean.setServlet(streamServlet);*/
         registrationBean.setEnabled(true);
         registrationBean.setLoadOnStartup(1);
