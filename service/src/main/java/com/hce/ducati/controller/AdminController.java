@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hce.ducati.ControllerUtils;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.mapper.UserMapper;
 import com.hce.ducati.service.UserService;
 import com.quincy.auth.annotation.PermissionNeeded;
+import com.quincy.auth.o.User;
 import com.quincy.auth.service.AuthorizationServerService;
 
 @Controller
@@ -30,15 +32,15 @@ public class AdminController {
 	@GetMapping("/reloadSession/user/id/{id}")
 	@ResponseBody
 	public void updateSessionByUserId(@PathVariable(required = true, name = "id")Long id) throws ClassNotFoundException, IOException {
-		UserEntity user = userService.find(id);
-		authorizationServerService.updateSession(user);
+		UserEntity userEntity = userService.find(id);
+		authorizationServerService.updateSession(ControllerUtils.toUser(userEntity));
 	}
 
 	@PermissionNeeded("reloadSessionsByRole")
 	@GetMapping("/reloadSession/role/{roleId}")
 	@ResponseBody
 	public void updateSessionByRole(@PathVariable(required = true, name = "roleId")Long roleId) throws ClassNotFoundException, IOException {
-		List<UserEntity> users = userMapper.findUsers(roleId);
+		List<User> users = userMapper.findUsers(roleId);
 		authorizationServerService.updateSession(users);
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hce.ducati.ControllerUtils;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.UserService;
 import com.quincy.auth.VCodeAuthControllerSupport;
@@ -21,8 +22,8 @@ public class AuthorizationController extends VCodeAuthControllerSupport {
 
 	@Override
 	protected User findUser(String username, Client client) {
-		UserEntity user = userService.find(username);
-		return user;
+		UserEntity userEntity = userService.find(username);
+		return ControllerUtils.toUser(userEntity);
 	}
 
 	@Override

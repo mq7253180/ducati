@@ -1,6 +1,5 @@
 package com.hce.ducati.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,7 +13,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.quincy.auth.o.User;
 
 import lombok.Data;
 
@@ -23,8 +21,7 @@ import lombok.Data;
 @DynamicUpdate
 @EntityListeners({AuditingEntityListener.class})
 @Entity(name = "s_user")
-public class UserEntity implements Serializable, User {
-	private static final long serialVersionUID = 3068671906589197352L;
+public class UserEntity {
 	@Id
 	@Column(name="id")
 	private Long id;
