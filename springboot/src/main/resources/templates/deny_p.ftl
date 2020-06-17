@@ -5,6 +5,6 @@
 		<title><@i18n key="title.error"/></title>
 	</head>
 	<body>
-		<font color="red"><@i18n key="status.error.403"/>[${denied_permission}]</font><br/>
+		<font color="red"><@i18n key="status.error.403"/>[${denied_permission?if_exists}]</font><br/>
 	</body>
 </html>
