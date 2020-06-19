@@ -12,6 +12,8 @@ import com.quincy.sdk.entity.Region;
 import redis.clients.jedis.JedisCluster;
 
 public interface XxxService {
+	public int updateResion(Long id, String cnName);
+	public int updateResion2(String enName, String cnName);
 	public String testZk(String arg, ZooKeeper zk, long duration) throws KeeperException, InterruptedException;
 	public String testTx(String s, Params p);
 	public String testTx0(String s, Params p);

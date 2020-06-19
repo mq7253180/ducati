@@ -74,6 +74,20 @@ public class XxxController {
 	@Autowired
 	private UserService userService;
 
+	@RequestMapping("/updateRegion")
+	@ResponseBody
+	public int updateRegion(@RequestParam(required = true, value = "id")Long id, @RequestParam(required = true, value = "cnName")String cnName) {
+		int effacted = xxxService.updateResion(id, cnName);
+		return effacted;
+	}
+
+	@RequestMapping("/updateRegion2")
+	@ResponseBody
+	public int updateRegion2(@RequestParam(required = true, value = "enName")String enName, @RequestParam(required = true, value = "cnName")String cnName) {
+		int effacted = xxxService.updateResion2(enName, cnName);
+		return effacted;
+	}
+
 	@OAuth2Resource("usrInfo")
 	@RequestMapping("/usrinfo")
 	@ResponseBody

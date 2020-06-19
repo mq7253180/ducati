@@ -10,4 +10,6 @@ import com.quincy.sdk.entity.Region;
 @Repository
 public interface RegionMapper {
 	public List<Region> find(@Param("suffix")String suffix);
+	public int update(@Param("id")Long id, @Param("cnName")String cnName);
+	public int update2(@Param("enName")String enName, @Param("cnName")String cnName);
 }

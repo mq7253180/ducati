@@ -8,4 +8,18 @@
 	<select id="find" resultMap="regionResultMap">
 		SELECT en_name,cn_name FROM b_regi${suffix}
 	</select>
+	<update id="update">
+		UPDATE b_region 
+		<set>
+			cn_name = #{cnName, jdbcType=VARCHAR}
+		</set>
+		WHERE id=#{id, jdbcType=INTEGER}
+	</update>
+	<update id="update2">
+		UPDATE b_region 
+		<set>
+			cn_name = #{cnName, jdbcType=VARCHAR}
+		</set>
+		WHERE en_name LIKE CONCAT('%', #{enName, jdbcType=VARCHAR}, '%')
+	</update>
 </mapper>

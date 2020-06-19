@@ -52,6 +52,20 @@ public class XxxServiceImpl implements XxxService {
 	@Reference(version = "1.0.0")
 	private DucatiClient ducatiClient;
 
+	@Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
+	public int updateResion(Long id, String cnName) {
+		int effacted = regionMapper.update(id, cnName);
+		return effacted;
+	}
+
+	@Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
+	public int updateResion2(String enName, String cnName) {
+		int effacted = regionMapper.update2(enName, cnName);
+		return effacted;
+	}
+
 	@DurationLog
 //	@Cache(expire = 30)
 //	@Synchronized("xxx")
