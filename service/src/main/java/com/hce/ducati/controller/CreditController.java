@@ -27,7 +27,6 @@ import com.hce.ducati.service.CompanyService;
 import com.hce.ducati.service.CreditService;
 import com.quincy.auth.annotation.PermissionNeeded;
 import com.quincy.auth.o.DSession;
-import com.quincy.auth.service.AuthorizationCommonService;
 import com.quincy.sdk.Result;
 import com.quincy.sdk.helper.CommonHelper;
 
@@ -38,8 +37,6 @@ public class CreditController {
 	private CompanyService companyService;
 	@Autowired
 	private CreditService creditService;
-	@Autowired
-	private AuthorizationCommonService authorizationService;
 
 	@PermissionNeeded("creditSeach")
 	@GetMapping(value = "")
@@ -55,8 +52,7 @@ public class CreditController {
 	@PermissionNeeded("creditAdd")
 	@PostMapping(value = "/add")
 	@ResponseBody
-	public Result add(HttpServletRequest request, Credit credit) throws Exception {
-		DSession session = authorizationService.getSession(request);
+	public Result add(DSession session, Credit credit) throws Exception {
 		credit.setUserId(session.getUser().getId());
 		Credit permanent = creditService.add(credit);
 		Result result = new Result();
@@ -89,8 +85,7 @@ public class CreditController {
 	@PermissionNeeded("creditUpdateAmount")
 	@PostMapping(value = "/update/amount")
 	@ResponseBody
-	public void updateAmount(HttpServletRequest request, Long id, BigDecimal amount) throws Exception {
-		DSession session = authorizationService.getSession(request);
+	public void updateAmount(DSession session, Long id, BigDecimal amount) throws Exception {
 		creditService.update(id, amount, session.getUser().getId());
 	}
 

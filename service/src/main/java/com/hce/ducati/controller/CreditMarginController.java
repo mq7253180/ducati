@@ -23,7 +23,6 @@ import com.hce.ducati.service.CompanyService;
 import com.hce.ducati.service.CreditMarginService;
 import com.quincy.auth.annotation.PermissionNeeded;
 import com.quincy.auth.o.DSession;
-import com.quincy.auth.service.AuthorizationCommonService;
 import com.quincy.sdk.Pagination;
 import com.quincy.sdk.Result;
 import com.quincy.sdk.helper.CommonHelper;
@@ -31,8 +30,6 @@ import com.quincy.sdk.helper.CommonHelper;
 @Controller
 @RequestMapping("/credit/margin")
 public class CreditMarginController {
-	@Autowired
-	private AuthorizationCommonService authorizationService;
 	@Autowired
 	private CompanyService companyService;
 	@Autowired
@@ -61,8 +58,7 @@ public class CreditMarginController {
 	@PermissionNeeded("creditMarginAdd")
 	@PostMapping(value = "/add")
 	@ResponseBody
-	public Result add(HttpServletRequest request, CreditMargin margin) throws Exception {
-		DSession session = authorizationService.getSession(request);
+	public Result add(DSession session, CreditMargin margin) throws Exception {
 		margin.setUserId(session.getUser().getId());
 		CreditMargin permanent = creditMarginService.add(margin);
 		Result result = new Result();
@@ -79,8 +75,7 @@ public class CreditMarginController {
 	@PermissionNeeded("creditMarginUpdate")
 	@PostMapping(value = "/update")
 	@ResponseBody
-	public Result update(HttpServletRequest request, CreditMargin margin) throws Exception {
-		DSession session = authorizationService.getSession(request);
+	public Result update(DSession session, CreditMargin margin) throws Exception {
 		margin.setUserId(session.getUser().getId());
 		return creditMarginService.update(margin);
 	}
@@ -88,8 +83,7 @@ public class CreditMarginController {
 	@PermissionNeeded("creditMarginAudit")
 	@PostMapping(value = "/audit")
 	@ResponseBody
-	public Result audit(HttpServletRequest request, CreditMargin margin) throws Exception {
-		DSession session = authorizationService.getSession(request);
+	public Result audit(DSession session, CreditMargin margin) throws Exception {
 		return creditMarginService.audit(margin.getId(), session.getUser().getId(), margin.getCurrency(), margin.getAmount());
 	}
 
