@@ -88,6 +88,32 @@ public class XxxController {
 		return effacted;
 	}
 
+	@RequestMapping("/updateRegion3")
+	@ResponseBody
+	public int updateRegion3() {
+		int effacted = xxxService.updateResion3();
+		return effacted;
+	}
+
+	@RequestMapping("/updateRegion4")
+	@ResponseBody
+	public int updateRegion4(@RequestParam(required = true, value = "enName")String enName) {
+		int effacted = xxxService.updateResion4(enName);
+		return effacted;
+	}
+
+	@GetMapping("/regions2")
+	@ResponseBody
+	public List<Region> findRegions2() {
+		return xxxService.findRegions2();
+	}
+
+	@GetMapping("/region")
+	@ResponseBody
+	public Region findRegion(@RequestParam(required = true, value = "id")Long id) {
+		return xxxService.findRegions3(id);
+	}
+
 	@OAuth2Resource("usrInfo")
 	@RequestMapping("/usrinfo")
 	@ResponseBody

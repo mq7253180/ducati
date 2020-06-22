@@ -66,6 +66,40 @@ public class XxxServiceImpl implements XxxService {
 		return effacted;
 	}
 
+	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
+	public int updateResion3() {
+		int effacted = regionMapper.update3();
+		return effacted;
+	}
+
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
+	public int updateResion4(String enName) {
+		int effacted = regionMapper.update4(enName);
+		return effacted;
+	}
+
+	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
+	public List<Region> findRegions2() {
+		List<Region> list = regionMapper.find2();
+		log.info("========="+list.size());
+		list = regionMapper.find2();
+		log.info("========="+list.size());
+		return list;
+	}
+
+	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
+	public Region findRegions3(Long id) {
+		Region  region = regionMapper.find3(id);
+		log.info("========="+region.getCnName());
+		region = regionMapper.find3(id);
+		log.info("========="+region.getCnName());
+		return region;
+	}
+
 	@DurationLog
 //	@Cache(expire = 30)
 //	@Synchronized("xxx")
@@ -137,8 +171,8 @@ public class XxxServiceImpl implements XxxService {
 		pp[4] = p;
 		zzzService.callDubbo(987l, null);
 		zzzService.callDubbo();
-//		zzzService.updateDB(s, p);
-//		zzzService.callHttp(321, new int[] {1, 5, 8}, pp);
+		zzzService.updateDB(s, p);
+		zzzService.callHttp(321, new int[] {1, 5, 8}, pp);
 		return "XXX";
 	}
 

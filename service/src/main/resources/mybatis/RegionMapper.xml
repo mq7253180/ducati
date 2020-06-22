@@ -8,6 +8,12 @@
 	<select id="find" resultMap="regionResultMap">
 		SELECT en_name,cn_name FROM b_regi${suffix}
 	</select>
+	<select id="find2" resultMap="regionResultMap">
+		SELECT en_name,cn_name FROM b_region WHERE sort BETWEEN 1 AND 10
+	</select>
+	<select id="find3" resultMap="regionResultMap">
+		SELECT en_name,cn_name FROM b_region WHERE id=#{id, jdbcType=INTEGER}
+	</select>
 	<update id="update">
 		UPDATE b_region 
 		<set>
@@ -19,6 +25,20 @@
 		UPDATE b_region 
 		<set>
 			cn_name = #{cnName, jdbcType=VARCHAR}
+		</set>
+		WHERE en_name LIKE CONCAT('%', #{enName, jdbcType=VARCHAR}, '%')
+	</update>
+	<update id="update3">
+		UPDATE b_region 
+		<set>
+			cn_name = CONCAT(cn_name, 'xxx')
+		</set>
+		WHERE sort BETWEEN 1 AND 10
+	</update>
+	<update id="update4">
+		UPDATE b_region 
+		<set>
+			cn_name = CONCAT(cn_name, 'www') 
 		</set>
 		WHERE en_name LIKE CONCAT('%', #{enName, jdbcType=VARCHAR}, '%')
 	</update>

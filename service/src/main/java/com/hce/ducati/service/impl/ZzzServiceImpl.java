@@ -24,22 +24,22 @@ public class ZzzServiceImpl implements ZzzService {
 		log.info("==============CALL_HTTP");
 	}
 
-	@AtomicOperational(confirm = "confirmUpdateDB")
-//	@AtomicOperational(confirm = "confirmUpdateDB", cancel = "cancelUpdateDB")
+//	@AtomicOperational(confirm = "confirmUpdateDB")
+	@AtomicOperational(confirm = "confirmUpdateDB", cancel = "cancelUpdateDB")
 	@Override
 	public void updateDB(String s, Params p) {
 		log.info("==============UPDATE_DB");
 	}
 
-	@AtomicOperational(confirm = "confirmCallDubbo")
-//	@AtomicOperational(confirm = "confirmCallDubbo", cancel = "cancelCallDubbo")
+//	@AtomicOperational(confirm = "confirmCallDubbo")
+	@AtomicOperational(confirm = "confirmCallDubbo", cancel = "cancelCallDubbo")
 	@Override
 	public void callDubbo(Long id, String val) {
 		log.info("==============CALL_DUBBO");
 	}
 
-	@AtomicOperational(confirm = "confirmCallDubbo")
-//	@AtomicOperational(confirm = "confirmCallDubbo", cancel = "cancelCallDubbo")
+//	@AtomicOperational(confirm = "confirmCallDubbo")
+	@AtomicOperational(confirm = "confirmCallDubbo", cancel = "cancelCallDubbo")
 	@Override
 	public void callDubbo() {
 		log.info("==============CALL_DUBBO");
@@ -56,17 +56,17 @@ public class ZzzServiceImpl implements ZzzService {
 			if(p!=null)
 				log.info("CONFIRM_CALL_HTTP--------------{}---{}", p.getA(), p.getB());
 		}
-		String html = HttpClientHelper.get("http://jlcedu.maqiangcgq.com", null);
-		log.info(html);
+//		String html = HttpClientHelper.get("http://jlcedu.maqiangcgq.com", null);
+//		log.info(html);
 	}
 
 	public void confirmUpdateDB(String s, Params p) {
 		if(true)
 			throw new RuntimeException("测试提交失败");
-		log.info("CONFIRM_UPDATE_DB=============={}--------{}", s, p.getB());
+		/*log.info("CONFIRM_UPDATE_DB=============={}--------{}", s, p.getB());
 		Company c= companyRepository.findById(1l).get();
 		c.setCnName(c.getCnName()+"-"+p.getA()+"-"+p.getB());
-		companyRepository.save(c);
+		companyRepository.save(c);*/
 	}
 
 	public void confirmCallDubbo(Long id, String val) {
@@ -76,8 +76,8 @@ public class ZzzServiceImpl implements ZzzService {
 	}
 
 	public void confirmCallDubbo() {
-		/*if(true)
-			throw new RuntimeException("测试提交失败wwwww");*/
+//		if(true)
+//			throw new RuntimeException("测试提交失败wwwww");
 		log.info("==============CONFIRM_CALL_DUBBO");
 	}
 
@@ -95,15 +95,15 @@ public class ZzzServiceImpl implements ZzzService {
 		/*if(true)
 			throw new RuntimeException("测试撤消失败");*/
 		log.info("CANCEL_UPDATE_DB=============={}--------{}", s, p.getB());
-		Company c= companyRepository.findById(1l).get();
+		/*Company c= companyRepository.findById(1l).get();
 		c.setCnName(c.getCnName().substring(0, 2));
-		companyRepository.save(c);
+		companyRepository.save(c);*/
 	}
 
 	public void cancelCallDubbo(Long id, String val) {
-		log.info("==============CANCEL_CALL_DUBBO");
-		if(true)
-			throw new RuntimeException("测试撤消失败");
+		log.info("==============CANCEL_CALL_DUBBO_WITH_PARAMS");
+//		if(true)
+//			throw new RuntimeException("测试撤消失败");
 	}
 
 	public void cancelCallDubbo() {

@@ -14,12 +14,16 @@ import redis.clients.jedis.JedisCluster;
 public interface XxxService {
 	public int updateResion(Long id, String cnName);
 	public int updateResion2(String enName, String cnName);
+	public int updateResion3();
+	public int updateResion4(String enName);
 	public String testZk(String arg, ZooKeeper zk, long duration) throws KeeperException, InterruptedException;
 	public String testTx(String s, Params p);
 	public String testTx0(String s, Params p);
 	public void testRedisCluster(String arg0, JedisCluster jedis, String arg1, JedisCluster jedis2, String arg2);
 	public void testDeprecatedSynchronized(long millis) throws InterruptedException;
 	public List<Region> findRegions();
+	public List<Region> findRegions2();
+	public Region findRegions3(Long id);
 	public String classInfo();
 	public int update(Long id, String mobilePhone);
 	public List<Enterprise> select(Long id);
