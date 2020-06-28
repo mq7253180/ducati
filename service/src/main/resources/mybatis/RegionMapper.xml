@@ -12,6 +12,9 @@
 	<select id="findByRange" resultMap="regionResultMap">
 		SELECT id,en_name,cn_name FROM b_region WHERE sort BETWEEN #{start, jdbcType=INTEGER} AND #{end, jdbcType=INTEGER}
 	</select>
+	<select id="findByRangeAndId" resultMap="regionResultMap">
+		SELECT id,en_name,cn_name FROM b_region WHERE id=#{id, jdbcType=INTEGER} AND sort BETWEEN #{start, jdbcType=INTEGER} AND #{end, jdbcType=INTEGER}
+	</select>
 	<select id="findById" resultMap="regionResultMap">
 		SELECT id,en_name,cn_name FROM b_region WHERE id=#{id, jdbcType=INTEGER}
 	</select>

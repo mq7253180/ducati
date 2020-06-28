@@ -89,16 +89,22 @@ public class XxxServiceImpl implements XxxService {
 				log.info("--------"+r.getCnName());
 		}
 		log.info("===================");
-		/*list = regionMapper.findByRange(3, 10);
+		list = regionMapper.findByRange(3, 10);
+		for(Region r:list) {
+			if(r.getId()==3||r.getId()==4||r.getId()==6)
+				log.info("--------"+r.getCnName());
+		}
+		Enterprise e = enterpriseMapper.findOne(15l);
+		log.info("------------"+e.getName());
+		log.info("===================");
+		Region r = regionMapper.findByRangeAndId(3l, 1, 4);
+		log.info("------------"+r.getCnName());
+		/*log.info("===================");
+		list = regionMapper.findByRange(1, 4);
 		for(Region r:list) {
 			if(r.getId()==3||r.getId()==4)
 				log.info("--------"+r.getCnName());
 		}*/
-		list = regionMapper.findByRange(2, 4);
-		for(Region r:list) {
-			if(r.getId()==3||r.getId()==4)
-				log.info("--------"+r.getCnName());
-		}
 		return list;
 	}
 
