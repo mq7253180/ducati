@@ -80,24 +80,62 @@ public class XxxServiceImpl implements XxxService {
 		return effacted;
 	}
 
-	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
 	@Override
 	public List<Region> findRegions2() {
-		List<Region> list = regionMapper.find2();
-		log.info("========="+list.size());
-		list = regionMapper.find2();
-		log.info("========="+list.size());
+		List<Region> list = regionMapper.findByRange(1, 4);
+		for(Region r:list) {
+			if(r.getId()==3||r.getId()==4)
+				log.info("--------"+r.getCnName());
+		}
+		log.info("===================");
+		/*list = regionMapper.findByRange(3, 10);
+		for(Region r:list) {
+			if(r.getId()==3||r.getId()==4)
+				log.info("--------"+r.getCnName());
+		}*/
+		list = regionMapper.findByRange(2, 4);
+		for(Region r:list) {
+			if(r.getId()==3||r.getId()==4)
+				log.info("--------"+r.getCnName());
+		}
 		return list;
 	}
 
-	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
 	@Override
-	public Region findRegions3(Long id) {
-		Region  region = regionMapper.find3(id);
+	public Region findRegion2(Long id) {
+		Region  region = regionMapper.findById(id);
 		log.info("========="+region.getCnName());
-		region = regionMapper.find3(id);
+		region = regionMapper.findByCnName(region.getCnName());
+		if(region!=null)
+			log.info("========="+region.getCnName());
+		region = regionMapper.findById(id);
 		log.info("========="+region.getCnName());
 		return region;
+	}
+
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
+	public Region findRegion2(String cnName) {
+		Region region = regionMapper.findByCnName(cnName);
+		log.info("========="+region.getId());
+		region = regionMapper.findById(region.getId());
+		if(region!=null)
+			log.info("========="+region.getCnName());
+		region = regionMapper.findByCnName(cnName);
+		if(region!=null)
+			log.info("========="+region.getCnName());
+		return region;
+	}
+
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
+	public List<Region> findRegions4(Long id) {
+		Region  region = regionMapper.findById(id);
+		log.info("========="+region.getCnName());
+		List<Region> list = regionMapper.findByRange(1, 10);
+		return list;
 	}
 
 	@DurationLog

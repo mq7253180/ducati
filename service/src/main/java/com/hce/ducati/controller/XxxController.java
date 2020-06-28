@@ -102,6 +102,12 @@ public class XxxController {
 		return effacted;
 	}
 
+	@GetMapping("/regions4")
+	@ResponseBody
+	public List<Region> findRegions4(@RequestParam(required = true, value = "id")Long id) {
+		return xxxService.findRegions4(id);
+	}
+
 	@GetMapping("/regions2")
 	@ResponseBody
 	public List<Region> findRegions2() {
@@ -111,7 +117,13 @@ public class XxxController {
 	@GetMapping("/region")
 	@ResponseBody
 	public Region findRegion(@RequestParam(required = true, value = "id")Long id) {
-		return xxxService.findRegions3(id);
+		return xxxService.findRegion2(id);
+	}
+
+	@GetMapping("/region2")
+	@ResponseBody
+	public Region findRegion2(@RequestParam(required = true, value = "cnName")String cnName) {
+		return xxxService.findRegion2(cnName);
 	}
 
 	@OAuth2Resource("usrInfo")

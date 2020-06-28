@@ -2,17 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hce.ducati.mapper.RegionMapper" >
 	<resultMap id="regionResultMap" type="com.quincy.sdk.entity.Region">
+		<result column="id" property="id" jdbcType="INTEGER" />
 		<result column="en_name" property="enName" jdbcType="VARCHAR" />
 		<result column="cn_name" property="cnName" jdbcType="VARCHAR" />
 	</resultMap>
 	<select id="find" resultMap="regionResultMap">
-		SELECT en_name,cn_name FROM b_regi${suffix}
+		SELECT id,en_name,cn_name FROM b_regi${suffix}
 	</select>
-	<select id="find2" resultMap="regionResultMap">
-		SELECT en_name,cn_name FROM b_region WHERE sort BETWEEN 1 AND 10
+	<select id="findByRange" resultMap="regionResultMap">
+		SELECT id,en_name,cn_name FROM b_region WHERE sort BETWEEN #{start, jdbcType=INTEGER} AND #{end, jdbcType=INTEGER}
 	</select>
-	<select id="find3" resultMap="regionResultMap">
-		SELECT en_name,cn_name FROM b_region WHERE id=#{id, jdbcType=INTEGER}
+	<select id="findById" resultMap="regionResultMap">
+		SELECT id,en_name,cn_name FROM b_region WHERE id=#{id, jdbcType=INTEGER}
+	</select>
+	<select id="findByCnName" resultMap="regionResultMap">
+		SELECT id,en_name,cn_name FROM b_region WHERE cn_name=#{cnName, jdbcType=VARCHAR}
 	</select>
 	<update id="update">
 		UPDATE b_region 

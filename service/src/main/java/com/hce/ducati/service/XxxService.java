@@ -23,7 +23,9 @@ public interface XxxService {
 	public void testDeprecatedSynchronized(long millis) throws InterruptedException;
 	public List<Region> findRegions();
 	public List<Region> findRegions2();
-	public Region findRegions3(Long id);
+	public Region findRegion2(Long id);
+	public Region findRegion2(String cnName);
+	public List<Region> findRegions4(Long id);
 	public String classInfo();
 	public int update(Long id, String mobilePhone);
 	public List<Enterprise> select(Long id);
