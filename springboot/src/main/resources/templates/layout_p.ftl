@@ -40,7 +40,7 @@
 	                    <a class="nav-link dropdown-toggle no-caret" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                        <div class="media">
 	                            <div class="media-body">
-	                                <span>${dddsession.user.name}<i class="zmdi zmdi-chevron-down"></i></span>
+	                                <span>${xsession.user.name}<i class="zmdi zmdi-chevron-down"></i></span>
 	                            </div>
 	                        </div>
 	                    </a>
@@ -64,7 +64,7 @@
 	            <div class="nicescroll-bar">
 	                <div class="navbar-nav-wrap">
 	                    <ul class="navbar-nav flex-column">
-	                    	<#list dddsession.menus as menu>
+	                    	<#list xsession.menus as menu>
 	                        <li class="nav-item active">
 	                            <a class="nav-link" href="javascript:void(0);" data-toggle="collapse" data-target="#menu_${menu.id}">
 	                                <span class="feather-icon"><i data-feather="${menu.icon}"></i></span>

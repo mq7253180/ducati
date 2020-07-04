@@ -13,7 +13,7 @@ public interface UserService {
 	public UserEntity update(UserEntity vo);
 	public UserEntity find(String loginName);
 	public UserEntity find(Long id);
-//	public DSession getSession(Long userId);
+//	public XSession getSession(Long userId);
 	public List<Role> findAllRoles();
 	public List<UserEntity> findAllUsers();
 	public OAuth2Code findOAuth2Info(Long userId, Long clientSystemId);
