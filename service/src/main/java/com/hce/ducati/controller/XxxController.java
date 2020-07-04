@@ -102,6 +102,27 @@ public class XxxController {
 		return effacted;
 	}
 
+	@RequestMapping("/updateRegion4x")
+	@ResponseBody
+	public int updateRegion4x(@RequestParam(required = true, value = "enName")String enName) {
+		int effacted = xxxService.updateResion4x(enName);
+		return effacted;
+	}
+
+	@RequestMapping("/updateRegion4xx")
+	@ResponseBody
+	public int updateRegion4xx(@RequestParam(required = true, value = "enName")String enName) {
+		int effacted = xxxService.updateResion4xx(enName);
+		return effacted;
+	}
+
+	@RequestMapping("/updateRegion5")
+	@ResponseBody
+	public int updateRegion5(@RequestParam(required = true, value = "enName")String enName) {
+		int effacted = xxxService.updateResion5(enName);
+		return effacted;
+	}
+
 	@GetMapping("/regions4")
 	@ResponseBody
 	public List<Region> findRegions4(@RequestParam(required = true, value = "id")Long id) {

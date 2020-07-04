@@ -49,4 +49,25 @@
 		</set>
 		WHERE en_name LIKE CONCAT('%', #{enName, jdbcType=VARCHAR}, '%')
 	</update>
+	<update id="update4x">
+		UPDATE b_region 
+		<set>
+			cn_name = CONCAT(cn_name, 'qqq') 
+		</set>
+		WHERE en_name=#{enName, jdbcType=VARCHAR}
+	</update>
+	<update id="update4xx">
+		UPDATE b_region 
+		<set>
+			en_name = CONCAT(en_name, 'qqq') 
+		</set>
+		WHERE en_name=#{enName, jdbcType=VARCHAR}
+	</update>
+	<update id="update5">
+		UPDATE b_region 
+		<set>
+			cn_name = CONCAT(cn_name, 'eee') 
+		</set>
+		WHERE en_name LIKE CONCAT(#{enName, jdbcType=VARCHAR}, '%')
+	</update>
 </mapper>

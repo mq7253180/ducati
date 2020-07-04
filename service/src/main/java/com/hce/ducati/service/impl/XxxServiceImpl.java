@@ -73,10 +73,31 @@ public class XxxServiceImpl implements XxxService {
 		return effacted;
 	}
 
-	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
 	@Override
 	public int updateResion4(String enName) {
 		int effacted = regionMapper.update4(enName);
+		return effacted;
+	}
+
+	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
+	public int updateResion4x(String enName) {
+		int effacted = regionMapper.update4x(enName);
+		return effacted;
+	}
+
+	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
+	public int updateResion4xx(String enName) {
+		int effacted = regionMapper.update4xx(enName);
+		return effacted;
+	}
+
+	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
+	public int updateResion5(String enName) {
+		int effacted = regionMapper.update5(enName);
 		return effacted;
 	}
 
@@ -90,21 +111,30 @@ public class XxxServiceImpl implements XxxService {
 		}
 		log.info("===================");
 		list = regionMapper.findByRange(3, 10);
+		log.info("SIZE------------"+list.size());
 		for(Region r:list) {
 			if(r.getId()==3||r.getId()==4||r.getId()==6)
 				log.info("--------"+r.getCnName());
 		}
-		Enterprise e = enterpriseMapper.findOne(15l);
+		/*Enterprise e = enterpriseMapper.findOne(15l);
 		log.info("------------"+e.getName());
 		log.info("===================");
-		Region r = regionMapper.findByRangeAndId(3l, 1, 4);
-		log.info("------------"+r.getCnName());
-		/*log.info("===================");
-		list = regionMapper.findByRange(1, 4);
+		Region region = regionMapper.findByRangeAndId(3l, 1, 4);
+		log.info("------------"+region.getCnName());*/
+		log.info("===================");
+		list = regionMapper.findByRange(3, 10);
+		log.info("SIZE------------"+list.size());
 		for(Region r:list) {
 			if(r.getId()==3||r.getId()==4)
 				log.info("--------"+r.getCnName());
-		}*/
+		}
+		log.info("===================");
+		list = regionMapper.findByRange(2, 10);
+		log.info("SIZE------------"+list.size());
+		for(Region r:list) {
+			if(r.getId()==3||r.getId()==4)
+				log.info("--------"+r.getCnName());
+		}
 		return list;
 	}
 
@@ -126,12 +156,12 @@ public class XxxServiceImpl implements XxxService {
 	public Region findRegion2(String cnName) {
 		Region region = regionMapper.findByCnName(cnName);
 		log.info("========="+region.getId());
-		region = regionMapper.findById(region.getId());
+		/*region = regionMapper.findById(region.getId());
 		if(region!=null)
-			log.info("========="+region.getCnName());
+			log.info("========="+region.getCnName());*/
 		region = regionMapper.findByCnName(cnName);
 		if(region!=null)
-			log.info("========="+region.getCnName());
+			log.info("========="+region.getId());
 		return region;
 	}
 
