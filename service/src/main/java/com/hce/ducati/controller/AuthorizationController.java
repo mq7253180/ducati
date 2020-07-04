@@ -3,7 +3,6 @@ package com.hce.ducati.controller;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,11 +29,9 @@ public class AuthorizationController extends VCodeAuthControllerSupport {
 	protected User findUser(String username, Client client) {
 		UserEntity userEntity = userService.find(username);
 		User user = ControllerUtils.toUser(userEntity);
-		MyParams myParams = new MyParams();
-		myParams.setXxx("wwwzzz");
-		Map<String, Serializable> attributes = new HashMap<String, Serializable>(2);
-		attributes.put("myParams", myParams);
-		user.setAttributes(attributes);
+//		user.setCurrencyAccounts(new HashMap<String, BigDecimal>(2));
+		user.setAttributes(new HashMap<String, Serializable>(2));
+		user.getAttributes().put("myParams", new MyParams().setXxx("wwwqqq"));
 		return user;
 	}
 

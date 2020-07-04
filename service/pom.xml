@@ -111,9 +111,9 @@
 		    <version>5.5.13</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.maqiangcgq</groupId>
-		    <artifactId>common-o</artifactId>
-		    <version>0.0.1</version>
+		    <groupId>com.hce</groupId>
+		    <artifactId>ducati-common-o</artifactId>
+		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>
     </dependencies>
 </project>

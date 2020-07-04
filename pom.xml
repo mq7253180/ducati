@@ -154,6 +154,7 @@
 		</profile>
 	</profiles>
 	<modules>
+		<module>common-o</module>
 		<module>service</module>
 		<module>springboot</module>
 		<module>client</module>
