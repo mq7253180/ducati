@@ -1,6 +1,9 @@
 package com.hce.ducati.controller;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +17,7 @@ import com.hce.ducati.service.UserService;
 //import com.quincy.auth.SessionAuthControllerSupport;
 import com.quincy.auth.VCodeAuthControllerSupport;
 import com.quincy.auth.o.User;
+import com.quincy.o.MyParams;
 import com.quincy.sdk.Client;
 
 @Controller
@@ -25,7 +29,13 @@ public class AuthorizationController extends VCodeAuthControllerSupport {
 	@Override
 	protected User findUser(String username, Client client) {
 		UserEntity userEntity = userService.find(username);
-		return ControllerUtils.toUser(userEntity);
+		User user = ControllerUtils.toUser(userEntity);
+		MyParams myParams = new MyParams();
+		myParams.setXxx("wwwzzz");
+		Map<String, Serializable> attributes = new HashMap<String, Serializable>(2);
+		attributes.put("myParams", myParams);
+		user.setAttributes(attributes);
+		return user;
 	}
 
 	@Override
