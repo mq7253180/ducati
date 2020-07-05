@@ -16,6 +16,7 @@ import com.hce.ducati.service.UserService;
 //import com.quincy.auth.SessionAuthControllerSupport;
 import com.quincy.auth.VCodeAuthControllerSupport;
 import com.quincy.auth.o.User;
+import com.quincy.o.AttributeKeys;
 import com.quincy.o.MyParams;
 import com.quincy.sdk.Client;
 
@@ -31,7 +32,7 @@ public class AuthorizationController extends VCodeAuthControllerSupport {
 		User user = ControllerUtils.toUser(userEntity);
 //		user.setCurrencyAccounts(new HashMap<String, BigDecimal>(2));
 		user.setAttributes(new HashMap<String, Serializable>(2));
-		user.getAttributes().put("myParams", new MyParams().setXxx("wwwqqq"));
+		user.getAttributes().put(AttributeKeys.MY_PARAMS, new MyParams().setXxx("wwwqqq"));
 		return user;
 	}
 
