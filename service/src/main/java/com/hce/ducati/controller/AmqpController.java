@@ -97,7 +97,9 @@ public class AmqpController {
                 channel.basicAck(deliveryTag, false);
 			}
 		};
-		channel.basicConsume(QUEUE_NAME, true, consumer);//autoAck: 是否自动确认消息, true自动确认, false不自动要手动调用
+		String consumerTag = channel.basicConsume(QUEUE_NAME, true, consumer);//Push模式: autoAck: 是否自动确认消息, true自动确认, false不自动要手动调用
+		log.info("CONSUMER_TAG================{}", consumerTag);
+//		GetResponse getResponse = channel.basicGet(QUEUE_NAME, true);//Pull模式
 	}
 
 	@PreDestroy
