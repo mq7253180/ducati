@@ -32,11 +32,10 @@ public class RabbitMQTest {
 			conn = connectionFactory.newConnection();
 			channel = conn.createChannel();
 			//开启发送方确认模式
-//			channel.confirmSelect();
-			channel.basicPublish(EXCHANGE_NAME, ROUTING_KEY, null, "wwwttt".getBytes());
-			//普通Confirm模式
-			/*if(channel.waitForConfirms())
-			    log.warn("======================消息发送成功" );
+			channel.confirmSelect();
+			do {
+				channel.basicPublish(EXCHANGE_NAME, ROUTING_KEY, null, "wwwttt".getBytes());
+			} while(!channel.waitForConfirms());
 			//批量Confirm模式
 			channel.waitForConfirmsOrDie(); //直到所有信息都发布，只要有一个未确认就会IOException
 			log.warn("======================全部执行完成");
@@ -51,7 +50,7 @@ public class RabbitMQTest {
 				public void handleNack(long deliveryTag, boolean multiple) throws IOException {
 					log.warn("======================未确认消息，标识：{}", deliveryTag);
 				}
-			});*/
+			});
 		} finally {
 			if(channel!=null)
 				channel.close();
