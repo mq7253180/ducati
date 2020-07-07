@@ -33,15 +33,6 @@ public class RabbitMQTest {
 			channel = conn.createChannel();
 			//开启发送方确认模式
 			channel.confirmSelect();
-			boolean waitForConfirms = true;
-			do {
-				if(!waitForConfirms)
-					Thread.sleep(500);
-				channel.basicPublish(EXCHANGE_NAME, ROUTING_KEY, null, "wwwttt".getBytes());
-			} while(!(waitForConfirms = channel.waitForConfirms()));
-			//批量Confirm模式
-			channel.waitForConfirmsOrDie(); //直到所有信息都发布，只要有一个未确认就会IOException
-			log.warn("======================全部执行完成");
 			//获取broker传回的信息
 			channel.addConfirmListener(new ConfirmListener() {
 				@Override
@@ -54,6 +45,15 @@ public class RabbitMQTest {
 					log.warn("======================未确认消息，标识：{}", deliveryTag);
 				}
 			});
+			boolean waitForConfirms = true;
+			do {
+				if(!waitForConfirms)
+					Thread.sleep(500);
+				channel.basicPublish(EXCHANGE_NAME, ROUTING_KEY, null, "wwwttt".getBytes());
+			} while(!(waitForConfirms = channel.waitForConfirms()));
+			//批量Confirm模式
+			channel.waitForConfirmsOrDie(); //直到所有信息都发布，只要有一个未确认就会IOException
+			log.warn("======================全部执行完成");
 		} finally {
 			if(channel!=null)
 				channel.close();

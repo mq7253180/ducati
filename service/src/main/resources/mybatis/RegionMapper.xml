@@ -47,7 +47,7 @@
 		<set>
 			cn_name = CONCAT(cn_name, 'www') 
 		</set>
-		WHERE en_name LIKE CONCAT('%', #{enName, jdbcType=VARCHAR}, '%')
+		WHERE en_name LIKE CONCAT(#{enName, jdbcType=VARCHAR}, '%')
 	</update>
 	<update id="update4x">
 		UPDATE b_region 
@@ -59,9 +59,9 @@
 	<update id="update4xx">
 		UPDATE b_region 
 		<set>
-			en_name = CONCAT(en_name, 'qqq') 
+			en_name = CONCAT(en_name, 'zzz') 
 		</set>
-		WHERE en_name=#{enName, jdbcType=VARCHAR}
+		WHERE en_name LIKE CONCAT('%', #{enName, jdbcType=VARCHAR}, '%')
 	</update>
 	<update id="update5">
 		UPDATE b_region 
