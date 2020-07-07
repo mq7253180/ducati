@@ -33,9 +33,12 @@ public class RabbitMQTest {
 			channel = conn.createChannel();
 			//开启发送方确认模式
 			channel.confirmSelect();
+			boolean waitForConfirms = true;
 			do {
+				if(!waitForConfirms)
+					Thread.sleep(500);
 				channel.basicPublish(EXCHANGE_NAME, ROUTING_KEY, null, "wwwttt".getBytes());
-			} while(!channel.waitForConfirms());
+			} while(!(waitForConfirms = channel.waitForConfirms()));
 			//批量Confirm模式
 			channel.waitForConfirmsOrDie(); //直到所有信息都发布，只要有一个未确认就会IOException
 			log.warn("======================全部执行完成");
