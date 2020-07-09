@@ -12,14 +12,14 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class RabbitMQTest {
-	private final static String QUEUE_NAME = "benelli.test.pull";
-//	private final static String QUEUE_NAME = "benelli.test.push";
-//	private final static String EXCHANGE_NAME = "benelli.direct";
-//	private final static String ROUTING_KEY = QUEUE_NAME.substring(QUEUE_NAME.lastIndexOf(".")+1, QUEUE_NAME.length());
+//	private final static String QUEUE_NAME = "benelli.test.pull";
+	private final static String QUEUE_NAME = "benelli.test.push";
+	private final static String EXCHANGE_NAME = "benelli.direct";
+	private final static String ROUTING_KEY = QUEUE_NAME.substring(QUEUE_NAME.lastIndexOf(".")+1, QUEUE_NAME.length());
 //	private final static String EXCHANGE_NAME = "benelli.fanout";
 //	private final static String ROUTING_KEY = "xxx";
-	private final static String EXCHANGE_NAME = "benelli.topic";
-	private final static String ROUTING_KEY = "benelli.test.#";
+//	private final static String EXCHANGE_NAME = "benelli.topic";
+//	private final static String ROUTING_KEY = "benelli.test.#";
 	private final static ConnectionFactory connectionFactory = new ConnectionFactory();
 
 	public static void main(String[] args) throws IOException, TimeoutException, InterruptedException {
