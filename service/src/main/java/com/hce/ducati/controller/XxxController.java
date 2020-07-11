@@ -190,9 +190,11 @@ public class XxxController {
 	}
 
 	@HystrixCommand(fallbackMethod = "hystrixFailure", commandProperties = {
-//			@HystrixProperty(name="execution.isolation.strategy", value="SEMAPHORE"), 
-			@HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds", value="2000"), 
-			@HystrixProperty(name="circuitBreaker.requestVolumeThreshold", value="60")
+			@HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds", value="1000"), 
+			@HystrixProperty(name="execution.isolation.thread.interruptOnTimeout", value="false"), 
+			@HystrixProperty(name="circuitBreaker.requestVolumeThreshold", value="20"), 
+			@HystrixProperty(name="circuitBreaker.errorThresholdPercentage", value="50"), 
+			@HystrixProperty(name="circuitBreaker.sleepWindowInMilliseconds", value="5000")
 	})
 	@GetMapping("/hystrix/normal")
 	@ResponseBody
