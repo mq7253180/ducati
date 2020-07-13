@@ -474,6 +474,14 @@ public class XxxController {
 		return "/content/test_permission";
 	}
 
+	@RequestMapping("/ttt")
+	@ResponseBody
+	public Result ttt() {
+		Result result = new Result();
+		result.setData("DUCATI");
+		return result;
+	}
+
 	@GetMapping("/test/request")
 	@ResponseBody
 	public void testRequest(HttpServletRequest request) {
