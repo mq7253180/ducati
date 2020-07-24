@@ -96,8 +96,8 @@ public class XxxServiceImpl implements XxxService {
 
 	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
 	@Override
-	public int updateResion5(String enName) {
-		int effacted = regionMapper.update5(enName);
+	public int updateResion5(Integer sort) {
+		int effacted = regionMapper.update5(sort);
 		return effacted;
 	}
 

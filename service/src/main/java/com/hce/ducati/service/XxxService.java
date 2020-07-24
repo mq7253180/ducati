@@ -18,7 +18,7 @@ public interface XxxService {
 	public int updateResion4(String enName);
 	public int updateResion4x(String enName);
 	public int updateResion4xx(String enName);
-	public int updateResion5(String enName);
+	public int updateResion5(Integer sort);
 	public String testZk(String arg, ZooKeeper zk, long duration) throws KeeperException, InterruptedException;
 	public String testTx(String s, Params p);
 	public String testTx0(String s, Params p);

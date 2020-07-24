@@ -68,6 +68,6 @@
 		<set>
 			cn_name = CONCAT(cn_name, 'eee') 
 		</set>
-		WHERE en_name LIKE CONCAT(#{enName, jdbcType=VARCHAR}, '%')
+		WHERE sort = #{sort, jdbcType=INTEGER}
 	</update>
 </mapper>

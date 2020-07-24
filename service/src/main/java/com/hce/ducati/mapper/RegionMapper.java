@@ -20,5 +20,5 @@ public interface RegionMapper {
 	public int update4(@Param("enName")String enName);
 	public int update4x(@Param("enName")String enName);
 	public int update4xx(@Param("enName")String enName);
-	public int update5(@Param("enName")String enName);
+	public int update5(@Param("sort")Integer sort);
 }

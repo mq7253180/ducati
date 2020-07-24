@@ -118,8 +118,8 @@ public class XxxController {
 
 	@RequestMapping("/updateRegion5")
 	@ResponseBody
-	public int updateRegion5(@RequestParam(required = true, value = "enName")String enName) {
-		int effacted = xxxService.updateResion5(enName);
+	public int updateRegion5(@RequestParam(required = true, value = "sort")Integer sort) {
+		int effacted = xxxService.updateResion5(sort);
 		return effacted;
 	}
 
