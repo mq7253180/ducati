@@ -18,6 +18,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import com.quincy.auth.AuthContext;
 import com.quincy.auth.AuthHandler;
 import com.quincy.auth.interceptor.OAuth2ResourceInterceptor;
+import com.quincy.auth.service.AuthorizationCommonService;
+import com.quincy.core.InnerConstants;
 import com.quincy.core.web.SignatureInterceptor;
 import com.quincy.core.web.SignaturePubKeyExchanger;
 import com.quincy.sdk.DTransactionContext;
@@ -37,6 +39,8 @@ public class ServiceInitConfiguration extends WebMvcConfiguration {
 	private AuthContext authContext;
 	@Autowired
 	private OAuth2ResourceInterceptor oauth2ResourceInterceptor;
+	@Autowired
+	private AuthorizationCommonService authorizationCommonService;
 
 	@Scheduled(cron = "0 0/2 * * * ?")
 	public void retry() throws ClassNotFoundException, NoSuchMethodException, SecurityException, IOException {
@@ -44,7 +48,7 @@ public class ServiceInitConfiguration extends WebMvcConfiguration {
 	}
 
 	@PostConstruct
-	public void init() {
+	public void init() throws Exception {
 		transactionContext.setTransactionFailure(new DTransactionFailure() {
 			@Override
 			public int retriesBeforeInform() {
@@ -58,8 +62,8 @@ public class ServiceInitConfiguration extends WebMvcConfiguration {
 		});
 		authContext.setAuthHandler(new AuthHandler() {
 			@Override
-			public ModelAndView rootView(HttpServletRequest request, HttpServletResponse response) {
-				return new ModelAndView("/index");
+			public ModelAndView rootView(HttpServletRequest request, HttpServletResponse response) throws Exception {
+				return new ModelAndView("/index").addObject(InnerConstants.ATTR_SESSION, authorizationCommonService.getSession(request));
 			}
 		});
 	}
