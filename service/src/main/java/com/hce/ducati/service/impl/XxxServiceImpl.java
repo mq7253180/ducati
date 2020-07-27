@@ -30,7 +30,7 @@ import com.quincy.sdk.entity.Region;
 import com.quincy.sdk.ZKContext;
 import com.quincy.sdk.annotation.DeprecatedSynchronized;
 import com.quincy.sdk.annotation.DurationLog;
-import com.quincy.sdk.annotation.JedisInjector;
+import com.quincy.sdk.annotation.JedisSupport;
 import com.quincy.sdk.annotation.ReadOnly;
 
 import lombok.extern.slf4j.Slf4j;
@@ -250,7 +250,7 @@ public class XxxServiceImpl implements XxxService {
 		return "XXX";
 	}
 
-	@JedisInjector
+	@JedisSupport
 	@Override
 	public void testRedisCluster(String arg0, JedisCluster jedis, String arg1, JedisCluster jedis2, String arg2) {
 		String key = "kkk";

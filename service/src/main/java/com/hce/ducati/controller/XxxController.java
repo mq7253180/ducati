@@ -49,7 +49,7 @@ import com.quincy.sdk.Result;
 import com.quincy.sdk.VCcodeSender;
 import com.quincy.sdk.VCodeCharsFrom;
 import com.quincy.sdk.annotation.Cache;
-import com.quincy.sdk.annotation.JedisInjector;
+import com.quincy.sdk.annotation.JedisSupport;
 import com.quincy.sdk.annotation.SignatureRequired;
 import com.quincy.sdk.annotation.VCodeRequired;
 import com.quincy.sdk.annotation.transaction.DTransactional;
@@ -316,7 +316,7 @@ public class XxxController {
 		return regionService.findCountries();
 	}
 
-	@JedisInjector
+	@JedisSupport
 	@GetMapping("/redis")
 	@ResponseBody
 	public void testRedis(Jedis jedis) {
