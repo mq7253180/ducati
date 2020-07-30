@@ -1,6 +1,10 @@
 package com.hce.ducati;
 
 import java.io.IOException;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -8,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -88,5 +93,12 @@ public class ServiceInitConfiguration extends WebMvcConfiguration {
 	@PreDestroy
 	private void destroy() {
 		
+	}
+
+	@Bean("ducatiThreadPoolExecutor")
+	public ThreadPoolExecutor threadPoolExecutor() {
+		BlockingQueue<Runnable> blockingQueue = new LinkedBlockingQueue<Runnable>(100);
+		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(10, 20, 60, TimeUnit.SECONDS, blockingQueue);
+		return threadPoolExecutor;
 	}
 }

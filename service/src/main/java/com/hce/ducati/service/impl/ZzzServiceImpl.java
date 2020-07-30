@@ -35,6 +35,11 @@ public class ZzzServiceImpl implements ZzzService {
 	@AtomicOperational(confirm = "confirmCallDubbo", cancel = "cancelCallDubbo")
 	@Override
 	public void callDubbo(Long id, String val) {
+		try {
+			Thread.sleep(600);
+		} catch (InterruptedException e) {
+			log.error("TX_TEST_SLEEP================", e);
+		}
 		log.info("==============CALL_DUBBO");
 	}
 
@@ -42,6 +47,11 @@ public class ZzzServiceImpl implements ZzzService {
 	@AtomicOperational(confirm = "confirmCallDubbo", cancel = "cancelCallDubbo")
 	@Override
 	public void callDubbo() {
+		try {
+			Thread.sleep(1500);
+		} catch (InterruptedException e) {
+			log.error("TX_TEST_SLEEP================", e);
+		}
 		log.info("==============CALL_DUBBO");
 	}
 
@@ -49,6 +59,11 @@ public class ZzzServiceImpl implements ZzzService {
 	private CompanyRepository companyRepository;
 
 	public void confirmCallHttp(int _i, int[] ii, Params[] ps) throws IOException {
+		try {
+			Thread.sleep(600);
+		} catch (InterruptedException e) {
+			log.error("TX_TEST_SLEEP================", e);
+		}
 		log.info("CONFIRM_CALL_HTTP=============={}", _i);
 		for(int i:ii)
 			log.info("CONFIRM_CALL_HTTP--------------{}", i);
@@ -61,21 +76,36 @@ public class ZzzServiceImpl implements ZzzService {
 	}
 
 	public void confirmUpdateDB(String s, Params p) {
-		if(true)
-			throw new RuntimeException("测试提交失败");
-		/*log.info("CONFIRM_UPDATE_DB=============={}--------{}", s, p.getB());
-		Company c= companyRepository.findById(1l).get();
+		try {
+			Thread.sleep(600);
+		} catch (InterruptedException e) {
+			log.error("TX_TEST_SLEEP================", e);
+		}
+		log.info("CONFIRM_UPDATE_DB=============={}--------{}", s, p.getB());
+//		if(true)
+//			throw new RuntimeException("测试提交失败");
+		/*Company c= companyRepository.findById(1l).get();
 		c.setCnName(c.getCnName()+"-"+p.getA()+"-"+p.getB());
 		companyRepository.save(c);*/
 	}
 
 	public void confirmCallDubbo(Long id, String val) {
+		try {
+			Thread.sleep(600);
+		} catch (InterruptedException e) {
+			log.error("TX_TEST_SLEEP================", e);
+		}
 		/*if(true)
 			throw new RuntimeException("测试提交失败");*/
 		log.info("==============CONFIRM_CALL_DUBBO");
 	}
 
 	public void confirmCallDubbo() {
+		try {
+			Thread.sleep(600);
+		} catch (InterruptedException e) {
+			log.error("TX_TEST_SLEEP================", e);
+		}
 //		if(true)
 //			throw new RuntimeException("测试提交失败wwwww");
 		log.info("==============CONFIRM_CALL_DUBBO");

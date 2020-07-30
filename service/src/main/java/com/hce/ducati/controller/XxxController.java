@@ -281,7 +281,7 @@ public class XxxController {
 	@Autowired
 	private ZzzService zzzService;
 
-	@DTransactional
+	@DTransactional(async = false)
 	@GetMapping("/testTx1")
 	@ResponseBody
 	public String testTx1() {
