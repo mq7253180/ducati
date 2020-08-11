@@ -79,11 +79,11 @@
 		    <artifactId>dubbo-server</artifactId>
 		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 		    <groupId>com.hcehk</groupId>
 		    <artifactId>cfca-api</artifactId>
 		    <version>1.0.5</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>com.hce</groupId>
 			<artifactId>cfca-logback-jdk6</artifactId>

@@ -33,7 +33,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.hce.cfca.service.CFCAService;
+//import com.hce.cfca.service.CFCAService;
 import com.hce.ducati.dao.CompanyRepository;
 import com.hce.ducati.dao.EnterpriseRepository;
 import com.hce.ducati.dao.IndividualRepository;
@@ -64,8 +64,8 @@ public class CompanyServiceImpl implements CompanyService {
 	private EnterpriseRepository enterpriseRepository;
 	@Autowired
 	private IndividualRepository individualRepository;
-	@Autowired
-	private CFCAService cfcaService;
+	/*@Autowired
+	private CFCAService cfcaService;*/
 	@Value("${location.accounts}")
 	private String accountsLocation;
 	@Value("${env}")
@@ -118,7 +118,7 @@ public class CompanyServiceImpl implements CompanyService {
 					enterprise.setIdNo(tx3002ReqVO.getEnterprise().getIdentNo());
 				}
 				if(enterprise.getUserid()==null) {
-					byte[] b = cfcaService.send(tx3002ReqVO, 3002);
+					byte[] b = null;//cfcaService.send(tx3002ReqVO, 3002);
 					tx3002ReqVO = objectMapper.readValue(b, Tx3002ReqVO.class);
 					enterprise.setUserid(tx3002ReqVO.getEnterprise().getUserId());
 				}
@@ -133,7 +133,7 @@ public class CompanyServiceImpl implements CompanyService {
 			    		sealAddVO.setUserId(enterprise.getUserid());
 			    		sealAddVO.setSeal(sealVO);
 			    		tx3011ReqVO.setSealAdd(sealAddVO);
-			    		byte[] b = cfcaService.send(tx3011ReqVO, 3011);
+			    		byte[] b = null;//cfcaService.send(tx3011ReqVO, 3011);
 			    		tx3011ReqVO = objectMapper.readValue(b, Tx3011ReqVO.class);
 			    		enterprise.setSealid(tx3011ReqVO.getSealAdd().getSeal().getSealId());
 			    	} else {
@@ -143,7 +143,7 @@ public class CompanyServiceImpl implements CompanyService {
 			    		sealUpdateVO.setUserId(enterprise.getUserid());
 			    		sealUpdateVO.setSeal(sealVO);
 			    		tx3012ReqVO.setSealUpdate(sealUpdateVO);
-			    		cfcaService.send(tx3012ReqVO, 3012);
+//			    		cfcaService.send(tx3012ReqVO, 3012);
 			    	}
 			    }
 				enterprise.setCompanyId(company.getId());
@@ -208,7 +208,7 @@ public class CompanyServiceImpl implements CompanyService {
 						        person.setMobilePhone("18000000000");
 						        person.setAuthenticationMode("线下人工审核");
 						        tx3001ReqVO.setPerson(person);
-						        byte[] b = cfcaService.send(tx3001ReqVO, 3001);
+						        byte[] b = null;//cfcaService.send(tx3001ReqVO, 3001);
 						        tx3001ReqVO = objectMapper.readValue(b, Tx3001ReqVO.class);
 						        individual.setUserid(tx3001ReqVO.getPerson().getUserId());
 							}

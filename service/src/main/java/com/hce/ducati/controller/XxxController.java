@@ -209,15 +209,6 @@ public class XxxController {
 		return "FAILURE";
 	}
 
-	@Value("${ducati.host}")
-	private String host;
-
-	@GetMapping("/host")
-	@ResponseBody
-	public String host() {
-		return host;
-	}
-
 	@GetMapping("/stream/output/{id}/{amount}")
 	@ResponseBody
 	public String streamSource(@PathVariable(required = true, name = "id")String id, @PathVariable(required = true, name = "amount")BigDecimal amount) {

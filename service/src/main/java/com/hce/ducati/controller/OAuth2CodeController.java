@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hce.cfca.CommonHelper;
 import com.hce.ducati.entity.OAuth2Code;
 import com.hce.ducati.entity.OAuth2Scope;
 import com.hce.ducati.entity.UserEntity;
@@ -25,6 +24,7 @@ import com.hce.ducati.o.OAuth2DTO;
 import com.hce.ducati.service.UserService;
 import com.quincy.auth.controller.OAuth2CodeControllerSupport;
 import com.quincy.auth.o.OAuth2Info;
+import com.quincy.sdk.helper.CommonHelper;
 
 @RequestMapping("/oauth2")
 @Controller
