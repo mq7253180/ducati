@@ -48,7 +48,7 @@ public class ServiceInitConfiguration extends WebMvcConfiguration {
 	private AuthorizationCommonService authorizationCommonService;
 
 	@Scheduled(cron = "0 0/2 * * * ?")
-	public void retry() throws ClassNotFoundException, NoSuchMethodException, SecurityException, IOException {
+	public void retry() throws ClassNotFoundException, NoSuchMethodException, SecurityException, IOException, InterruptedException {
 		transactionContext.compensate("xxx");
 	}
 

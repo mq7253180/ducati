@@ -272,7 +272,7 @@ public class XxxController {
 	@Autowired
 	private ZzzService zzzService;
 
-	@DTransactional(async = false)
+	@DTransactional()
 	@GetMapping("/testTx1")
 	@ResponseBody
 	public String testTx1() {

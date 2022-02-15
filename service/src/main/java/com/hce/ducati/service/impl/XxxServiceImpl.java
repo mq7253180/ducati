@@ -237,7 +237,7 @@ public class XxxServiceImpl implements XxxService {
 	}
 
 //	@DTransactional(frequencyBatch = "xxx", executor = "ducatiThreadPoolExecutor")
-	@DTransactional(frequencyBatch = "xxx", async = false)
+	@DTransactional(frequencyBatch = "xxx")
 	@Override
 	public String testTx(String s, Params p) {
 		Params[] pp = new Params[5];
