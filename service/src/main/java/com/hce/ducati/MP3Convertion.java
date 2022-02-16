@@ -19,7 +19,8 @@ import com.mpatric.mp3agic.UnsupportedTagException;
 public class MP3Convertion {
 
 	public static void main(String[] args) throws IOException, UnsupportedTagException, InvalidDataException, NotSupportedException {
-//		charsetsInfo(SRC_DIR_LOCATION+"/邓丽君/夜色.mp3", "ISO-8859-1", "GBK");
+//		String locationSuffix = "/xxx/同桌的你.mp3";
+//		charsetsInfo(SRC_DIR_LOCATION+locationSuffix, "ISO-8859-1", "GBK");
 		/*File[] files = new File(SRC_DIR_LOCATION).listFiles();
 		for(File file:files) {
 			if(file.isDirectory())
@@ -37,7 +38,7 @@ public class MP3Convertion {
 //		String dirName = "Celtic TreasureⅡ";
 //		String dirName = "张信哲";
 //		String dirName = "Kenny G";
-		String dirName = "经典老掉牙";
+//		String dirName = "经典老掉牙";
 //		String dirName = "平安";
 //		String dirName = "礼仪曲";
 //		String dirName = "同一首歌";
@@ -66,6 +67,7 @@ public class MP3Convertion {
 //		String dirName = "陈百强";
 //		String dirName = "周华健";
 //		String dirName = "高胜美";
+		String dirName = "xxx";
 
 		tree(new File(SRC_DIR_LOCATION+"/"+dirName), null);
 		System.out.println("Total: "+count);
@@ -100,22 +102,45 @@ public class MP3Convertion {
 	}
 
 	private static void convertAttributes(Mp3File mp3file, String location, String dstGenreDescription) throws IOException, UnsupportedTagException, InvalidDataException, NotSupportedException {
+		String title = null;
+		String artist = null;
+		String album = null;
+		String comment = null;
+		String genreDescription = null;
+		String albumArtist = null;
+		String composer = null;
+
+		ID3v1 id3v1Tag = mp3file.getId3v1Tag();
 		ID3v2 id3v2Tag = mp3file.getId3v2Tag();
+		boolean bothTagsExists = true;
 		if(id3v2Tag!=null) {
-			String title = trim(id3v2Tag.getTitle());
-			String artist = trim(id3v2Tag.getArtist());
-			String album = trim(id3v2Tag.getAlbum());
-			String comment = trim(id3v2Tag.getComment());
-			String genreDescription = trim(id3v2Tag.getGenreDescription());
-			String albumArtist = trim(id3v2Tag.getAlbumArtist());
-			String composer = trim(id3v2Tag.getComposer());
-			ID3v1 id3v1Tag = mp3file.getId3v1Tag();
+			title = trim(id3v2Tag.getTitle());
+			artist = trim(id3v2Tag.getArtist());
+			album = trim(id3v2Tag.getAlbum());
+			comment = trim(id3v2Tag.getComment());
+			genreDescription = trim(id3v2Tag.getGenreDescription());
+			albumArtist = trim(id3v2Tag.getAlbumArtist());
+			composer = trim(id3v2Tag.getComposer());
 			if(id3v1Tag==null) {
 				id3v1Tag = new ID3v1Tag();
 				mp3file.setId3v1Tag(id3v1Tag);
 			}
+		} else {
+			if(id3v1Tag!=null) {
+				title = trim(id3v1Tag.getTitle());
+				artist = trim(id3v1Tag.getArtist());
+				album = trim(id3v1Tag.getAlbum());
+				comment = trim(id3v1Tag.getComment());
+				id3v2Tag = new ID3v23Tag();
+				mp3file.setId3v2Tag(id3v2Tag);
+			} else {
+				bothTagsExists = false;
+				System.err.println("NO_ID3V2TAG_AND_ID3V1TAG----------"+location);
+			}
+		}
+		if(bothTagsExists) {
 			if(title!=null) {
-				title = convert(id3v2Tag.getTitle());
+				title = convert(title);
 				id3v2Tag.setTitle(title);
 				id3v1Tag.setTitle(title);
 			}
@@ -194,8 +219,7 @@ public class MP3Convertion {
 //			System.out.println("Track: "+id3v1Tag.getTrack());
 //			System.out.println("Version: "+id3v1Tag.getVersion());
 //			System.out.println("Year: "+id3v1Tag.getYear());
-		} else
-			System.err.println("NO_ID3V2TAG----------"+location);
+		}
 	}
 
 	private static void process(File file, String dstGenreDescription) throws UnsupportedTagException, InvalidDataException, IOException, NotSupportedException {
