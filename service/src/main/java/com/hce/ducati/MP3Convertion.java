@@ -10,6 +10,7 @@ import com.mpatric.mp3agic.ID3v1;
 import com.mpatric.mp3agic.ID3v1Genres;
 import com.mpatric.mp3agic.ID3v1Tag;
 import com.mpatric.mp3agic.ID3v2;
+import com.mpatric.mp3agic.ID3v22Tag;
 import com.mpatric.mp3agic.ID3v23Tag;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
@@ -19,7 +20,7 @@ import com.mpatric.mp3agic.UnsupportedTagException;
 public class MP3Convertion {
 
 	public static void main(String[] args) throws IOException, UnsupportedTagException, InvalidDataException, NotSupportedException {
-//		String locationSuffix = "/xxx/同桌的你.mp3";
+//		String locationSuffix = "/邓丽君/夜色.mp3";
 //		charsetsInfo(SRC_DIR_LOCATION+locationSuffix, "ISO-8859-1", "GBK");
 		/*File[] files = new File(SRC_DIR_LOCATION).listFiles();
 		for(File file:files) {
@@ -69,14 +70,30 @@ public class MP3Convertion {
 //		String dirName = "高胜美";
 		String dirName = "xxx";
 
-		tree(new File(SRC_DIR_LOCATION+"/"+dirName), null);
-		System.out.println("Total: "+count);
+//		tree(new File(SRC_DIR_LOCATION+"/"+dirName), null);
+//		System.out.println("Total: "+count);
 //		String location = DST_DIR_LOCATION+"/孙佳星/咪姆.mp3";
 //		convertAttributes(new Mp3File(location), location, null);
 
-//		ID3v23Tag id3v2Tag = new ID3v23Tag();
-//		id3v2Tag.setArtist("群星");
-//		setAttributes(id3v2Tag, DST_DIR_LOCATION+"/经典老掉牙/世界需要热心肠.mp3");
+		ID3v23Tag id3v2Tag = new ID3v23Tag();
+//		id3v2Tag.setTitle("万岁毛主席");
+		id3v2Tag.setArtist("梦之旅合唱组合");
+//		id3v2Tag.setAlbum("流淌的歌声1");
+//		id3v2Tag.setAlbumArtist("");
+//		id3v2Tag.setComposer("曲: 张丕基, 词: 乔羽");
+//		id3v2Tag.setTrack("10");
+//		id3v2Tag.setComment("");
+//		id3v2Tag.setYear("2005");
+//		setAttributes(id3v2Tag, DST_DIR_LOCATION+"/经典老掉牙/我和我的祖国（梦之旅）.mp3");
+//		setAttributes(id3v2Tag, DST_DIR_LOCATION+"/经典老掉牙/铃儿响叮当（梦之旅）.MP3");
+//		setAttributes(id3v2Tag, DST_DIR_LOCATION+"/经典老掉牙/故乡的骄傲.MP3");
+
+//		printInfo("/Users/maqiang/Music/Music/Media/﻿梦之旅合唱组合/﻿﻿流淌的歌声之真情依旧(一)/10 ﻿夕阳红.mp3");
+//		clearImg(DST_DIR_LOCATION+"/xxx/种太阳(孙佳星).mp3");
+		clearImg(DST_DIR_LOCATION+"/xxx/种太阳(群星).mp3");
+		clearImg(DST_DIR_LOCATION+"/xxx/种太阳(小星星合唱团).mp3");
+		clearImg(DST_DIR_LOCATION+"/xxx/种太阳(中央人民广播电台少年广播合唱团).mp3");
+		clearImg(DST_DIR_LOCATION+"/xxx/我和我的祖国（梦之旅）.mp3");
 	}
 
 	private final static String SRC_DIR_LOCATION = "/Users/maqiang/Quincy/Media/MP3_ISO-8859-1";
@@ -124,6 +141,25 @@ public class MP3Convertion {
 			if(id3v1Tag==null) {
 				id3v1Tag = new ID3v1Tag();
 				mp3file.setId3v1Tag(id3v1Tag);
+			}
+			if(id3v2Tag instanceof ID3v22Tag) {
+				ID3v23Tag id3v23Tag = new ID3v23Tag();
+				id3v23Tag.setEncoder(id3v2Tag.getEncoder());
+				id3v23Tag.setAlbumImage(id3v2Tag.getAlbumImage(), id3v2Tag.getAlbumImageMimeType());
+				id3v23Tag.setArtistUrl(id3v2Tag.getArtistUrl());
+				id3v23Tag.setAudiofileUrl(id3v2Tag.getAudiofileUrl());
+				id3v23Tag.setAudioSourceUrl(id3v2Tag.getAudioSourceUrl());
+				id3v23Tag.setBPM(id3v2Tag.getBPM());
+				id3v23Tag.setTrack(id3v2Tag.getTrack());
+				id3v23Tag.setYear(id3v2Tag.getYear());
+				id3v23Tag.setUrl(id3v2Tag.getUrl());
+				id3v23Tag.setGrouping(id3v2Tag.getGrouping());
+				id3v23Tag.setDate(id3v2Tag.getDate());
+				id3v23Tag.setPublisher(id3v2Tag.getPublisher());
+				id3v23Tag.setPublisherUrl(id3v2Tag.getPublisherUrl());
+				id3v23Tag.setKey(id3v2Tag.getKey());
+				mp3file.setId3v2Tag(id3v23Tag);
+				id3v2Tag = id3v23Tag;
 			}
 		} else {
 			if(id3v1Tag!=null) {
@@ -174,51 +210,14 @@ public class MP3Convertion {
 					genreDescription = "Other";
 				} else {
 					int genre = ID3v1Genres.matchGenreDescription(genreDescription);
-					if(genre<0)
+					if(genre<0) {
+						genreDescription = convert(genreDescription);
 						genreDescription = genreDescriptionMap.get(genreDescription);
+					}
 				}
 			}
 			id3v2Tag.setGenreDescription(genreDescription);
 			id3v1Tag.setGenre(ID3v1Genres.matchGenreDescription(genreDescription));
-//			System.out.println("Title: "+id3v2Tag.getTitle()+"---"+title);
-//			System.out.println("Artist: "+id3v2Tag.getArtist()+"---"+artist);
-//			System.out.println("Album: "+id3v2Tag.getAlbum()+"---"+album);
-//			System.out.println("Comment: "+id3v2Tag.getComment()+"---"+comment);
-//			System.out.println("Album Artist: "+id3v2Tag.getAlbumArtist()+"---"+albumArtist);
-//			System.out.println("Composer: "+id3v2Tag.getComposer()+"---"+composer);
-			System.out.println("Genre: "+id3v2Tag.getGenre());
-			System.out.println("Genre Description: "+id3v2Tag.getGenreDescription());
-
-//			System.out.println("AlbumImageMimeType: "+id3v2Tag.getAlbumImageMimeType());
-//			System.out.println("ArtistUrl: "+id3v2Tag.getArtistUrl());
-//			System.out.println("AudiofileUrl: "+id3v2Tag.getAudiofileUrl());
-//			System.out.println("BPM: "+id3v2Tag.getBPM());
-//			System.out.println("CommercialUrl: "+id3v2Tag.getCommercialUrl());
-//			System.out.println("Copyright: "+id3v2Tag.getCopyright());
-//			System.out.println("CopyrightUrl: "+id3v2Tag.getCopyrightUrl());
-//			System.out.println("DataLength: "+id3v2Tag.getDataLength());
-//			System.out.println("Date: "+id3v2Tag.getDate());
-//			System.out.println("Encoder: "+id3v2Tag.getEncoder());
-//			System.out.println("ItunesComment: "+id3v2Tag.getItunesComment());
-//			System.out.println("Key: "+id3v2Tag.getKey());
-//			System.out.println("Length: "+id3v2Tag.getLength());
-//			System.out.println("Lyrics: "+id3v2Tag.getLyrics());
-//			System.out.println("OriginalArtist: "+id3v2Tag.getOriginalArtist());
-//			System.out.println("PartOfSet: "+id3v2Tag.getPartOfSet());
-//			System.out.println("PaymentUrl: "+id3v2Tag.getPaymentUrl());
-//			System.out.println("Publisher: "+id3v2Tag.getPublisher());
-//			System.out.println("PublisherUrl: "+id3v2Tag.getPublisherUrl());
-//			System.out.println("Padding: "+id3v2Tag.getPadding());
-//			System.out.println("RadiostationUrl: "+id3v2Tag.getRadiostationUrl());
-//			System.out.println("Track: "+id3v2Tag.getTrack());
-//			System.out.println("Url: "+id3v2Tag.getUrl());
-//			System.out.println("Version: "+id3v2Tag.getVersion());
-//			System.out.println("WmpRating: "+id3v2Tag.getWmpRating());
-//			System.out.println("Year: "+id3v2Tag.getYear());
-//			System.out.println("ObseleteFormat: "+id3v2Tag.getObseleteFormat());
-//			System.out.println("Track: "+id3v1Tag.getTrack());
-//			System.out.println("Version: "+id3v1Tag.getVersion());
-//			System.out.println("Year: "+id3v1Tag.getYear());
 		}
 	}
 
@@ -250,7 +249,9 @@ public class MP3Convertion {
 		String title = trim(id3v2TagSrc.getTitle());
 		String artist = trim(id3v2TagSrc.getArtist());
 		String album = trim(id3v2TagSrc.getAlbum());
+		String composer = trim(id3v2TagSrc.getComposer());
 		String comment = trim(id3v2TagSrc.getComment());
+		String year = trim(id3v2TagSrc.getYear());
 		if(title!=null) {
 			id3v2Tag.setTitle(title);
 			id3v1Tag.setTitle(title);
@@ -272,6 +273,12 @@ public class MP3Convertion {
 			id3v2Tag.setGenreDescription(genreDescription);
 			id3v1Tag.setGenre(ID3v1Genres.matchGenreDescription(genreDescription));
 		}
+		if(year!=null) {
+			id3v2Tag.setYear(year);
+			id3v1Tag.setYear(year);
+		}
+		if(composer!=null)
+			id3v2Tag.setComposer(composer);
 		String newLocation = new StringBuilder(location).insert(location.length()-4, "_xxx").toString();
 		mp3file.save(newLocation);
 	}
@@ -298,6 +305,7 @@ public class MP3Convertion {
 		genreDescriptionMap.put("未知名", "Other");
 		genreDescriptionMap.put("军旅", "Other");
 		genreDescriptionMap.put("中国军魂军歌试听中心", "Other");
+		genreDescriptionMap.put("null", "Other");
 	}
 
 	private final static String[] charsets = {"ISO-8859-1", "GBK", "GB2312", "GB18030", "UTF-8", "UTF-16", "UTF-16BE", "UTF-16LE", "UTF-32", "UTF-32BE", "UTF-32LE", "US-ASCII", "BIG5"};
@@ -316,12 +324,66 @@ public class MP3Convertion {
 				hexSb.append(Integer.toHexString(b&0xff).toUpperCase());
 			}
 			String content = new String(bb, testDstCharset);
-			bb = new String(bb, testCharset).getBytes();
+//			bb = new String(bb, testCharset).getBytes();
 			for(byte b:bb) {
 				byteSbTest.append(b);
 				byteSbTest.append(",");
 			}
 			System.out.println(charset+"====="+hexSb.toString()+"====="+byteSb.substring(0, byteSb.length()-1)+"====="+testCharset+": "+byteSbTest.substring(0, byteSbTest.length()-1)+"====="+content);
 		}
+	}
+
+	private static void printInfo(String location) throws UnsupportedTagException, InvalidDataException, IOException {
+		Mp3File mp3file = new Mp3File(new File(location));
+		ID3v2 id3v2Tag = mp3file.getId3v2Tag();
+//		System.out.println("Genre: "+id3v2Tag.getGenre());
+//		System.out.println("Genre Description: "+genreDescription);
+		System.out.println("Title: "+id3v2Tag.getTitle());
+//		System.out.println("Artist: "+id3v2Tag.getArtist()+"---"+artist);
+//		System.out.println("Album: "+id3v2Tag.getAlbum()+"---"+album);
+//		System.out.println("Comment: "+id3v2Tag.getComment()+"---"+comment);
+//		System.out.println("Album Artist: "+id3v2Tag.getAlbumArtist()+"---"+albumArtist);
+//		System.out.println("Composer: "+id3v2Tag.getComposer()+"---"+composer);
+//		System.out.println("Date: "+id3v2Tag.getDate());
+//		System.out.println("Year: "+id3v1Tag.getYear());
+		System.out.println("Track: "+id3v2Tag.getTrack());
+
+//		System.out.println("AlbumImageMimeType: "+id3v2Tag.getAlbumImageMimeType());
+//		System.out.println("ArtistUrl: "+id3v2Tag.getArtistUrl());
+//		System.out.println("AudiofileUrl: "+id3v2Tag.getAudiofileUrl());
+//		System.out.println("BPM: "+id3v2Tag.getBPM());
+//		System.out.println("CommercialUrl: "+id3v2Tag.getCommercialUrl());
+//		System.out.println("Copyright: "+id3v2Tag.getCopyright());
+//		System.out.println("CopyrightUrl: "+id3v2Tag.getCopyrightUrl());
+//		System.out.println("DataLength: "+id3v2Tag.getDataLength());
+//		System.out.println("Date: "+id3v2Tag.getDate());
+//		System.out.println("Encoder: "+id3v2Tag.getEncoder());
+//		System.out.println("ItunesComment: "+id3v2Tag.getItunesComment());
+//		System.out.println("Key: "+id3v2Tag.getKey());
+//		System.out.println("Length: "+id3v2Tag.getLength());
+//		System.out.println("Lyrics: "+id3v2Tag.getLyrics());
+//		System.out.println("OriginalArtist: "+id3v2Tag.getOriginalArtist());
+//		System.out.println("PartOfSet: "+id3v2Tag.getPartOfSet());
+//		System.out.println("PaymentUrl: "+id3v2Tag.getPaymentUrl());
+//		System.out.println("Publisher: "+id3v2Tag.getPublisher());
+//		System.out.println("PublisherUrl: "+id3v2Tag.getPublisherUrl());
+//		System.out.println("Padding: "+id3v2Tag.getPadding());
+//		System.out.println("RadiostationUrl: "+id3v2Tag.getRadiostationUrl());
+//		System.out.println("Track: "+id3v2Tag.getTrack());
+//		System.out.println("Url: "+id3v2Tag.getUrl());
+//		System.out.println("Version: "+id3v2Tag.getVersion());
+//		System.out.println("WmpRating: "+id3v2Tag.getWmpRating());
+//		System.out.println("Year: "+id3v2Tag.getYear());
+//		System.out.println("ObseleteFormat: "+id3v2Tag.getObseleteFormat());
+//		System.out.println("Track: "+id3v1Tag.getTrack());
+//		System.out.println("Version: "+id3v1Tag.getVersion());
+	}
+
+	private static void clearImg(String location) throws UnsupportedTagException, InvalidDataException, IOException, NotSupportedException {
+		Mp3File mp3file = new Mp3File(new File(location));
+		ID3v2 id3v2Tag = mp3file.getId3v2Tag();
+		id3v2Tag.clearAlbumImage();
+		String newLocation = new StringBuilder(location).insert(location.length()-4, "_xxx").toString();
+		mp3file.save(newLocation);
 	}
 }
