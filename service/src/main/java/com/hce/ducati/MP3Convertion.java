@@ -68,16 +68,17 @@ public class MP3Convertion {
 //		String dirName = "陈百强";
 //		String dirName = "周华健";
 //		String dirName = "高胜美";
-		String dirName = "xxx";
+//		String dirName = "xxx";
+//		String dirName = "许茹芸";
 
 //		tree(new File(SRC_DIR_LOCATION+"/"+dirName), null);
 //		System.out.println("Total: "+count);
 //		String location = DST_DIR_LOCATION+"/孙佳星/咪姆.mp3";
 //		convertAttributes(new Mp3File(location), location, null);
 
-		ID3v23Tag id3v2Tag = new ID3v23Tag();
+//		ID3v23Tag id3v2Tag = new ID3v23Tag();
 //		id3v2Tag.setTitle("万岁毛主席");
-		id3v2Tag.setArtist("梦之旅合唱组合");
+//		id3v2Tag.setArtist("梦之旅合唱组合");
 //		id3v2Tag.setAlbum("流淌的歌声1");
 //		id3v2Tag.setAlbumArtist("");
 //		id3v2Tag.setComposer("曲: 张丕基, 词: 乔羽");
@@ -85,16 +86,16 @@ public class MP3Convertion {
 //		id3v2Tag.setComment("");
 //		id3v2Tag.setYear("2005");
 //		setAttributes(id3v2Tag, DST_DIR_LOCATION+"/经典老掉牙/我和我的祖国（梦之旅）.mp3");
-//		setAttributes(id3v2Tag, DST_DIR_LOCATION+"/经典老掉牙/铃儿响叮当（梦之旅）.MP3");
-//		setAttributes(id3v2Tag, DST_DIR_LOCATION+"/经典老掉牙/故乡的骄傲.MP3");
 
 //		printInfo("/Users/maqiang/Music/Music/Media/﻿梦之旅合唱组合/﻿﻿流淌的歌声之真情依旧(一)/10 ﻿夕阳红.mp3");
-//		clearImg(DST_DIR_LOCATION+"/xxx/种太阳(孙佳星).mp3");
-		clearImg(DST_DIR_LOCATION+"/xxx/种太阳(群星).mp3");
-		clearImg(DST_DIR_LOCATION+"/xxx/种太阳(小星星合唱团).mp3");
-		clearImg(DST_DIR_LOCATION+"/xxx/种太阳(中央人民广播电台少年广播合唱团).mp3");
-		clearImg(DST_DIR_LOCATION+"/xxx/我和我的祖国（梦之旅）.mp3");
+//		clearImg(DST_DIR_LOCATION+"/xxx/.mp3");
+
+		ID3v23Tag id3v2Tag = new ID3v23Tag();
+		id3v2Tag.setTitle("");
+		setAttributes(id3v2Tag, TMP_DST_DIR+"//.mp3");
 	}
+
+	private final static String TMP_DST_DIR = "/Users/maqiang/iTunes/Music-UTF8";
 
 	private final static String SRC_DIR_LOCATION = "/Users/maqiang/Quincy/Media/MP3_ISO-8859-1";
 	private final static String DST_DIR_LOCATION = "/Users/maqiang/Quincy/Media/MP3_UTF-8";
@@ -279,7 +280,7 @@ public class MP3Convertion {
 		}
 		if(composer!=null)
 			id3v2Tag.setComposer(composer);
-		String newLocation = new StringBuilder(location).insert(location.length()-4, "_xxx").toString();
+		String newLocation = new StringBuilder(location).insert(location.length()-4, "_x").toString();
 		mp3file.save(newLocation);
 	}
 
@@ -383,7 +384,7 @@ public class MP3Convertion {
 		Mp3File mp3file = new Mp3File(new File(location));
 		ID3v2 id3v2Tag = mp3file.getId3v2Tag();
 		id3v2Tag.clearAlbumImage();
-		String newLocation = new StringBuilder(location).insert(location.length()-4, "_xxx").toString();
+		String newLocation = new StringBuilder(location).insert(location.length()-4, "_x").toString();
 		mp3file.save(newLocation);
 	}
 }
