@@ -91,8 +91,11 @@ public class MP3Convertion {
 //		clearImg(DST_DIR_LOCATION+"/xxx/.mp3");
 
 		ID3v23Tag id3v2Tag = new ID3v23Tag();
-		id3v2Tag.setTitle("");
-		setAttributes(id3v2Tag, TMP_DST_DIR+"//.mp3");
+		id3v2Tag.setTitle("31_You Raise Me Up");
+		setAttributes(id3v2Tag, TMP_DST_DIR+"/03_English/31_You Raise Me Up.mp3");
+		id3v2Tag = new ID3v23Tag();
+		id3v2Tag.setTitle("32_Hey Jude");
+		setAttributes(id3v2Tag, TMP_DST_DIR+"/03_English/32_Hey Jude.mp3");
 	}
 
 	private final static String TMP_DST_DIR = "/Users/maqiang/iTunes/Music-UTF8";
