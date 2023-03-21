@@ -48,7 +48,7 @@ public class KafkaTest implements Partitioner {
 //		p.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, KafkaTest.class.getName());
 		Producer<String, String> producer = new KafkaProducer<String, String>(p);
 		for(int i=0;i<8;i++) {
-			producer.send(new ProducerRecord<String, String>(TOPIC_NAME, "sadfasdfsa"+i), new Callback() {
+			producer.send(new ProducerRecord<String, String>(TOPIC_NAME, "bcd", "sadfasdfsa"+i), new Callback() {
 				@Override
 				public void onCompletion(RecordMetadata metadata, Exception exception) {
 					if(exception==null) {
@@ -73,6 +73,7 @@ public class KafkaTest implements Partitioner {
 		p.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 		p.put(ConsumerConfig.GROUP_ID_CONFIG, "quincy_test");
 		p.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+//		p.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, "");
 		Consumer<String, String>  consumer = new KafkaConsumer<String, String>(p);
 		consumer.subscribe(Collections.singletonList(TOPIC_NAME), new ConsumerRebalanceListener() {
 			@Override
@@ -95,7 +96,7 @@ public class KafkaTest implements Partitioner {
 		ConsumerRecords<String, String> records = consumer.poll(timeout);
 		int i = 0;
 		for(ConsumerRecord<String, String> r:records) {
-			System.out.println((i++)+"-"+r.key()+"---"+r.value()+"---"+r.partition());
+			System.out.println((i++)+"-"+r.key()+"---"+r.value()+"---"+r.partition()+"---"+r.offset());
 		}
 		consumer.commitSync();
 		consumer.close();
