@@ -5,11 +5,11 @@ import java.text.ParseException;
 import java.util.List;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.dom4j.DocumentException;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.hce.ducati.entity.Company;
+import com.itextpdf.text.DocumentException;
 
 import cfca.sadk.algorithm.common.PKIException;
 

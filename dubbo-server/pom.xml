@@ -10,11 +10,15 @@
 		<artifactId>ducati</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
+	<properties>
+		<version.curator>5.5.0</version.curator>
+	</properties>
 	<dependencies>
 		<dependency>
 		    <groupId>org.javassist</groupId>
 		    <artifactId>javassist</artifactId>
-		    <version>3.27.0-GA</version>
+		    <version>3.29.2-GA</version>
+		    <!-- junit: [4.13.1,) -->
 		</dependency>
 		<dependency>
 		    <groupId>com.maqiangcgq</groupId>
@@ -30,13 +34,20 @@
 		<dependency>
 		    <groupId>org.apache.dubbo</groupId>
 		    <artifactId>dubbo-spring-boot-starter</artifactId>
-		    <version>2.7.3</version>
+		    <version>3.2.0</version>
+		    <!-- Spring Boot: 2.7.10, GLOBAL: 3.0.5
+		    log4j-api: 2.20.0, GLOBAL: 2.19.0 -->
 		    <!-- <exclusions>
 				<exclusion>
 					<groupId>log4j</groupId>
 					<artifactId>log4j</artifactId>
 				</exclusion>
 			</exclusions> -->
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.curator</groupId>
+		    <artifactId>curator-x-discovery-server</artifactId>
+		    <version>${version.curator}</version>
 		</dependency>
 		<!-- 加载Dubbo结束 -->
 		<dependency>
@@ -49,10 +60,12 @@
 		    <artifactId>quincy-redis</artifactId>
 		    <version>1.1.2</version>
 		</dependency>
+		<!-- 
 		<dependency>
 		    <groupId>com.maqiangcgq</groupId>
 		    <artifactId>quincy-zookeeper</artifactId>
 		    <version>1.1.2</version>
 		</dependency>
+		 -->
     </dependencies>
 </project>

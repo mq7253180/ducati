@@ -8,7 +8,6 @@ import java.text.ParseException;
 import java.util.List;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -24,6 +23,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.CompanyService;
 import com.hce.ducati.service.UserService;
+import com.itextpdf.text.DocumentException;
 import com.quincy.auth.annotation.PermissionNeeded;
 import com.quincy.auth.entity.Role;
 import com.quincy.sdk.helper.CommonHelper;

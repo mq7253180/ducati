@@ -28,15 +28,16 @@ import org.apache.kafka.common.serialization.StringSerializer;
 public class KafkaTest implements Partitioner {
 
 	public static void main(String[] args) {
-//		pub();
-		cosume();
+		pub();
+//		cosume();
 	}
 
 	private final static String TOPIC_NAME = "aaa";
+	private final static String KEY = "bcde";
 
 	public static void pub() {
 		Properties p = new Properties();
-		p.put(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG, "47.93.89.0:9092");
+		p.put(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG, "47.93.89.0:9092,47.93.89.0:9092");
 //		p.put(ProducerConfig.ACKS_CONFIG, "0");
 //		p.put(CommonClientConfigs.RETRIES_CONFIG, "3");
 //		p.put(ProducerConfig.LINGER_MS_CONFIG, "1");
@@ -48,7 +49,7 @@ public class KafkaTest implements Partitioner {
 //		p.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, KafkaTest.class.getName());
 		Producer<String, String> producer = new KafkaProducer<String, String>(p);
 		for(int i=0;i<8;i++) {
-			producer.send(new ProducerRecord<String, String>(TOPIC_NAME, "bcd", "sadfasdfsa"+i), new Callback() {
+			producer.send(new ProducerRecord<String, String>(TOPIC_NAME, KEY, "sadfasdfsa"+i), new Callback() {
 				@Override
 				public void onCompletion(RecordMetadata metadata, Exception exception) {
 					if(exception==null) {
@@ -75,6 +76,7 @@ public class KafkaTest implements Partitioner {
 		p.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 //		p.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, "");
 		Consumer<String, String>  consumer = new KafkaConsumer<String, String>(p);
+		/*
 		consumer.subscribe(Collections.singletonList(TOPIC_NAME), new ConsumerRebalanceListener() {
 			@Override
 			public void onPartitionsRevoked(Collection<TopicPartition> partitions) {
@@ -92,6 +94,8 @@ public class KafkaTest implements Partitioner {
 				}
 			}
 		});
+		*/
+		consumer.assign(Collections.singletonList(new TopicPartition(TOPIC_NAME, 4)));
 		Duration timeout = Duration.ofSeconds(3);
 		ConsumerRecords<String, String> records = consumer.poll(timeout);
 		int i = 0;

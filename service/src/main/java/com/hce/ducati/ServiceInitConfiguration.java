@@ -8,8 +8,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -32,6 +30,9 @@ import com.quincy.sdk.DTransactionFailure;
 import com.quincy.sdk.EmailService;
 import com.quincy.sdk.RedisProcessor;
 import com.quincy.sdk.WebMvcConfiguration;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @PropertySource(value = {"classpath:application-core.properties", "classpath:application-auth.properties", "classpath:application-service.properties", "classpath:application-oauth2.properties"})
 @Configuration("sssiiiccc")

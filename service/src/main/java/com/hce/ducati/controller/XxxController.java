@@ -5,9 +5,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.zookeeper.KeeperException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +55,7 @@ import com.quincy.sdk.entity.Region;
 import com.quincy.sdk.helper.AopHelper;
 import com.quincy.sdk.service.RegionService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
 
@@ -69,7 +68,7 @@ public class XxxController {
 	private QuincyFeign quincyFeign;
 	@Autowired
 	private InnerFeign innerFeign;
-	@Autowired
+	@Autowired(required = false)
 	private DucatiSpringCloudClient ducatiSpringCloudClient;
 	@Autowired
 	private UserService userService;
@@ -234,7 +233,7 @@ public class XxxController {
 		return xxxService.findRegions();
 	}
 
-	@Reference(version = "1.0.0")
+	@DubboReference(version = "1.0.0")
 	private DucatiClient ducatiClient;
 
 	@GetMapping("/regions/dubbo")
@@ -505,8 +504,8 @@ public class XxxController {
 				.append(request.getAuthType())
 				.append("\r\ngetMethod: ")
 				.append(request.getMethod())
-				.append("\r\ngetRealPath: ")
-				.append(request.getRealPath("*"))
+//				.append("\r\ngetRealPath: ")
+//				.append(request.getRealPath("*"))
 				.append("\r\ngetScheme: ")
 				.append(request.getScheme())
 				.append("\r\ngetServerName: ")

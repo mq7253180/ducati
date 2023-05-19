@@ -21,7 +21,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.dom4j.DocumentException;
+//import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -71,7 +71,7 @@ public class CompanyServiceImpl implements CompanyService {
 	@Value("${env}")
 	private String env;
 
-	public void syn(boolean init) throws IOException, ParseException, JsonParseException, JsonMappingException, DocumentException, InvalidFormatException, PKIException {
+	public void syn(boolean init) throws IOException, ParseException, JsonParseException, JsonMappingException, InvalidFormatException, PKIException {
 		File rootDir = new File(accountsLocation);
 		File[] companyFiles = rootDir.listFiles(new FileFilter() {
 			@Override

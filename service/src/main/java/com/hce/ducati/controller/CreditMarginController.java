@@ -5,8 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +24,8 @@ import com.quincy.auth.o.XSession;
 import com.quincy.sdk.Pagination;
 import com.quincy.sdk.Result;
 import com.quincy.sdk.helper.CommonHelper;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/credit/margin")

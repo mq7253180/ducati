@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +23,8 @@ import com.hce.ducati.service.UserService;
 import com.quincy.auth.controller.OAuth2CodeControllerSupport;
 import com.quincy.auth.o.OAuth2Info;
 import com.quincy.sdk.helper.CommonHelper;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @RequestMapping("/oauth2")
 @Controller

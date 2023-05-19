@@ -75,7 +75,7 @@ public class AmqpController {
 		}
 	}
 
-	@PostConstruct
+//	@PostConstruct
 	public void init() throws IOException, TimeoutException {
 		connectionFactory.setHost(host);
 		connectionFactory.setUsername(username);

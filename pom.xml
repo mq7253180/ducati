@@ -10,19 +10,19 @@
 		<argLine>-Dfile.encoding=UTF-8</argLine>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<version.spring>5.1.6.RELEASE</version.spring>
-		<version.spring-cloud>2.1.3.RELEASE</version.spring-cloud>
+		<version.spring>6.0.8</version.spring>
+		<version.spring-cloud>4.0.2</version.spring-cloud>
 	</properties>
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>3.10.1</version>
 				<configuration>
-					<source>11</source>
-					<target>11</target>
-					<compilerVersion>11</compilerVersion>
+					<source>17</source>
+					<target>17</target>
+					<compilerVersion>17</compilerVersion>
 					<encoding>UTF-8</encoding>
 					<compilerArgument>-Xlint:deprecation</compilerArgument>
 					<!-- <compilerArguments>
@@ -33,7 +33,7 @@
 					<dependency>
 						<groupId>org.codehaus.plexus</groupId>
 						<artifactId>plexus-compiler-javac</artifactId>
-						<version>2.8.5</version>
+						<version>2.11.1</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -54,7 +54,7 @@
 				<spring.datasource.url>47.93.89.0:3306/ducati</spring.datasource.url>
 				<spring.datasource.username>admin</spring.datasource.username>
 				<spring.datasource.password>nimda</spring.datasource.password>
-				<spring.datasource.url.slave>47.93.89.0:6603/ducati</spring.datasource.url.slave>
+				<spring.datasource.url.slave>47.93.89.0:3306/ducati</spring.datasource.url.slave>
 				<spring.datasource.username.slave>jlcedu</spring.datasource.username.slave>
 				<spring.datasource.password.slave>xxx</spring.datasource.password.slave>
 				<!-- <spring.rocketmq.nameServer>172.16.80.32:9876</spring.rocketmq.nameServer> -->
@@ -62,8 +62,8 @@
 				<expire.session>10</expire.session><!-- minutes -->
 				<expire.vcode>1</expire.vcode><!-- minutes -->
 				<!-- <redis.nodes>47.93.89.0:6379,47.93.89.0:6389,47.93.89.0:6399</redis.nodes> -->
-				<redis.nodes>47.93.89.0:26379,47.93.89.0:26389,47.93.89.0:26399</redis.nodes>
-				<!-- <redis.nodes>47.93.89.0:6379</redis.nodes> -->
+				<!-- <redis.nodes>47.93.89.0:26379,47.93.89.0:26389,47.93.89.0:26399</redis.nodes> -->
+				<redis.nodes>47.93.89.0:6379</redis.nodes>
 				<redis.pwd>foobared</redis.pwd>
 				<domain>127.0.0.1</domain><!-- 种cookie识别session, ajax跨域 -->
 				<mail.user>mq7253180@126.com</mail.user>

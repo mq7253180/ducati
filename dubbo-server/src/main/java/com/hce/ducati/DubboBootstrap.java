@@ -2,8 +2,12 @@ package com.hce.ducati;
 
 import java.io.IOException;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+@Configuration
 public class DubboBootstrap {
 	public static void main(String[] args) throws IOException {
 //		System.setProperty("dubbo.application.logger", "slf4j");
@@ -19,5 +23,10 @@ public class DubboBootstrap {
 			if(context!=null)
 				context.close();
 		}
+	}
+
+	@PostConstruct
+	public void init() {
+		System.setProperty("zookeeper.sasl.client", "false");
 	}
 }
