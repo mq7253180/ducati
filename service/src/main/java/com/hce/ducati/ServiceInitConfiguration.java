@@ -1,6 +1,7 @@
 package com.hce.ducati;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -15,14 +16,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 
 import com.quincy.auth.AuthContext;
 import com.quincy.auth.AuthHandler;
 import com.quincy.auth.interceptor.OAuth2ResourceInterceptor;
-import com.quincy.auth.service.AuthorizationCommonService;
-import com.quincy.core.InnerConstants;
 import com.quincy.core.web.SignatureInterceptor;
 import com.quincy.core.web.SignaturePubKeyExchanger;
 import com.quincy.sdk.DTransactionContext;
@@ -32,7 +30,6 @@ import com.quincy.sdk.RedisProcessor;
 import com.quincy.sdk.WebMvcConfiguration;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 @PropertySource(value = {"classpath:application-core.properties", "classpath:application-auth.properties", "classpath:application-service.properties", "classpath:application-oauth2.properties"})
 @Configuration("sssiiiccc")
@@ -45,8 +42,6 @@ public class ServiceInitConfiguration extends WebMvcConfiguration {
 	private AuthContext authContext;
 	@Autowired
 	private OAuth2ResourceInterceptor oauth2ResourceInterceptor;
-	@Autowired
-	private AuthorizationCommonService authorizationCommonService;
 
 	@Scheduled(cron = "0 0/2 * * * ?")
 	public void retry() throws ClassNotFoundException, NoSuchMethodException, SecurityException, IOException, InterruptedException {
@@ -67,9 +62,12 @@ public class ServiceInitConfiguration extends WebMvcConfiguration {
 			}
 		});
 		authContext.setAuthHandler(new AuthHandler() {
+			/**
+			 * 只有auth.loginRequired.root=true时才有用
+			 */
 			@Override
-			public ModelAndView rootView(HttpServletRequest request, HttpServletResponse response) throws Exception {
-				return new ModelAndView("/index").addObject(InnerConstants.ATTR_SESSION, authorizationCommonService.getSession(request));
+			public Map<String, ?> rootViewObjects(HttpServletRequest request) throws Exception {
+				return null;
 			}
 		});
 	}
