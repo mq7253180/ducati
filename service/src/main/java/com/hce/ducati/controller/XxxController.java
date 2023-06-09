@@ -44,7 +44,7 @@ import com.quincy.auth.annotation.OAuth2Resource;
 import com.quincy.auth.annotation.PermissionNeeded;
 import com.quincy.sdk.RedisProcessor;
 import com.quincy.sdk.Result;
-import com.quincy.sdk.VCcodeSender;
+import com.quincy.sdk.VCodeSender;
 import com.quincy.sdk.VCodeCharsFrom;
 import com.quincy.sdk.annotation.Cache;
 import com.quincy.sdk.annotation.JedisSupport;
@@ -372,7 +372,7 @@ public class XxxController {
 	@GetMapping("/vcode")
 	@ResponseBody
 	public Result vcodeAsMobile(HttpServletRequest request) throws Exception {
-		String token = redisProcessor.vcode(request, VCodeCharsFrom.DIGITS, 6, "mobilePhone", new VCcodeSender() {
+		String token = redisProcessor.vcode(request, VCodeCharsFrom.DIGITS, 6, "mobilePhone", new VCodeSender() {
 			@Override
 			public void send(char[] vcode, String token) throws Exception {
 				log.info("已通过阿里云短信接口发送验证码: {}", new String(vcode));
