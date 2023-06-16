@@ -40,7 +40,6 @@ import com.hce.ducati.service.impl.UserServiceImpl;
 import com.hce.ducati.service.impl.aBcd;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
-import com.quincy.auth.annotation.OAuth2Resource;
 import com.quincy.auth.annotation.PermissionNeeded;
 import com.quincy.sdk.RedisProcessor;
 import com.quincy.sdk.Result;
@@ -146,7 +145,6 @@ public class XxxController {
 		return xxxService.findRegion2(cnName);
 	}
 
-	@OAuth2Resource("usrInfo")
 	@RequestMapping("/usrinfo")
 	@ResponseBody
 	public UserEntity getUserInfo(@RequestParam(required = true, value = OAuth.OAUTH_USERNAME)String username) {

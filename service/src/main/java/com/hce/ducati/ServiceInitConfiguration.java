@@ -20,7 +20,6 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 
 import com.quincy.auth.AuthContext;
 import com.quincy.auth.AuthHandler;
-import com.quincy.auth.interceptor.OAuth2ResourceInterceptor;
 import com.quincy.core.web.SignatureInterceptor;
 import com.quincy.core.web.SignaturePubKeyExchanger;
 import com.quincy.sdk.DTransactionContext;
@@ -40,8 +39,6 @@ public class ServiceInitConfiguration extends WebMvcConfiguration {
 	private EmailService emailService;
 	@Autowired
 	private AuthContext authContext;
-	@Autowired
-	private OAuth2ResourceInterceptor oauth2ResourceInterceptor;
 
 	@Scheduled(cron = "0 0/2 * * * ?")
 	public void retry() throws ClassNotFoundException, NoSuchMethodException, SecurityException, IOException, InterruptedException {
@@ -86,7 +83,6 @@ public class ServiceInitConfiguration extends WebMvcConfiguration {
 				return "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCMYDMqMFSJL+nUMzF7MQjCYe/Y3P26wjVn90CdrSE8H9Ed4dg0/BteWn5+ZK65DwWev2F79hBIpprPrtVe+wplCTkpyR+mPiNL+WKkvo7miMegRYJFZLvh9QrFuDzMJZ+rAiu4ldxkVB0CMKfYEWbukKGmAinxVAqUr/HcW2mWjwIDAQAB";
 			}
 		})).addPathPatterns("/**");
-		registry.addInterceptor(oauth2ResourceInterceptor).addPathPatterns("/**");
 	}
 
 	@PreDestroy
