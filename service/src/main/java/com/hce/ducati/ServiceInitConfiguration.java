@@ -30,7 +30,7 @@ import com.quincy.sdk.WebMvcConfiguration;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-@PropertySource(value = {"classpath:application-core.properties", "classpath:application-auth.properties", "classpath:application-service.properties", "classpath:application-oauth2.properties"})
+@PropertySource(value = {"classpath:application-core.properties", "classpath:application-auth.properties", "classpath:application-service.properties", "classpath:application-oauth2.properties", "classpath:application-sdk.properties", "classpath:application-sensitiveness.properties"})
 @Configuration("sssiiiccc")
 public class ServiceInitConfiguration extends WebMvcConfiguration {
 	@Autowired
@@ -69,13 +69,9 @@ public class ServiceInitConfiguration extends WebMvcConfiguration {
 		});
 	}
 
-	@Autowired
-	private RedisProcessor redisProcessor;
-
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
 		super.addInterceptors(registry);
-		registry.addInterceptor((HandlerInterceptor)redisProcessor).addPathPatterns("/**");
 		registry.addInterceptor(new SignatureInterceptor(new SignaturePubKeyExchanger() {
 			@Override
 			public String getPublicKeyById(String id) {

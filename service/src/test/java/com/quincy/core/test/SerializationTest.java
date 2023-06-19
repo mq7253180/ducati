@@ -2,8 +2,7 @@ package com.quincy.core.test;
 
 import java.io.IOException;
 
-import com.quincy.core.test.o.Entity;
-import com.quincy.sdk.helper.CommonHelper;
+//import com.quincy.core.test.o.Entity;
 
 public class SerializationTest {
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -17,7 +16,7 @@ public class SerializationTest {
 			s.append(",");
 		}
 		System.out.println(s.toString());*/
-		byte[] bb = {-84,-19,0,5,115,114,0,29,99,111,109,46,113,117,105,110,99,121,46,99,111,114,101,46,116,101,115,116,46,111,46,69,110,116,105,116,121,117,39,114,-65,33,67,85,-28,2,0,2,76,0,3,97,97,97,116,0,18,76,106,97,118,97,47,108,97,110,103,47,83,116,114,105,110,103,59,76,0,3,98,98,98,113,0,126,0,1,120,112,116,0,3,120,120,120,116,0,3,119,119,119};
+//		byte[] bb = {-84,-19,0,5,115,114,0,29,99,111,109,46,113,117,105,110,99,121,46,99,111,114,101,46,116,101,115,116,46,111,46,69,110,116,105,116,121,117,39,114,-65,33,67,85,-28,2,0,2,76,0,3,97,97,97,116,0,18,76,106,97,118,97,47,108,97,110,103,47,83,116,114,105,110,103,59,76,0,3,98,98,98,113,0,126,0,1,120,112,116,0,3,120,120,120,116,0,3,119,119,119};
 //		byte[] bb = {-84,-19,0,5,115,114,0,29,99,111,109,46,113,117,105,110,99,121,46,99,111,114,101,46,116,101,115,116,46,111,46,69,110,116,105,116,121,-78,-75,-52,76,-82,-71,78,-103,2,0,2,76,0,3,97,97,97,116,0,18,76,106,97,118,97,47,108,97,110,103,47,83,116,114,105,110,103,59,76,0,3,98,98,98,113,0,126,0,1,120,112,116,0,3,120,120,120,116,0,3,119,119,119};
 		/*
 		 * Entity2 eX = (Entity2)CommonHelper.unSerialize(bb);
@@ -29,9 +28,9 @@ public class SerializationTest {
 		 * 
 		 * 加一字段: 也没问题，但新加字段值为空
 		 */
-		Entity eX = (Entity)CommonHelper.unSerialize(bb);
-		System.out.println("E2-------------"+eX.getAaa());
-		System.out.println("E2-------------"+eX.getBbb());
+//		Entity eX = (Entity)CommonHelper.unSerialize(bb);
+//		System.out.println("E2-------------"+eX.getAaa());
+//		System.out.println("E2-------------"+eX.getBbb());
 //		System.out.println("E2-------------"+eX.getCcc());
 	}
 }
