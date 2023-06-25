@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,9 +14,11 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+import org.springframework.web.servlet.support.RequestContext;
 
 import com.quincy.auth.annotation.LoginRequired;
 import com.quincy.auth.controller.RootController;
+import com.quincy.sdk.helper.CommonHelper;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -79,5 +82,42 @@ public class TestController {
 				}
 			}
 		}
+	}
+
+	@ResponseBody
+	@RequestMapping("/testx")
+	public ModelAndView testx() {
+//		if(true)
+//			throw new RuntimeException("xxx");
+		return new ModelAndView("test");
+	}
+
+	@ResponseBody
+	@RequestMapping("/testxx")
+	public ModelAndView testxx() {
+		if(true)
+			throw new RuntimeException("xxx");
+		return new ModelAndView("test");
+	}
+
+	@RequestMapping("/testxxx")
+	public ModelAndView testxxx() {
+		if(true)
+			throw new RuntimeException("xxx");
+		return new ModelAndView("test");
+	}
+
+	@RequestMapping("/testw")
+	public String testw(HttpServletRequest request) {
+		RequestContext requestContext = new RequestContext(request);
+		return requestContext.getMessage("status.error.500");
+	}
+
+	@Autowired
+	private ApplicationContext applicationContext;
+
+	@RequestMapping("/testww")
+	public String testww() {
+		return applicationContext.getMessage("status.error.500", null, CommonHelper.getLocale());
 	}
 }

@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 
 import com.quincy.auth.AuthContext;
@@ -25,7 +24,6 @@ import com.quincy.core.web.SignaturePubKeyExchanger;
 import com.quincy.sdk.DTransactionContext;
 import com.quincy.sdk.DTransactionFailure;
 import com.quincy.sdk.EmailService;
-import com.quincy.sdk.RedisProcessor;
 import com.quincy.sdk.WebMvcConfiguration;
 
 import jakarta.servlet.http.HttpServletRequest;
