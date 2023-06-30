@@ -28,7 +28,7 @@ import com.quincy.sdk.WebMvcConfiguration;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-@PropertySource(value = {"classpath:application-core.properties", "classpath:application-auth.properties", "classpath:application-service.properties", "classpath:application-oauth2.properties", "classpath:application-sdk.properties", "classpath:application-sensitiveness.properties"})
+@PropertySource(value = {"classpath:application-core.properties", "classpath:application-auth.properties", "classpath:application-service.properties", "classpath:application-oauth2.properties", "classpath:application-sensitiveness.properties"})
 @Configuration("sssiiiccc")
 public class ServiceInitConfiguration extends WebMvcConfiguration {
 	@Autowired
