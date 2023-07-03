@@ -156,6 +156,7 @@
 	<modules>
 		<module>common-o</module>
 		<module>service</module>
+		<module>service-sharding</module>
 		<module>springboot</module>
 		<module>client</module>
 		<module>dubbo-server</module>

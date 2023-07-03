@@ -234,7 +234,7 @@
 		</dependency>
 		<dependency>
 		    <groupId>com.hce</groupId>
-		    <artifactId>ducati-service</artifactId>
+		    <artifactId>ducati-service-sharding</artifactId>
 		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
