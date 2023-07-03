@@ -52,8 +52,7 @@ public class CustomerServiceImpl implements CustomerService {
 		Date lastLogined = vo.getLastLogined();
 		if(lastLogined!=null)
 			po.setLastLogined(lastLogined);
-		userRepository.save(po);
-		return po;
+		return userRepository.save(po);
 	}
 
 	@Override

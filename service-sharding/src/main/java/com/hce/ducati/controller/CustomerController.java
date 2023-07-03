@@ -38,8 +38,8 @@ public class CustomerController {
 
 	@PostMapping("/update")
 	@ResponseBody
-	public void update(@RequestBody UserEntity e) {
-		customerService.update(e.getId(), e);
+	public UserEntity update(@RequestBody UserEntity e) {
+		return customerService.update(e.getId(), e);
 	}
 
 	@GetMapping("/get")
