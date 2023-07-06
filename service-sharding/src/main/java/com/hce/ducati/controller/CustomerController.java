@@ -1,5 +1,6 @@
 package com.hce.ducati.controller;
 
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hce.ducati.dto.UserDto;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.mapper.TestMapper;
 import com.hce.ducati.service.CustomerService;
@@ -61,8 +63,12 @@ public class CustomerController {
 
 	@RequestMapping("/all")
 	@ResponseBody
-	public void all() {
-		testMapper.findAllUsers();
+	public List<UserDto> all() {
+		List<UserDto> list = testMapper.findAllUsers();
+		for(UserDto user:list) {
+			System.out.println(user.getId()+"---"+user.getIdStr());
+		}
+		return list;
 	}
 
 	public static void main(String[] args) {
