@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hce.ducati.entity.UserEntity;
+import com.hce.ducati.mapper.TestMapper;
 import com.hce.ducati.service.CustomerService;
 import com.quincy.sdk.SnowFlakeUtil;
 
@@ -53,6 +54,15 @@ public class CustomerController {
 		if(true)
 			throw new RuntimeException("xxx");
 		return new ModelAndView("test");
+	}
+
+	@Autowired
+	private TestMapper testMapper;
+
+	@RequestMapping("/all")
+	@ResponseBody
+	public void all() {
+		testMapper.findAllUsers();
 	}
 
 	public static void main(String[] args) {
