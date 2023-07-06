@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hce.ducati.dao.TestDao;
 import com.hce.ducati.dto.UserDto;
 import com.hce.ducati.entity.UserEntity;
-import com.hce.ducati.mapper.TestMapper;
 import com.hce.ducati.service.CustomerService;
 import com.quincy.sdk.SnowFlakeUtil;
 
@@ -59,16 +59,27 @@ public class CustomerController {
 	}
 
 	@Autowired
-	private TestMapper testMapper;
+	private TestDao testDao;
 
 	@RequestMapping("/all")
 	@ResponseBody
 	public List<UserDto> all() {
-		List<UserDto> list = testMapper.findAllUsers();
-		for(UserDto user:list) {
-			System.out.println(user.getId()+"---"+user.getIdStr());
-		}
+		List<UserDto> list = testDao.findAllUsers();
 		return list;
+	}
+
+	@RequestMapping("/surname")
+	@ResponseBody
+	public List<UserDto> surname() {
+		List<UserDto> list = testDao.findUsersBySurname("王%");
+		return list;
+	}
+
+	@RequestMapping("/one")
+	@ResponseBody
+	public UserDto one(@RequestParam(required = true, name = "userid")Long userId) {
+		UserDto dto = testDao.findUser(userId);
+		return dto;
 	}
 
 	public static void main(String[] args) {
