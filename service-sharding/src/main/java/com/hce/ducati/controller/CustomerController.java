@@ -63,16 +63,16 @@ public class CustomerController {
 
 	@RequestMapping("/all")
 	@ResponseBody
-	public List<UserDto> all() {
-		List<UserDto> list = testDao.findAllUsers();
-		return list;
+	public List<UserDto>[] all() {
+		List<UserDto>[] lists = testDao.findAllUsers();
+		return lists;
 	}
 
 	@RequestMapping("/surname")
 	@ResponseBody
-	public List<UserDto> surname() {
-		List<UserDto> list = testDao.findUsersBySurname("王%");
-		return list;
+	public List<UserDto>[] surname() {
+		List<UserDto>[] lists = testDao.findUsersBySurname("王%");
+		return lists;
 	}
 
 	@RequestMapping("/one")
