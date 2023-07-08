@@ -14,6 +14,8 @@ public class UserDto {
 	private String idStr;
 	@Column("name")
 	private String name;
+	@Column("nickname")
+	private String nickName;
 	@Column("mobile_phone")
 	private String mobilePhone;
 	@Column("creation_time")

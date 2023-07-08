@@ -77,9 +77,15 @@ public class CustomerController {
 
 	@RequestMapping("/one")
 	@ResponseBody
-	public UserDto one(@RequestParam(required = true, name = "userid")Long userId) {
-		UserDto dto = testDao.findUser(userId);
+	public UserDto one(@RequestParam(required = true, name = "mobilephone")String mobilePhone) {
+		UserDto dto = testDao.findUser(mobilePhone);
 		return dto;
+	}
+
+	@RequestMapping("/update")
+	@ResponseBody
+	public int[] update(@RequestParam(required = true, name = "nickname")String nickName) {
+		return testDao.updateNickName(nickName);
 	}
 
 	public static void main(String[] args) {

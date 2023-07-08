@@ -24,28 +24,28 @@ public class UserEntity {
 	@Id
 	@Column(name="id")
 	private Long id;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	@CreatedDate
 	@Column(name="creation_time")
 	private Date creationTime;
 //	@ManyToMany(cascade = CascadeType.ALL)
 //	@JoinTable(name = "s_role_user_rel", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
 //	private Set<Role> roles;
-	@Column(name="username")
+	@Column(name = "username")
 	private String username;
-	@Column(name="name")
+	@Column(name = "name")
 	private String name;
-	@Column(name="nickname")
+	@Column(name = "nickname")
 	private String nickName;
-	@Column(name="password")
+	@Column(name = "password")
 	private String password;
-	@Column(name="email")
+	@Column(name = "email")
 	private String email;
-	@Column(name="mobile_phone")
+	@Column(name = "mobile_phone")
 	private String mobilePhone;
-	@Column(name="jsessionid")
+	@Column(name = "jsessionid")
 	private String jsessionid;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
-	@Column(name="last_logined")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	@Column(name = "last_logined")
 	private Date lastLogined;
 }
