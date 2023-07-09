@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.hce.ducati.dto.UserDto;
 import com.quincy.sdk.MasterOrSlave;
-import com.quincy.sdk.annotation.AllShardsJDBCDao;
-import com.quincy.sdk.annotation.ExecuteQuery;
-import com.quincy.sdk.annotation.ExecuteUpdate;
+import com.quincy.sdk.annotation.sharding.AllShardsJDBCDao;
+import com.quincy.sdk.annotation.sharding.ExecuteQuery;
+import com.quincy.sdk.annotation.sharding.ExecuteUpdate;
 
 @AllShardsJDBCDao
 public interface TestDao {

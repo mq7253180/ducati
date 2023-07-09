@@ -13,7 +13,7 @@ import com.hce.ducati.dao.UserRepository;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.CustomerService;
 import com.quincy.sdk.annotation.ReadOnly;
-import com.quincy.sdk.annotation.ShardingKey;
+import com.quincy.sdk.annotation.sharding.ShardingKey;
 import com.quincy.sdk.helper.CommonHelper;
 
 @Service
@@ -56,7 +56,8 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	@ReadOnly
+//	@ReadOnly
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
 	public UserEntity find(@ShardingKey Long userId) {
 		Optional<UserEntity> optional = userRepository.findById(userId);
 		return optional.isPresent()?optional.get():null;

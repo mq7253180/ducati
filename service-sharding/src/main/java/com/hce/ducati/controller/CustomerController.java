@@ -1,5 +1,6 @@
 package com.hce.ducati.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
 
@@ -47,7 +48,7 @@ public class CustomerController {
 
 	@GetMapping("/get")
 	@ResponseBody
-	public UserEntity get(@RequestParam(required = true, name = "userid")Long userId) {
+	public UserEntity get(@RequestParam(required = true, name = "userid")Long userId) throws SQLException {
 		return customerService.find(userId);
 	}
 
