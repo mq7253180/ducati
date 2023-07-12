@@ -48,7 +48,7 @@ public class CustomerController {
 
 	@GetMapping("/get")
 	@ResponseBody
-	public UserEntity get(@RequestParam(required = true, name = "userid")Long userId) throws SQLException {
+	public UserDto get(@RequestParam(required = true, name = "userid")Long userId) throws SQLException {
 		return customerService.find(userId);
 	}
 

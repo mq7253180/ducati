@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hce.ducati.dao.UserDao;
 import com.hce.ducati.dao.UserRepository;
+import com.hce.ducati.dto.UserDto;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.CustomerService;
 import com.quincy.sdk.annotation.ReadOnly;
@@ -20,6 +22,8 @@ import com.quincy.sdk.helper.CommonHelper;
 public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private UserDao userDao;
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
 	@Override
@@ -58,8 +62,10 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 //	@ReadOnly
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-	public UserEntity find(@ShardingKey Long userId) {
-		Optional<UserEntity> optional = userRepository.findById(userId);
-		return optional.isPresent()?optional.get():null;
+	public UserDto find(@ShardingKey Long userId) {
+//		Optional<UserEntity> optional = userRepository.findById(userId);
+//		return optional.isPresent()?optional.get():null;
+		System.out.println("find================by sharding");
+		return userDao.find(userId);
 	}
 }
