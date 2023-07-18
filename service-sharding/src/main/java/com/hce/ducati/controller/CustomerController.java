@@ -1,5 +1,7 @@
 package com.hce.ducati.controller;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
@@ -48,7 +50,7 @@ public class CustomerController {
 
 	@GetMapping("/get")
 	@ResponseBody
-	public UserDto get(@RequestParam(required = true, name = "userid")Long userId) throws SQLException {
+	public UserDto get(@RequestParam(required = true, name = "userid")Long userId) throws SQLException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IOException {
 		return customerService.find(userId);
 	}
 

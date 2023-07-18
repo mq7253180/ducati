@@ -1,5 +1,8 @@
 package com.hce.ducati.service.impl;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.Optional;
 
@@ -14,6 +17,8 @@ import com.hce.ducati.dao.UserRepository;
 import com.hce.ducati.dto.UserDto;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.CustomerService;
+import com.quincy.sdk.AllShardsDaoSupport;
+import com.quincy.sdk.DaoSupport;
 import com.quincy.sdk.annotation.ReadOnly;
 import com.quincy.sdk.annotation.sharding.ShardingKey;
 import com.quincy.sdk.helper.CommonHelper;
@@ -59,13 +64,21 @@ public class CustomerServiceImpl implements CustomerService {
 		return userRepository.save(po);
 	}
 
+	@Autowired
+	private DaoSupport daoSupport;
+	@Autowired
+	private AllShardsDaoSupport allShardsDaoSupport;
+
 	@Override
 //	@ReadOnly
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-	public UserDto find(@ShardingKey Long userId) {
+	public UserDto find(@ShardingKey Long userId) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, SQLException, IOException {
 //		Optional<UserEntity> optional = userRepository.findById(userId);
 //		return optional.isPresent()?optional.get():null;
-		System.out.println("find================by sharding");
-		return userDao.find(userId);
+//		System.out.println("find================by method");
+//		UserDto userDto = (UserDto)daoSupport.executeQuery("SELECT id AS id_str,id,name,nickname,mobile_phone,creation_time FROM s_user WHERE id=?", UserDto.class, UserDto.class, userId);
+		System.out.println("find================by proxy");
+		UserDto userDto = userDao.find(userId);
+		return userDto;
 	}
 }
