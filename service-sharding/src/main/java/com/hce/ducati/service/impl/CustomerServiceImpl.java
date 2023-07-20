@@ -77,7 +77,7 @@ public class CustomerServiceImpl implements CustomerService {
 //		return optional.isPresent()?optional.get():null;
 //		System.out.println("find================by method");
 //		UserDto userDto = (UserDto)daoSupport.executeQuery("SELECT id AS id_str,id,name,nickname,mobile_phone,creation_time FROM s_user WHERE id=?", UserDto.class, UserDto.class, userId);
-		System.out.println("find================by proxy");
+		System.out.println("find================by proxy==========no transaction");
 		UserDto userDto = userDao.find(userId);
 		return userDto;
 	}

@@ -21,7 +21,7 @@
 		</dependency>
 		<dependency>
 		    <groupId>com.maqiangcgq</groupId>
-		    <artifactId>quincy-db-sharding</artifactId>
+		    <artifactId>quincy-jdbc-sharding</artifactId>
 		    <version>1.1.2</version>
 		</dependency>
 		<dependency>
