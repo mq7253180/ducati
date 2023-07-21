@@ -17,8 +17,8 @@ import com.hce.ducati.dao.UserRepository;
 import com.hce.ducati.dto.UserDto;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.CustomerService;
-import com.quincy.sdk.AllShardsDaoSupport;
-import com.quincy.sdk.DaoSupport;
+import com.quincy.sdk.ShardingJdbcDao;
+import com.quincy.sdk.JdbcDao;
 import com.quincy.sdk.annotation.ReadOnly;
 import com.quincy.sdk.annotation.sharding.ShardingKey;
 import com.quincy.sdk.helper.CommonHelper;
@@ -65,9 +65,9 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Autowired
-	private DaoSupport daoSupport;
+	private JdbcDao jdbcDao;
 	@Autowired
-	private AllShardsDaoSupport allShardsDaoSupport;
+	private ShardingJdbcDao shardingJdbcDao;
 
 	@Override
 //	@ReadOnly
@@ -76,7 +76,7 @@ public class CustomerServiceImpl implements CustomerService {
 //		Optional<UserEntity> optional = userRepository.findById(userId);
 //		return optional.isPresent()?optional.get():null;
 //		System.out.println("find================by method");
-//		UserDto userDto = (UserDto)daoSupport.executeQuery("SELECT id AS id_str,id,name,nickname,mobile_phone,creation_time FROM s_user WHERE id=?", UserDto.class, UserDto.class, userId);
+//		UserDto userDto = (UserDto)jdbcDao.executeQuery("SELECT id AS id_str,id,name,nickname,mobile_phone,creation_time FROM s_user WHERE id=?", UserDto.class, UserDto.class, userId);
 		System.out.println("find================by proxy==========no transaction");
 		UserDto userDto = userDao.find(userId);
 		return userDto;
