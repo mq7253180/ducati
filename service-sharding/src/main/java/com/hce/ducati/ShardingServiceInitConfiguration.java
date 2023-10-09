@@ -7,6 +7,6 @@ import com.quincy.sdk.WebMvcConfiguration;
 
 @PropertySource(value = {"classpath:application-core.properties", "classpath:application-sensitiveness.properties"})
 @Configuration("sssiiiccc")
-public class ServiceInitConfiguration extends WebMvcConfiguration {
+public class ShardingServiceInitConfiguration extends WebMvcConfiguration {
 	
 }

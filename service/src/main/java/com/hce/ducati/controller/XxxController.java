@@ -364,8 +364,8 @@ public class XxxController {
 
 	@Autowired
 	private AuthorizationCommonController authorizationCommonController;
-	@Value("${vcode.expire}")
-	private int vcodeExpire;
+//	@Value("${vcode.expire}")
+//	private int vcodeExpire;
 
 	@GetMapping("/vcode")
 	@ResponseBody

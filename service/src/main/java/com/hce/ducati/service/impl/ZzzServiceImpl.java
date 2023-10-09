@@ -9,6 +9,8 @@ import com.hce.ducati.dao.CompanyRepository;
 import com.hce.ducati.entity.Company;
 import com.hce.ducati.o.Params;
 import com.hce.ducati.service.ZzzService;
+import com.hce.ducati.service.ZzzzService;
+import com.quincy.sdk.annotation.Synchronized;
 import com.quincy.sdk.annotation.transaction.AtomicOperational;
 import com.quincy.sdk.helper.HttpClientHelper;
 
@@ -140,5 +142,17 @@ public class ZzzServiceImpl implements ZzzService {
 		log.info("==============CANCEL_CALL_DUBBO");
 		if(true)
 			throw new RuntimeException("测试撤消失败");
+	}
+
+	@Autowired
+	private ZzzzService zzzzService;
+
+	@Synchronized("xxx")
+	public void test() throws InterruptedException {
+		Thread.sleep(5000);
+		log.warn("AAA=========BEFORE");
+		zzzzService.test();
+		log.warn("AAA=========AFTER");
+		Thread.sleep(3000);
 	}
 }

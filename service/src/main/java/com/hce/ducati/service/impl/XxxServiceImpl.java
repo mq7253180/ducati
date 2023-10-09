@@ -28,7 +28,7 @@ import com.quincy.sdk.annotation.transaction.DTransactional;
 import com.quincy.sdk.dao.RegionRepository;
 import com.quincy.sdk.entity.Region;
 import com.quincy.sdk.ZKContext;
-import com.quincy.sdk.annotation.DeprecatedSynchronized;
+import com.quincy.sdk.annotation.ZkSynchronized;
 import com.quincy.sdk.annotation.DurationLog;
 import com.quincy.sdk.annotation.JedisSupport;
 import com.quincy.sdk.annotation.ReadOnly;
@@ -261,7 +261,7 @@ public class XxxServiceImpl implements XxxService {
 		log.info("testRedisCluster==================={}", jedis2.get(key));
 	}
 
-	@DeprecatedSynchronized(value = "ttt")
+	@ZkSynchronized(value = "ttt")
 	@Override
 	public void testDeprecatedSynchronized(long millis) throws InterruptedException {
 		Thread.sleep(millis);
