@@ -148,8 +148,8 @@
 				<log.level>INFO</log.level>
 				<spring.freemarker.cache>false</spring.freemarker.cache>
 				<prefix.resource>/static</prefix.resource>
-				<eureka.addr>192.168.0.116:8761</eureka.addr>
-				<eureka.instance.hostname>localhost</eureka.instance.hostname>
+				<eureka.addr>47.93.89.0:8761</eureka.addr>
+				<eureka.instance.hostname>192.168.0.116</eureka.instance.hostname>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
@@ -164,8 +164,8 @@
 				<log.level>WARN</log.level>
 				<spring.freemarker.cache>true</spring.freemarker.cache>
 				<prefix.resource>https://xxx.maqiangcgq.com/ducati</prefix.resource>
-				<eureka.addr>192.168.0.116:8761</eureka.addr>
-				<eureka.instance.hostname>localhost</eureka.instance.hostname>
+				<eureka.addr>localhost:8761</eureka.addr>
+				<eureka.instance.hostname>10.27.74.163</eureka.instance.hostname>
 			</properties>
 		</profile>
 		<profile>
@@ -177,8 +177,8 @@
 				<log.level>WARN</log.level>
 				<spring.freemarker.cache>true</spring.freemarker.cache>
 				<prefix.resource>https://xxx.maqiangcgq.com/ducati</prefix.resource>
-				<eureka.addr>192.168.0.116:8761</eureka.addr>
-				<eureka.instance.hostname>localhost</eureka.instance.hostname>
+				<eureka.addr>localhost:8761</eureka.addr>
+				<eureka.instance.hostname>10.27.74.163</eureka.instance.hostname>
 			</properties>
 		</profile>
 	</profiles>
@@ -270,12 +270,12 @@
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-config-client</artifactId>
 		    <version>${version.spring-cloud}</version>
-		</dependency> -->
+		</dependency>
 		<dependency>
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-config</artifactId>
 		    <version>${version.spring-cloud}</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-bootstrap</artifactId>
