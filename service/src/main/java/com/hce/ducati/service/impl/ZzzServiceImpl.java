@@ -4,21 +4,49 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hce.ducati.dao.CompanyRepository;
-import com.hce.ducati.entity.Company;
+import com.hce.ducati.dao.TestDao;
+import com.hce.ducati.mapper.TestMapper;
 import com.hce.ducati.o.Params;
+import com.hce.ducati.o.RegionDto;
+import com.hce.ducati.o.UserDto;
 import com.hce.ducati.service.ZzzService;
 import com.hce.ducati.service.ZzzzService;
 import com.quincy.sdk.annotation.Synchronized;
 import com.quincy.sdk.annotation.transaction.AtomicOperational;
-import com.quincy.sdk.helper.HttpClientHelper;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
 public class ZzzServiceImpl implements ZzzService {
+	@Autowired
+	private TestDao testDao;
+	@Autowired
+	private TestMapper testMapper;
+	@Autowired
+	private ZzzzService zzzzService;
+
+	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
+	public void testTxUpdate() {
+		testDao.upate("13800138000", 1l);
+		zzzzService.testTxUpdate(1l, "anihC");
+	}
+
+	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
+	public void testTxQuery() {
+		RegionDto regionDto = testMapper.findRegion(1l);
+		log.warn("EN_NAME======================{}", regionDto.getEnName());
+		UserDto userDto = zzzzService.testTxQuery(1l);
+		log.warn("MOBILE_PHONE======================{}", userDto.getMobilePhone());
+	}
+
 //	@AtomicOperational(confirm = "confirmCallHttp")
 	@AtomicOperational(confirm = "confirmCallHttp", cancel = "cancelCallHttp")
 	@Override
@@ -143,9 +171,6 @@ public class ZzzServiceImpl implements ZzzService {
 		if(true)
 			throw new RuntimeException("测试撤消失败");
 	}
-
-	@Autowired
-	private ZzzzService zzzzService;
 
 	@Synchronized("xxx")
 	public void test() throws InterruptedException {
