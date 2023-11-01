@@ -23,6 +23,7 @@ import com.hce.ducati.client.QuincyFeign;
 import com.hce.ducati.entity.Enterprise;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.ServiceInitConfiguration;
+import com.hce.ducati.client.CenterFeign;
 import com.hce.ducati.client.DucatiClient;
 import com.hce.ducati.client.DucatiSpringCloudClient;
 import com.hce.ducati.o.AccountO;
@@ -81,6 +82,15 @@ public class XxxController {
 	@ResponseBody
 	public void testTxq() {
 		zzzService.testTxQuery();
+	}
+
+	@Autowired
+	private CenterFeign centerFeign;
+
+	@RequestMapping("/testf")
+	@ResponseBody
+	public String testf() {
+		return centerFeign.actuator();
 	}
 
 	@RequestMapping("/updateRegion")
