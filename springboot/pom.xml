@@ -153,8 +153,8 @@
 				<log.level>INFO</log.level>
 				<spring.freemarker.cache>false</spring.freemarker.cache>
 				<prefix.resource>/static</prefix.resource>
-				<eureka.addr>47.93.89.0:8761</eureka.addr>
-				<eureka.instance.hostname>192.168.0.116</eureka.instance.hostname>
+				<eureka.addr>localhost:8761</eureka.addr>
+				<eureka.instance.hostname>localhost</eureka.instance.hostname>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
