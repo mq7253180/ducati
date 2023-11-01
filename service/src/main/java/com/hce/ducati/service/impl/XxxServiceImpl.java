@@ -2,7 +2,7 @@ package com.hce.ducati.service.impl;
 
 import java.util.List;
 
-import org.apache.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.ZooDefs;
@@ -49,7 +49,7 @@ public class XxxServiceImpl implements XxxService {
 	private RegionMapper regionMapper;
 	@Autowired
 	private InnerFeign innerFeign;
-	@Reference(version = "1.0.0")
+	@DubboReference(version = "1.0.0")
 	private DucatiClient ducatiClient;
 
 	@Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)

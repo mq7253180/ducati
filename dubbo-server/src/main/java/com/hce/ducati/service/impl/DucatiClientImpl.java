@@ -3,7 +3,7 @@ package com.hce.ducati.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.dubbo.config.annotation.Service;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.hce.ducati.client.DucatiClient;
@@ -13,7 +13,7 @@ import com.quincy.sdk.service.RegionService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Service(version = "1.0.0", interfaceClass = DucatiClient.class, timeout = 2000, retries = 3)
+@DubboService(version = "1.0.0", interfaceClass = DucatiClient.class, timeout = 2000, retries = 3)
 public class DucatiClientImpl implements DucatiClient {
 	@Autowired
 	private RegionService regionService;
