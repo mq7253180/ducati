@@ -28,6 +28,11 @@
 					<!-- <compilerArguments>
 						<extdirs>${pom.basedir}/src/main/lib</extdirs>
 					</compilerArguments> -->
+					<compilerArgs>
+						<compilerArg>
+							-parameters
+						</compilerArg>
+                    </compilerArgs>
 				</configuration>
 				<dependencies>
 					<dependency>
@@ -70,6 +75,7 @@
 				<mail.to>mq7253181@126.com</mail.to>
 				<zk.url>47.93.89.0:2181,47.93.89.0:2182,47.93.89.0:2183</zk.url>
 				<zk.timeout>5000</zk.timeout>
+				<kafka.url>47.93.89.0:9092</kafka.url>
 				<dubbo.protocol.port>20880</dubbo.protocol.port>
 				<nexus.url>172.16.80.38:8082</nexus.url>
 				<cfca.platid>8949665AA3D9699DE05311016B0A2A11</cfca.platid>
@@ -87,29 +93,30 @@
 			<properties>
 				<env>pro</env>
 				<server.port>8080</server.port>
-				<spring.datasource.url>localhost:3306/ducati</spring.datasource.url>
+				<spring.datasource.url>10.27.74.163:3306/ducati</spring.datasource.url>
 				<spring.datasource.username>admin</spring.datasource.username>
-				<spring.datasource.password>xxxx</spring.datasource.password>
+				<spring.datasource.password>nimda</spring.datasource.password>
 				<!-- HAProxy负载 -->
-				<spring.datasource.url.slave>192.168.0.1:6603/ducati</spring.datasource.url.slave>
+				<spring.datasource.url.slave>10.27.74.163:3306/ducati</spring.datasource.url.slave>
 				<!-- Keepalived负载 -->
 				<!-- <spring.datasource.url.slave>172.16.0.1:3306/ducati</spring.datasource.url.slave> -->
 				<spring.datasource.username.slave>jlcedu</spring.datasource.username.slave>
-				<spring.datasource.password.slave>xxxx</spring.datasource.password.slave>
+				<spring.datasource.password.slave>xxx</spring.datasource.password.slave>
 				<!-- <spring.rocketmq.nameServer>10.30.1.11:9876</spring.rocketmq.nameServer> -->
 				<spring.jpa.show-sql>false</spring.jpa.show-sql>
 				<expire.session>60</expire.session><!-- minutes -->
 				<expire.vcode>3</expire.vcode><!-- minutes -->
-				<redis.nodes>localhost:6379,localhost:6389,localhost:6399</redis.nodes>
+				<redis.nodes>10.27.74.163:6379</redis.nodes>
 				<!-- <redis.nodes>localhost:26379,localhost:26389,localhost:26399</redis.nodes> -->
 				<redis.pwd>foobared</redis.pwd>
 				<domain>maqiangcgq.com</domain><!-- 种cookie识别session, ajax跨域 -->
 				<mail.user>mq7253180@126.com</mail.user>
 				<mail.to></mail.to>
-				<zk.url>localhost:2181,localhost:2182,localhost:2183</zk.url>
+				<zk.url>10.27.74.163:2181,10.27.74.163:2182,10.27.74.163:2183</zk.url>
 				<zk.timeout>5000</zk.timeout>
+				<kafka.url>10.27.74.163:9092</kafka.url>
 				<dubbo.protocol.port>20880</dubbo.protocol.port>
-				<nexus.url>172.16.80.38:8082</nexus.url>
+				<nexus.url>10.27.74.163:8082</nexus.url>
 				<cfca.platid>8F09B7F146D84B75E053025B210A1949</cfca.platid>
 				<cfca.addr>cs.anxinsign.com</cfca.addr>
 				<cfca.jks.location>/quincy/secret/anxinsign.jks</cfca.jks.location>
@@ -143,6 +150,7 @@
 				<mail.to></mail.to>
 				<zk.url>localhost:2181,localhost:2182,localhost:2183</zk.url>
 				<zk.timeout>5000</zk.timeout>
+				<kafka.url>localhost:9092</kafka.url>
 				<dubbo.protocol.port>20890</dubbo.protocol.port>
 				<nexus.url>172.16.80.38:8082</nexus.url>
 				<cfca.platid>8F09B7F146D84B75E053025B210A1949</cfca.platid>
