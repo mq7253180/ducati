@@ -35,13 +35,6 @@
 		    <version>5.2.3</version>
 		</dependency>
 		<dependency>
-			<groupId>com.hce.ducati</groupId>
-			<artifactId>pw-swift-core</artifactId>
-			<version>SRU2017-7.9.7</version>
-			<scope>system</scope>
-			<systemPath>${pom.basedir}/src/main/lib/pw-swift-core-SRU2017-7.9.7.jar</systemPath>
-		</dependency>
-		<dependency>
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-openfeign</artifactId>
 		    <version>${version.spring-cloud}</version>
@@ -82,11 +75,20 @@
 		    <artifactId>dubbo-server</artifactId>
 		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<!-- <dependency>
+		<!--
+		<dependency>
 		    <groupId>com.hcehk</groupId>
 		    <artifactId>cfca-api</artifactId>
 		    <version>1.0.5</version>
-		</dependency> -->
+		</dependency>
+		-->
+		<dependency>
+			<groupId>com.hce.ducati</groupId>
+			<artifactId>pw-swift-core</artifactId>
+			<version>SRU2017-7.9.7</version>
+			<scope>system</scope>
+			<systemPath>${pom.basedir}/src/main/lib/pw-swift-core-SRU2017-7.9.7.jar</systemPath>
+		</dependency>
 		<dependency>
 			<groupId>com.hce</groupId>
 			<artifactId>cfca-logback-jdk6</artifactId>
@@ -108,6 +110,7 @@
 			<scope>system</scope>
 			<systemPath>${pom.basedir}/src/main/lib/cfca/sadk-3.4.1.2.jar</systemPath>
 		</dependency>
+		
 		<dependency>
 		    <groupId>com.itextpdf</groupId>
 		    <artifactId>itextpdf</artifactId>
