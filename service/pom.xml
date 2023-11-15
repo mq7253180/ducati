@@ -81,7 +81,7 @@
 		    <artifactId>cfca-api</artifactId>
 		    <version>1.0.5</version>
 		</dependency>
-		-->
+		
 		<dependency>
 			<groupId>com.hce.ducati</groupId>
 			<artifactId>pw-swift-core</artifactId>
@@ -110,7 +110,7 @@
 			<scope>system</scope>
 			<systemPath>${pom.basedir}/src/main/lib/cfca/sadk-3.4.1.2.jar</systemPath>
 		</dependency>
-		
+		-->
 		<dependency>
 		    <groupId>com.itextpdf</groupId>
 		    <artifactId>itextpdf</artifactId>
