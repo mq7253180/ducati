@@ -189,6 +189,14 @@
 	</profiles>
 	<repositories>
 		<repository>
+            <id>quincy</id>
+            <name>My Nexus</name>
+            <url>https://nexus.maqiang777.com/repository/maven-releases/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+		<repository>
 			<id>aliyun</id>
 			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
 			<releases>
@@ -198,16 +206,6 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		<!-- <repository>
-			<id>hce-nexus</id>
-			<url>http://172.16.80.12:8081/repository/maven-public/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository> -->
 		<repository>
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
