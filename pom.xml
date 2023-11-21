@@ -52,7 +52,7 @@
 	</build>
 	<repositories>
 		<repository>
-            <id>quincy</id>
+            <id>quincy</id><!--一定要和settings.xml中的serverId相对应-->
             <name>My Nexus</name>
             <url>https://nexus.maqiang777.com/repository/maven-releases/</url>
             <snapshots>
