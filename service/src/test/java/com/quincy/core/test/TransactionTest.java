@@ -39,12 +39,56 @@ public class TransactionTest {
 		}
 	}
 
+	public void opt2() throws Exception {
+		Connection conn = null;
+		PreparedStatement stat = null;
+		PreparedStatement stat2 = null;
+		try {
+			conn = this.createConnection();
+			conn.setAutoCommit(false);
+			conn.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
+			stat = conn.prepareStatement("SELECT * FROM b_region WHERE id=?");
+			stat.setLong(1, 243);
+			ResultSet rs = stat.executeQuery();
+			if(rs.next()) {
+				System.out.println("----------------"+rs.getString("en_name"));
+			}
+
+//			stat2 = conn.prepareStatement("UPDATE b_region SET en_name=CONCAT(en_name, '_xxx') WHERE id=?");
+			stat2 = conn.prepareStatement("DELETE FROM b_region WHERE id=?");
+			stat2.setLong(1, 243);
+			int r = stat2.executeUpdate();
+			System.out.println("R----------------"+r);
+
+			rs = stat.executeQuery();
+			if(rs.next()) {
+				System.out.println("----------------"+rs.getString("en_name"));
+			}
+
+			conn.commit();
+		} catch (Exception e) {
+			conn.rollback();
+			throw e;
+		} finally {
+			if(stat!=null) {
+				stat.close();
+			}
+			if(stat2!=null) {
+				stat2.close();
+			}
+			if(conn!=null) {
+				conn.close();
+			}
+		}
+	}
+
 	private Connection createConnection() throws ClassNotFoundException, SQLException {
-		Class.forName("com.mysql.jdbc.Driver");
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/jlcedu", "jlcedu", "xxx");
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		return DriverManager.getConnection("jdbc:mysql://47.93.89.0:3306/ducati", "admin", "nimda");
 	}
 
 	public static void main(String[] args) throws Exception {
-		new TransactionTest().opt1();
+//		new TransactionTest().opt1();
+		new TransactionTest().opt2();
 	}
 }
