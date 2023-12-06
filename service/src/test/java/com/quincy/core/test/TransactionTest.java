@@ -30,12 +30,10 @@ public class TransactionTest {
 			conn.rollback();
 			throw e;
 		} finally {
-			if(stat!=null) {
+			if(stat!=null)
 				stat.close();
-			}
-			if(conn!=null) {
+			if(conn!=null)
 				conn.close();
-			}
 		}
 	}
 
@@ -71,15 +69,12 @@ public class TransactionTest {
 			conn.rollback();
 			throw e;
 		} finally {
-			if(stat!=null) {
+			if(stat!=null)
 				stat.close();
-			}
-			if(stat2!=null) {
+			if(stat2!=null)
 				stat2.close();
-			}
-			if(conn!=null) {
+			if(conn!=null)
 				conn.close();
-			}
 		}
 	}
 
@@ -97,7 +92,7 @@ public class TransactionTest {
 //			stat = conn.prepareStatement("SELECT * FROM b_region WHERE id=?");
 //			stat.setLong(1, 243);
 			stat = conn.prepareStatement("SELECT * FROM b_region WHERE en_name LIKE ?");
-			stat.setString(1, "U%");
+			stat.setString(1, "Ug%");
 			rs = stat.executeQuery();
 			while(rs.next()) {
 				System.out.println("----------------"+rs.getString("en_name"));
@@ -111,7 +106,7 @@ public class TransactionTest {
 //			System.out.println("R----------------"+r);
 
 			stat3 = conn.prepareStatement("SELECT * FROM b_region WHERE en_name LIKE ?");
-			stat3.setString(1, "United%");
+			stat3.setString(1, "U%");
 			rs = stat3.executeQuery();
 			while(rs.next()) {
 				System.out.println(rs.getLong("id")+"==============="+rs.getString("en_name"));
@@ -122,18 +117,45 @@ public class TransactionTest {
 			conn.rollback();
 			throw e;
 		} finally {
-			if(stat!=null) {
+			if(stat!=null)
 				stat.close();
-			}
-			if(stat2!=null) {
+			if(stat2!=null)
 				stat2.close();
-			}
-			if(stat3!=null) {
+			if(stat3!=null)
 				stat3.close();
-			}
-			if(conn!=null) {
+			if(conn!=null)
 				conn.close();
-			}
+		}
+	}
+
+	public void opt4() throws Exception {
+		Connection conn = null;
+		PreparedStatement stat = null;
+		try {
+			conn = this.createConnection();
+			conn.setAutoCommit(false);
+			conn.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
+//			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb BETWEEN 12 AND 21;");
+//			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb BETWEEN 10 AND 25;");
+//			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE id=1;");
+//			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb=15;");
+//			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb=17;");
+//			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb BETWEEN 15 AND 15;");
+			stat = conn.prepareStatement("INSERT INTO test VALUES(11, 'aaa11', 15);");
+//			stat = conn.prepareStatement("DELETE FROM test WHERE bbb=15;");
+//			stat = conn.prepareStatement("DELETE FROM test WHERE bbb=17;");
+//			stat = conn.prepareStatement("DELETE FROM test WHERE id=1;");
+//			stat = conn.prepareStatement("DELETE FROM test WHERE bbb BETWEEN 10 AND 25;");
+			System.out.println("R----------"+stat.executeUpdate());
+			conn.commit();
+		} catch (Exception e) {
+			conn.rollback();
+			throw e;
+		} finally {
+			if(stat!=null)
+				stat.close();
+			if(conn!=null)
+				conn.close();
 		}
 	}
 
@@ -143,8 +165,6 @@ public class TransactionTest {
 	}
 
 	public static void main(String[] args) throws Exception {
-//		new TransactionTest().opt1();
-//		new TransactionTest().opt2();
-		new TransactionTest().opt3();
+		new TransactionTest().opt4();
 	}
 }
