@@ -141,10 +141,10 @@ public class TransactionTest {
 //			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb=15;");
 //			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb=17;");
 //			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb BETWEEN 15 AND 15;");
-			stat = conn.prepareStatement("INSERT INTO test VALUES(11, 'aaa11', 15);");
+//			stat = conn.prepareStatement("INSERT INTO test VALUES(11, 'aaa11', 17);");
 //			stat = conn.prepareStatement("DELETE FROM test WHERE bbb=15;");
 //			stat = conn.prepareStatement("DELETE FROM test WHERE bbb=17;");
-//			stat = conn.prepareStatement("DELETE FROM test WHERE id=1;");
+			stat = conn.prepareStatement("DELETE FROM test WHERE id=1;");
 //			stat = conn.prepareStatement("DELETE FROM test WHERE bbb BETWEEN 10 AND 25;");
 			System.out.println("R----------"+stat.executeUpdate());
 			conn.commit();
