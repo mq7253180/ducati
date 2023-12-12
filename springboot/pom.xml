@@ -94,15 +94,11 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>1.2.2</version>
 				<configuration>
-					<imageName>quincy/ducati</imageName>
+					<imageName>registry.maqiang777.com/quincy/ducati</imageName>
 					<imageTags>
 						<imageTag>1.0</imageTag>
 					</imageTags>
 					<forceTags>true</forceTags>
-					<!-- <dockerHost>http://localhost:2375</dockerHost>
-					<registryUrl>localhost:5000</registryUrl>
-					<pushImage>true</pushImage>
-					<pushImageTag>true</pushImageTag> -->
 
 					<!-- Dockerfile两种方式 -->
 					<!-- 方式一：插件自动生成 -->
@@ -130,6 +126,11 @@
 							<include>${project.build.finalName}.conf</include>
 						</resource>
 					</resources>
+					<!-- <dockerHost>http://47.93.89.0:2375</dockerHost>
+					<registryUrl>https://registry.maqiang777.com</registryUrl>
+					<pushImage>true</pushImage>
+					<pushImageTag>true</pushImageTag> -->
+					<serverId>docker-registry</serverId><!-- 对应maven的settings.xml中server节点的id节点的值，以获取用户名和密码 -->
 				</configuration>
 			</plugin>
 		</plugins>
@@ -153,8 +154,8 @@
 				<log.level>INFO</log.level>
 				<spring.freemarker.cache>false</spring.freemarker.cache>
 				<prefix.resource>/static</prefix.resource>
-				<eureka.addr>localhost:8761</eureka.addr>
-				<eureka.instance.hostname>localhost</eureka.instance.hostname>
+				<eureka.addr>47.93.89.0:8761</eureka.addr>
+				<eureka.instance.hostname>47.93.89.0</eureka.instance.hostname>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
@@ -286,7 +287,7 @@
 		</dependency>
 		<dependency>
 		    <groupId>com.hce</groupId>
-		    <artifactId>ducati-service</artifactId>
+		    <artifactId>ducati-service-sharding</artifactId>
 		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
