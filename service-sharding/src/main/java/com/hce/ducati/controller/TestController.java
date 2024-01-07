@@ -1,5 +1,7 @@
 package com.hce.ducati.controller;
 
+import java.net.UnknownHostException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -20,8 +22,8 @@ public class TestController {
 
 	@RequestMapping("/test")
 	@ResponseBody
-	public void test() throws InterruptedException {
-		zzzService.test();
+	public void test() throws InterruptedException, UnknownHostException {
+		zzzService.test2();
 	}
 
 	@RequestMapping("/honda")
