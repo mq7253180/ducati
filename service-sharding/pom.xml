@@ -16,9 +16,19 @@
 	<dependencies>
 		<dependency>
 		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-config-client</artifactId>
+		    <version>${version.spring-cloud}</version>
+		</dependency>
+		<!-- <dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-config</artifactId>
+		    <version>${version.spring-cloud}</version>
+		</dependency> -->
+		<!--<dependency>
+		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-bus-kafka</artifactId>
 		    <version>4.0.0</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
 		    <groupId>com.maqiangcgq</groupId>
 		    <artifactId>quincy-redis</artifactId>

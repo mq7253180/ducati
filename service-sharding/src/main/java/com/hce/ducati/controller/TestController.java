@@ -1,6 +1,7 @@
 package com.hce.ducati.controller;
 
 import java.net.UnknownHostException;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +24,19 @@ public class TestController {
 	@RequestMapping("/test")
 	@ResponseBody
 	public void test() throws InterruptedException, UnknownHostException {
-		zzzService.test2();
+		zzzService.test();
+	}
+
+	@RequestMapping("/chaxun")
+	@ResponseBody
+	public String chaxun() throws InterruptedException, UnknownHostException {
+		return zzzService.chaxun("asfa", 324);
+	}
+
+	@RequestMapping("/keys")
+	@ResponseBody
+	public Set<String> allKeys() {
+		return zzzService.allKeys(null);
 	}
 
 	@RequestMapping("/honda")
