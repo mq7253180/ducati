@@ -10,60 +10,31 @@ public class TransactionTest {
 	public void opt1() throws Exception {
 		Connection conn = null;
 		PreparedStatement stat = null;
-		try {
-			conn = this.createConnection();
-			conn.setAutoCommit(false);
-			conn.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
-			stat = conn.prepareStatement("SELECT * FROM t_core_i18n_value WHERE id=?");
-			stat.setLong(1, 101);
-			ResultSet rs = stat.executeQuery();
-			if(rs.next()) {
-				System.out.println("----------------"+rs.getString("value"));
-			}
-
-			rs = stat.executeQuery();
-			if(rs.next()) {
-				System.out.println("----------------"+rs.getString("value"));
-			}
-			conn.commit();
-		} catch (Exception e) {
-			conn.rollback();
-			throw e;
-		} finally {
-			if(stat!=null)
-				stat.close();
-			if(conn!=null)
-				conn.close();
-		}
-	}
-
-	public void opt2() throws Exception {
-		Connection conn = null;
-		PreparedStatement stat = null;
 		PreparedStatement stat2 = null;
+		PreparedStatement stat3 = null;
+		PreparedStatement stat4 = null;
 		try {
 			conn = this.createConnection();
 			conn.setAutoCommit(false);
 			conn.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
-			stat = conn.prepareStatement("SELECT * FROM b_region WHERE id=?");
-			stat.setLong(1, 243);
+			stat = conn.prepareStatement("SELECT * FROM test WHERE bbb BETWEEN ? AND ?");
+			stat.setInt(1, 12);
+			stat.setInt(2, 21);
 			ResultSet rs = stat.executeQuery();
-			if(rs.next()) {
-				System.out.println("----------------"+rs.getString("en_name"));
+			while(rs.next()) {
+				System.out.println(rs.getInt("id")+"---"+rs.getString("aaa")+"---"+rs.getString("bbb"));
 			}
-			rs.close();
 
-			stat2 = conn.prepareStatement("UPDATE b_region SET en_name=CONCAT(en_name, '_xxx') WHERE id=?");
-//			stat2 = conn.prepareStatement("DELETE FROM b_region WHERE id=?");
-			stat2.setLong(1, 243);
-			int r = stat2.executeUpdate();
-			System.out.println("R----------------"+r);
+			stat2 = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE id=?;");
+			stat2.setInt(1, 9);
+			System.out.println("UPDATE======"+stat2.executeUpdate());
 
+			stat.setInt(1, 7);
+			stat.setInt(2, 21);
 			rs = stat.executeQuery();
-			if(rs.next()) {
-				System.out.println("----------------"+rs.getString("en_name"));
+			while(rs.next()) {
+				System.out.println(rs.getInt("id")+"---"+rs.getString("aaa")+"---"+rs.getString("bbb"));
 			}
-
 			conn.commit();
 		} catch (Exception e) {
 			conn.rollback();
@@ -73,6 +44,32 @@ public class TransactionTest {
 				stat.close();
 			if(stat2!=null)
 				stat2.close();
+			if(stat3!=null)
+				stat3.close();
+			if(stat4!=null)
+				stat4.close();
+			if(conn!=null)
+				conn.close();
+		}
+	}
+
+	public void opt2() throws Exception {
+		Connection conn = null;
+		PreparedStatement stat = null;
+		try {
+			conn = this.createConnection();
+			conn.setAutoCommit(false);
+			conn.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
+			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE id=?;");
+			stat.setLong(1, 9);
+			System.out.println("----------------"+stat.executeUpdate());
+			conn.commit();
+		} catch (Exception e) {
+			conn.rollback();
+			throw e;
+		} finally {
+			if(stat!=null)
+				stat.close();
 			if(conn!=null)
 				conn.close();
 		}
@@ -144,9 +141,20 @@ public class TransactionTest {
 //			stat = conn.prepareStatement("INSERT INTO test VALUES(11, 'aaa11', 17);");
 //			stat = conn.prepareStatement("DELETE FROM test WHERE bbb=15;");
 //			stat = conn.prepareStatement("DELETE FROM test WHERE bbb=17;");
-			stat = conn.prepareStatement("DELETE FROM test WHERE id=1;");
+//			stat = conn.prepareStatement("DELETE FROM test WHERE id=1;");
 //			stat = conn.prepareStatement("DELETE FROM test WHERE bbb BETWEEN 10 AND 25;");
-			System.out.println("R----------"+stat.executeUpdate());
+//			System.out.println("R----------"+stat.executeUpdate());
+//			stat = conn.prepareStatement("SELECT * FROM test WHERE bbb BETWEEN 10 AND 25 ORDER BY bbb;");
+			stat = conn.prepareStatement("SELECT * FROM test WHERE id=11;");
+			ResultSet rs = stat.executeQuery();
+			while(rs.next())
+				System.out.println(rs.getString("aaa")+"---"+rs.getInt("bbb"));
+			rs.close();
+			System.out.println("--------------------");
+			rs = stat.executeQuery();
+			while(rs.next())
+				System.out.println(rs.getString("aaa")+"---"+rs.getInt("bbb"));
+			rs.close();
 			conn.commit();
 		} catch (Exception e) {
 			conn.rollback();
@@ -165,6 +173,6 @@ public class TransactionTest {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new TransactionTest().opt4();
+		new TransactionTest().opt2();
 	}
 }
