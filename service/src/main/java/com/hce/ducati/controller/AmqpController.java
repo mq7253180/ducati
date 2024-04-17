@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rabbitmq.client.AMQP.BasicProperties;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.ConfirmListener;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.Consumer;
-import com.rabbitmq.client.DefaultConsumer;
-import com.rabbitmq.client.Envelope;
+//import com.rabbitmq.client.AMQP.BasicProperties;
+//import com.rabbitmq.client.Channel;
+//import com.rabbitmq.client.ConfirmListener;
+//import com.rabbitmq.client.Connection;
+//import com.rabbitmq.client.ConnectionFactory;
+//import com.rabbitmq.client.Consumer;
+//import com.rabbitmq.client.DefaultConsumer;
+//import com.rabbitmq.client.Envelope;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,19 +27,19 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/amqp")
 public class AmqpController {
-	private final static ConnectionFactory connectionFactory = new ConnectionFactory();
+//	private final static ConnectionFactory connectionFactory = new ConnectionFactory();
 	@Value("${spring.rabbitmq.host}")
 	private String host;
 	@Value("${spring.rabbitmq.username}")
 	private String username;
 	@Value("${spring.rabbitmq.password}")
 	private String password;
-	private static Connection conn = null;
-	private static Channel channel = null;
+//	private static Connection conn = null;
+//	private static Channel channel = null;
 	private final static String QUEUE_NAME = "ducati.origin";
 	private final static String ROUTING_KEY = QUEUE_NAME.substring(QUEUE_NAME.indexOf("_")+1, QUEUE_NAME.length());
 	private final static String EXCHANGE_NAME = "ducati.origin";
-
+/*
 	@RequestMapping("/send")
 	@ResponseBody
 	public void send(@RequestParam(required = true, name = "content")String content) throws IOException, TimeoutException, InterruptedException {
@@ -117,4 +117,5 @@ public class AmqpController {
 			log.error("AMQP_ERR: ", e);
 		}
 	}
+*/
 }

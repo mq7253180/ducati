@@ -24,15 +24,20 @@
 		    <artifactId>quincy-redis</artifactId>
 		    <version>1.1.2</version>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 		    <groupId>com.maqiangcgq</groupId>
 		    <artifactId>quincy-zookeeper</artifactId>
 		    <version>1.1.2</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
 		    <groupId>org.apache.poi</groupId>
 		    <artifactId>poi-ooxml</artifactId>
 		    <version>5.2.3</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-config-client</artifactId>
+		    <version>${version.spring-cloud}</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.springframework.cloud</groupId>
@@ -45,6 +50,7 @@
 		    <version>2.2.10.RELEASE</version>
 		</dependency>
 		<!-- 有了spring-cloud-starter-bus-amqp就不用依赖这个了 -->
+		<!--
 		<dependency>
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-stream</artifactId>
@@ -70,12 +76,13 @@
 		    <artifactId>spring-cloud-starter-bus-amqp</artifactId>
 		    <version>4.0.1</version>
 		</dependency>
+		-->
+		<!--
 		<dependency>
 		    <groupId>com.hce</groupId>
 		    <artifactId>dubbo-server</artifactId>
 		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<!--
 		<dependency>
 		    <groupId>com.hcehk</groupId>
 		    <artifactId>cfca-api</artifactId>
@@ -127,14 +134,14 @@
 		    <version>0.9.1</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.kafka</groupId>
-		    <artifactId>kafka-clients</artifactId>
-		    <version>3.4.0</version>
-		</dependency>
-		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-core</artifactId>
 		    <version>2.14.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.kafka</groupId>
+		    <artifactId>kafka-clients</artifactId>
+		    <version>3.4.0</version>
 		</dependency>
     </dependencies>
 </project>

@@ -5,9 +5,9 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.dubbo.config.annotation.DubboReference;
+//import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.oltu.oauth2.common.OAuth;
-import org.apache.zookeeper.KeeperException;
+//import org.apache.zookeeper.KeeperException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.ApplicationContext;
@@ -24,7 +24,7 @@ import com.hce.ducati.entity.Enterprise;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.ServiceInitConfiguration;
 import com.hce.ducati.client.CenterFeign;
-import com.hce.ducati.client.DucatiClient;
+//import com.hce.ducati.client.DucatiClient;
 import com.hce.ducati.client.DucatiSpringCloudClient;
 import com.hce.ducati.o.AccountO;
 import com.hce.ducati.o.Params;
@@ -226,7 +226,7 @@ public class XxxController {
 	public String hystrixFailure() {
 		return "FAILURE";
 	}
-
+/*
 	@GetMapping("/stream/output/{id}/{amount}")
 	@ResponseBody
 	public String streamSource(@PathVariable(required = true, name = "id")String id, @PathVariable(required = true, name = "amount")BigDecimal amount) {
@@ -245,31 +245,31 @@ public class XxxController {
 		o.setAmount(amount);
 		return ducatiSpringCloudClient.sendTo(o);
 	}
-
+*/
 	@GetMapping("/regions")
 	@ResponseBody
 	public List<Region> findRegions() {
 		return xxxService.findRegions();
 	}
 
-	@DubboReference(version = "1.0.0")
-	private DucatiClient ducatiClient;
+//	@DubboReference(version = "1.0.0")
+//	private DucatiClient ducatiClient;
 
-	@GetMapping("/regions/dubbo")
-	@ResponseBody
-	public List<com.hce.ducati.client.o.Region> findRegionsViaDubbo() {
-		log.info("============================SPRINGBOOT_DUBBO");
-		return ducatiClient.fineAllZones();
-	}
+//	@GetMapping("/regions/dubbo")
+//	@ResponseBody
+//	public List<com.hce.ducati.client.o.Region> findRegionsViaDubbo() {
+//		log.info("============================SPRINGBOOT_DUBBO");
+//		return ducatiClient.fineAllZones();
+//	}
 
 	@Autowired
 	private XxxService xxxService;
 
-	@GetMapping("/zk/{arg}/{duration}")
-	@ResponseBody
-	public String testZk(@PathVariable(required = true, name = "arg")String arg, @PathVariable(required = true, name = "duration")long duration) throws KeeperException, InterruptedException {
-		return xxxService.testZk(arg, null, duration);
-	}
+//	@GetMapping("/zk/{arg}/{duration}")
+//	@ResponseBody
+//	public String testZk(@PathVariable(required = true, name = "arg")String arg, @PathVariable(required = true, name = "duration")long duration) throws KeeperException, InterruptedException {
+//		return xxxService.testZk(arg, null, duration);
+//	}
 
 	@GetMapping("/testTx")
 	@ResponseBody
@@ -348,11 +348,11 @@ public class XxxController {
 		xxxService.testRedisCluster("aaa", null, "bbb", null, "ccc");
 	}
 
-	@GetMapping("/redis3")
-	@ResponseBody
-	public void testRedisCluster3() throws InterruptedException {
-		xxxService.testDeprecatedSynchronized(3000);
-	}
+//	@GetMapping("/redis3")
+//	@ResponseBody
+//	public void testRedisCluster3() throws InterruptedException {
+//		xxxService.testDeprecatedSynchronized(3000);
+//	}
 
 	private String sss;
 

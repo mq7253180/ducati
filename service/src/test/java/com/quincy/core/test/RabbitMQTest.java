@@ -3,10 +3,10 @@ package com.quincy.core.test;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.ConfirmListener;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
+//import com.rabbitmq.client.Channel;
+//import com.rabbitmq.client.ConfirmListener;
+//import com.rabbitmq.client.Connection;
+//import com.rabbitmq.client.ConnectionFactory;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,8 +20,8 @@ public class RabbitMQTest {
 //	private final static String ROUTING_KEY = "xxx";
 //	private final static String EXCHANGE_NAME = "benelli.topic";
 //	private final static String ROUTING_KEY = "benelli.test.#";
-	private final static ConnectionFactory connectionFactory = new ConnectionFactory();
-
+//	private final static ConnectionFactory connectionFactory = new ConnectionFactory();
+/*
 	public static void main(String[] args) throws IOException, TimeoutException, InterruptedException {
 		connectionFactory.setHost("47.93.89.0");
 		connectionFactory.setUsername("guest");
@@ -61,4 +61,5 @@ public class RabbitMQTest {
 				conn.close();
 		}
 	}
+*/
 }

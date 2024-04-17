@@ -2,11 +2,11 @@ package com.hce.ducati.service.impl;
 
 import java.util.List;
 
-import org.apache.dubbo.config.annotation.DubboReference;
-import org.apache.zookeeper.CreateMode;
-import org.apache.zookeeper.KeeperException;
-import org.apache.zookeeper.ZooDefs;
-import org.apache.zookeeper.ZooKeeper;
+//import org.apache.dubbo.config.annotation.DubboReference;
+//import org.apache.zookeeper.CreateMode;
+//import org.apache.zookeeper.KeeperException;
+//import org.apache.zookeeper.ZooDefs;
+//import org.apache.zookeeper.ZooKeeper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hce.ducati.client.DucatiClient;
+//import com.hce.ducati.client.DucatiClient;
 import com.hce.ducati.client.InnerFeign;
 import com.hce.ducati.entity.Enterprise;
 import com.hce.ducati.mapper.EnterpriseMapper;
@@ -23,12 +23,12 @@ import com.hce.ducati.o.Params;
 import com.hce.ducati.service.XxxService;
 import com.hce.ducati.service.ZzzService;
 import com.hce.ducati.service.ZzzzService;
-import com.quincy.sdk.annotation.ZooKeeperInjector;
+//import com.quincy.sdk.annotation.ZooKeeperInjector;
 import com.quincy.sdk.annotation.transaction.DTransactional;
 import com.quincy.sdk.dao.RegionRepository;
 import com.quincy.sdk.entity.Region;
-import com.quincy.sdk.ZKContext;
-import com.quincy.sdk.annotation.ZkSynchronized;
+//import com.quincy.sdk.ZKContext;
+//import com.quincy.sdk.annotation.ZkSynchronized;
 import com.quincy.sdk.annotation.DurationLog;
 import com.quincy.sdk.annotation.JedisSupport;
 import com.quincy.sdk.annotation.ReadOnly;
@@ -39,8 +39,8 @@ import redis.clients.jedis.JedisCluster;
 @Slf4j
 @Service
 public class XxxServiceImpl implements XxxService {
-	@Autowired
-	private ZKContext zkContext;
+//	@Autowired
+//	private ZKContext zkContext;
 	@Value("${spring.application.name}")
 	private String appName;
 	@Autowired
@@ -49,8 +49,8 @@ public class XxxServiceImpl implements XxxService {
 	private RegionMapper regionMapper;
 	@Autowired
 	private InnerFeign innerFeign;
-	@DubboReference(version = "1.0.0")
-	private DucatiClient ducatiClient;
+//	@DubboReference(version = "1.0.0")
+//	private DucatiClient ducatiClient;
 
 	@Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
 	@Override
@@ -174,23 +174,23 @@ public class XxxServiceImpl implements XxxService {
 		return list;
 	}
 
-	@DurationLog
+//	@DurationLog
 //	@Cache(expire = 30)
 //	@Synchronized("xxx")
 //	@DeprecatedSynchronized("xxx")
-	@ZooKeeperInjector
-	@Override
-	public String testZk(String arg, ZooKeeper zk, long duration) throws KeeperException, InterruptedException {
-		String result = zk.create("/qqq", arg.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
-		log.info("==============={}", result);
-		List<String> list = zk.getChildren(zkContext.getSynPath(), false);
-		for(String path:list) {
-			log.info("---------------{}", path);
-		}
-		Thread.sleep(duration);
-//		zk.delete("/quincy-ducati/synchronization/xxx/execution1", -1);
-		return "sss";
-	}
+//	@ZooKeeperInjector
+//	@Override
+//	public String testZk(String arg, ZooKeeper zk, long duration) throws KeeperException, InterruptedException {
+//		String result = zk.create("/qqq", arg.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
+//		log.info("==============={}", result);
+//		List<String> list = zk.getChildren(zkContext.getSynPath(), false);
+//		for(String path:list) {
+//			log.info("---------------{}", path);
+//		}
+//		Thread.sleep(duration);
+////		zk.delete("/quincy-ducati/synchronization/xxx/execution1", -1);
+//		return "sss";
+//	}
 
 	@Autowired
 	private ZzzService zzzService;
@@ -214,8 +214,8 @@ public class XxxServiceImpl implements XxxService {
 				.append(this.classInfo(regionMapper, "MYBATIS_MAPPER"))
 				.append("\r\n")
 				.append(this.classInfo(innerFeign, "SPRINGCLOUD_FEIGN"))
-				.append("\r\n")
-				.append(this.classInfo(ducatiClient, "DUBBO_CLIENT"))
+//				.append("\r\n")
+//				.append(this.classInfo(ducatiClient, "DUBBO_CLIENT"))
 				.toString();
 	}
 
@@ -261,11 +261,11 @@ public class XxxServiceImpl implements XxxService {
 		log.info("testRedisCluster==================={}", jedis2.get(key));
 	}
 
-	@ZkSynchronized(value = "ttt")
-	@Override
-	public void testDeprecatedSynchronized(long millis) throws InterruptedException {
-		Thread.sleep(millis);
-	}
+//	@ZkSynchronized(value = "ttt")
+//	@Override
+//	public void testDeprecatedSynchronized(long millis) throws InterruptedException {
+//		Thread.sleep(millis);
+//	}
 
 	@ReadOnly
 	public List<Region> findRegions() {
