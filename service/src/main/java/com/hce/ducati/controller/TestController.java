@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.RequestContext;
 
 import com.quincy.auth.annotation.LoginRequired;
 import com.quincy.auth.controller.RootController;
+import com.quincy.sdk.annotation.DoNotWrap;
 import com.quincy.sdk.helper.CommonHelper;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,6 +39,19 @@ public class TestController {
 //	private String templateLoaderPath;
 //	@Value("${spring.freemarker.suffix}")
 //	private String springFreemarkerSuffix;
+
+	@DoNotWrap
+	@RequestMapping("/test/callback")
+	@ResponseBody
+	public String callback() {
+		return "OK";
+	}
+
+	@RequestMapping("/test/callback/wrap")
+	@ResponseBody
+	public String callbackWrap() {
+		return "OK";
+	}
 
 	@RequestMapping("/test/honda")
 	@ResponseBody
