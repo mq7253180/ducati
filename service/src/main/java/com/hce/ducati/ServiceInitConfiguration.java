@@ -22,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.UserService;
-import com.quincy.auth.AuthContext;
 import com.quincy.auth.AuthHandler;
 import com.quincy.auth.controller.AuthActions;
 import com.quincy.auth.controller.PwdRestEmailInfo;
@@ -45,8 +44,6 @@ public class ServiceInitConfiguration {
 	@Autowired
 	private EmailService emailService;
 	@Autowired
-	private AuthContext authContext;
-	@Autowired
 	private UserService userService;
 
 	@Scheduled(cron = "0 0/2 * * * ?")
@@ -67,15 +64,16 @@ public class ServiceInitConfiguration {
 				emailService.send("mq7253180@126.com", "转账失败", message, "", null, "UTF-8", null, null);
 			}
 		});
-		authContext.setAuthHandler(new AuthHandler() {
-			/**
-			 * 只有auth.loginRequired.root=true时才有用
-			 */
+	}
+
+	@Bean
+	public AuthHandler authHandler() {
+		return new AuthHandler() {
 			@Override
 			public Map<String, ?> rootViewObjects(HttpServletRequest request) throws Exception {
 				return null;
 			}
-		});
+		};
 	}
 
 	@Bean
