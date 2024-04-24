@@ -16,7 +16,8 @@ public class TransactionTest {
 		try {
 			conn = this.createConnection();
 			conn.setAutoCommit(false);
-			conn.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
+			conn.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+//			conn.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
 			stat = conn.prepareStatement("SELECT * FROM test WHERE bbb BETWEEN ? AND ?");
 			stat.setInt(1, 12);
 			stat.setInt(2, 21);
@@ -59,9 +60,13 @@ public class TransactionTest {
 		try {
 			conn = this.createConnection();
 			conn.setAutoCommit(false);
-			conn.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
-			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE id=?;");
-			stat.setLong(1, 9);
+			conn.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+//			conn.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
+//			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE id=?;");
+//			stat.setLong(1, 9);
+//			stat = conn.prepareStatement("UPDATE test SET bbb=bbb+5 WHERE aaa=?;");
+//			stat.setString(1, "aaa8");
+			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb BETWEEN 12 AND 21;");
 			System.out.println("----------------"+stat.executeUpdate());
 			conn.commit();
 		} catch (Exception e) {
@@ -131,8 +136,8 @@ public class TransactionTest {
 		try {
 			conn = this.createConnection();
 			conn.setAutoCommit(false);
-			conn.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
-//			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb BETWEEN 12 AND 21;");
+			conn.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb BETWEEN 12 AND 21;");
 //			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb BETWEEN 10 AND 25;");
 //			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE id=1;");
 //			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb=15;");
@@ -143,18 +148,18 @@ public class TransactionTest {
 //			stat = conn.prepareStatement("DELETE FROM test WHERE bbb=17;");
 //			stat = conn.prepareStatement("DELETE FROM test WHERE id=1;");
 //			stat = conn.prepareStatement("DELETE FROM test WHERE bbb BETWEEN 10 AND 25;");
-//			System.out.println("R----------"+stat.executeUpdate());
+			System.out.println("R----------"+stat.executeUpdate());
 //			stat = conn.prepareStatement("SELECT * FROM test WHERE bbb BETWEEN 10 AND 25 ORDER BY bbb;");
-			stat = conn.prepareStatement("SELECT * FROM test WHERE id=11;");
-			ResultSet rs = stat.executeQuery();
-			while(rs.next())
-				System.out.println(rs.getString("aaa")+"---"+rs.getInt("bbb"));
-			rs.close();
-			System.out.println("--------------------");
-			rs = stat.executeQuery();
-			while(rs.next())
-				System.out.println(rs.getString("aaa")+"---"+rs.getInt("bbb"));
-			rs.close();
+//			stat = conn.prepareStatement("SELECT * FROM test WHERE id=11;");
+//			ResultSet rs = stat.executeQuery();
+//			while(rs.next())
+//				System.out.println(rs.getString("aaa")+"---"+rs.getInt("bbb"));
+//			rs.close();
+//			System.out.println("--------------------");
+//			rs = stat.executeQuery();
+//			while(rs.next())
+//				System.out.println(rs.getString("aaa")+"---"+rs.getInt("bbb"));
+//			rs.close();
 			conn.commit();
 		} catch (Exception e) {
 			conn.rollback();
