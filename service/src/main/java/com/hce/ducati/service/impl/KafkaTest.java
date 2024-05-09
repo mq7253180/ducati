@@ -40,10 +40,22 @@ public class KafkaTest implements Partitioner {
 		p.put(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG, "47.93.89.0:9092,47.93.89.0:9092");
 //		p.put(ProducerConfig.ACKS_CONFIG, "0");
 //		p.put(CommonClientConfigs.RETRIES_CONFIG, "3");
+		/*
+		 * 默认值是0，意思就是消息必须立即被发送，但这样会影响性能
+		 * 一般设置10毫秒左右，就是说这个消息发送完后会进入本地的一个batch，如果10毫秒内，这个batch满了16kb就会随batch一起被发送出去
+		 * 如果10毫秒内，batch没满，那么也必须把消息发送出去，不能让消息的发送延迟时间太长
+		 */
 //		p.put(ProducerConfig.LINGER_MS_CONFIG, "1");
+		/*
+		 * 设置发送消息的本地缓冲区，如果设置了该缓冲区，消息会先发送到本地缓冲区，可以提高消息发送性能，默认值是33554432，即32MB
+		 */
 //		p.put(ProducerConfig.BUFFER_MEMORY_CONFIG, "33554432");
 //		p.put(CommonClientConfigs.REQUEST_TIMEOUT_MS_CONFIG, "180000");
-		p.put(ProducerConfig.BATCH_SIZE_CONFIG, "1");
+		/*
+		 * 设置发送消息的本地缓冲区，如果设置了该缓冲区，消息会先发送到本地缓冲区，可以提高消息发送性能，默认值是33554432，即32MB
+		 * 本地线程会从缓冲区取数据，批量发送到broker，设置批量发送消息的大小，默认值是16384，即16kb，就是说一个batch满了16kb就发送出去
+		 */
+		p.put(ProducerConfig.BATCH_SIZE_CONFIG, 16384);
 		p.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 		p.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 //		p.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, KafkaTest.class.getName());
