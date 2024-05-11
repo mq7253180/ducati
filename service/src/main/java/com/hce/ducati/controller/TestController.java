@@ -19,7 +19,6 @@ import org.springframework.web.servlet.support.RequestContext;
 
 import com.quincy.auth.annotation.LoginRequired;
 import com.quincy.auth.controller.RootController;
-import com.quincy.sdk.RedisProcessor;
 import com.quincy.sdk.annotation.DoNotWrap;
 import com.quincy.sdk.helper.CommonHelper;
 
@@ -30,8 +29,6 @@ import jakarta.servlet.http.HttpServletResponse;
 @Controller
 @RequestMapping("")
 public class TestController {
-	@Autowired
-	private RedisProcessor redisProcessor;
 	@Value("${spring.pid.file}")
 	private String pid;
 	@Value("${ducati.host}")
@@ -47,7 +44,6 @@ public class TestController {
 	@RequestMapping("/test/callback")
 	@ResponseBody
 	public String callback() {
-		redisProcessor.setAndExpire("kkk", "vvv", 10);
 		return "OK";
 	}
 
