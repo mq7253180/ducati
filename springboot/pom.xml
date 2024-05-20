@@ -216,17 +216,22 @@
 			</snapshots>
 		</repository>
 	</repositories>
-	<!-- <dependencyManagement>
+	<dependencyManagement>
 	    <dependencies>
-	        <dependency>
+	        <!-- <dependency>
 	            <groupId>org.springframework.cloud</groupId>
 	            <artifactId>spring-cloud-dependencies</artifactId>
 	            <version>Finchley.SR2</version>
 	            <type>pom</type>
 	            <scope>import</scope>
-	        </dependency>
+	        </dependency> -->
+	        <dependency>
+			    <groupId>org.projectlombok</groupId>
+			    <artifactId>lombok</artifactId>
+			    <version>1.18.32</version>
+			</dependency>
 	    </dependencies>
-	</dependencyManagement> -->
+	</dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
