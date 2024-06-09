@@ -1,4 +1,4 @@
-package com.hce.ducati;
+package com.churen;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

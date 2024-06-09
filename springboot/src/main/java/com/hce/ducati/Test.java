@@ -1,4 +1,4 @@
-package org.springframework.boot.autoconfigure.data.redis;
+package com.hce.ducati;
 
 public class Test {
 	private String value;

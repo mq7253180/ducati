@@ -1,8 +1,6 @@
-package org.springframework.boot.autoconfigure.data.redis;
+package com.churen;
 
 import org.springframework.context.annotation.Configuration;
-
-import com.hce.ducati.QuincyRedisProperties;
 
 @Configuration
 public class QuincyRedisConfiguration {

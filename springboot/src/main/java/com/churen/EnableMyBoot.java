@@ -1,4 +1,4 @@
-package org.springframework.boot.autoconfigure.data.redis;
+package com.churen;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

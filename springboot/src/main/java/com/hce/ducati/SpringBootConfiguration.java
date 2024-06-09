@@ -4,7 +4,6 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.redis.Test;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.session.data.redis.config.annotation.SpringSessionRedisConnectionFactory;
 

@@ -1,4 +1,4 @@
-package org.springframework.boot.autoconfigure.data.redis;
+package com.churen;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,32 +17,14 @@ import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import org.springframework.session.data.redis.config.annotation.SpringSessionRedisConnectionFactory;
 
-import com.hce.ducati.QuincyRedisProperties;
+//import jakarta.annotation.PostConstruct;
+//import jakarta.annotation.Priority;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.Priority;
-
-@Priority(1)
+//@Priority(1)
 @Order(1)
 //@Configuration
 class AestConfiguration {//implements BeanDefinitionRegistryPostProcessor {
-	@SpringSessionRedisConnectionFactory
-	@Bean
-	public Test test1() {
-		Test t = new Test();
-		t.setValue("aaaaaaa");
-		return t;
-	}
-
-	@Bean
-	public Test test2() {
-		Test t = new Test();
-		t.setValue("bbbbbbb");
-		return t;
-	}
-
 	@Autowired
 	private QuincyRedisProperties quincyRedisProperties;
 	@Autowired
@@ -53,21 +35,12 @@ class AestConfiguration {//implements BeanDefinitionRegistryPostProcessor {
 		this.quincyRedisProperties = quincyRedisProperties;
 	}
 
-	@Priority(1)
-	@Order(1)
-	@Bean
-	Test createTest(RedisProperties redisProperties, QuincyRedisProperties quincyRedisProperties) {
-		this.redisProperties = redisProperties;
-		this.quincyRedisProperties = quincyRedisProperties;
-		return new Test();
-	}
-
 	@Autowired
 	private JedisConnectionFactory f;
 	@Autowired
 	private ConfigurableListableBeanFactory beanFactory;
 
-	@PostConstruct
+//	@PostConstruct
 	public void init() {
 		System.out.println("beanFactory========="+beanFactory);
 		QuincyRedisProperties qp = beanFactory.getBean(QuincyRedisProperties.class);
