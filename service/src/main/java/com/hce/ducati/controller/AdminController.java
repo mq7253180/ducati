@@ -33,7 +33,7 @@ public class AdminController {
 	@ResponseBody
 	public void updateSessionByUserId(@PathVariable(required = true, name = "id")Long id) throws ClassNotFoundException, IOException {
 		UserEntity userEntity = userService.find(id);
-		authorizationServerService.updateSession(ControllerUtils.toUser(userEntity));
+//		authorizationServerService.updateSession(ControllerUtils.toUser(userEntity));
 	}
 
 	@PermissionNeeded("reloadSessionsByRole")
@@ -41,6 +41,6 @@ public class AdminController {
 	@ResponseBody
 	public void updateSessionByRole(@PathVariable(required = true, name = "roleId")Long roleId) throws ClassNotFoundException, IOException {
 		List<User> users = userMapper.findUsers(roleId);
-		authorizationServerService.updateSession(users);
+//		authorizationServerService.updateSession(users);s
 	}
 }
