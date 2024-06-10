@@ -19,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.churen.EnableMyBoot;
 import com.quincy.sdk.Constants;
+import com.quincy.sdk.annotation.EnableRedisSessionEviction;
 
 //@EnableDubbo
 @EnableFeignClients
@@ -33,6 +34,7 @@ import com.quincy.sdk.Constants;
 @EnableJpaAuditing
 @EnableAutoConfiguration
 @EnableScheduling
+@EnableRedisSessionEviction
 @EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1800)
 @SpringBootApplication/*(exclude = {
         DataSourceAutoConfiguration.class
