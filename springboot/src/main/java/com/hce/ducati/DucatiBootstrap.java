@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.churen.EnableMyBoot;
+import com.quincy.auth.annotation.EnableAnnotationAuth;
 import com.quincy.sdk.Constants;
 import com.quincy.sdk.annotation.EnableRedisSessionEviction;
 
@@ -34,6 +35,7 @@ import com.quincy.sdk.annotation.EnableRedisSessionEviction;
 @EnableJpaAuditing
 @EnableAutoConfiguration
 @EnableScheduling
+@EnableAnnotationAuth
 @EnableRedisSessionEviction
 @EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1800)
 @SpringBootApplication/*(exclude = {
