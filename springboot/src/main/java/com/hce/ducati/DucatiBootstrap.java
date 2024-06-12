@@ -37,7 +37,7 @@ import com.quincy.sdk.annotation.EnableRedisSessionEviction;
 @EnableScheduling
 @EnableAnnotationAuth
 @EnableRedisSessionEviction
-@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1800)
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1234)
 @SpringBootApplication/*(exclude = {
         DataSourceAutoConfiguration.class
 })*/
