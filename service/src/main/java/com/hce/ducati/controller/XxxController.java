@@ -391,7 +391,7 @@ public class XxxController {
 	@GetMapping("/vcode")
 	@ResponseBody
 	public Result vcodeAsMobile(HttpServletRequest request) throws Exception {
-		String token = authorizationCommonController.vcode(request, VCodeCharsFrom.DIGITS, 6, "mobilePhone", new VCodeSender() {
+		String token = authorizationCommonController.vcode(request, VCodeCharsFrom.DIGITS, 6, new VCodeSender() {
 			@Override
 			public void send(char[] vcode) throws Exception {
 				log.info("已通过阿里云短信接口发送验证码: {}", new String(vcode));
