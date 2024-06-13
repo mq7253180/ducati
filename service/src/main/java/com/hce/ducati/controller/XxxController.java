@@ -43,9 +43,10 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.quincy.auth.annotation.PermissionNeeded;
 import com.quincy.auth.annotation.VCodeRequired;
 import com.quincy.auth.controller.AuthorizationCommonController;
-import com.quincy.auth.controller.VCodeCharsFrom;
-import com.quincy.auth.controller.VCodeSender;
 import com.quincy.sdk.Result;
+import com.quincy.sdk.VCodeCharsFrom;
+import com.quincy.sdk.VCodeSender;
+import com.quincy.sdk.VCodeService;
 import com.quincy.sdk.annotation.Cache;
 import com.quincy.sdk.annotation.JedisSupport;
 import com.quincy.sdk.annotation.SignatureRequired;
@@ -387,11 +388,13 @@ public class XxxController {
 	private AuthorizationCommonController authorizationCommonController;
 //	@Value("${vcode.expire}")
 //	private int vcodeExpire;
+	@Autowired
+	private VCodeService vCodeService;
 
 	@GetMapping("/vcode")
 	@ResponseBody
 	public Result vcodeAsMobile(HttpServletRequest request) throws Exception {
-		String token = authorizationCommonController.vcode(request, VCodeCharsFrom.DIGITS, 6, new VCodeSender() {
+		String token = vCodeService.vcode(request, VCodeCharsFrom.DIGITS, 6, new VCodeSender() {
 			@Override
 			public void send(char[] vcode) throws Exception {
 				log.info("已通过阿里云短信接口发送验证码: {}", new String(vcode));
