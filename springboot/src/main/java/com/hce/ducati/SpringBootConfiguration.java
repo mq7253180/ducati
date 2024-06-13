@@ -5,7 +5,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.session.data.redis.config.annotation.SpringSessionRedisConnectionFactory;
+//import org.springframework.session.data.redis.config.annotation.SpringSessionRedisConnectionFactory;
 
 import com.hce.ducati.freemarker.PaginationTemplateDirectiveModelBean;
 
@@ -23,11 +23,11 @@ public class SpringBootConfiguration {
 //    	System.out.println("TTTTTTTTTTT==========="+t1+"================"+t2+"-------"+test.getValue());
 //    }
 
-    @Autowired
-    public void setTestFactory(@SpringSessionRedisConnectionFactory ObjectProvider<Test> t1, ObjectProvider<Test> t2) {
-    	this.test = t1.getIfAvailable(t2::getObject);
-    	System.out.println("TTTTTTTTTTT==========="+test.getValue());
-    }
+//    @Autowired
+//    public void setTestFactory(@SpringSessionRedisConnectionFactory ObjectProvider<Test> t1, ObjectProvider<Test> t2) {
+//    	this.test = t1.getIfAvailable(t2::getObject);
+//    	System.out.println("TTTTTTTTTTT==========="+test.getValue());
+//    }
 
     @PostConstruct
     public void init() {

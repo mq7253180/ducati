@@ -13,11 +13,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+//import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import com.churen.EnableMyBoot;
 import com.quincy.auth.annotation.EnableAnnotationAuth;
 import com.quincy.sdk.Constants;
 import com.quincy.sdk.annotation.EnableRedisSessionEviction;
@@ -37,11 +36,10 @@ import com.quincy.sdk.annotation.EnableRedisSessionEviction;
 @EnableScheduling
 @EnableAnnotationAuth
 @EnableRedisSessionEviction
-@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1234)
+//@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1234)
 @SpringBootApplication/*(exclude = {
         DataSourceAutoConfiguration.class
 })*/
-@EnableMyBoot
 @ComponentScan(basePackages= {"com.*"})
 public class DucatiBootstrap {
     public static void main(String[] args) {
