@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.HandlerMethod;
@@ -17,8 +18,11 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.support.RequestContext;
 
+import com.quincy.auth.AuthHelper;
 import com.quincy.auth.annotation.LoginRequired;
 import com.quincy.auth.controller.RootController;
+import com.quincy.auth.o.XSession;
+import com.quincy.core.InnerConstants;
 import com.quincy.sdk.annotation.DoNotWrap;
 import com.quincy.sdk.helper.CommonHelper;
 
@@ -143,5 +147,14 @@ public class TestController {
 	@RequestMapping("/testww")
 	public String testww() {
 		return applicationContext.getMessage("status.error.500", null, CommonHelper.getLocale());
+	}
+
+	@LoginRequired
+	@ResponseBody
+	@RequestMapping("/test/update/{name}")
+	public void update(HttpServletRequest request, @PathVariable(required = true, name = "name")String name) {
+		XSession xs = AuthHelper.getSession(request);
+		xs.getUser().setName(name);
+		request.getSession().setAttribute(InnerConstants.ATTR_SESSION, xs);
 	}
 }
