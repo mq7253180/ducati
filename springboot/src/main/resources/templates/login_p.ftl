@@ -9,10 +9,10 @@
 			Password: <input type="password" name="password" id="pwd"><br/>
 			Verification Code: <input type="input" name="vcode" id="vcode"><img id="_vcode" src=""/><br/>
 			<input type="button" id="ajaxLoginBtn" value="Signin"/>
-			<input type="button" id="ajaxVCodeLoginBtn" value="Signin"/>
+			<input type="button" id="sendTempPwdBtn" value="发送临时密码"/>
+			<input type="button" id="tempPwdLoginBtn" value="登录"/>
 			<input type="button" id="testBtn" value="Test"/>
-			<a id="pwdResetBtn" href="javacript:void(0);">忘记密码</a><br/><br/>
-			<input type="button" id="sendTempPwdBtn" value="发送临时密码"/><input type="button" id="tempPwdLoginBtn" value="登录"/>
+			<a id="pwdResetBtn" href="javacript:void(0);">忘记密码</a>
 		</div>
 		<input type="hidden" id="locale" value="<@locale/>"/>
 		<input type="hidden" id="uri" value="<@attr key="uri_without_first" />"/>
