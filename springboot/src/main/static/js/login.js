@@ -51,6 +51,41 @@ $("#testBtn").click(function() {
 		}
 	});
 });
+$("#sendTempPwdBtn").click(function() {
+	$.ajaxProxy({
+		url: "/auth/vcode/email",
+		type: "POST",
+		dataType: "JSON",
+		data: {
+			"username": $("#uname").val()
+		},
+		handle: function(result) {
+			alert(result.msg);
+			if(result.status<1) {
+				$("#email").focus();
+			} else
+				$("#tempPassword").focus();
+		}
+	});
+});
+$("#tempPwdLoginBtn").click(function() {
+	$.ajaxProxy({
+		url: "/auth/signin/vcode",
+		type: "POST",
+		dataType: "JSON",
+		data: {
+			"vcode": $("#pwd").val()
+		},
+		handle: function(result) {
+			if(result.status==1) {
+				var redirectTo = $.trim($("#redirectTo").val());
+				$(location).attr("href", redirectTo.length==0?"/":redirectTo);
+			} else {
+				alert(result.msg);
+			}
+		}
+	});
+});
 $("#ajaxVCodeLoginBtn").click(function() {
 	$.ajaxProxy({
 		url: "/auth/signin/vcode",
