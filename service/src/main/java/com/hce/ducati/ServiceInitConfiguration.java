@@ -23,8 +23,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.UserService;
 import com.quincy.auth.AuthHandler;
+import com.quincy.auth.PwdRestEmailInfo;
+import com.quincy.auth.TempPwdLoginEmailInfo;
 import com.quincy.auth.controller.AuthActions;
-import com.quincy.auth.controller.PwdRestEmailInfo;
 import com.quincy.auth.o.User;
 import com.quincy.core.web.PublicKeyGetter;
 import com.quincy.o.AttributeKeys;
@@ -83,6 +84,21 @@ public class ServiceInitConfiguration {
 			public String getById(String id) {
 //				return null;
 				return "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCMYDMqMFSJL+nUMzF7MQjCYe/Y3P26wjVn90CdrSE8H9Ed4dg0/BteWn5+ZK65DwWev2F79hBIpprPrtVe+wplCTkpyR+mPiNL+WKkvo7miMegRYJFZLvh9QrFuDzMJZ+rAiu4ldxkVB0CMKfYEWbukKGmAinxVAqUr/HcW2mWjwIDAQAB";
+			}
+		};
+	}
+
+	@Bean
+	public TempPwdLoginEmailInfo tempPwdLoginEmailInfo() {
+		return new TempPwdLoginEmailInfo() {
+			@Override
+			public String getSubject() {
+				return "临时密码";
+			}
+
+			@Override
+			public String getContent() {
+				return "临时密码为: {0}, {1}分钟内有效";
 			}
 		};
 	}
