@@ -396,8 +396,8 @@ public class XxxController {
 	public Result vcodeAsMobile(HttpServletRequest request) throws Exception {
 		String token = vCodeService.vcode(request, VCodeCharsFrom.DIGITS, 6, new VCodeSender() {
 			@Override
-			public void send(char[] vcode) throws Exception {
-				log.info("已通过阿里云短信接口发送验证码: {}", new String(vcode));
+			public void send(char[] vcode, int expireMinuts) throws Exception {
+				log.info("已通过阿里云短信接口发送验证码: {}, 失效时间{}分钟", new String(vcode), expireMinuts);
 			}
 		});
 		Result result = new Result(1, "验证码发送成功", token);
