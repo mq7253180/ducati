@@ -47,8 +47,13 @@ public class TestController {
 	@DoNotWrap
 	@RequestMapping("/test/callback")
 	@ResponseBody
-	public String callback() {
-		return "OK";
+	public TestVo callback() {
+		TestVo v = new TestVo();
+		v.setName("Quincy");
+		v.setSex("Male");
+		if(true)
+			throw new RuntimeException("asfasds");
+		return v;
 	}
 
 	@RequestMapping("/test/callback/wrap")
