@@ -149,7 +149,7 @@ public class ServiceInitConfiguration {
 			}
 
 			@Override
-			public void updateLastLogin(Long userId, String jsessionid) {
+			public void updateLastLogin(Long userId, String jsessionid, Client client) {
 				UserEntity vo = new UserEntity();
 				vo.setId(userId);
 				vo.setJsessionid(jsessionid);
