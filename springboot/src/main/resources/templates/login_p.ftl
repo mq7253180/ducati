@@ -13,6 +13,9 @@
 			<input type="button" id="tempPwdLoginBtn" value="登录"/>
 			<input type="button" id="testBtn" value="Test"/>
 			<a id="pwdResetBtn" href="javacript:void(0);">忘记密码</a>
+			<br/><br/>
+			<input type="input" name="vcode2" id="vcode2"><img id="_vcode2" src=""/><br/>
+			<input type="button" id="test2Btn" value="提交"/>
 		</div>
 		<input type="hidden" id="locale" value="<@locale/>"/>
 		<input type="hidden" id="uri" value="<@attr key="uri_without_first" />"/>

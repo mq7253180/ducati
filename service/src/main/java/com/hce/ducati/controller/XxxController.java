@@ -369,10 +369,10 @@ public class XxxController {
 		return this.sss;
 	}
 
-	@VCodeRequired(clientTokenName = "mobilePhone")
-	@GetMapping("/vcode/do")
+	@VCodeRequired
+	@RequestMapping("/test")
 	@ResponseBody
-	public String testRequireVcode() {
+	public String test() {
 		return "xxxx";
 	}
 

@@ -19,7 +19,7 @@ var login = function() {
 			} else {
 				alert(result.msg);
 				if(result.status<-3)
-					$("#_vcode").attr("src", "/auth/vcode/25/10/25/110/35?random="+Math.random());
+					$("#_vcode").attr("src", "/vcode/25/10/25/110/35?random="+Math.random());
 				var inputKey = null;
 				if(result.status==0||result.status==-3||result.status==-4)
 					inputKey = "pwd";
@@ -39,7 +39,7 @@ $(document).keyup(function(event) {
 });
 $("#ajaxLoginBtn").click(login);
 $("#_vcode").click(function() {
-	$(this).attr("src", "/auth/vcode/25/10/25/110/35?random="+Math.random());
+	$(this).attr("src", "/vcode/25/10/25/110/35?random="+Math.random());
 });
 $("#testBtn").click(function() {
 	$.ajaxProxy({
@@ -96,6 +96,24 @@ $("#pwdResetBtn").click(function() {
 		},
 		handle: function(result) {
 			alert(result.status+"======"+result.msg);
+		}
+	});
+	return false;
+});
+$("#_vcode2").attr("src", "/vcode/25/10/25/110/35?random="+Math.random());
+$("#_vcode2").click(function() {
+	$(this).attr("src", "/vcode/25/10/25/110/35?random="+Math.random());
+});
+$("#test2Btn").click(function() {
+	$.ajaxProxy({
+		url: "/xxx/test",
+		type: "POST",
+		dataType: "JSON",
+		data: {
+			"vcode": $("#vcode2").val()
+		},
+		handle: function(result) {
+			alert(result);
 		}
 	});
 	return false;
