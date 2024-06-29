@@ -45,7 +45,7 @@ import com.quincy.auth.controller.AuthorizationCommonController;
 import com.quincy.sdk.Result;
 import com.quincy.sdk.VCodeCharsFrom;
 import com.quincy.sdk.VCodeSender;
-import com.quincy.sdk.VCodeService;
+import com.quincy.sdk.VCodeOpsRgistry;
 import com.quincy.sdk.annotation.Cache;
 import com.quincy.sdk.annotation.JedisSupport;
 import com.quincy.sdk.annotation.SignatureRequired;
@@ -389,12 +389,12 @@ public class XxxController {
 //	@Value("${vcode.expire}")
 //	private int vcodeExpire;
 	@Autowired
-	private VCodeService vCodeService;
+	private VCodeOpsRgistry vCodeOpsRgistry;
 
 	@GetMapping("/vcode")
 	@ResponseBody
 	public Result vcodeAsMobile(HttpServletRequest request) throws Exception {
-		String token = vCodeService.vcode(request, VCodeCharsFrom.DIGITS, 6, new VCodeSender() {
+		String token = vCodeOpsRgistry.genAndSend(request, VCodeCharsFrom.DIGITS, 6, new VCodeSender() {
 			@Override
 			public void send(char[] vcode, int expireMinuts) throws Exception {
 				log.info("已通过阿里云短信接口发送验证码: {}, 失效时间{}分钟", new String(vcode), expireMinuts);
