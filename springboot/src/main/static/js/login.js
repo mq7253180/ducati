@@ -118,3 +118,6 @@ $("#test2Btn").click(function() {
 	});
 	return false;
 });
+$("#test2A").click(function() {
+	$(location).attr("href", "/xxx/test?vcode="+$("#vcode2").val());
+});
