@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hce.ducati.client.InnerFeign;
 import com.hce.ducati.client.QuincyFeign;
@@ -42,6 +43,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.quincy.auth.annotation.PermissionNeeded;
 import com.quincy.auth.controller.AuthorizationCommonController;
+import com.quincy.core.InnerConstants;
 import com.quincy.sdk.Result;
 import com.quincy.sdk.VCodeCharsFrom;
 import com.quincy.sdk.VCodeSender;
@@ -371,9 +373,10 @@ public class XxxController {
 
 	@VCodeRequired
 	@RequestMapping("/test")
-	@ResponseBody
-	public String test() {
-		return "xxxx";
+	public ModelAndView test() {
+		return new ModelAndView(InnerConstants.VIEW_PATH_RESULT)
+				.addObject("status", 1)
+				.addObject("msg", "成功");
 	}
 
 //	@VCodeRequired

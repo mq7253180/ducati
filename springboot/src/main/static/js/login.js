@@ -113,7 +113,7 @@ $("#test2Btn").click(function() {
 			"vcode": $("#vcode2").val()
 		},
 		handle: function(result) {
-			alert(result);
+			alert(result.msg);
 		}
 	});
 	return false;
