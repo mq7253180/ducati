@@ -374,7 +374,7 @@ public class XxxController {
 	@VCodeRequired
 	@RequestMapping("/test")
 	public ModelAndView test() {
-		return new ModelAndView(InnerConstants.VIEW_PATH_RESULT)
+		return new ModelAndView(InnerConstants.VIEW_PATH_SUCCESS)
 				.addObject("status", 1)
 				.addObject("msg", "成功");
 	}
