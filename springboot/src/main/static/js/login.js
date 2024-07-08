@@ -110,6 +110,7 @@ $("#test2Btn").click(function() {
 		type: "POST",
 		dataType: "JSON",
 		data: {
+			"status": 1,
 			"vcode": $("#vcode2").val()
 		},
 		handle: function(result) {
@@ -118,6 +119,9 @@ $("#test2Btn").click(function() {
 	});
 	return false;
 });
-$("#test2A").click(function() {
-	$(location).attr("href", "/xxx/test?vcode="+$("#vcode2").val());
+$("#test2AS").click(function() {
+	$(location).attr("href", "/xxx/test?status=1&vcode="+$("#vcode2").val());
+});
+$("#test2AF").click(function() {
+	$(location).attr("href", "/xxx/test?status=0&vcode="+$("#vcode2").val());
 });

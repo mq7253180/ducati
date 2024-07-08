@@ -373,10 +373,10 @@ public class XxxController {
 
 	@VCodeRequired
 	@RequestMapping("/test")
-	public ModelAndView test() {
-		return new ModelAndView(InnerConstants.VIEW_PATH_SUCCESS)
-				.addObject("status", 1)
-				.addObject("msg", "成功");
+	public ModelAndView test(@RequestParam(required = true, value = "status")int status) {
+		return new ModelAndView(status==1?InnerConstants.VIEW_PATH_SUCCESS:InnerConstants.VIEW_PATH_FAILURE)
+				.addObject("status", status)
+				.addObject("msg", status==1?"成功":"失败");
 	}
 
 //	@VCodeRequired

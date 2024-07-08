@@ -15,7 +15,7 @@
 			<a id="pwdResetBtn" href="javacript:void(0);">忘记密码</a>
 			<br/><br/>
 			<input type="input" name="vcode2" id="vcode2"><img id="_vcode2" src=""/><br/>
-			<input type="button" id="test2Btn" value="提交"/><input type="button" id="test2A" value="提交A"/>
+			<input type="button" id="test2Btn" value="提交"/><input type="button" id="test2AS" value="提交成功"/><input type="button" id="test2AF" value="提交失败"/>
 		</div>
 		<input type="hidden" id="locale" value="<@locale/>"/>
 		<input type="hidden" id="uri" value="<@attr key="uri_without_first" />"/>
