@@ -27,10 +27,10 @@ public interface TestDao {
 	@ExecuteUpdate(sql = "UPDATE test t INNER JOIN sub_test s ON t.id=s.test_id SET t.aaa=CONCAT(t.aaa,?),t.bbb=t.bbb+?,s.eee=CONCAT(s.eee,?),s.bbdd=s.bbdd+?,s.ddd1=?,s.ddd2=?,s.ddd3=? WHERE s.fff=?", withHistory = true, 
 			selectionSql = "SELECT t.bbb,t.aaa AS ta,t.id AS tid,s.eee,s.id,s.bbdd,s.ddd1,s.ddd2,s.ddd3 FROM test t INNER JOIN sub_test s ON t.id=s.test_id WHERE s.fff=?")
 	public int testUpateRecord4(String aaa, int bbb, String eee, float bbdd, Date ddd1, Date ddd2, Date ddd3, int fff);
-	@ExecuteQueryWIthDynamicColumns(sqlFrontHalf = "SELECT s.id,s.eee,s.fff,f.id,f.name,f.sort,v.value_decimal FROM (SELECT * FROM sub_test LIMIT 10 OFFSET 0)", tableName = "sub_test", returnItemType = SubTestDto.class)
+	@ExecuteQueryWIthDynamicColumns(sqlFrontHalf = "SELECT s.id,s.eee,s.fff,f.id,f.name,f.sort,v.value_decimal,v.value_str FROM (SELECT * FROM sub_test LIMIT 10 OFFSET 0)", tableName = "sub_test", returnItemType = SubTestDto.class)
 	public List<SubTestDto> findSubTest();
-	@ExecuteQueryWIthDynamicColumns(sqlFrontHalf = "SELECT s.id,s.eee,s.fff,f.id,f.name,f.sort,v.value_decimal FROM (SELECT * FROM sub_test WHERE id=?)", tableName = "sub_test", returnItemType = SubTestDto.class)
+	@ExecuteQueryWIthDynamicColumns(sqlFrontHalf = "SELECT s.id,s.eee,s.fff,f.id,f.name,f.sort,v.value_decimal,v.value_str FROM (SELECT * FROM sub_test WHERE id=?)", tableName = "sub_test", returnItemType = SubTestDto.class)
 	public OneSubTestDynamicFieldsDto findOneSubTest(String id);
-	@ExecuteQueryWIthDynamicColumns(sqlFrontHalf = "SELECT s.id,s.eee,s.fff,f.id,f.name,f.sort,v.value_decimal FROM (SELECT * FROM sub_test WHERE id=?)", tableName = "sub_test", returnItemType = SubTestDto.class)
+	@ExecuteQueryWIthDynamicColumns(sqlFrontHalf = "SELECT s.id,s.eee,s.fff,f.id,f.name,f.sort,v.value_decimal,v.value_str FROM (SELECT * FROM sub_test WHERE id=?)", tableName = "sub_test", returnItemType = SubTestDto.class)
 	public SubTestDto findOneSubTest2(String id);
 }
