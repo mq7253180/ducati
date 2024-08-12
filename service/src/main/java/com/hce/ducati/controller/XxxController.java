@@ -419,7 +419,7 @@ public class XxxController {
 
 	@GetMapping("/ddd/{limit}/{offset}")
 	@ResponseBody
-	public Object findSubTest(@PathVariable(required = true, name = "limit")int limit, @PathVariable(required = true, name = "offset")int offset) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, SQLException, IOException {
+	public Object findSubTest(@PathVariable(required = true, name = "limit")int limit, @PathVariable(required = true, name = "offset")int offset) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, SQLException, IOException, CloneNotSupportedException {
 		return xxxService.findSubTests(limit, offset);
 	}
 

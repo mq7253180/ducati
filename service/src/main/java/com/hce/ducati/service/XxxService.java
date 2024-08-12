@@ -47,7 +47,7 @@ public interface XxxService {
 	public void testUpdation2();
 	public void testUpdation3();
 	public void testUpdation4();
-	public Object findSubTests(int limit, int offset) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, SQLException, IOException;
+	public Object findSubTests(int limit, int offset) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, SQLException, IOException, CloneNotSupportedException;
 	public List<SubTestDto> findSubTest2(int limit, int offset);
 	public Object findOneSubTest(String id);
 	public SubTestDto findOneSubTest2(String id);
