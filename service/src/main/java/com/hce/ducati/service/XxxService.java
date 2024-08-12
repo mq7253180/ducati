@@ -13,6 +13,7 @@ import com.hce.ducati.entity.Enterprise;
 import com.hce.ducati.entity.Zelation;
 import com.hce.ducati.o.Params;
 import com.hce.ducati.o.SubTestDto;
+import com.quincy.sdk.DynamicField;
 import com.quincy.sdk.entity.Region;
 
 import redis.clients.jedis.JedisCluster;
@@ -51,4 +52,5 @@ public interface XxxService {
 	public List<SubTestDto> findSubTest2(int limit, int offset);
 	public Object findOneSubTest(String id);
 	public SubTestDto findOneSubTest2(String id);
+	public List<DynamicField> findSubTestDynamicFields();
 }

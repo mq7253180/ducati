@@ -49,6 +49,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.quincy.auth.annotation.PermissionNeeded;
 import com.quincy.auth.controller.AuthorizationCommonController;
 import com.quincy.core.InnerConstants;
+import com.quincy.sdk.DynamicField;
 import com.quincy.sdk.Result;
 import com.quincy.sdk.VCodeCharsFrom;
 import com.quincy.sdk.VCodeSender;
@@ -433,6 +434,12 @@ public class XxxController {
 	@ResponseBody
 	public SubTestDto findOneSubTest2(@PathVariable(required = true, name = "id")String id) {
 		return xxxService.findOneSubTest2(id);
+	}
+
+	@GetMapping("/subtest/dynamicfields")
+	@ResponseBody
+	public List<DynamicField> findSubTestDynamicFields() {
+		return xxxService.findSubTestDynamicFields();
 	}
 
 	@VCodeRequired

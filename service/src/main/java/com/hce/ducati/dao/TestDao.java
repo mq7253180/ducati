@@ -6,9 +6,11 @@ import java.util.List;
 import com.hce.ducati.o.OneSubTestDynamicFieldsDto;
 import com.hce.ducati.o.SubTestDto;
 import com.hce.ducati.o.UserDto;
+import com.quincy.sdk.DynamicField;
 import com.quincy.sdk.annotation.ExecuteQuery;
 import com.quincy.sdk.annotation.ExecuteQueryWIthDynamicColumns;
 import com.quincy.sdk.annotation.ExecuteUpdate;
+import com.quincy.sdk.annotation.FindDynamicFields;
 import com.quincy.sdk.annotation.JDBCDao;
 
 @JDBCDao
@@ -33,4 +35,6 @@ public interface TestDao {
 	public OneSubTestDynamicFieldsDto findOneSubTest(String id);
 	@ExecuteQueryWIthDynamicColumns(sqlFrontHalf = "SELECT s.id,s.eee,s.fff,f.id,f.name,f.sort,v.value_decimal,v.value_str FROM (SELECT * FROM sub_test WHERE id=?)", tableName = "sub_test", returnItemType = SubTestDto.class)
 	public SubTestDto findOneSubTest2(String id);
+	@FindDynamicFields("sub_test")
+	public List<DynamicField> findSubTestDynamicFields();
 }

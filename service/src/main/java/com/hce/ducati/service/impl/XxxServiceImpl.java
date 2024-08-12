@@ -39,6 +39,7 @@ import com.hce.ducati.service.ZzzzService;
 import com.quincy.sdk.annotation.transaction.DTransactional;
 import com.quincy.sdk.dao.RegionRepository;
 import com.quincy.sdk.entity.Region;
+import com.quincy.sdk.DynamicField;
 import com.quincy.sdk.JdbcDao;
 //import com.quincy.sdk.ZKContext;
 //import com.quincy.sdk.annotation.ZkSynchronized;
@@ -402,5 +403,10 @@ public class XxxServiceImpl implements XxxService {
 	@Override
 	public SubTestDto findOneSubTest2(String id) {
 		return testDao.findOneSubTest2(id);
+	}
+
+	@Override
+	public List<DynamicField> findSubTestDynamicFields() {
+		return testDao.findSubTestDynamicFields();
 	}
 }
