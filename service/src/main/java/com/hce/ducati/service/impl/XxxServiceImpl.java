@@ -386,7 +386,7 @@ public class XxxServiceImpl implements XxxService {
 
 	@Override
 	public Object findSubTests(int limit, int offset) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, SQLException, IOException {
-		return jdbcDao.executeQueryWithDynamicColumns("SELECT s.id,s.eee,s.fff,f.id,f.name,f.sort,v.value_decimal FROM (SELECT * FROM sub_test LIMIT "+limit+" OFFSET "+offset+")", "sub_test", SubTestDynamicFieldsDto.class, SubTestDto.class);
+		return jdbcDao.executeQueryWithDynamicColumns("SELECT s.id,s.eee,s.fff,f.name,f.sort,v.value_decimal FROM (SELECT * FROM sub_test LIMIT "+limit+" OFFSET "+offset+")", "sub_test", SubTestDynamicFieldsDto.class, SubTestDto.class);
 	}
 
 	@Override
