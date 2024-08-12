@@ -1,6 +1,12 @@
 package com.hce.ducati.service.impl;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //import org.apache.dubbo.config.annotation.DubboReference;
 //import org.apache.zookeeper.CreateMode;
@@ -16,10 +22,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 //import com.hce.ducati.client.DucatiClient;
 import com.hce.ducati.client.InnerFeign;
+import com.hce.ducati.dao.TestDao;
+import com.hce.ducati.dao.ZelationRepository;
 import com.hce.ducati.entity.Enterprise;
+import com.hce.ducati.entity.Zelation;
 import com.hce.ducati.mapper.EnterpriseMapper;
 import com.hce.ducati.mapper.RegionMapper;
+import com.hce.ducati.mapper.TestMapper;
 import com.hce.ducati.o.Params;
+import com.hce.ducati.o.SubTestDto;
+import com.hce.ducati.o.SubTestDynamicFieldsDto;
 import com.hce.ducati.service.XxxService;
 import com.hce.ducati.service.ZzzService;
 import com.hce.ducati.service.ZzzzService;
@@ -27,6 +39,7 @@ import com.hce.ducati.service.ZzzzService;
 import com.quincy.sdk.annotation.transaction.DTransactional;
 import com.quincy.sdk.dao.RegionRepository;
 import com.quincy.sdk.entity.Region;
+import com.quincy.sdk.JdbcDao;
 //import com.quincy.sdk.ZKContext;
 //import com.quincy.sdk.annotation.ZkSynchronized;
 import com.quincy.sdk.annotation.DurationLog;
@@ -51,6 +64,10 @@ public class XxxServiceImpl implements XxxService {
 	private InnerFeign innerFeign;
 //	@DubboReference(version = "1.0.0")
 //	private DucatiClient ducatiClient;
+	@Autowired
+	private TestMapper testMapper;
+	@Autowired
+	private TestDao testDao;
 
 	@Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
 	@Override
@@ -310,5 +327,80 @@ public class XxxServiceImpl implements XxxService {
 		enterpriseMapper.updateIndividualOne(id2, region);
 		Thread.sleep(delay);
 		return 1;
+	}
+
+	@Autowired
+	private ZelationRepository zelationRepository;
+
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
+	public Zelation saveZelation() {
+		Zelation z = new Zelation();
+		z.setTestId(4);
+		z.setUestId(6);
+		z.setGgg(92);
+		z = zelationRepository.save(z);
+		System.out.println("ID=============="+z.getId());
+		return z;
+	}
+
+//	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
+	public void test1() {
+		testMapper.updateTest(1l, "xxx");
+//		test2();
+		zzzzService.test2();
+//		throw new RuntimeException("asfsf");
+	}
+
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRES_NEW, rollbackFor = Throwable.class)
+	@Override
+	public void test2() {
+		testMapper.updateTest(2l, "zzz");
+		throw new RuntimeException("zxcsfsd");
+	}
+
+	@Override
+	public void testUpdation() {
+		testDao.testUpateRecord3("www", "xxx", 3, 21);
+	}
+
+	@Override
+	public void testUpdation2() {
+		testDao.testUpateRecord2("www", 21);
+	}
+
+	@Override
+	public void testUpdation3() {
+		testDao.testUpateRecord(78, "www", 21);
+	}
+
+	@Override
+	public void testUpdation4() {
+		Date date = new Date();
+		testDao.testUpateRecord4("www", 6, "xxx", -1.23f, date, date, date, 21);
+	}
+
+	@Autowired
+	private JdbcDao jdbcDao;
+
+	@Override
+	public Object findSubTests(int limit, int offset) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, SQLException, IOException {
+		return jdbcDao.executeQueryWithDynamicColumns("SELECT s.id,s.eee,s.fff,f.id,f.name,f.sort,v.value_decimal FROM (SELECT * FROM sub_test LIMIT "+limit+" OFFSET "+offset+")", "sub_test", SubTestDynamicFieldsDto.class, SubTestDto.class);
+	}
+
+	@Override
+	public List<SubTestDto> findSubTest2(int limit, int offset) {
+		return testDao.findSubTest();
+	}
+
+	@Override
+	public Object findOneSubTest(String id) {
+		return testDao.findOneSubTest(id);
+	}
+
+	@Override
+	public SubTestDto findOneSubTest2(String id) {
+		return testDao.findOneSubTest2(id);
 	}
 }

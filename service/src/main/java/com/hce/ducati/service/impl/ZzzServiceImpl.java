@@ -41,7 +41,7 @@ public class ZzzServiceImpl implements ZzzService {
 	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
 	@Override
 	public void testTxQuery() {
-		RegionDto regionDto = testMapper.findRegion(1l);
+		RegionDto regionDto = testMapper.findRegion(9l);
 		log.warn("EN_NAME======================{}", regionDto.getEnName());
 		UserDto userDto = zzzzService.testTxQuery(1l);
 		log.warn("MOBILE_PHONE======================{}", userDto.getMobilePhone());

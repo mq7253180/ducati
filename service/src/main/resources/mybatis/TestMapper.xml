@@ -21,4 +21,11 @@
 		</set>
 		WHERE id=#{id, jdbcType=INTEGER}
 	</update>
+	<update id="updateTest">
+		UPDATE test 
+		<set>
+			aaa = #{aaa, jdbcType=VARCHAR}
+		</set>
+		WHERE id=#{id, jdbcType=INTEGER}
+	</update>
 </mapper>

@@ -31,8 +31,9 @@ public class JdbcTest {
 		PreparedStatement stat = null;
 		ResultSet rs = null;
 		try {
+			stat = conn.prepareStatement("SELECT * FROM sub_test");
 //			stat = conn.prepareStatement("SELECT * FROM b_region WHERE id<=20");
-			stat = conn.prepareStatement("SELECT * FROM b_region WHERE id=7");
+//			stat = conn.prepareStatement("SELECT * FROM b_region WHERE id=7");
 //			stat = conn.prepareStatement("SELECT * FROM b_region WHERE id=8");
 //			stat = conn.prepareStatement("SELECT * FROM singer", PreparedStatement.RETURN_GENERATED_KEYS);
 //			stat = conn.prepareStatement("SELECT * FROM singer", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
@@ -40,7 +41,9 @@ public class JdbcTest {
 //			rs = stat.getGeneratedKeys();
 			rs = stat.executeQuery();
 			while(rs.next()) {
-				System.out.println(rs.getLong("id")+"---"+rs.getString("en_name"));
+				Object eee = rs.getObject("eee");
+				Object fff = rs.getObject("fff");
+				System.out.println(eee.getClass().getName()+"---"+fff.getClass().getName()+"--"+eee+"---"+fff);
 //				rs.updateString(1, "aaa2");
 //				rs.updateRow();
 //				rs.insertRow();

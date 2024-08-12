@@ -1,6 +1,9 @@
 package com.hce.ducati.controller;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hce.ducati.client.InnerFeign;
 import com.hce.ducati.client.QuincyFeign;
+import com.hce.ducati.dao.TestDao;
 import com.hce.ducati.entity.Enterprise;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.ServiceInitConfiguration;
@@ -30,6 +34,7 @@ import com.hce.ducati.client.DucatiSpringCloudClient;
 import com.hce.ducati.o.AccountO;
 import com.hce.ducati.o.Params;
 import com.hce.ducati.o.RegionResultDTO;
+import com.hce.ducati.o.SubTestDto;
 import com.hce.ducati.service.UserService;
 import com.hce.ducati.service.XxxService;
 import com.hce.ducati.service.ZzzService;
@@ -371,12 +376,76 @@ public class XxxController {
 		return this.sss;
 	}
 
+	@GetMapping("/transaction")
+	@ResponseBody
+	public String test() {
+		xxxService.test1();
+		return "测试事务";
+	}
+
+	@GetMapping("/u")
+	@ResponseBody
+	public String testUpdation() {
+		xxxService.testUpdation();
+		return "测试记录数据版本1";
+	}
+
+	@GetMapping("/uu")
+	@ResponseBody
+	public String testUpdation2() {
+		xxxService.testUpdation2();
+		return "测试记录数据版本2";
+	}
+
+	@GetMapping("/uuu")
+	@ResponseBody
+	public String testUpdation3() {
+		xxxService.testUpdation3();
+		return "测试记录数据版本3";
+	}
+
+	@GetMapping("/uuuu")
+	@ResponseBody
+	public String testUpdation4() {
+		xxxService.testUpdation4();
+		return "测试记录数据版本4";
+	}
+
+	@GetMapping("/dd/{id}")
+	@ResponseBody
+	public Object findOneSubTest(@PathVariable(required = true, name = "id")String id) {
+		return xxxService.findOneSubTest(id);
+	}
+
+	@GetMapping("/ddd/{limit}/{offset}")
+	@ResponseBody
+	public Object findSubTest(@PathVariable(required = true, name = "limit")int limit, @PathVariable(required = true, name = "offset")int offset) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, SQLException, IOException {
+		return xxxService.findSubTests(limit, offset);
+	}
+
+	@GetMapping("/dddd/{limit}/{offset}")
+	@ResponseBody
+	public List<SubTestDto> findSubTest2(@PathVariable(required = true, name = "limit")int limit, @PathVariable(required = true, name = "offset")int offset) {
+		return xxxService.findSubTest2(limit, offset);
+	}
+
+	@GetMapping("/dddd/{id}")
+	@ResponseBody
+	public SubTestDto findOneSubTest2(@PathVariable(required = true, name = "id")String id) {
+		return xxxService.findOneSubTest2(id);
+	}
+
 	@VCodeRequired
 	@RequestMapping("/test")
 	public ModelAndView test(@RequestParam(required = true, value = "status")int status) {
 		return new ModelAndView(status==1?InnerConstants.VIEW_PATH_SUCCESS:InnerConstants.VIEW_PATH_FAILURE)
 				.addObject("status", status)
 				.addObject("msg", status==1?"成功":"失败");
+	}
+
+	@RequestMapping("/zelation")
+	public void saveZelation() {
+		xxxService.saveZelation();
 	}
 
 //	@VCodeRequired

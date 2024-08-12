@@ -18,11 +18,11 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.support.RequestContext;
 
+import com.quincy.auth.AuthConstants;
 import com.quincy.auth.AuthHelper;
 import com.quincy.auth.annotation.LoginRequired;
 import com.quincy.auth.controller.RootController;
 import com.quincy.auth.o.XSession;
-import com.quincy.core.InnerConstants;
 import com.quincy.sdk.annotation.DoNotWrap;
 import com.quincy.sdk.helper.CommonHelper;
 
@@ -160,6 +160,6 @@ public class TestController {
 	public void update(HttpServletRequest request, @PathVariable(required = true, name = "name")String name) {
 		XSession xs = AuthHelper.getSession(request);
 		xs.getUser().setName(name);
-		request.getSession().setAttribute(InnerConstants.ATTR_SESSION, xs);
+		request.getSession().setAttribute(AuthConstants.ATTR_SESSION, xs);
 	}
 }

@@ -67,7 +67,8 @@ public class TransactionTest {
 //			stat = conn.prepareStatement("UPDATE test SET bbb=bbb+5 WHERE aaa=?;");
 //			stat.setString(1, "aaa8");
 //			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb BETWEEN 12 AND 21;");
-			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx');");
+//			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx');");
+			stat = conn.prepareStatement("UPDATE sub_test SET eee=CONCAT(eee, '_xxx') WHERE fff=21;");
 			System.out.println("----------------"+stat.executeUpdate());
 			conn.commit();
 		} catch (Exception e) {

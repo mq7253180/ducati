@@ -9,4 +9,5 @@ import com.hce.ducati.o.RegionDto;
 public interface TestMapper {
 	public RegionDto findRegion(@Param("id")Long id);
 	public int updateRegion(@Param("id")Long id, @Param("enName")String enName);
+	public int updateTest(@Param("id")Long id, @Param("aaa")String aaa);
 }

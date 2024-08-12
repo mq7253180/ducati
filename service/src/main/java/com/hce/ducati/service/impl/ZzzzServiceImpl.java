@@ -67,4 +67,11 @@ public class ZzzzServiceImpl implements ZzzzService {
 	public void testUpdate() {
 		
 	}
+
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRES_NEW, rollbackFor = Throwable.class)
+	@Override
+	public void test2() {
+		testMapper.updateTest(2l, "www");
+		throw new RuntimeException("zxcsfsd");
+	}
 }

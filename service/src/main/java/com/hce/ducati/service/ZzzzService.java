@@ -10,4 +10,5 @@ public interface ZzzzService {
 	public void updateDB(String s, Params p);
 	public void callDubbo(Long id, String val);
 	public void test() throws InterruptedException;
+	public void test2();
 }
