@@ -1,10 +1,20 @@
 package com.quincy.core.test;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class JdbcTest {
 	public void test() throws Exception {
@@ -31,7 +41,13 @@ public class JdbcTest {
 		PreparedStatement stat = null;
 		ResultSet rs = null;
 		try {
-			stat = conn.prepareStatement("SELECT * FROM sub_test");
+			stat = conn.prepareStatement("SELECT * FROM sub_test;");
+			ResultSetMetaData md = stat.getMetaData();
+			int columnCount = md.getColumnCount();
+			for(int i=1;i<=columnCount;i++) {
+				System.out.println(md.getColumnName(i)+"---"+md.getColumnTypeName(i)+"---"+md.getColumnClassName(i));
+			}
+//			stat = conn.prepareStatement("SELECT * FROM sub_test");
 //			stat = conn.prepareStatement("SELECT * FROM b_region WHERE id<=20");
 //			stat = conn.prepareStatement("SELECT * FROM b_region WHERE id=7");
 //			stat = conn.prepareStatement("SELECT * FROM b_region WHERE id=8");
@@ -39,6 +55,7 @@ public class JdbcTest {
 //			stat = conn.prepareStatement("SELECT * FROM singer", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			//sql, resultSetType, resultSetConcurrency, resultSetHoldability
 //			rs = stat.getGeneratedKeys();
+			/*
 			rs = stat.executeQuery();
 			while(rs.next()) {
 				Object eee = rs.getObject("eee");
@@ -51,6 +68,7 @@ public class JdbcTest {
 			}
 			stat.close();
 			rs.close();
+			*/
 			System.err.println("=======================");
 //			stat = conn.prepareStatement("SELECT * FROM b_region WHERE id<=20");
 			stat = conn.prepareStatement("SELECT * FROM b_region WHERE id=8");
@@ -104,10 +122,29 @@ public class JdbcTest {
 //		System.out.println(Math.pow(2, 15)+Math.pow(2, 14)+Math.pow(2, 13)+Math.pow(2, 12)+Math.pow(2, 11)+Math.pow(2, 10)+Math.pow(2, 9)+Math.pow(2, 8));
 //		System.out.println(Math.pow(2, 15)+Math.pow(2, 14)+Math.pow(2, 13)+Math.pow(2, 12)+Math.pow(2, 10)+Math.pow(2, 9)+Math.pow(2, 8)+255);
 //		System.out.println(new String(new byte[]{53, 46, 54, 46, 51, 48}));
-		try {
-			new JdbcTest().test();
-		} catch (Exception e) {
-			e.printStackTrace();
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		Random random = new Random();
+		for(int i=0;i<200;i++) {
+//			int r = random.nextInt(1024, 4095);
+//			int r = ThreadLocalRandom.current().nextInt(1024, 8191);
+//			int r = ThreadLocalRandom.current().nextInt(128, 511);
+//			int r = ThreadLocalRandom.current().nextInt(16, 63);
+			int r = ThreadLocalRandom.current().nextInt(131072, 524287);
+			int remainder = r%8;
+			Integer count = map.get(remainder);
+			map.put(remainder, (count==null?0:count)+1);
+			System.out.println(r+"-------"+remainder);
 		}
+		System.out.println("====================");	
+		for(Entry<Integer, Integer> e:map.entrySet()) {
+			System.out.println(e.getKey()+"-------"+e.getValue());
+		}
+//		System.out.println(Math.pow(2, 19));
+		System.out.println(1024%8+"---"+8191%8);
+//		try {
+//			new JdbcTest().test();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 }
