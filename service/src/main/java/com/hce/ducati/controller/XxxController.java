@@ -27,6 +27,7 @@ import com.hce.ducati.client.QuincyFeign;
 import com.hce.ducati.dao.TestDao;
 import com.hce.ducati.entity.Enterprise;
 import com.hce.ducati.entity.UserEntity;
+import com.hce.ducati.GlobalProperties;
 import com.hce.ducati.ServiceInitConfiguration;
 import com.hce.ducati.client.CenterFeign;
 //import com.hce.ducati.client.DucatiClient;
@@ -418,9 +419,13 @@ public class XxxController {
 		return xxxService.findOneSubTest(id);
 	}
 
+	@Autowired
+	private GlobalProperties globalProperties;
+
 	@GetMapping("/ddd/{limit}/{offset}")
 	@ResponseBody
 	public Object findSubTest(@PathVariable(required = true, name = "limit")int limit, @PathVariable(required = true, name = "offset")int offset) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, SQLException, IOException, CloneNotSupportedException {
+		System.out.println("GlobalProperties========="+globalProperties.getHost()+"---"+globalProperties.getPort()+"---"+globalProperties.getPassword());
 		return xxxService.findSubTests(limit, offset);
 	}
 
