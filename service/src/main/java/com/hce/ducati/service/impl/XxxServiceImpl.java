@@ -254,8 +254,8 @@ public class XxxServiceImpl implements XxxService {
 		System.out.println(String.format(CLASS_INFO, "xxx", "www", "xxx", "www"));
 	}
 
-//	@DTransactional(frequencyBatch = "xxx", executor = "ducatiThreadPoolExecutor")
-	@DTransactional(frequencyBatch = "xxx")
+//	@DTransactional(flagForCronJob = "xxx", executor = "ducatiThreadPoolExecutor")
+	@DTransactional(flagForCronJob = "xxx")
 	@Override
 	public String testTx(String s, Params p) {
 		Params[] pp = new Params[5];
