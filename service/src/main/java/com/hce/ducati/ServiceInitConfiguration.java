@@ -22,10 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.UserService;
-import com.quincy.auth.AuthHandler;
 import com.quincy.auth.PwdRestEmailInfo;
 import com.quincy.auth.TempPwdLoginEmailInfo;
 import com.quincy.auth.controller.AuthActions;
+import com.quincy.auth.controller.RootControllerHandler;
 import com.quincy.auth.o.User;
 import com.quincy.core.web.PublicKeyGetter;
 import com.quincy.o.AttributeKeys;
@@ -68,10 +68,15 @@ public class ServiceInitConfiguration {
 	}
 
 	@Bean
-	public AuthHandler authHandler() {
-		return new AuthHandler() {
+	public RootControllerHandler rootControllerHandler() {
+		return new RootControllerHandler() {
 			@Override
-			public Map<String, ?> rootViewObjects(HttpServletRequest request) throws Exception {
+			public boolean loginRequired() {
+				return true;
+			}
+
+			@Override
+			public Map<String, ?> viewObjects(HttpServletRequest request) throws Exception {
 				return null;
 			}
 		};
