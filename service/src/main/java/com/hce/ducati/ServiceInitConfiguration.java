@@ -49,7 +49,7 @@ public class ServiceInitConfiguration {
 
 	@Scheduled(cron = "0 0/2 * * * ?")
 	public void retry() throws ClassNotFoundException, NoSuchMethodException, SecurityException, IOException, InterruptedException {
-		transactionContext.compensate("xxx");
+		transactionContext.resume("xxx");
 	}
 
 	@PostConstruct
