@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.quincy.auth.annotation.EnableAnnotationAuth;
+import com.quincy.auth.annotation.EnableMultiEnterprise;
 import com.quincy.auth.annotation.EnablePermissionAndRole;
 import com.quincy.sdk.Constants;
 import com.quincy.sdk.annotation.EnableRedisSessionEviction;
@@ -38,6 +39,7 @@ import com.quincy.sdk.annotation.EnableRedisSessionEviction;
 @EnableAnnotationAuth
 @EnableRedisSessionEviction(pcBrowser = true, mobileBrowser = true, app = true)
 @EnablePermissionAndRole
+@EnableMultiEnterprise
 //@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1234)
 @SpringBootApplication/*(exclude = {
         DataSourceAutoConfiguration.class

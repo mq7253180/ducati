@@ -50,6 +50,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.quincy.auth.annotation.PermissionNeeded;
 import com.quincy.auth.controller.AuthorizationCommonController;
 import com.quincy.core.InnerConstants;
+import com.quincy.sdk.DTransactionOptRegistry;
 import com.quincy.sdk.DynamicField;
 import com.quincy.sdk.Result;
 import com.quincy.sdk.VCodeCharsFrom;
@@ -280,6 +281,16 @@ public class XxxController {
 //	public String testZk(@PathVariable(required = true, name = "arg")String arg, @PathVariable(required = true, name = "duration")long duration) throws KeeperException, InterruptedException {
 //		return xxxService.testZk(arg, null, duration);
 //	}
+
+	@Autowired
+	private DTransactionOptRegistry transactionContext;
+
+	@GetMapping("/test/tx/resume")
+	@ResponseBody
+	public String testResume() throws ClassNotFoundException, NoSuchMethodException, IOException, InterruptedException {
+		transactionContext.resume("xxx");
+		return "xxx";
+	}
 
 	@GetMapping("/testTx")
 	@ResponseBody

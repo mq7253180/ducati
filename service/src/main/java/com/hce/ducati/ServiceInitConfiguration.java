@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hce.ducati.entity.UserEntity;
@@ -31,7 +30,7 @@ import com.quincy.core.web.PublicKeyGetter;
 import com.quincy.o.AttributeKeys;
 import com.quincy.o.MyParams;
 import com.quincy.sdk.Client;
-import com.quincy.sdk.DTransactionContext;
+import com.quincy.sdk.DTransactionOptRegistry;
 import com.quincy.sdk.DTransactionFailure;
 import com.quincy.sdk.EmailService;
 
@@ -41,20 +40,20 @@ import jakarta.servlet.http.HttpServletRequest;
 @Configuration("sssiiiccc")
 public class ServiceInitConfiguration {
 	@Autowired
-	private DTransactionContext transactionContext;
+	private DTransactionOptRegistry dTransactionOptRegistry;
 	@Autowired
 	private EmailService emailService;
 	@Autowired
 	private UserService userService;
 
-	@Scheduled(cron = "0 0/2 * * * ?")
+//	@Scheduled(cron = "0 0/2 * * * ?")
 	public void retry() throws ClassNotFoundException, NoSuchMethodException, SecurityException, IOException, InterruptedException {
-		transactionContext.resume("xxx");
+		dTransactionOptRegistry.resume("xxx");
 	}
 
 	@PostConstruct
 	public void init() throws Exception {
-		transactionContext.setTransactionFailure(new DTransactionFailure() {
+		dTransactionOptRegistry.setTransactionFailure(new DTransactionFailure() {
 			@Override
 			public int retriesBeforeInform() {
 				return 0;

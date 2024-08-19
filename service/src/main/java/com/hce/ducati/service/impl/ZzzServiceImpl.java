@@ -47,22 +47,22 @@ public class ZzzServiceImpl implements ZzzService {
 		log.warn("MOBILE_PHONE======================{}", userDto.getMobilePhone());
 	}
 
-//	@AtomicOperational(confirm = "confirmCallHttp")
-	@AtomicOperational(confirm = "confirmCallHttp", cancel = "cancelCallHttp")
+	@AtomicOperational(confirm = "confirmCallHttp")
+//	@AtomicOperational(confirm = "confirmCallHttp", cancel = "cancelCallHttp")
 	@Override
 	public void callHttp(int i, int[] ii, Params[] ps) {
 		log.info("==============CALL_HTTP");
 	}
 
-//	@AtomicOperational(confirm = "confirmUpdateDB")
-	@AtomicOperational(confirm = "confirmUpdateDB", cancel = "cancelUpdateDB")
+	@AtomicOperational(confirm = "confirmUpdateDB")
+//	@AtomicOperational(confirm = "confirmUpdateDB", cancel = "cancelUpdateDB")
 	@Override
 	public void updateDB(String s, Params p) {
 		log.info("==============UPDATE_DB");
 	}
 
-//	@AtomicOperational(confirm = "confirmCallDubbo")
-	@AtomicOperational(confirm = "confirmCallDubbo", cancel = "cancelCallDubbo")
+	@AtomicOperational(confirm = "confirmCallDubbo")
+//	@AtomicOperational(confirm = "confirmCallDubbo", cancel = "cancelCallDubbo")
 	@Override
 	public void callDubbo(Long id, String val) {
 		try {
@@ -73,8 +73,8 @@ public class ZzzServiceImpl implements ZzzService {
 		log.info("==============CALL_DUBBO");
 	}
 
-//	@AtomicOperational(confirm = "confirmCallDubbo")
-	@AtomicOperational(confirm = "confirmCallDubbo", cancel = "cancelCallDubbo")
+	@AtomicOperational(confirm = "confirmCallDubbo")
+//	@AtomicOperational(confirm = "confirmCallDubbo", cancel = "cancelCallDubbo")
 	@Override
 	public void callDubbo() {
 		try {
@@ -125,8 +125,8 @@ public class ZzzServiceImpl implements ZzzService {
 		} catch (InterruptedException e) {
 			log.error("TX_TEST_SLEEP================", e);
 		}
-		/*if(true)
-			throw new RuntimeException("测试提交失败");*/
+		if(true)
+			throw new RuntimeException("测试提交失败");
 		log.info("==============CONFIRM_CALL_DUBBO");
 	}
 
