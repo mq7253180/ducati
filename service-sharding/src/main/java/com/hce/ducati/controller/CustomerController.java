@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,8 +30,7 @@ public class CustomerController {
 	@PostMapping("/add")
 	@ResponseBody
 	public Long add(@RequestBody UserEntity e) {
-		Random r = new Random();
-		Long userId = new SnowFlakeAlgorithm().nextId()+r.nextInt();
+		Long userId = SnowFlakeAlgorithm.nextId();
 		System.out.println("userId=============="+userId);
 		e.setId(userId);
 		e.setCreationTime(null);
