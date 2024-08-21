@@ -39,7 +39,7 @@ import com.quincy.sdk.annotation.EnableRedisSessionEviction;
 @EnableAnnotationAuth
 @EnableRedisSessionEviction(pcBrowser = true, mobileBrowser = true, app = true)
 @EnablePermissionAndRole
-@EnableMultiEnterprise
+//@EnableMultiEnterprise
 //@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1234)
 @SpringBootApplication/*(exclude = {
         DataSourceAutoConfiguration.class
@@ -52,5 +52,11 @@ public class DucatiBootstrap {
         sa.addListeners(new ApplicationPidFileWriter());
         sa.run(args);
 //        SpringApplication.run(Bootstrap.class, args);
+        if(args!=null) {
+        	System.out.println("SYS_ARGS_LENGTH----"+args.length);
+        	for(String arg:args) {
+        		System.out.println("SYS_ARG----"+arg);
+        	}
+        }
     }
 }

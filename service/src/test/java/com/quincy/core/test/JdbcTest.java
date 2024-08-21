@@ -137,22 +137,6 @@ public class JdbcTest {
 //		String s = new String(buf);
 //		System.out.println(s);
 //		System.out.println(-1&0xff);
-//		System.out.println(Math.pow(2, 15)+Math.pow(2, 14)+Math.pow(2, 13)+Math.pow(2, 12)+Math.pow(2, 11)+Math.pow(2, 10)+Math.pow(2, 9)+Math.pow(2, 8));
-//		System.out.println(Math.pow(2, 15)+Math.pow(2, 14)+Math.pow(2, 13)+Math.pow(2, 12)+Math.pow(2, 10)+Math.pow(2, 9)+Math.pow(2, 8)+255);
-//		System.out.println(new String(new byte[]{53, 46, 54, 46, 51, 48}));
-//		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-//		Random random = new Random();
-//		for(int i=0;i<200;i++) {
-//			int r = random.nextInt(1024, 4095);
-//			int r = ThreadLocalRandom.current().nextInt(1024, 8191);
-//			int r = ThreadLocalRandom.current().nextInt(128, 511);
-//			int r = ThreadLocalRandom.current().nextInt(16, 63);
-//			int r = ThreadLocalRandom.current().nextInt(131072, 524287);
-//			int remainder = r%8;
-//			Integer count = map.get(remainder);
-//			map.put(remainder, (count==null?0:count)+1);
-//			System.out.println(r+"-------"+remainder);
-//		}
 //		System.out.println("====================");	
 //		for(Entry<Integer, Integer> e:map.entrySet()) {
 //			System.out.println(e.getKey()+"-------"+e.getValue());
@@ -164,10 +148,10 @@ public class JdbcTest {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-		ObjectMapper mapper = new ObjectMapper();
-		System.out.println(mapper.writeValueAsString("sss"));
-		System.out.println(mapper.writeValueAsString(null));
-//		
+//		ObjectMapper mapper = new ObjectMapper();
+//		System.out.println(mapper.writeValueAsString("sss"));
+//		System.out.println(mapper.writeValueAsString(null));
+
 //		System.out.println(mapper.readValue(mapper.writeValueAsString("sss"), String.class));
 //		String s = mapper.readValue(mapper.writeValueAsString(null), String.class);
 //		String s2 = mapper.readValue("null", String.class);

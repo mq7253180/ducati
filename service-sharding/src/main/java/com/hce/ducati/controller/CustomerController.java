@@ -20,7 +20,7 @@ import com.hce.ducati.dao.TestDao;
 import com.hce.ducati.dto.UserDto;
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.CustomerService;
-import com.quincy.sdk.SnowFlakeUtil;
+import com.quincy.sdk.SnowFlakeAlgorithm;
 
 @Controller
 @RequestMapping("/user")
@@ -32,7 +32,7 @@ public class CustomerController {
 	@ResponseBody
 	public Long add(@RequestBody UserEntity e) {
 		Random r = new Random();
-		Long userId = new SnowFlakeUtil().nextId()+r.nextInt();
+		Long userId = new SnowFlakeAlgorithm().nextId()+r.nextInt();
 		System.out.println("userId=============="+userId);
 		e.setId(userId);
 		e.setCreationTime(null);
