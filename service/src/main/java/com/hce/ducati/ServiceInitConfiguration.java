@@ -21,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.UserService;
-import com.quincy.auth.PwdRestEmailInfo;
 import com.quincy.auth.TempPwdLoginEmailInfo;
 import com.quincy.auth.controller.AuthActions;
 import com.quincy.auth.controller.RootControllerHandler;
@@ -33,6 +32,7 @@ import com.quincy.sdk.Client;
 import com.quincy.sdk.DTransactionOptRegistry;
 import com.quincy.sdk.DTransactionFailure;
 import com.quincy.sdk.EmailService;
+import com.quincy.sdk.PwdRestEmailInfo;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -116,7 +116,7 @@ public class ServiceInitConfiguration {
 			}
 
 			@Override
-			public String getContent(String uri) {
+			public String getContent(String uri, int timeoutSeconds) {
 				return new StringBuilder(500)
 						.append("<html>")
 						.append("\n\t<head>")
@@ -126,11 +126,11 @@ public class ServiceInitConfiguration {
 						.append("\n\t<body>")
 						.append("\n\t\t<font color=\"purple\">请</font>")
 						.append("<a href=\"")
-						.append("http://127.0.0.1:12081")
 						.append(uri)
 						.append("\">点击</a>")
-						.append("<font color=\"purple\">继续操作，如果无法自动打开，请复制此链接至浏览器地址栏敲回车: ")
-						.append("http://127.0.0.1:12081")
+						.append("<font color=\"purple\">继续操作，")
+						.append(timeoutSeconds/60)
+						.append("分钟内失效，如果无法自动打开，请复制此链接至浏览器地址栏敲回车: ")
 						.append(uri)
 						.append("</font>")
 						.append("\n\t</body>")

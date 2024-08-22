@@ -88,7 +88,7 @@ $("#tempPwdLoginBtn").click(function() {
 });
 $("#pwdResetBtn").click(function() {
 	$.ajaxProxy({
-		url: "/auth/vcode/pwdset",
+		url: "/auth/pwdset/vcode",
 		type: "POST",
 		dataType: "JSON",
 		data: {

@@ -1,5 +1,6 @@
 package com.hce.ducati.o;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.quincy.sdk.annotation.DynamicColumnQueryDTO;
@@ -10,7 +11,8 @@ import lombok.Data;
 
 @DynamicColumnQueryDTO
 @Data
-public class SubTestDynamicFieldsDto {
+public class SubTestDynamicFieldsDto implements Serializable {
+	private static final long serialVersionUID = 7953404612544688506L;
 	@DynamicFields
 	private List<String> dynamicFieldNames;
 	@Result

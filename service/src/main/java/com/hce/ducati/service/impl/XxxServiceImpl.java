@@ -41,6 +41,7 @@ import com.quincy.sdk.dao.RegionRepository;
 import com.quincy.sdk.entity.Region;
 import com.quincy.sdk.DynamicField;
 import com.quincy.sdk.JdbcDao;
+import com.quincy.sdk.annotation.Cache;
 //import com.quincy.sdk.ZKContext;
 //import com.quincy.sdk.annotation.ZkSynchronized;
 import com.quincy.sdk.annotation.DurationLog;
@@ -385,6 +386,7 @@ public class XxxServiceImpl implements XxxService {
 	@Autowired
 	private JdbcDao jdbcDao;
 
+	@Cache
 	@Override
 	public Object findSubTests(int limit, int offset) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, SQLException, IOException, CloneNotSupportedException {
 		return jdbcDao.executeQueryWithDynamicColumns("SELECT s.id,s.eee,s.fff,f.id,f.name,f.sort,v.value_decimal,v.value_str FROM (SELECT * FROM sub_test LIMIT "+limit+" OFFSET "+offset+")", "sub_test", SubTestDto.class, SubTestDynamicFieldsDto.class);
