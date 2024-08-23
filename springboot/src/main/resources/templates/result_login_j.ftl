@@ -1,1 +1,0 @@
-{"status": 1, "msg": "<@i18n key="status.success"/>", "data": {<#if status?exists>"status":${status}</#if><#if msg?exists>, "msg":"${msg}"</#if><#if data?exists>, "data":${data}</#if>}}
