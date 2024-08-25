@@ -162,6 +162,11 @@ public class ServiceInitConfiguration {
 			}
 
 			@Override
+			public void updatePassword(User user) {
+				
+			}
+
+			@Override
 			public ModelAndView signinView(HttpServletRequest request) {
 				return null;
 			}

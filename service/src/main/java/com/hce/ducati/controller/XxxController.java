@@ -57,7 +57,7 @@ import com.quincy.sdk.Result;
 import com.quincy.sdk.VCodeCharsFrom;
 import com.quincy.sdk.VCodeSender;
 import com.quincy.sdk.VCodeOpsRgistry;
-import com.quincy.sdk.annotation.Cache;
+import com.quincy.sdk.annotation.SecondaryCache;
 import com.quincy.sdk.annotation.JedisSupport;
 import com.quincy.sdk.annotation.SignatureRequired;
 import com.quincy.sdk.annotation.VCodeRequired;
@@ -337,7 +337,7 @@ public class XxxController {
 	@Autowired
 	private RegionService regionService;
 
-	@Cache(expire = 30)
+	@SecondaryCache(expire = 30)
 	@GetMapping("/region/all")
 	@ResponseBody
 	public List<Region> findAllRegions() {
@@ -345,7 +345,7 @@ public class XxxController {
 		return regionService.findAll();
 	}
 
-	@Cache(expire = 15)
+	@SecondaryCache(expire = 15)
 	@GetMapping("/region/countries")
 	@ResponseBody
 	public List<Region> findCountries() {
