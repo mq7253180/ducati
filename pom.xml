@@ -90,8 +90,8 @@
 				<spring.datasource.username>admin</spring.datasource.username>
 				<spring.datasource.password>nimda</spring.datasource.password>
 				<spring.datasource.url.slave>47.93.89.0:3306/ducati</spring.datasource.url.slave>
-				<spring.datasource.username.slave>jlcedu</spring.datasource.username.slave>
-				<spring.datasource.password.slave>xxx</spring.datasource.password.slave>
+				<spring.datasource.username.slave>admin</spring.datasource.username.slave>
+				<spring.datasource.password.slave>nimda</spring.datasource.password.slave>
 				<!-- <spring.rocketmq.nameServer>172.16.80.32:9876</spring.rocketmq.nameServer> -->
 				<spring.jpa.show-sql>true</spring.jpa.show-sql>
 				<expire.session>13</expire.session><!-- minutes -->
