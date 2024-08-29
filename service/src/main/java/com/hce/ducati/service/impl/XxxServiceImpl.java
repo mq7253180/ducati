@@ -388,10 +388,15 @@ public class XxxServiceImpl implements XxxService {
 	private JdbcDao jdbcDao;
 
 	@DurationLog
-	@PrimaryCache(expire = 60)
-	@SecondaryCache(expire = 90)
+	@PrimaryCache(expire = 60, retries = 10, millisBetweenRetries = 200)
+//	@SecondaryCache(expire = 90)
 	@Override
 	public Object findSubTests(int limit, int offset) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, SQLException, IOException, CloneNotSupportedException {
+		try {
+			Thread.sleep(700);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		return jdbcDao.executeQueryWithDynamicColumns("SELECT s.id,s.eee,s.fff,f.id,f.name,f.sort,v.value_decimal,v.value_str FROM (SELECT * FROM sub_test LIMIT "+limit+" OFFSET "+offset+")", "sub_test", SubTestDto.class, SubTestDynamicFieldsDto.class);
 	}
 

@@ -18,7 +18,11 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.reflections.Reflections;
 import org.reflections.scanners.MethodAnnotationsScanner;
@@ -142,27 +146,65 @@ public class JdbcTest {
 		}
 	}
 
-	private static Reflections reflections = null;
-	private static Object lock = new Object();
+	private final static Lock lock = new ReentrantLock();
+	private final static Condition condition = lock.newCondition();
+	private final static Object lock2 = new Object();
 
-	public static Reflections get() {
-		if(reflections==null) {
-			synchronized(lock) {
-				if(reflections==null)
-//					reflections = new Reflections("com.quincy.core.test", new MethodAnnotationsScanner(), new TypeAnnotationsScanner(), new SubTypesScanner());
-					reflections = new Reflections("com.quincy.core.test", Scanners.MethodsAnnotated, Scanners.TypesAnnotated, Scanners.SubTypes);
-			}
+	private static void testLock(String mark, long millis) {
+		lock.lock();
+		System.out.println(mark+"---------STARTED");
+		try {
+			condition.await(millis, TimeUnit.MILLISECONDS);
+			condition.signalAll();
+//			condition.await(millis, TimeUnit.MILLISECONDS);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return reflections;
+		System.out.println(mark+"---------FINISHED");
+		lock.unlock();
 	}
 
-	public static void main(String[] args) throws JsonProcessingException {
-		AtomicInteger LOCK = new AtomicInteger();
+	private static void testLock2(String mark, long millis) {
+		synchronized(lock2) {
+			System.out.println(mark+"---------STARTED");
+			try {
+				lock2.wait(millis);
+				lock2.notifyAll();
+//				lock2.wait(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(mark+"---------FINISHED");
+		}
+//		lock.lock();
+//		
+//		lock.unlock();
+	}
+
+	public static void main(String[] args) throws JsonProcessingException, InterruptedException {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				testLock("aaaaaa", 8000);
+			}
+		}).start();
+		Thread.sleep(200);
+//		condition.signalAll();
+		Thread.sleep(1000);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				testLock("bbbbbbb", 10000);
+			}
+		}).start();
+//		AtomicInteger LOCK = new AtomicInteger();
 //		LOCK.set(0);
-		System.out.println(LOCK.compareAndSet(0, 5)+"--------------"+LOCK.get());
-		System.out.println(LOCK.compareAndExchange(5, 8)+"--------------"+LOCK.get());
-		System.out.println(LOCK.compareAndExchangeAcquire(8, 11)+"--------------"+LOCK.get());
-		System.out.println(LOCK.compareAndExchangeRelease(11, 15)+"--------------"+LOCK.get());
+//		System.out.println(LOCK.compareAndSet(0, 5)+"--------------"+LOCK.get());
+//		System.out.println(LOCK.compareAndExchange(5, 8)+"--------------"+LOCK.get());
+//		System.out.println(LOCK.compareAndExchangeAcquire(8, 11)+"--------------"+LOCK.get());
+//		System.out.println(LOCK.compareAndExchangeRelease(11, 15)+"--------------"+LOCK.get());
 //		byte[] buf = {83, 69, 76, 69, 67, 84, 32, 42, 32, 70, 82, 79, 77, 32, 115, 105, 110, 103, 101, 114};
 //		byte[] buf = {58, 1, 0, 1, -113, -94, 58, 0, -1, -1, -1, 0, 33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 113, 117, 105, 110, 99, 121, 0, 20, -92, -105, -31, 74, 19, 66, -29, 47, 24, 57, -96, -16, -109, 122, 106, -74, 73, -94, -2, -11, 113, 117, 105, 110, 99, 121, 49, 0, 109, 121, 115, 113, 108, 95, 110, 97, 116, 105, 118, 101, 95, 112, 97, 115, 115, 119, 111, 114, 100, 0, -78, 16, 95, 114, 117, 110, 116, 105, 109, 101, 95, 118, 101, 114, 115, 105, 111, 110, 8, 49, 46, 56, 46, 48, 95, 57, 50, 15, 95, 99, 108, 105, 101, 110, 116, 95, 118, 101, 114, 115, 105, 111, 110, 18, 64, 77, 89, 83, 81, 76, 95, 67, 74, 95, 86, 69, 82, 83, 73, 79, 78, 64, 12, 95, 99, 108, 105, 101, 110, 116, 95, 110, 97, 109, 101, 28, 64, 77, 89, 83, 81, 76, 95, 67, 74, 95, 68, 73, 83, 80, 76, 65, 89, 95, 80, 82, 79, 68, 95, 78, 65, 77, 69, 64, 15, 95, 99, 108, 105, 101, 110, 116, 95, 108, 105, 99, 101, 110, 115, 101, 23, 64, 77, 89, 83, 81, 76, 95, 67, 74, 95, 76, 73, 67, 69, 78, 83, 69, 95, 84, 89, 80, 69, 64, 15, 95, 114, 117, 110, 116, 105, 109, 101, 95, 118, 101, 110, 100, 111, 114, 18, 79, 114, 97, 99, 108, 101, 32, 67, 111, 114, 112, 111, 114, 97, 116, 105, 111, 110, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 //		byte[] buf = {74, 0, 0, 0, 10, 53, 46, 54, 46, 51, 48, 0, 16, 0, 0, 0, 105, 100, 59, 55, 66, 38, 53, 117, 0, -1, -9, 8, 2, 0, 127, -128, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 114, 90, 77, 81, 50, 67, 59, 60, 91, 55, 63, 117, 0, 109, 121, 115, 113, 108, 95, 110, 97, 116, 105, 118, 101, 95, 112, 97, 115, 115, 119, 111, 114, 100, 0};
