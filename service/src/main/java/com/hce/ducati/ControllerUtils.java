@@ -14,7 +14,6 @@ public class ControllerUtils {
 		user.setEmail(entity.getEmail());
 		user.setPassword(entity.getPassword());
 		user.setJsessionid(entity.getJsessionid());
-		user.setLastLogined(entity.getLastLogined());
 		return user;
 	}
 }

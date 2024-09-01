@@ -279,10 +279,13 @@ public class HttpTest {
 		};
 
 	public static void main(String[] args) throws IOException {
+		int n = 8;
+		int t = 20;
+		System.out.println(((n-1)&t)+"--------"+t%n);
 //		SSLTest.test(REQUEST_PROPERTIES_PAIR_SINA);
 //		SSLTest.testHttp(REQUEST_PROPERTIES_PAIR_SINA);
 
-		HttpTest.test(REQUEST_PROPERTIES_PAIR_BAIDU);
+//		HttpTest.test(REQUEST_PROPERTIES_PAIR_BAIDU);
 //		SSLTest.testHttp(REQUEST_PROPERTIES_PAIR_BAIDU);
 
 //		SSLTest.test(REQUEST_PROPERTIES_PAIR);
