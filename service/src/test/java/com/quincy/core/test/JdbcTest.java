@@ -33,7 +33,7 @@ import org.reflections.scanners.TypeAnnotationsScanner;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quincy.sdk.annotation.JDBCDao;
-import com.quincy.sdk.annotation.PrimaryCache;
+import com.quincy.sdk.annotation.Cache;
 
 public class JdbcTest {
 //	@PrimaryCache

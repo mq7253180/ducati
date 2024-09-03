@@ -41,12 +41,12 @@ import com.quincy.sdk.dao.RegionRepository;
 import com.quincy.sdk.entity.Region;
 import com.quincy.sdk.DynamicField;
 import com.quincy.sdk.JdbcDao;
-import com.quincy.sdk.annotation.SecondaryCache;
+import com.quincy.sdk.annotation.L2Cache;
 //import com.quincy.sdk.ZKContext;
 //import com.quincy.sdk.annotation.ZkSynchronized;
 import com.quincy.sdk.annotation.DurationLog;
 import com.quincy.sdk.annotation.JedisSupport;
-import com.quincy.sdk.annotation.PrimaryCache;
+import com.quincy.sdk.annotation.Cache;
 import com.quincy.sdk.annotation.ReadOnly;
 
 import lombok.extern.slf4j.Slf4j;
@@ -388,8 +388,8 @@ public class XxxServiceImpl implements XxxService {
 	private JdbcDao jdbcDao;
 
 	@DurationLog
-	@PrimaryCache(expire = 60, retries = 10, millisBetweenRetries = 200)
-//	@SecondaryCache(expire = 90)
+	@Cache(expire = 60, retries = 10, millisBetweenRetries = 200)
+	@L2Cache(expire = 90)
 	@Override
 	public Object findSubTests(int limit, int offset) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, SQLException, IOException, CloneNotSupportedException {
 		try {

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.hce.ducati.service.ZzzService;
 import com.hce.ducati.service.ZzzzService;
 import com.quincy.sdk.DistributedLock;
-import com.quincy.sdk.annotation.SecondaryCache;
+import com.quincy.sdk.annotation.L2Cache;
 import com.quincy.sdk.annotation.JedisSupport;
 import com.quincy.sdk.annotation.Synchronized;
 
@@ -49,7 +49,7 @@ public class ZzzServiceImpl implements ZzzService {
 		}
 	}
 
-	@SecondaryCache(expire = 20, retries = 20)
+	@L2Cache(expire = 20, retries = 20)
 	@Override
 	public String chaxun(String s, int i) throws InterruptedException {
 		Thread.sleep(5000);
