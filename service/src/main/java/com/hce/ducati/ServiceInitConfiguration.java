@@ -25,7 +25,7 @@ import com.quincy.auth.TempPwdLoginEmailInfo;
 import com.quincy.auth.controller.AuthActions;
 import com.quincy.auth.controller.RootControllerHandler;
 import com.quincy.auth.o.User;
-import com.quincy.core.web.PublicKeyGetter;
+import com.quincy.core.PublicKeyGetter;
 import com.quincy.o.AttributeKeys;
 import com.quincy.o.MyParams;
 import com.quincy.sdk.Client;
