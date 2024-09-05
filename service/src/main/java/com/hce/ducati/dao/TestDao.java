@@ -7,11 +7,11 @@ import com.hce.ducati.o.OneSubTestDynamicFieldsDto;
 import com.hce.ducati.o.SubTestDto;
 import com.hce.ducati.o.UserDto;
 import com.quincy.sdk.DynamicField;
-import com.quincy.sdk.annotation.ExecuteQuery;
-import com.quincy.sdk.annotation.ExecuteQueryWIthDynamicColumns;
-import com.quincy.sdk.annotation.ExecuteUpdate;
-import com.quincy.sdk.annotation.FindDynamicFields;
-import com.quincy.sdk.annotation.JDBCDao;
+import com.quincy.sdk.annotation.jdbc.ExecuteQuery;
+import com.quincy.sdk.annotation.jdbc.ExecuteQueryWIthDynamicColumns;
+import com.quincy.sdk.annotation.jdbc.ExecuteUpdate;
+import com.quincy.sdk.annotation.jdbc.FindDynamicFields;
+import com.quincy.sdk.annotation.jdbc.JDBCDao;
 
 @JDBCDao
 public interface TestDao {

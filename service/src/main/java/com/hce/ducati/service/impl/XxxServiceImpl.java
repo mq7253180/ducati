@@ -42,12 +42,12 @@ import com.quincy.sdk.entity.Region;
 import com.quincy.sdk.DynamicField;
 import com.quincy.sdk.JdbcDao;
 import com.quincy.sdk.annotation.L2Cache;
+import com.quincy.sdk.annotation.jdbc.ReadOnly;
 //import com.quincy.sdk.ZKContext;
 //import com.quincy.sdk.annotation.ZkSynchronized;
 import com.quincy.sdk.annotation.DurationLog;
 import com.quincy.sdk.annotation.JedisSupport;
 import com.quincy.sdk.annotation.Cache;
-import com.quincy.sdk.annotation.ReadOnly;
 
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.JedisCluster;

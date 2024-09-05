@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.hce.ducati.dao.CompanyRepository;
 import com.hce.ducati.entity.Company;
 import com.hce.ducati.service.CompanyService;
-import com.quincy.sdk.annotation.ReadOnly;
+import com.quincy.sdk.annotation.jdbc.ReadOnly;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {

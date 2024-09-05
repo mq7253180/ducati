@@ -21,8 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.UserService;
-import com.quincy.auth.TempPwdLoginEmailInfo;
-import com.quincy.auth.controller.RootControllerHandler;
 import com.quincy.core.PublicKeyGetter;
 import com.quincy.o.AttributeKeys;
 import com.quincy.o.MyParams;
@@ -32,6 +30,8 @@ import com.quincy.sdk.DTransactionOptRegistry;
 import com.quincy.sdk.DTransactionFailure;
 import com.quincy.sdk.EmailService;
 import com.quincy.sdk.PwdRestEmailInfo;
+import com.quincy.sdk.RootControllerHandler;
+import com.quincy.sdk.TempPwdLoginEmailInfo;
 import com.quincy.sdk.o.User;
 
 import jakarta.servlet.http.HttpServletRequest;

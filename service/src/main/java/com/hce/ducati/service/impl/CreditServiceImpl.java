@@ -20,7 +20,7 @@ import com.hce.ducati.o.CreditDTO;
 import com.hce.ducati.service.CreditMarginService;
 import com.hce.ducati.service.CreditService;
 import com.quincy.sdk.Pagination;
-import com.quincy.sdk.annotation.ReadOnly;
+import com.quincy.sdk.annotation.jdbc.ReadOnly;
 import com.quincy.sdk.helper.CommonHelper;
 
 @Service

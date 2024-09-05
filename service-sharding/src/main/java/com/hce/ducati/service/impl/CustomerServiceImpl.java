@@ -19,7 +19,7 @@ import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.CustomerService;
 import com.quincy.sdk.ShardingJdbcDao;
 import com.quincy.sdk.JdbcDao;
-import com.quincy.sdk.annotation.ReadOnly;
+import com.quincy.sdk.annotation.jdbc.ReadOnly;
 import com.quincy.sdk.annotation.sharding.ShardingKey;
 import com.quincy.sdk.helper.CommonHelper;
 

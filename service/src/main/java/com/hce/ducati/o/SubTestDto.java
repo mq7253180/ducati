@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.quincy.sdk.DynamicColumn;
-import com.quincy.sdk.annotation.Column;
-import com.quincy.sdk.annotation.DTO;
-import com.quincy.sdk.annotation.DynamicColumns;
+import com.quincy.sdk.annotation.jdbc.Column;
+import com.quincy.sdk.annotation.jdbc.DTO;
+import com.quincy.sdk.annotation.jdbc.DynamicColumns;
 
 import lombok.Data;
 

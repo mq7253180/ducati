@@ -1,7 +1,7 @@
 package com.hce.ducati.o;
 
-import com.quincy.sdk.annotation.Column;
-import com.quincy.sdk.annotation.DTO;
+import com.quincy.sdk.annotation.jdbc.Column;
+import com.quincy.sdk.annotation.jdbc.DTO;
 
 import lombok.Data;
 

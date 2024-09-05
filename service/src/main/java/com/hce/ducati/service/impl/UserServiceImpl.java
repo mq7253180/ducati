@@ -20,7 +20,7 @@ import com.hce.ducati.o.OAuth2DTO;
 import com.hce.ducati.service.UserService;
 import com.quincy.auth.dao.RoleRepository;
 import com.quincy.auth.entity.Role;
-import com.quincy.sdk.annotation.ReadOnly;
+import com.quincy.sdk.annotation.jdbc.ReadOnly;
 import com.quincy.sdk.helper.CommonHelper;
 
 @Service

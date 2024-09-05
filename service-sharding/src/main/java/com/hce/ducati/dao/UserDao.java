@@ -1,8 +1,8 @@
 package com.hce.ducati.dao;
 
 import com.hce.ducati.dto.UserDto;
-import com.quincy.sdk.annotation.ExecuteQuery;
-import com.quincy.sdk.annotation.JDBCDao;
+import com.quincy.sdk.annotation.jdbc.ExecuteQuery;
+import com.quincy.sdk.annotation.jdbc.JDBCDao;
 
 @JDBCDao
 public interface UserDao {

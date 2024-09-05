@@ -3,9 +3,9 @@ package com.hce.ducati.o;
 import java.io.Serializable;
 import java.util.List;
 
-import com.quincy.sdk.annotation.DynamicColumnQueryDTO;
-import com.quincy.sdk.annotation.DynamicFields;
-import com.quincy.sdk.annotation.Result;
+import com.quincy.sdk.annotation.jdbc.DynamicColumnQueryDTO;
+import com.quincy.sdk.annotation.jdbc.DynamicFields;
+import com.quincy.sdk.annotation.jdbc.Result;
 
 import lombok.Data;
 

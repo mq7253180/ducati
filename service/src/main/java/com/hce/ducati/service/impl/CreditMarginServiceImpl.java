@@ -23,7 +23,7 @@ import com.hce.ducati.o.CreditMarginDTO;
 import com.hce.ducati.service.CreditMarginService;
 import com.quincy.sdk.Pagination;
 import com.quincy.sdk.Result;
-import com.quincy.sdk.annotation.ReadOnly;
+import com.quincy.sdk.annotation.jdbc.ReadOnly;
 
 @Service
 public class CreditMarginServiceImpl implements CreditMarginService {
