@@ -19,8 +19,8 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.support.RequestContext;
 
 import com.quincy.auth.AuthConstants;
-import com.quincy.auth.AuthHelper;
 import com.quincy.auth.controller.RootController;
+import com.quincy.sdk.AuthHelper;
 import com.quincy.sdk.annotation.DoNotWrap;
 import com.quincy.sdk.annotation.auth.LoginRequired;
 import com.quincy.sdk.helper.CommonHelper;
