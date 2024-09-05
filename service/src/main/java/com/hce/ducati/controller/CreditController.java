@@ -23,10 +23,10 @@ import com.hce.ducati.entity.Credit;
 import com.hce.ducati.o.CreditDTO;
 import com.hce.ducati.service.CompanyService;
 import com.hce.ducati.service.CreditService;
-import com.quincy.auth.annotation.PermissionNeeded;
-import com.quincy.auth.o.XSession;
 import com.quincy.sdk.Result;
+import com.quincy.sdk.annotation.auth.PermissionNeeded;
 import com.quincy.sdk.helper.CommonHelper;
+import com.quincy.sdk.o.XSession;
 
 import jakarta.servlet.http.HttpServletRequest;
 

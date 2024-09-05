@@ -19,11 +19,11 @@ import com.hce.ducati.ServiceConstants;
 import com.hce.ducati.entity.CreditMargin;
 import com.hce.ducati.service.CompanyService;
 import com.hce.ducati.service.CreditMarginService;
-import com.quincy.auth.annotation.PermissionNeeded;
-import com.quincy.auth.o.XSession;
 import com.quincy.sdk.Pagination;
 import com.quincy.sdk.Result;
+import com.quincy.sdk.annotation.auth.PermissionNeeded;
 import com.quincy.sdk.helper.CommonHelper;
+import com.quincy.sdk.o.XSession;
 
 import jakarta.servlet.http.HttpServletRequest;
 

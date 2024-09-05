@@ -20,11 +20,11 @@ import org.springframework.web.servlet.support.RequestContext;
 
 import com.quincy.auth.AuthConstants;
 import com.quincy.auth.AuthHelper;
-import com.quincy.auth.annotation.LoginRequired;
 import com.quincy.auth.controller.RootController;
-import com.quincy.auth.o.XSession;
 import com.quincy.sdk.annotation.DoNotWrap;
+import com.quincy.sdk.annotation.auth.LoginRequired;
 import com.quincy.sdk.helper.CommonHelper;
+import com.quincy.sdk.o.XSession;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

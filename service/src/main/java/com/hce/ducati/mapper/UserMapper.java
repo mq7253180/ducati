@@ -6,13 +6,11 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.hce.ducati.o.OAuth2DTO;
-import com.quincy.auth.o.OAuth2Info;
-import com.quincy.auth.o.User;
+import com.quincy.sdk.o.User;
 
 @Repository
 public interface UserMapper {
 	public int updateLastLogined(@Param("id")Long id, @Param("jsessionid")String jsessionid);
 	public List<User> findUsers(@Param("roleId")Long roleId);
 	public OAuth2DTO findOAuth2ById(@Param("id")Long id);
-	public OAuth2Info findOAuth2ByCode(@Param("authorizationCode")String authorizationCode);
 }

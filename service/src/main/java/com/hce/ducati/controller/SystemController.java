@@ -11,8 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.service.UserService;
-import com.quincy.auth.annotation.PermissionNeeded;
 import com.quincy.auth.entity.Role;
+import com.quincy.sdk.annotation.auth.PermissionNeeded;
 
 @Controller("sssccc")
 @RequestMapping("/sys")

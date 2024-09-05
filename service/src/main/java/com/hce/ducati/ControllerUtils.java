@@ -1,7 +1,7 @@
 package com.hce.ducati;
 
 import com.hce.ducati.entity.UserEntity;
-import com.quincy.auth.o.User;
+import com.quincy.sdk.o.User;
 
 public class ControllerUtils {
 	public static User toUser(UserEntity entity) {
