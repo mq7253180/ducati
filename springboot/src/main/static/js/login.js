@@ -125,3 +125,19 @@ $("#test2AS").click(function() {
 $("#test2AF").click(function() {
 	$(location).attr("href", "/xxx/test?status=0&vcode="+$("#vcode2").val());
 });
+$("#uploadBtn").click(function() {
+	$("#zipFiles").ajaxUploadFiles({
+		url: "/xxx/upload",
+		maxSize: 10*1024*1024,
+		acceptableTypes: ["zip", "mp4", "jpg", "jpeg"],
+		validationFailed: function(msg) {
+			alert(msg);
+		},
+		handle: function(data) {
+			alert("成功");
+		},
+		after: function() {
+			
+		}
+	});
+});

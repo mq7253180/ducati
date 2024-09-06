@@ -1,8 +1,10 @@
 package com.hce.ducati.controller;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
-import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.List;
@@ -18,22 +20,21 @@ import org.springframework.context.Lifecycle;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hce.ducati.client.InnerFeign;
-import com.hce.ducati.client.QuincyFeign;
-import com.hce.ducati.dao.TestDao;
-import com.hce.ducati.entity.Enterprise;
-import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.GlobalProperties;
 import com.hce.ducati.ServiceInitConfiguration;
 import com.hce.ducati.client.CenterFeign;
 //import com.hce.ducati.client.DucatiClient;
 import com.hce.ducati.client.DucatiSpringCloudClient;
-import com.hce.ducati.o.AccountO;
+import com.hce.ducati.client.InnerFeign;
+import com.hce.ducati.client.QuincyFeign;
+import com.hce.ducati.entity.Enterprise;
+import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.o.Params;
 import com.hce.ducati.o.RegionResultDTO;
 import com.hce.ducati.o.SubTestDto;
@@ -54,18 +55,20 @@ import com.quincy.sdk.DTransactionOptRegistry;
 import com.quincy.sdk.DynamicField;
 import com.quincy.sdk.Result;
 import com.quincy.sdk.VCodeCharsFrom;
-import com.quincy.sdk.VCodeSender;
 import com.quincy.sdk.VCodeOpsRgistry;
-import com.quincy.sdk.annotation.L2Cache;
+import com.quincy.sdk.VCodeSender;
 import com.quincy.sdk.annotation.JedisSupport;
+import com.quincy.sdk.annotation.L2Cache;
 import com.quincy.sdk.annotation.SignatureRequired;
 import com.quincy.sdk.annotation.VCodeRequired;
 import com.quincy.sdk.annotation.auth.PermissionNeeded;
 import com.quincy.sdk.annotation.transaction.DTransactional;
 import com.quincy.sdk.entity.Region;
 import com.quincy.sdk.helper.AopHelper;
+import com.quincy.sdk.helper.HttpClientHelper;
 import com.quincy.sdk.service.RegionService;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
@@ -610,6 +613,26 @@ public class XxxController {
 		Result result = new Result();
 		result.setData("DUCATI");
 		return result;
+	}
+
+	@PostMapping("/upload")
+	@ResponseBody
+	public void upload(HttpServletRequest request) throws IOException, ServletException {
+		HttpClientHelper.handleUpload(request, new HttpClientHelper.UploadHandler() {
+			@Override
+			public void handle(String name, InputStream in) throws IOException {
+				OutputStream out = null;
+				try {
+					out = new FileOutputStream("/Users/maqiang/tmp/upload/"+name);
+					byte[] temp = new byte[in.available()];
+					in.read(temp);
+					out.write(temp);
+				} finally {
+					if(out!=null)
+						out.close();
+				}
+			}
+		});
 	}
 
 	@GetMapping("/test/request")
