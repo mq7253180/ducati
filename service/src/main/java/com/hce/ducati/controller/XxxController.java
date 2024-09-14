@@ -446,8 +446,9 @@ public class XxxController {
 	@GetMapping("/ddd/{limit}/{offset}")
 	@ResponseBody
 	public Object findSubTest(@PathVariable(required = true, name = "limit")int limit, @PathVariable(required = true, name = "offset")int offset) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, SQLException, IOException, CloneNotSupportedException {
-//		System.out.println("GlobalProperties========="+globalProperties.getHost()+"---"+globalProperties.getPort()+"---"+globalProperties.getPassword());
-//		return xxxService.findSubTests(limit, offset);
+		System.out.println("GlobalProperties========="+globalProperties.getHost()+"---"+globalProperties.getPort()+"---"+globalProperties.getPassword());
+		return xxxService.findSubTests(limit, offset);
+		/*
 		Runnable task = new Runnable() {
 			@Override
 			public void run() {
@@ -464,6 +465,7 @@ public class XxxController {
 			new Thread(task).start();
 		}
 		return null;
+		*/
 	}
 
 	@GetMapping("/dddd/{limit}/{offset}")
