@@ -140,10 +140,9 @@ var uri = $("#uri").val();
 		} else {
 			var req = window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
 			req.onreadystatechange = function() {
+				//alert(req.readyState+"---"+req.status+"\r\n"+req.responseText);
 				if(req.readyState==4) {
-					if(req.status!=200) {
-						handleException(req);
-					} else {
+					if(req.status==200) {
 						var data = JSON.parse(req.responseText);
 						if(data.status==1) {
 							s.handle(data.data);
@@ -152,6 +151,9 @@ var uri = $("#uri").val();
 							if(data.status==0)
 								$(top.location).attr("href", "/auth/signin");
 						}
+					} else {
+						if(req.status==0)
+							handleException(JSON.parse("{\"readyState\": 0, \"responseText\": \"{'path': '"+s.url+"'}\"}"));
 					}
 					if(s.after!=null)
 						s.after();
