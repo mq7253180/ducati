@@ -135,9 +135,6 @@ $("#uploadBtn").click(function() {
 		},
 		handle: function(data) {
 			alert("成功");
-		},
-		after: function() {
-			
 		}
 	});
 });

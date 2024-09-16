@@ -28,9 +28,8 @@ var uri = $("#uri").val();
 	});
 	if(navigator.appName=="Microsoft Internet Explorer") {
 		var regExp = new RegExp("^.+MSIE\\s*[1-9]\\.+.+$", "g");
-		if(regExp.test(navigator.appVersion)) {
+		if(regExp.test(navigator.appVersion))
 			alert($.i18n.prop("msg.ie"));
-		}
 	}
 	function handleException(xhr) {
 		let msg = "未知错误："+xhr.readyState;
@@ -56,9 +55,7 @@ var uri = $("#uri").val();
 	}
 	$.ajaxProxy = function(s) {
 		let handle = s.handle;
-		let after = s.after;
 		delete s.handle;
-		delete s.after;
 		s.success = function(data) {
 			if(data.status==1) {
 				handle(data.data);
@@ -67,17 +64,13 @@ var uri = $("#uri").val();
 				if(data.status==0)
 					$(top.location).attr("href", "/auth/signin");
 			}
-			if(after!=null)
-				after();
 		};
-		s.error = function(xhr, status) {
-			if(after!=null)
-				after();
+		s.error = function(xhr) {
 			handleException(xhr);
 		};
-		s.complete = function(xhr, status) {
-			//alert("complete---"+status+"---"+JSON.stringify(xhr));
-		};
+		/*s.complete = function(xhr, status) {
+			alert("complete---"+status+"---"+JSON.stringify(xhr));
+		};*/
 		$.ajax(s);
 	};
 	$.fn.ajaxUploadFiles = function(s) {
@@ -133,8 +126,6 @@ var uri = $("#uri").val();
 		}
 		if(retVal<1) {
 			s.validationFailed(validationErrorMsg);
-			if(s.after!=null)
-				s.after();
 		} else {
 			/*var req = window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
 			req.onreadystatechange = function() {
@@ -155,8 +146,6 @@ var uri = $("#uri").val();
 							"status": 0,
 							"statusText": "error"
 						}:req);
-					if(s.after!=null)
-						s.after();
 				}
 			};
 			req.open("POST", s.url, true);
@@ -168,8 +157,7 @@ var uri = $("#uri").val();
 				data: formData,
 				processData: false,
 				contentType: false,
-				handle: s.handle,
-				after: s.after
+				handle: s.handle
 			});
 		}
 		return retVal;
