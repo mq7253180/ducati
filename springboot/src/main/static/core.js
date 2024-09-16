@@ -71,6 +71,7 @@ var uri = $("#uri").val();
 							case 500: msg += "后端抛异常";break;
 							case 502: msg += "Nginx负载节点全挂了";break;
 							case 503: msg += "Nginx超负荷";break;
+							default: msg += xhr.status;break;
 						}
 						msg += "："+xhr.responseJSON.path
 					};break;
