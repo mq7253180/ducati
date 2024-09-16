@@ -32,6 +32,27 @@ var uri = $("#uri").val();
 			alert($.i18n.prop("msg.ie"));
 		}
 	}
+	function handleException(xhr) {
+		let msg = "未知错误："+xhr.readyState;
+		switch(xhr.readyState) {
+			case 0: msg = "未初始化，检查网络是否畅通，Nginx、SLB、应用服务是否活着";break;
+			case 1: msg = "已经建立连接，准备发送";break;
+			case 2: msg = "已经发送，等待响应";break;
+			case 3: msg = "已经得到响应，正在接收数据";break;
+			case 4: {
+				msg = "已完成，";
+				switch(xhr.status) {
+					case 404: msg += "路径不存在";break;
+					case 500: msg += "后端抛异常";break;
+					case 502: msg += "Nginx负载节点全挂了";break;
+					case 503: msg += "Nginx超负荷";break;
+					default: msg += xhr.status;break;
+				}
+				msg += "："+JSON.parse(xhr.responseText).path
+			};break;
+		}
+		alert("XMLHttpRequest"+msg);
+	}
 	$.ajaxProxy = function(s) {
 		$.ajax({
 			url: s.url,
@@ -45,11 +66,10 @@ var uri = $("#uri").val();
 			success: function(data) {
 				if(data.status==1) {
 					s.handle(data.data);
-				} else if(data.status==0) {
-					alert(data.msg);
-					$(top.location).attr("href", "/auth/signin");
 				} else {
 					alert(data.msg);
+					if(data.status==0)
+						$(top.location).attr("href", "/auth/signin");
 				}
 				if(s.after!=null)
 					s.after();
@@ -58,25 +78,7 @@ var uri = $("#uri").val();
 				if(s.after!=null)
 					s.after();
 				//alert(status+"---"+JSON.stringify(xhr));
-				let msg = "未知错误："+xhr.readyState;
-				switch(xhr.readyState) {
-					case 0: msg = "未初始化，检查网络是否畅通，Nginx、SLB、应用服务是否活着";break;
-					case 1: msg = "已经建立连接，准备发送";break;
-					case 2: msg = "已经发送，等待响应";break;
-					case 3: msg = "已经得到响应，正在接收数据";break;
-					case 4: {
-						msg = "已完成，";
-						switch(xhr.status) {
-							case 404: msg += "路径不存在";break;
-							case 500: msg += "后端抛异常";break;
-							case 502: msg += "Nginx负载节点全挂了";break;
-							case 503: msg += "Nginx超负荷";break;
-							default: msg += xhr.status;break;
-						}
-						msg += "："+xhr.responseJSON.path
-					};break;
-				}
-				alert("XMLHttpRequest"+msg);
+				handleException(xhr);
 			}
 		});
 	};
@@ -139,18 +141,17 @@ var uri = $("#uri").val();
 			var req = window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
 			req.onreadystatechange = function() {
 				if(req.readyState==4) {
-					if(req.status==200) {
+					if(req.status!=200) {
+						handleException(req);
+					} else {
 						var data = JSON.parse(req.responseText);
 						if(data.status==1) {
 							s.handle(data.data);
-						} else if(data.status==0) {
-							alert(data.msg);
-							$(top.location).attr("href", "/auth/signin");
 						} else {
 							alert(data.msg);
+							if(data.status==0)
+								$(top.location).attr("href", "/auth/signin");
 						}
-					} else {
-						alert(req.status+"------"+req.responseText);
 					}
 					if(s.after!=null)
 						s.after();
