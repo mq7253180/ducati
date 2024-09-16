@@ -621,6 +621,7 @@ public class XxxController {
 		return result;
 	}
 
+//	@LoginRequired
 	@PostMapping("/upload")
 	@ResponseBody
 	public void upload(HttpServletRequest request) throws IOException, ServletException {

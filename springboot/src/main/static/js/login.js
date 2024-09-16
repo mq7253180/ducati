@@ -128,8 +128,8 @@ $("#test2AF").click(function() {
 $("#uploadBtn").click(function() {
 	$("#zipFiles").ajaxUploadFiles({
 		url: "/xxx/upload",
-		maxSize: 10*1024*1024,
-		acceptableTypes: ["zip", "mp4", "jpg", "jpeg"],
+		maxSize: 20*1024*1024,
+		acceptableTypes: ["zip", "mp3", "mp4", "jpg", "jpeg"],
 		validationFailed: function(msg) {
 			alert(msg);
 		},

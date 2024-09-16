@@ -48,40 +48,37 @@ var uri = $("#uri").val();
 					case 503: msg += "Nginx超负荷";break;
 					default: msg += xhr.status;break;
 				}
-				msg += "："+JSON.parse(xhr.responseText).path;
-				//msg += "："+xhr.responseJSON.path;
+				//msg += "："+JSON.parse(xhr.responseText).path;
+				msg += "："+xhr.responseJSON.path;
 			};break;
 		}
 		alert("XMLHttpRequest"+msg);
 	}
 	$.ajaxProxy = function(s) {
-		$.ajax({
-			url: s.url,
-			type: s.type,
-			dataType: s.dataType,
-			data: s.data,
-			headers: {"locale": $("#locale").val()},
-			complete: function(xhr, status) {
-				//alert("complete---"+status+"---"+JSON.stringify(xhr));
-			},
-			success: function(data) {
-				if(data.status==1) {
-					s.handle(data.data);
-				} else {
-					alert(data.msg);
-					if(data.status==0)
-						$(top.location).attr("href", "/auth/signin");
-				}
-				if(s.after!=null)
-					s.after();
-			},
-			error: function(xhr, status) {
-				if(s.after!=null)
-					s.after();
-				//alert(status+"---"+JSON.stringify(xhr));
-				handleException(xhr);
+		let handle = s.handle;
+		let after = s.after;
+		delete s.handle;
+		delete s.after;
+		s.success = function(data) {
+			if(data.status==1) {
+				handle(data.data);
+			} else {
+				alert(data.msg);
+				if(data.status==0)
+					$(top.location).attr("href", "/auth/signin");
 			}
-		});
+			if(after!=null)
+				after();
+		};
+		s.error = function(xhr, status) {
+			if(after!=null)
+				after();
+			handleException(xhr);
+		};
+		s.complete = function(xhr, status) {
+			//alert("complete---"+status+"---"+JSON.stringify(xhr));
+		};
+		$.ajax(s);
 	};
 	$.fn.ajaxUploadFiles = function(s) {
 		var formData = new FormData();
@@ -139,7 +136,7 @@ var uri = $("#uri").val();
 			if(s.after!=null)
 				s.after();
 		} else {
-			var req = window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+			/*var req = window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
 			req.onreadystatechange = function() {
 				//alert(req.readyState+"---"+req.status+"\r\n"+req.responseText);
 				if(req.readyState==4) {
@@ -164,7 +161,16 @@ var uri = $("#uri").val();
 			};
 			req.open("POST", s.url, true);
 			req.setRequestHeader("x-requested-with", "XMLHttpRequest");
-			req.send(formData);
+			req.send(formData);*/
+			$.ajaxProxy({
+				url: s.url,
+				type: "POST",
+				data: formData,
+				processData: false,
+				contentType: false,
+				handle: s.handle,
+				after: s.after
+			});
 		}
 		return retVal;
 	};
