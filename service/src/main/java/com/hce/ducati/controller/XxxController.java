@@ -61,6 +61,7 @@ import com.quincy.sdk.annotation.JedisSupport;
 import com.quincy.sdk.annotation.L2Cache;
 import com.quincy.sdk.annotation.SignatureRequired;
 import com.quincy.sdk.annotation.VCodeRequired;
+import com.quincy.sdk.annotation.auth.LoginRequired;
 import com.quincy.sdk.annotation.auth.PermissionNeeded;
 import com.quincy.sdk.annotation.transaction.DTransactional;
 import com.quincy.sdk.entity.Region;
@@ -443,9 +444,12 @@ public class XxxController {
 	@Autowired
 	private GlobalProperties globalProperties;
 
+//	@LoginRequired
 	@GetMapping("/ddd/{limit}/{offset}")
 	@ResponseBody
 	public Object findSubTest(@PathVariable(required = true, name = "limit")int limit, @PathVariable(required = true, name = "offset")int offset) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, SQLException, IOException, CloneNotSupportedException {
+//		if(true)
+//			throw new RuntimeException("dsfafas");
 		System.out.println("GlobalProperties========="+globalProperties.getHost()+"---"+globalProperties.getPort()+"---"+globalProperties.getPassword());
 		return xxxService.findSubTests(limit, offset);
 		/*

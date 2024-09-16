@@ -40,7 +40,7 @@ var uri = $("#uri").val();
 			data: s.data,
 			headers: {"locale": $("#locale").val()},
 			complete: function(xhr, status) {
-				//alert("complete---"+xhr+"-"+status);
+				//alert("complete---"+status+"---"+JSON.stringify(xhr));
 			},
 			success: function(data) {
 				if(data.status==1) {
@@ -55,9 +55,27 @@ var uri = $("#uri").val();
 					s.after();
 			},
 			error: function(xhr, status) {
-				alert("error---"+xhr+"-"+status);
 				if(s.after!=null)
 					s.after();
+				//alert(status+"---"+JSON.stringify(xhr));
+				let msg = "未知错误："+xhr.readyState;
+				switch(xhr.readyState) {
+					case 0: msg = "未初始化，检查网络是否畅通，Nginx、SLB、应用服务是否活着";break;
+					case 1: msg = "已经建立连接，准备发送";break;
+					case 2: msg = "已经发送，等待响应";break;
+					case 3: msg = "已经得到响应，正在接收数据";break;
+					case 4: {
+						msg = "已完成，";
+						switch(xhr.status) {
+							case 404: msg += "路径不存在";break;
+							case 500: msg += "后端抛异常";break;
+							case 502: msg += "Nginx负载节点全挂了";break;
+							case 503: msg += "Nginx超负荷";break;
+						}
+						msg += "："+xhr.responseJSON.path
+					};break;
+				}
+				alert("XMLHttpRequest"+msg);
 			}
 		});
 	};
