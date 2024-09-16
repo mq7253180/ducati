@@ -48,7 +48,8 @@ var uri = $("#uri").val();
 					case 503: msg += "Nginx超负荷";break;
 					default: msg += xhr.status;break;
 				}
-				msg += "："+JSON.parse(xhr.responseText).path
+				msg += "："+JSON.parse(xhr.responseText).path;
+				//msg += "："+xhr.responseJSON.path;
 			};break;
 		}
 		alert("XMLHttpRequest"+msg);
@@ -151,10 +152,12 @@ var uri = $("#uri").val();
 							if(data.status==0)
 								$(top.location).attr("href", "/auth/signin");
 						}
-					} else {
-						if(req.status==0)
-							handleException(JSON.parse("{\"readyState\": 0, \"responseText\": \"{'path': '"+s.url+"'}\"}"));
-					}
+					} else
+						handleException(req.status==0?{
+							"readyState": 0,
+							"status": 0,
+							"statusText": "error"
+						}:req);
 					if(s.after!=null)
 						s.after();
 				}
