@@ -6,6 +6,7 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 //import org.springframework.session.data.redis.config.annotation.SpringSessionRedisConnectionFactory;
+import org.springframework.session.web.http.DefaultCookieSerializer;
 
 import com.hce.ducati.freemarker.PaginationTemplateDirectiveModelBean;
 
@@ -29,9 +30,13 @@ public class SpringBootConfiguration {
 //    	System.out.println("TTTTTTTTTTT==========="+test.getValue());
 //    }
 
+    @Autowired
+    private DefaultCookieSerializer cookieSerializer;
+
     @PostConstruct
     public void init() {
     	configuration.setSharedVariable("p", new PaginationTemplateDirectiveModelBean());
+    	cookieSerializer.setUseHttpOnlyCookie(false);
     }
 
     /*@Bean
