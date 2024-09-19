@@ -16,6 +16,8 @@ import com.hce.ducati.freemarker.PaginationTemplateDirectiveModelBean;
 public class SpringBootConfiguration {
     @Autowired
     private freemarker.template.Configuration configuration;
+    @Autowired
+    private DefaultCookieSerializer cookieSerializer;
     private Test test;
 
 //    @Autowired
@@ -29,9 +31,6 @@ public class SpringBootConfiguration {
 //    	this.test = t1.getIfAvailable(t2::getObject);
 //    	System.out.println("TTTTTTTTTTT==========="+test.getValue());
 //    }
-
-    @Autowired
-    private DefaultCookieSerializer cookieSerializer;
 
     @PostConstruct
     public void init() {
