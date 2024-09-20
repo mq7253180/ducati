@@ -84,6 +84,7 @@
 			<properties>
 				<env>dev</env>
 				<server.port>12081</server.port>
+				<access-control-allow-origin>http://127.0.0.1:9527</access-control-allow-origin>
 				<eureka.addr>47.93.89.0:8761</eureka.addr>
 				<eureka.instance.hostname>47.93.89.0</eureka.instance.hostname>
 				<spring.datasource.url>47.93.89.0:3306/ducati</spring.datasource.url>
@@ -119,48 +120,11 @@
 			</activation>
 		</profile>
 		<profile>
-			<id>pro1</id>
+			<id>pro</id>
 			<properties>
 				<env>pro</env>
-				<server.port>8080</server.port>
-				<eureka.addr>10.27.74.163:8761</eureka.addr>
-				<eureka.instance.hostname>10.27.74.163</eureka.instance.hostname>
-				<spring.datasource.url>10.27.74.163:3306/ducati</spring.datasource.url>
-				<spring.datasource.username>admin</spring.datasource.username>
-				<spring.datasource.password>nimda</spring.datasource.password>
-				<!-- HAProxy负载 -->
-				<spring.datasource.url.slave>10.27.74.163:3306/ducati</spring.datasource.url.slave>
-				<!-- Keepalived负载 -->
-				<!-- <spring.datasource.url.slave>172.16.0.1:3306/ducati</spring.datasource.url.slave> -->
-				<spring.datasource.username.slave>finder</spring.datasource.username.slave>
-				<spring.datasource.password.slave>rednif</spring.datasource.password.slave>
-				<!-- <spring.rocketmq.nameServer>10.30.1.11:9876</spring.rocketmq.nameServer> -->
-				<spring.jpa.show-sql>false</spring.jpa.show-sql>
-				<expire.session>60</expire.session><!-- minutes -->
-				<expire.vcode>3</expire.vcode><!-- minutes -->
-				<redis.nodes>10.27.74.163:6379</redis.nodes>
-				<!-- <redis.nodes>localhost:26379,localhost:26389,localhost:26399</redis.nodes> -->
-				<redis.pwd>foobared</redis.pwd>
-				<auth.center>https://jep8566.com</auth.center>
-				<mail.user>mq7253180@126.com</mail.user>
-				<mail.to></mail.to>
-				<zk.url>10.27.74.163:2181,10.27.74.163:2182,10.27.74.163:2183</zk.url>
-				<zk.timeout>5000</zk.timeout>
-				<kafka.url>10.27.74.163:9092</kafka.url>
-				<dubbo.protocol.port>20880</dubbo.protocol.port>
-				<nexus.url>10.27.74.163:8082</nexus.url>
-				<cfca.platid>8F09B7F146D84B75E053025B210A1949</cfca.platid>
-				<cfca.addr>cs.anxinsign.com</cfca.addr>
-				<cfca.jks.location>/quincy/secret/anxinsign.jks</cfca.jks.location>
-				<cfca.sealid>95394B7F3279445BE053025B210AE261</cfca.sealid>
-				<location.accounts></location.accounts>
-			</properties>
-		</profile>
-		<profile>
-			<id>pro2</id>
-			<properties>
-				<env>pro</env>
-				<server.port>8090</server.port>
+				<server.port>12080</server.port>
+				<access-control-allow-origin>*.jep8566.com</access-control-allow-origin>
 				<eureka.addr>localhost:8761</eureka.addr>
 				<eureka.instance.hostname>10.27.74.163</eureka.instance.hostname>
 				<spring.datasource.url>localhost:3306/ducati</spring.datasource.url>
@@ -169,14 +133,14 @@
 				<!-- HAProxy负载 -->
 				<!-- <spring.datasource.url.slave>192.168.0.1:6603/ducati</spring.datasource.url.slave> -->
 				<!-- Keepalived负载 -->
-				<spring.datasource.url.slave>172.16.0.1:3306/ducati</spring.datasource.url.slave>
+				<spring.datasource.url.slave>localhost:3306/ducati</spring.datasource.url.slave>
 				<spring.datasource.username.slave>finder</spring.datasource.username.slave>
 				<spring.datasource.password.slave>rednif</spring.datasource.password.slave>
 				<!-- <spring.rocketmq.nameServer>10.30.1.11:9876</spring.rocketmq.nameServer> -->
 				<spring.jpa.show-sql>false</spring.jpa.show-sql>
 				<expire.session>60</expire.session><!-- minutes -->
 				<expire.vcode>3</expire.vcode><!-- minutes -->
-				<redis.nodes>localhost:6379,localhost:6389,localhost:6399</redis.nodes>
+				<redis.nodes>47.93.89.0:6379</redis.nodes>
 				<!-- <redis.nodes>localhost:26379,localhost:26389,localhost:26399</redis.nodes> -->
 				<redis.pwd>foobared</redis.pwd>
 				<auth.center>https://jep8566.com</auth.center>
