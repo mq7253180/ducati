@@ -124,7 +124,7 @@
 			<properties>
 				<env>pro</env>
 				<server.port>12080</server.port>
-				<access-control-allow-origin>https://demo.jep8566.com</access-control-allow-origin>
+				<access-control-allow-origin>*.jep8566.com</access-control-allow-origin>
 				<eureka.addr>localhost:8761</eureka.addr>
 				<eureka.instance.hostname>10.27.74.163</eureka.instance.hostname>
 				<spring.datasource.url>localhost:3306/ducati</spring.datasource.url>
