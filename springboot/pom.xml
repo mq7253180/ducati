@@ -166,7 +166,7 @@
 			<properties>
 				<env>pro</env>
 				<spring.pid.file>/quincy/tmp/ducati.pid</spring.pid.file>
-				<path.log.logback>/quincy/tmp/logs/ducati</path.log.logback>
+				<path.log.logback>/logs/ducati</path.log.logback>
 				<log.level>WARN</log.level>
 				<spring.freemarker.cache>true</spring.freemarker.cache>
 				<prefix.resource>https://static.jep8566.com</prefix.resource>
