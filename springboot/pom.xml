@@ -165,7 +165,7 @@
 			<id>pro</id>
 			<properties>
 				<env>pro</env>
-				<spring.pid.file>/quincy/tmp/ducati.pid</spring.pid.file>
+				<spring.pid.file>/logs/ducati/ducatid.pid</spring.pid.file>
 				<path.log.logback>/logs/ducati</path.log.logback>
 				<log.level>WARN</log.level>
 				<spring.freemarker.cache>true</spring.freemarker.cache>
