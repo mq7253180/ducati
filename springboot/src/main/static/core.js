@@ -68,9 +68,10 @@ var uri = $("#uri").val();
 		s.error = function(xhr) {
 			handleException(xhr);
 		};
-		/*s.complete = function(xhr, status) {
-			alert("complete---"+status+"---"+JSON.stringify(xhr));
-		};*/
+		s.complete = function(xhr, status) {
+			//alert("complete---Stop Loading---"+status+"---"+JSON.stringify(xhr));
+			//Stop Loading
+		};
 		$.ajax(s);
 	};
 	$.fn.ajaxUploadFiles = function(s) {
