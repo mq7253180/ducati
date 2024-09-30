@@ -145,6 +145,8 @@ public class ServiceInitConfiguration {
 			@Override
 			public User findUser(String username, Client client) {
 				UserEntity userEntity = userService.find(username);
+				if(userEntity==null)
+					return null;
 				User user = ControllerUtils.toUser(userEntity);
 //				user.setCurrencyAccounts(new HashMap<String, BigDecimal>(2));
 				user.setAttributes(new HashMap<String, Serializable>(2));
