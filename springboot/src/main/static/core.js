@@ -56,6 +56,9 @@ var uri = $("#uri").val();
 	$.ajaxProxy = function(s) {
 		let handle = s.handle;
 		delete s.handle;
+		s.xhrFields = {
+			withCredentials: true
+		};
 		s.success = function(data) {
 			if(data.status==1) {
 				handle(data.data);
@@ -151,6 +154,7 @@ var uri = $("#uri").val();
 			};
 			req.open("POST", s.url, true);
 			req.setRequestHeader("x-requested-with", "XMLHttpRequest");
+			req.withCredentials = true;
 			req.send(formData);*/
 			$.ajaxProxy({
 				url: s.url,
