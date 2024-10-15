@@ -14,6 +14,8 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.boot.web.server.Cookie.SameSite;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -45,6 +47,8 @@ public class ServiceInitConfiguration {
 	private EmailService emailService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ServerProperties serverProperties;
 
 //	@Scheduled(cron = "0 0/2 * * * ?")
 	public void retry() throws ClassNotFoundException, NoSuchMethodException, SecurityException, IOException, InterruptedException {
@@ -53,6 +57,9 @@ public class ServiceInitConfiguration {
 
 	@PostConstruct
 	public void init() throws Exception {
+//		serverProperties.getServlet().getSession().getCookie().setSecure(true);
+//		serverProperties.getServlet().getSession().getCookie().setSameSite(SameSite.NONE);
+		System.out.println("SameSite==================="+serverProperties.getServlet().getSession().getCookie().getSameSite());
 		dTransactionOptRegistry.setTransactionFailure(new DTransactionFailure() {
 			@Override
 			public int retriesBeforeInform() {
