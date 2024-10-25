@@ -2,7 +2,6 @@ package com.hce.ducati;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
