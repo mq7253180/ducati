@@ -158,8 +158,7 @@ public class ServiceInitConfiguration {
 			public void updateLastLogin(Long userId, String jsessionid, Client client) {
 				UserEntity vo = new UserEntity();
 				vo.setId(userId);
-				vo.setJsessionid(jsessionid);
-				vo.setLastLogined(new Date());
+				vo.setJsessionidPcBrowser(jsessionid);
 				userService.update(vo);
 			}
 

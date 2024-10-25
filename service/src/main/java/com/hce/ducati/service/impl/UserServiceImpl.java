@@ -55,12 +55,9 @@ public class UserServiceImpl implements UserService {
 		String name = CommonHelper.trim(vo.getName());
 		if(name!=null)
 			po.setName(name);
-		String jsessionid = CommonHelper.trim(vo.getJsessionid());
+		String jsessionid = CommonHelper.trim(vo.getJsessionidPcBrowser());
 		if(jsessionid!=null)
-			po.setJsessionid(jsessionid);
-		Date lastLogined = vo.getLastLogined();
-		if(lastLogined!=null)
-			po.setLastLogined(lastLogined);
+			po.setJsessionidPcBrowser(jsessionid);
 		userRepository.save(po);
 		return po;
 	}

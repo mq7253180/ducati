@@ -43,14 +43,41 @@ public class JdbcTest {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://47.93.89.0:3306/ducati", "admin", "nimda");
 
-			doQuery(conn);
+//			doQuery(conn);
 //			doUpdate(conn);
+			testType(conn);
 		} catch (Exception e) {
 			throw e;
 		} finally {
 			if(conn!=null) {
 				conn.close();
 			}
+		}
+	}
+
+	private void testType(Connection conn) throws SQLException {
+		PreparedStatement stat = null;
+		ResultSet rs = null;
+		try {
+			stat = conn.prepareStatement("SELECT aaa,bbb,ccc,ddd,eee FROM test_type;");
+			rs = stat.executeQuery();
+			rs.next();
+			System.out.println("TINYINT->"+rs.getObject(1).getClass().getName());
+			System.out.println("SMALLINT->"+rs.getObject(2).getClass().getName());
+			System.out.println("MEDIUMINT->"+rs.getObject(3).getClass().getName());
+			System.out.println("INT->"+rs.getObject(4).getClass().getName());
+			System.out.println("BIGINT->"+rs.getObject(5).getClass().getName());
+			/*ResultSetMetaData meta = rs.getMetaData();
+			System.out.println("TINYINT->"+meta.getColumnTypeName(1));
+			System.out.println("SMALLINT->"+meta.getColumnTypeName(2));
+			System.out.println("MEDIUMINT->"+meta.getColumnTypeName(3));
+			System.out.println("INT->"+meta.getColumnTypeName(4));
+			System.out.println("BIGINT->"+meta.getColumnTypeName(5));*/
+		} finally {
+			if(rs!=null)
+				rs.close();
+			if(stat!=null)
+				stat.close();
 		}
 	}
 	
@@ -109,8 +136,6 @@ public class JdbcTest {
 //			stat = conn.prepareStatement("SELECT * FROM b_region WHERE id<=20");
 //			stat = conn.prepareStatement("SELECT * FROM b_region WHERE id=8");
 //			rs = stat.executeQuery();
-		} catch (SQLException e) {
-			throw e;
 		} finally {
 			if(rs!=null)
 				rs.close();
@@ -183,8 +208,9 @@ public class JdbcTest {
 //		lock.unlock();
 	}
 
-	public static void main(String[] args) throws JsonProcessingException, InterruptedException {
-		new Thread(new Runnable() {
+	public static void main(String[] args) throws Exception {
+		new JdbcTest().test();
+		/*new Thread(new Runnable() {
 			@Override
 			public void run() {
 				testLock("aaaaaa", 8000);
@@ -198,7 +224,7 @@ public class JdbcTest {
 			public void run() {
 				testLock("bbbbbbb", 10000);
 			}
-		}).start();
+		}).start();*/
 //		AtomicInteger LOCK = new AtomicInteger();
 //		LOCK.set(0);
 //		System.out.println(LOCK.compareAndSet(0, 5)+"--------------"+LOCK.get());

@@ -16,8 +16,7 @@
 	<update id="updateLastLogined">
 		UPDATE s_user 
 		<set>
-			jsessionid = #{jsessionid, jdbcType=VARCHAR},
-			last_logined = NOW()
+			jsessionid_pc_browser = #{jsessionid, jdbcType=VARCHAR}
 		</set>
 		WHERE id=#{id, jdbcType=INTEGER}
 	</update>

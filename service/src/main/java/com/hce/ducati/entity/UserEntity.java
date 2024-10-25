@@ -19,7 +19,7 @@ import lombok.Data;
 @DynamicInsert
 @DynamicUpdate
 @EntityListeners({AuditingEntityListener.class})
-@Entity(name = "s_user")
+@Entity(name = "b_user")
 public class UserEntity {
 	@Id
 	@Column(name="id")
@@ -35,15 +35,18 @@ public class UserEntity {
 	private String username;
 	@Column(name="name")
 	private String name;
+	@Column(name="gender")
+	private Byte gender;
 	@Column(name="password")
 	private String password;
 	@Column(name="email")
 	private String email;
 	@Column(name="mobile_phone")
 	private String mobilePhone;
-	@Column(name="jsessionid")
-	private String jsessionid;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
-	@Column(name="last_logined")
-	private Date lastLogined;
+	@Column(name="jsessionid_pc_browser")
+	private String jsessionidPcBrowser;
+	@Column(name="jsessionid_mobile_browser")
+	private String jsessionidMobileBrowser;
+	@Column(name="jsessionid_app")
+	private String jsessionidApp;
 }

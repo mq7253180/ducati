@@ -13,7 +13,7 @@ public class ControllerUtils {
 		user.setMobilePhone(entity.getMobilePhone());
 		user.setEmail(entity.getEmail());
 		user.setPassword(entity.getPassword());
-		user.setJsessionid(entity.getJsessionid());
+		user.setJsessionid(entity.getJsessionidPcBrowser());
 		return user;
 	}
 }
