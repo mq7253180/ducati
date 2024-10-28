@@ -30,27 +30,27 @@ import com.hce.ducati.GlobalProperties;
 import com.hce.ducati.ServiceInitConfiguration;
 import com.hce.ducati.client.CenterFeign;
 //import com.hce.ducati.client.DucatiClient;
-import com.hce.ducati.client.DucatiSpringCloudClient;
+//import com.hce.ducati.client.DucatiSpringCloudClient;
 import com.hce.ducati.client.InnerFeign;
 import com.hce.ducati.client.QuincyFeign;
 import com.hce.ducati.entity.Enterprise;
-import com.hce.ducati.entity.UserEntity;
 import com.hce.ducati.o.Params;
 import com.hce.ducati.o.RegionResultDTO;
 import com.hce.ducati.o.SubTestDto;
-import com.hce.ducati.service.UserService;
 import com.hce.ducati.service.XxxService;
 import com.hce.ducati.service.ZzzService;
 import com.hce.ducati.service.impl.A;
 import com.hce.ducati.service.impl.ABCdefg;
 import com.hce.ducati.service.impl.ABdefgh;
 import com.hce.ducati.service.impl.Abefghi;
-import com.hce.ducati.service.impl.UserServiceImpl;
 import com.hce.ducati.service.impl.aBcd;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
-import com.quincy.auth.controller.AuthorizationCommonController;
+import com.quincy.auth.entity.UserEntity;
+import com.quincy.auth.service.UserService;
+import com.quincy.auth.service.impl.UserServiceImpl;
 import com.quincy.core.InnerConstants;
+import com.quincy.sdk.Client;
 import com.quincy.sdk.DTransactionOptRegistry;
 import com.quincy.sdk.DynamicField;
 import com.quincy.sdk.Result;
@@ -67,6 +67,7 @@ import com.quincy.sdk.annotation.transaction.DTransactional;
 import com.quincy.sdk.entity.Region;
 import com.quincy.sdk.helper.AopHelper;
 import com.quincy.sdk.helper.HttpClientHelper;
+import com.quincy.sdk.o.User;
 import com.quincy.sdk.service.RegionService;
 
 import jakarta.servlet.ServletException;
@@ -83,8 +84,8 @@ public class XxxController {
 	private QuincyFeign quincyFeign;
 	@Autowired
 	private InnerFeign innerFeign;
-	@Autowired(required = false)
-	private DucatiSpringCloudClient ducatiSpringCloudClient;
+//	@Autowired(required = false)
+//	private DucatiSpringCloudClient ducatiSpringCloudClient;
 	@Autowired
 	private UserService userService;
 
@@ -190,8 +191,8 @@ public class XxxController {
 
 	@RequestMapping("/usrinfo")
 	@ResponseBody
-	public UserEntity getUserInfo(@RequestParam(required = true, value = OAuth.OAUTH_USERNAME)String username) {
-		UserEntity user = userService.find(username);
+	public User getUserInfo(HttpServletRequest request, @RequestParam(required = true, value = OAuth.OAUTH_USERNAME)String username) {
+		User user = userService.find(username, Client.get(request));
 		user.setPassword(null);
 		return user;
 	}
@@ -511,8 +512,8 @@ public class XxxController {
 		return "wwwww";
 	}
 
-	@Autowired
-	private AuthorizationCommonController authorizationCommonController;
+//	@Autowired
+//	private AuthorizationCommonController authorizationCommonController;
 //	@Value("${vcode.expire}")
 //	private int vcodeExpire;
 	@Autowired

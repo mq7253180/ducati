@@ -1,11 +1,8 @@
 package com.hce.ducati.client;
 
-import java.math.BigDecimal;
 import java.util.function.Consumer;
 
 //import org.springframework.amqp.core.MessageBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 //import org.springframework.cloud.stream.annotation.EnableBinding;
 //import org.springframework.cloud.stream.annotation.StreamListener;
 //import org.springframework.cloud.stream.function.StreamBridge;
@@ -32,8 +29,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 //@EnableBinding({DucatiBound.class})
 public class DucatiSpringCloudClient {
-	@Autowired
-	private DucatiBound processor;
+//	@Autowired
+//	private DucatiBound processor;
 //	@Autowired
 //	@Qualifier(DucatiBound.INPUT)
 //	private MessageChannel output;

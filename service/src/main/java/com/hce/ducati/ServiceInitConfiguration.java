@@ -1,8 +1,6 @@
 package com.hce.ducati;
 
 import java.io.IOException;
-import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -18,20 +16,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hce.ducati.entity.UserEntity;
-import com.hce.ducati.service.UserService;
 import com.quincy.core.PublicKeyGetter;
 import com.quincy.o.AttributeKeys;
 import com.quincy.o.MyParams;
 import com.quincy.sdk.AuthActions;
-import com.quincy.sdk.Client;
 import com.quincy.sdk.DTransactionOptRegistry;
 import com.quincy.sdk.DTransactionFailure;
 import com.quincy.sdk.EmailService;
 import com.quincy.sdk.PwdRestEmailInfo;
 import com.quincy.sdk.RootControllerHandler;
 import com.quincy.sdk.TempPwdLoginEmailInfo;
-import com.quincy.sdk.o.User;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -42,8 +36,6 @@ public class ServiceInitConfiguration {
 	private DTransactionOptRegistry dTransactionOptRegistry;
 	@Autowired
 	private EmailService emailService;
-	@Autowired
-	private UserService userService;
 
 //	@Scheduled(cron = "0 0/2 * * * ?")
 	public void retry() throws ClassNotFoundException, NoSuchMethodException, SecurityException, IOException, InterruptedException {
@@ -142,33 +134,8 @@ public class ServiceInitConfiguration {
 	public AuthActions authActions() {
 		return new AuthActions() {
 			@Override
-			public User findUser(String username, Client client) {
-				UserEntity userEntity = userService.find(username);
-				if(userEntity==null)
-					return null;
-				User user = ControllerUtils.toUser(userEntity);
-//				user.setCurrencyAccounts(new HashMap<String, BigDecimal>(2));
-				user.setAttributes(new HashMap<String, Serializable>(2));
-				user.getAttributes().put(AttributeKeys.MY_PARAMS, new MyParams().setXxx("wwwqqq"));
-				return user;
-			}
-
-			@Override
-			public void updateLastLogin(Long userId, String jsessionid, Client client) {
-				UserEntity vo = new UserEntity();
-				vo.setId(userId);
-				vo.setJsessionidPcBrowser(jsessionid);
-				userService.update(vo);
-			}
-
-			@Override
-			public void updatePassword(Long userId, String password) {
-				
-			}
-
-			@Override
-			public ModelAndView signinView(HttpServletRequest request) {
-				return null;
+			public void loadAttributes(Long userId, Map<String, Object> attributes) {
+				attributes.put(AttributeKeys.MY_PARAMS, new MyParams().setXxx("wwwqqq"));
 			}
 		};
 	}
