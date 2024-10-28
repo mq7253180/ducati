@@ -43,6 +43,8 @@ public class UserEntity {
 	private String email;
 	@Column(name="mobile_phone")
 	private String mobilePhone;
+	@Column(name="avatar")
+	private String avatar;
 	@Column(name="jsessionid_pc_browser")
 	private String jsessionidPcBrowser;
 	@Column(name="jsessionid_mobile_browser")
