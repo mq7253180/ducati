@@ -15,34 +15,19 @@
 	</properties>
 	<dependencies>
 		<dependency>
-		    <groupId>org.springframework.cloud</groupId>
-		    <artifactId>spring-cloud-config-client</artifactId>
-		    <version>${version.spring-cloud}</version>
-		</dependency>
-		<!-- <dependency>
-		    <groupId>org.springframework.cloud</groupId>
-		    <artifactId>spring-cloud-starter-config</artifactId>
-		    <version>${version.spring-cloud}</version>
-		</dependency> -->
-		<!--<dependency>
-		    <groupId>org.springframework.cloud</groupId>
-		    <artifactId>spring-cloud-starter-bus-kafka</artifactId>
-		    <version>4.0.0</version>
-		</dependency>-->
-		<dependency>
-		    <groupId>com.quincy</groupId>
-		    <artifactId>quincy-redis</artifactId>
-		    <version>2.0.0</version>
-		</dependency>
-		<dependency>
 		    <groupId>com.quincy</groupId>
 		    <artifactId>quincy-jdbc-sharding</artifactId>
 		    <version>2.0.0</version>
 		</dependency>
 		<dependency>
-			<groupId>com.quincy</groupId>
-			<artifactId>quincy-auth-common</artifactId>
-			<version>2.0.0</version>
+		    <groupId>com.quincy</groupId>
+		    <artifactId>quincy-auth-server-sharding</artifactId>
+		    <version>2.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.hce</groupId>
+		    <artifactId>ducati-service</artifactId>
+		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

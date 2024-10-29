@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 //import org.apache.dubbo.config.annotation.DubboReference;
 //import org.apache.zookeeper.CreateMode;
@@ -27,7 +25,6 @@ import com.hce.ducati.dao.ZelationRepository;
 import com.hce.ducati.entity.Enterprise;
 import com.hce.ducati.entity.Zelation;
 import com.hce.ducati.mapper.EnterpriseMapper;
-import com.hce.ducati.mapper.RegionMapper;
 import com.hce.ducati.mapper.TestMapper;
 import com.hce.ducati.o.Params;
 import com.hce.ducati.o.SubTestDto;
@@ -37,12 +34,9 @@ import com.hce.ducati.service.ZzzService;
 import com.hce.ducati.service.ZzzzService;
 //import com.quincy.sdk.annotation.ZooKeeperInjector;
 import com.quincy.sdk.annotation.transaction.DTransactional;
-import com.quincy.sdk.dao.RegionRepository;
-import com.quincy.sdk.entity.Region;
 import com.quincy.sdk.DynamicField;
 import com.quincy.sdk.JdbcDao;
 import com.quincy.sdk.annotation.L2Cache;
-import com.quincy.sdk.annotation.jdbc.ReadOnly;
 //import com.quincy.sdk.ZKContext;
 //import com.quincy.sdk.annotation.ZkSynchronized;
 import com.quincy.sdk.annotation.DurationLog;
@@ -60,10 +54,6 @@ public class XxxServiceImpl implements XxxService {
 	@Value("${spring.application.name}")
 	private String appName;
 	@Autowired
-	private RegionRepository regionRepository;
-	@Autowired
-	private RegionMapper regionMapper;
-	@Autowired
 	private InnerFeign innerFeign;
 //	@DubboReference(version = "1.0.0")
 //	private DucatiClient ducatiClient;
@@ -71,128 +61,6 @@ public class XxxServiceImpl implements XxxService {
 	private TestMapper testMapper;
 	@Autowired
 	private TestDao testDao;
-
-	@Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-	@Override
-	public int updateResion(Long id, String cnName) {
-		int effacted = regionMapper.update(id, cnName);
-		return effacted;
-	}
-
-	@Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-	@Override
-	public int updateResion2(String enName, String cnName) {
-		int effacted = regionMapper.update2(enName, cnName);
-		return effacted;
-	}
-
-	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-	@Override
-	public int updateResion3() {
-		int effacted = regionMapper.update3();
-		return effacted;
-	}
-
-	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-	@Override
-	public int updateResion4(String enName) {
-		int effacted = regionMapper.update4(enName);
-		return effacted;
-	}
-
-	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-	@Override
-	public int updateResion4x(String enName) {
-		int effacted = regionMapper.update4x(enName);
-		return effacted;
-	}
-
-	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-	@Override
-	public int updateResion4xx(String enName) {
-		int effacted = regionMapper.update4xx(enName);
-		return effacted;
-	}
-
-	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-	@Override
-	public int updateResion5(Integer sort) {
-		int effacted = regionMapper.update5(sort);
-		return effacted;
-	}
-
-	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-	@Override
-	public List<Region> findRegions2() {
-		List<Region> list = regionMapper.findByRange(1, 4);
-		for(Region r:list) {
-			if(r.getId()==3||r.getId()==4)
-				log.info("--------"+r.getCnName());
-		}
-		log.info("===================");
-		list = regionMapper.findByRange(3, 10);
-		log.info("SIZE------------"+list.size());
-		for(Region r:list) {
-			if(r.getId()==3||r.getId()==4||r.getId()==6)
-				log.info("--------"+r.getCnName());
-		}
-		/*Enterprise e = enterpriseMapper.findOne(15l);
-		log.info("------------"+e.getName());
-		log.info("===================");
-		Region region = regionMapper.findByRangeAndId(3l, 1, 4);
-		log.info("------------"+region.getCnName());*/
-		log.info("===================");
-		list = regionMapper.findByRange(3, 10);
-		log.info("SIZE------------"+list.size());
-		for(Region r:list) {
-			if(r.getId()==3||r.getId()==4)
-				log.info("--------"+r.getCnName());
-		}
-		log.info("===================");
-		list = regionMapper.findByRange(2, 10);
-		log.info("SIZE------------"+list.size());
-		for(Region r:list) {
-			if(r.getId()==3||r.getId()==4)
-				log.info("--------"+r.getCnName());
-		}
-		return list;
-	}
-
-	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-	@Override
-	public Region findRegion2(Long id) {
-		Region  region = regionMapper.findById(id);
-		log.info("========="+region.getCnName());
-		region = regionMapper.findByCnName(region.getCnName());
-		if(region!=null)
-			log.info("========="+region.getCnName());
-		region = regionMapper.findById(id);
-		log.info("========="+region.getCnName());
-		return region;
-	}
-
-	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-	@Override
-	public Region findRegion2(String cnName) {
-		Region region = regionMapper.findByCnName(cnName);
-		log.info("========="+region.getId());
-		/*region = regionMapper.findById(region.getId());
-		if(region!=null)
-			log.info("========="+region.getCnName());*/
-		region = regionMapper.findByCnName(cnName);
-		if(region!=null)
-			log.info("========="+region.getId());
-		return region;
-	}
-
-	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-	@Override
-	public List<Region> findRegions4(Long id) {
-		Region  region = regionMapper.findById(id);
-		log.info("========="+region.getCnName());
-		List<Region> list = regionMapper.findByRange(1, 10);
-		return list;
-	}
 
 //	@DurationLog
 //	@Cache(expire = 30)
@@ -228,10 +96,6 @@ public class XxxServiceImpl implements XxxService {
 				.append(this.classInfo(zzzService, "WITH_AOP"))
 				.append("\r\n")
 				.append(this.classInfo(zzzzService, "NO_AOP_AOP"))
-				.append("\r\n")
-				.append(this.classInfo(regionRepository, "JPA_REPOSITORY"))
-				.append("\r\n")
-				.append(this.classInfo(regionMapper, "MYBATIS_MAPPER"))
 				.append("\r\n")
 				.append(this.classInfo(innerFeign, "SPRINGCLOUD_FEIGN"))
 //				.append("\r\n")
@@ -286,11 +150,6 @@ public class XxxServiceImpl implements XxxService {
 //	public void testDeprecatedSynchronized(long millis) throws InterruptedException {
 //		Thread.sleep(millis);
 //	}
-
-	@ReadOnly
-	public List<Region> findRegions() {
-		return regionMapper.find("on");
-	}
 
 	@Autowired
 	private EnterpriseMapper enterpriseMapper;

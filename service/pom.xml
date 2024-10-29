@@ -16,7 +16,7 @@
 	<dependencies>
 		<dependency>
 		    <groupId>com.quincy</groupId>
-		    <artifactId>quincy-jdbc</artifactId>
+		    <artifactId>quincy-jdbc-base</artifactId>
 		    <version>2.0.0</version>
 		</dependency>
 		<dependency>

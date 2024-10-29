@@ -21,6 +21,7 @@ import com.quincy.sdk.Constants;
 import com.quincy.sdk.annotation.auth.EnableAnnotationAuth;
 import com.quincy.sdk.annotation.auth.EnablePermissionAndRole;
 import com.quincy.sdk.annotation.auth.EnableRedisSessionEviction;
+import com.quincy.sdk.annotation.auth.EnableShardingPermissionAndRole;
 
 //@EnableDubbo
 @EnableFeignClients
@@ -37,7 +38,8 @@ import com.quincy.sdk.annotation.auth.EnableRedisSessionEviction;
 @EnableScheduling
 @EnableAnnotationAuth
 @EnableRedisSessionEviction(pcBrowser = true, mobileBrowser = true, app = true)
-@EnablePermissionAndRole
+//@EnablePermissionAndRole
+@EnableShardingPermissionAndRole
 //@EnableMultiEnterprise
 //@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1234)
 @SpringBootApplication/*(exclude = {

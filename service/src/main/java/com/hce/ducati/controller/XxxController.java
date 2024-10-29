@@ -35,7 +35,6 @@ import com.hce.ducati.client.InnerFeign;
 import com.hce.ducati.client.QuincyFeign;
 import com.hce.ducati.entity.Enterprise;
 import com.hce.ducati.o.Params;
-import com.hce.ducati.o.RegionResultDTO;
 import com.hce.ducati.o.SubTestDto;
 import com.hce.ducati.service.XxxService;
 import com.hce.ducati.service.ZzzService;
@@ -46,7 +45,6 @@ import com.hce.ducati.service.impl.Abefghi;
 import com.hce.ducati.service.impl.aBcd;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
-import com.quincy.auth.entity.UserEntity;
 import com.quincy.auth.service.UserService;
 import com.quincy.auth.service.impl.UserServiceImpl;
 import com.quincy.core.InnerConstants;
@@ -58,17 +56,14 @@ import com.quincy.sdk.VCodeCharsFrom;
 import com.quincy.sdk.VCodeOpsRgistry;
 import com.quincy.sdk.VCodeSender;
 import com.quincy.sdk.annotation.JedisSupport;
-import com.quincy.sdk.annotation.L2Cache;
 import com.quincy.sdk.annotation.SignatureRequired;
 import com.quincy.sdk.annotation.VCodeRequired;
 import com.quincy.sdk.annotation.auth.LoginRequired;
 import com.quincy.sdk.annotation.auth.PermissionNeeded;
 import com.quincy.sdk.annotation.transaction.DTransactional;
-import com.quincy.sdk.entity.Region;
 import com.quincy.sdk.helper.AopHelper;
 import com.quincy.sdk.helper.HttpClientHelper;
 import com.quincy.sdk.o.User;
-import com.quincy.sdk.service.RegionService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -116,79 +111,6 @@ public class XxxController {
 		return centerFeign.actuator();
 	}
 
-	@RequestMapping("/updateRegion")
-	@ResponseBody
-	public int updateRegion(@RequestParam(required = true, value = "id")Long id, @RequestParam(required = true, value = "cnName")String cnName) {
-		int effacted = xxxService.updateResion(id, cnName);
-		return effacted;
-	}
-
-	@RequestMapping("/updateRegion2")
-	@ResponseBody
-	public int updateRegion2(@RequestParam(required = true, value = "enName")String enName, @RequestParam(required = true, value = "cnName")String cnName) {
-		int effacted = xxxService.updateResion2(enName, cnName);
-		return effacted;
-	}
-
-	@RequestMapping("/updateRegion3")
-	@ResponseBody
-	public int updateRegion3() {
-		int effacted = xxxService.updateResion3();
-		return effacted;
-	}
-
-	@RequestMapping("/updateRegion4")
-	@ResponseBody
-	public int updateRegion4(@RequestParam(required = true, value = "enName")String enName) {
-		int effacted = xxxService.updateResion4(enName);
-		return effacted;
-	}
-
-	@RequestMapping("/updateRegion4x")
-	@ResponseBody
-	public int updateRegion4x(@RequestParam(required = true, value = "enName")String enName) {
-		int effacted = xxxService.updateResion4x(enName);
-		return effacted;
-	}
-
-	@RequestMapping("/updateRegion4xx")
-	@ResponseBody
-	public int updateRegion4xx(@RequestParam(required = true, value = "enName")String enName) {
-		int effacted = xxxService.updateResion4xx(enName);
-		return effacted;
-	}
-
-	@RequestMapping("/updateRegion5")
-	@ResponseBody
-	public int updateRegion5(@RequestParam(required = true, value = "sort")Integer sort) {
-		int effacted = xxxService.updateResion5(sort);
-		return effacted;
-	}
-
-	@GetMapping("/regions4")
-	@ResponseBody
-	public List<Region> findRegions4(@RequestParam(required = true, value = "id")Long id) {
-		return xxxService.findRegions4(id);
-	}
-
-	@GetMapping("/regions2")
-	@ResponseBody
-	public List<Region> findRegions2() {
-		return xxxService.findRegions2();
-	}
-
-	@GetMapping("/region")
-	@ResponseBody
-	public Region findRegion(@RequestParam(required = true, value = "id")Long id) {
-		return xxxService.findRegion2(id);
-	}
-
-	@GetMapping("/region2")
-	@ResponseBody
-	public Region findRegion2(@RequestParam(required = true, value = "cnName")String cnName) {
-		return xxxService.findRegion2(cnName);
-	}
-
 	@RequestMapping("/usrinfo")
 	@ResponseBody
 	public User getUserInfo(HttpServletRequest request, @RequestParam(required = true, value = OAuth.OAUTH_USERNAME)String username) {
@@ -214,20 +136,6 @@ public class XxxController {
 		String info = xxxService.classInfo();
 		log.info("\r\n"+info);
 		return info.replaceAll("\r\n", "<br/>");
-	}
-
-	@GetMapping("/regions/quincy")
-	@ResponseBody
-	public List<Region> finaRegionsByQuincy() {
-		RegionResultDTO dto = quincyFeign.getRegions();
-		return dto.getData();
-	}
-
-	@GetMapping("/regions/inner")
-	@ResponseBody
-	public List<Region> finaRegionsByInner() {
-		RegionResultDTO dto = innerFeign.getRegions();
-		return dto.getData();
 	}
 
 	@HystrixCommand(fallbackMethod = "hystrixFailure", commandProperties = {
@@ -269,11 +177,6 @@ public class XxxController {
 		return ducatiSpringCloudClient.sendTo(o);
 	}
 */
-	@GetMapping("/regions")
-	@ResponseBody
-	public List<Region> findRegions() {
-		return xxxService.findRegions();
-	}
 
 //	@DubboReference(version = "1.0.0")
 //	private DucatiClient ducatiClient;
@@ -337,25 +240,6 @@ public class XxxController {
 		zzzService.updateDB(s, p);
 		zzzService.callHttp(321, new int[] {1, 5, 8}, pp);
 		return "XXX";
-	}
-
-	@Autowired
-	private RegionService regionService;
-
-	@L2Cache(expire = 30)
-	@GetMapping("/region/all")
-	@ResponseBody
-	public List<Region> findAllRegions() {
-		log.info("===============findAllRegions");
-		return regionService.findAll();
-	}
-
-	@L2Cache(expire = 15)
-	@GetMapping("/region/countries")
-	@ResponseBody
-	public List<Region> findCountries() {
-		log.info("===============findCountries");
-		return regionService.findCountries();
 	}
 
 	@JedisSupport
