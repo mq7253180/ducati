@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 //import org.apache.dubbo.config.annotation.DubboReference;
-import org.apache.oltu.oauth2.common.OAuth;
 //import org.apache.zookeeper.KeeperException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -109,14 +108,6 @@ public class XxxController {
 	@ResponseBody
 	public String testf() {
 		return centerFeign.actuator();
-	}
-
-	@RequestMapping("/usrinfo")
-	@ResponseBody
-	public User getUserInfo(HttpServletRequest request, @RequestParam(required = true, value = OAuth.OAUTH_USERNAME)String username) {
-		User user = userService.find(username, Client.get(request));
-		user.setPassword(null);
-		return user;
 	}
 
 	@GetMapping("/error/json")
