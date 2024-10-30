@@ -15,7 +15,9 @@ import com.hce.ducati.o.Params;
 import com.hce.ducati.o.SubTestDto;
 import com.hce.ducati.service.XxxService;
 import com.hce.ducati.service.XxxServiceShardingProxy;
+import com.quincy.sdk.AuthHelper;
 import com.quincy.sdk.DynamicField;
+import com.quincy.sdk.o.XSession;
 
 import redis.clients.jedis.JedisCluster;
 
@@ -119,7 +121,8 @@ public class XxxServiceShardingImpl implements XxxService {
 	public Object findSubTests(int limit, int offset)
 			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
 			NoSuchMethodException, SecurityException, SQLException, IOException, CloneNotSupportedException {
-		return xxxServiceShardingProxy.findSubTests(offset, limit, offset);
+		XSession xSession = AuthHelper.getSession();
+		return xxxServiceShardingProxy.findSubTests(xSession.getUser().getShardingKey(), limit, offset);
 	}
 
 	@Override
