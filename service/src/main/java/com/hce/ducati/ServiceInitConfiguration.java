@@ -1,6 +1,7 @@
 package com.hce.ducati;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -28,7 +29,7 @@ import com.quincy.sdk.TempPwdLoginEmailInfo;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-@PropertySource(value = {"classpath:application-core.properties", "classpath:application-auth.properties", "classpath:application-service.properties", "classpath:application-oauth2.properties", "classpath:application-sensitiveness.properties"})
+@PropertySource(value = {"classpath:application-core.properties", "classpath:application-auth.properties", "classpath:application-service.properties", "classpath:application-sensitiveness.properties"})
 @Configuration("sssiiiccc")
 public class ServiceInitConfiguration {
 	@Autowired
@@ -133,7 +134,7 @@ public class ServiceInitConfiguration {
 	public AuthActions authActions() {
 		return new AuthActions() {
 			@Override
-			public void loadAttributes(Long userId, Map<String, Object> attributes) {
+			public void onLogin(Long userId, Map<String, Serializable> attributes) {
 				attributes.put(AttributeKeys.MY_PARAMS, new MyParams().setXxx("wwwqqq"));
 			}
 		};
