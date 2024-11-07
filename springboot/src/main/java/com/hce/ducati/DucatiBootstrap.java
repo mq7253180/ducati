@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.quincy.sdk.Constants;
+import com.quincy.sdk.SnowFlake;
 import com.quincy.sdk.annotation.auth.EnableAnnotationAuth;
 import com.quincy.sdk.annotation.auth.EnablePermissionAndRole;
 import com.quincy.sdk.annotation.auth.EnableRedisSessionEviction;
@@ -53,7 +54,8 @@ public class DucatiBootstrap {
         sa.addListeners(new ApplicationPidFileWriter());
         sa.run(args);
 //        SpringApplication.run(Bootstrap.class, args);
-        if(args!=null) {
+        if(args!=null&&args.length>0) {
+        	SnowFlake.setWorkerId(Integer.parseInt(args[0]));
         	System.out.println("SYS_ARGS_LENGTH----"+args.length);
         	for(String arg:args) {
         		System.out.println("SYS_ARG----"+arg);

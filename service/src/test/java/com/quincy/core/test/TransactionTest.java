@@ -54,13 +54,14 @@ public class TransactionTest {
 		}
 	}
 
-	public void opt2() throws Exception {
+	public void opt2(Integer userId) throws Exception {
 		Connection conn = null;
 		PreparedStatement stat = null;
+		PreparedStatement stat2 = null;
 		try {
 			conn = this.createConnection();
 			conn.setAutoCommit(false);
-			conn.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+			conn.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
 //			conn.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
 //			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE id=?;");
 //			stat.setLong(1, 9);
@@ -68,15 +69,30 @@ public class TransactionTest {
 //			stat.setString(1, "aaa8");
 //			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb BETWEEN 12 AND 21;");
 //			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx');");
-			stat = conn.prepareStatement("UPDATE sub_test SET eee=CONCAT(eee, '_xxx') WHERE fff=21;");
-			System.out.println("----------------"+stat.executeUpdate());
+//			stat = conn.prepareStatement("UPDATE sub_test SET eee=CONCAT(eee, '_xxx') WHERE fff=21;");
+			stat = conn.prepareStatement("UPDATE b_login_user_mapping SET user_id=user_id WHERE login_name=?");
+			stat.setString(1, "abcde");
+			int result = stat.executeUpdate();
+			System.out.println(userId+": 1----------------"+result);
+			if(result==0) {
+				Thread.sleep(1000);
+				stat2 = conn.prepareStatement("INSERT INTO b_login_user_mapping(login_name, user_id) VALUES(?, ?);");
+				stat2.setString(1, "abcde");
+				stat2.setInt(2, 35);
+				System.out.println(userId+": 2----------------"+stat2.executeUpdate());
+			} else {
+				System.out.println("用户名已存在");
+			}
 			conn.commit();
 		} catch (Exception e) {
 			conn.rollback();
+			System.out.println("EEE====="+e.getClass().getName()+"-----"+e.getMessage());
 			throw e;
 		} finally {
 			if(stat!=null)
 				stat.close();
+			if(stat2!=null)
+				stat2.close();
 			if(conn!=null)
 				conn.close();
 		}
@@ -188,6 +204,21 @@ public class TransactionTest {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new TransactionTest().opt4();
+		TransactionTest test = new TransactionTest();
+		new Thread(()->{
+			try {
+				test.opt2(76);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}).start();
+		Thread.sleep(200);
+		new Thread(()->{
+			try {
+				test.opt2(88);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}).start();
 	}
 }

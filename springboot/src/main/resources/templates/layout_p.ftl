@@ -64,7 +64,7 @@
 	            <div class="nicescroll-bar">
 	                <div class="navbar-nav-wrap">
 	                    <ul class="navbar-nav flex-column">
-	                    	<#list xsession.menus as menu>
+	                    	<#list xsession.menus?if_exists as menu>
 	                        <li class="nav-item active">
 	                            <a class="nav-link" href="javascript:void(0);" data-toggle="collapse" data-target="#menu_${menu.id}">
 	                                <span class="feather-icon"><i data-feather="${menu.icon}"></i></span>
