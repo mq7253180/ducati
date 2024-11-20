@@ -37,4 +37,6 @@ public interface TestDao {
 	public SubTestDto findOneSubTest2(String id);
 	@FindDynamicFields("sub_test")
 	public List<DynamicField> findSubTestDynamicFields();
+	@ExecuteUpdate(sql = "UPDATE uest SET ddd=ddd+1 WHERE id=?")
+	public int updateUest(Long id);
 }
