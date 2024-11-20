@@ -34,14 +34,14 @@ public class PerformaceController {
 
 	@RequestMapping("/uuu")
 	@ResponseBody
-	public Result uuu(@RequestParam(required = true, value = "c") int c) throws InterruptedException {
+	public Result uuu(@RequestParam(required = true, value = "id")Long id, @RequestParam(required = true, value = "c")int c) throws InterruptedException {
 		List<Thread> threads = new ArrayList<Thread>(c);
 		long start = System.currentTimeMillis();
 		finished = 0;
 		Object lock = new Object();
 		for(int i=0;i<c;i++) {
 			threads.add(new Thread(()->{
-				testDao.updateUest(1l);
+				testDao.updateUest(id);
 				finished++;
 				synchronized(lock) {
 					lock.notifyAll();
