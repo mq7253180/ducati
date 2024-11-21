@@ -37,8 +37,19 @@ public class PerformaceController {
 	@RequestMapping("/uuu")
 	@ResponseBody
 	public Result uuu(@RequestParam(required = true, value = "id")Long id, @RequestParam(required = true, value = "c")int c) throws InterruptedException {
-		long duration = multiThreads(c, ()->{
+		long duration = multiThreads(c, (index)->{
 			testDao.updateUest(id);
+		});
+		Result result = new Result();
+		result.setData(duration);
+		return result;
+	}
+
+	@RequestMapping("/uuu2")
+	@ResponseBody
+	public Result uuu2(@RequestParam(required = true, value = "id")Long id, @RequestParam(required = true, value = "c")int c) throws InterruptedException {
+		long duration = multiThreads(c, (index)->{
+			testDao.updateUest(id+index);
 		});
 		Result result = new Result();
 		result.setData(duration);
@@ -48,7 +59,7 @@ public class PerformaceController {
 	@RequestMapping("/iii")
 	@ResponseBody
 	public Result iii(@RequestParam(required = true, value = "c")int c) throws InterruptedException {
-		long duration = multiThreads(c, ()->{
+		long duration = multiThreads(c, (index)->{
 			testDao.insertUest();
 		});
 		Result result = new Result();
@@ -61,14 +72,16 @@ public class PerformaceController {
 		long start = System.currentTimeMillis();
 		finished = 0;
 		Object lock = new Object();
-		for(int i=0;i<count;i++)
+		for(int i=0;i<count;i++) {
+			int index = i;
 			threads.add(new Thread(()->{
-				task.run();
+				task.run(index);
 				finished++;
 				synchronized(lock) {
 					lock.notifyAll();
 				}
 			}));
+		}
 		for(Thread thread:threads)
 			thread.start();
 		while(finished<count)
@@ -79,11 +92,11 @@ public class PerformaceController {
 	}
 
 	private static interface Task {
-		public void run();
+		public void run(int index);
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		long duration = multiThreads(50, ()->{
+		long duration = multiThreads(50, (index)->{
 			try {
 //				System.out.println("---"+finished);
 				HttpClientHelper.get("https://demo.jep8566.com/api/ppp/qqq", null);
