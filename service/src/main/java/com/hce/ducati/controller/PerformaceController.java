@@ -1,5 +1,6 @@
 package com.hce.ducati.controller;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hce.ducati.dao.TestDao;
 import com.quincy.sdk.Result;
+import com.quincy.sdk.helper.HttpClientHelper;
 
 @RefreshScope
 @Controller
@@ -35,29 +37,61 @@ public class PerformaceController {
 	@RequestMapping("/uuu")
 	@ResponseBody
 	public Result uuu(@RequestParam(required = true, value = "id")Long id, @RequestParam(required = true, value = "c")int c) throws InterruptedException {
-		List<Thread> threads = new ArrayList<Thread>(c);
+		long duration = multiThreads(c, ()->{
+			testDao.updateUest(id);
+		});
+		Result result = new Result();
+		result.setData(duration);
+		return result;
+	}
+
+	@RequestMapping("/iii")
+	@ResponseBody
+	public Result iii(@RequestParam(required = true, value = "c")int c) throws InterruptedException {
+		long duration = multiThreads(c, ()->{
+			testDao.insertUest();
+		});
+		Result result = new Result();
+		result.setData(duration);
+		return result;
+	}
+
+	private static long multiThreads(int count, Task task) throws InterruptedException {
+		List<Thread> threads = new ArrayList<Thread>(count);
 		long start = System.currentTimeMillis();
 		finished = 0;
 		Object lock = new Object();
-		for(int i=0;i<c;i++) {
+		for(int i=0;i<count;i++)
 			threads.add(new Thread(()->{
-				testDao.updateUest(id);
+				task.run();
 				finished++;
 				synchronized(lock) {
 					lock.notifyAll();
 				}
 			}));
-		}
-		for(Thread thread:threads) {
+		for(Thread thread:threads)
 			thread.start();
-		}
-		while(finished<c) {
+		while(finished<count)
 			synchronized(lock) {
 				lock.wait(100);
 			}
-		}
-		Result result = new Result();
-		result.setData(System.currentTimeMillis()-start);
-		return result;
+		return System.currentTimeMillis()-start;
+	}
+
+	private static interface Task {
+		public void run();
+	}
+
+	public static void main(String[] args) throws InterruptedException {
+		long duration = multiThreads(50, ()->{
+			try {
+//				System.out.println("---"+finished);
+				HttpClientHelper.get("https://demo.jep8566.com/api/ppp/qqq", null);
+//				System.out.println();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		System.out.println(duration);
 	}
 }
