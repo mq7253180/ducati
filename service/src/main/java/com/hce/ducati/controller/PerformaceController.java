@@ -95,12 +95,12 @@ public class PerformaceController {
 		public void run(int index);
 	}
 
-	public static void main(String[] args) throws InterruptedException {
-		long duration = multiThreads(50, (index)->{
+	public static void main(String[] args) throws InterruptedException, IOException {
+		long duration = multiThreads(20, (index)->{
 			try {
-//				System.out.println("---"+finished);
-				HttpClientHelper.get("https://demo.jep8566.com/api/ppp/qqq", null);
-//				System.out.println();
+				System.out.println("---"+index);
+				HttpClientHelper.get("https://demo.jep8566.com/api/ppp/uuu?id=12345&c=1", null);
+				System.out.println("==="+index);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
