@@ -33,7 +33,7 @@ public class PerformaceController {
 
 	@Autowired
 	private PerformanceService performanceService;
-	private static volatile int finished = 0;
+	private static int finished = 0;
 
 	@RequestMapping("/uuu")
 	@ResponseBody
@@ -77,8 +77,8 @@ public class PerformaceController {
 			int index = i;
 			threads.add(new Thread(()->{
 				task.run(index);
-				finished++;
 				synchronized(lock) {
+					finished++;
 					lock.notifyAll();
 				}
 			}));
@@ -87,6 +87,13 @@ public class PerformaceController {
 			thread.start();
 		while(finished<count)
 			synchronized(lock) {
+//				int f = 0;
+//				for(int i=0;i<threads.size();i++) {
+//					Thread thread = threads.get(i);
+//					if(thread.getState().equals(Thread.State.TERMINATED))
+//						f++;
+//				}
+//				log.info("FINISHED---{}", f);
 				lock.wait(100);
 			}
 		long duration = System.currentTimeMillis()-start;
