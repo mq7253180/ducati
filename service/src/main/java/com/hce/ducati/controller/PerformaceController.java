@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hce.ducati.dao.TestDao;
+import com.hce.ducati.service.PerformanceService;
 import com.quincy.sdk.Result;
 import com.quincy.sdk.helper.HttpClientHelper;
 
@@ -31,14 +31,14 @@ public class PerformaceController {
 	}
 
 	@Autowired
-	private TestDao testDao;
+	private PerformanceService performanceService;
 	private static volatile int finished = 0;
 
 	@RequestMapping("/uuu")
 	@ResponseBody
 	public Result uuu(@RequestParam(required = true, value = "id")Long id, @RequestParam(required = true, value = "c")int c) throws InterruptedException {
 		long duration = multiThreads(c, (index)->{
-			testDao.updateUest(id);
+			performanceService.updateUest(id);
 		});
 		Result result = new Result();
 		result.setData(duration);
@@ -49,7 +49,7 @@ public class PerformaceController {
 	@ResponseBody
 	public Result uuu2(@RequestParam(required = true, value = "id")Long id, @RequestParam(required = true, value = "c")int c) throws InterruptedException {
 		long duration = multiThreads(c, (index)->{
-			testDao.updateUest(id+index);
+			performanceService.updateUest(id+index);
 		});
 		Result result = new Result();
 		result.setData(duration);
@@ -60,7 +60,7 @@ public class PerformaceController {
 	@ResponseBody
 	public Result iii(@RequestParam(required = true, value = "c")int c) throws InterruptedException {
 		long duration = multiThreads(c, (index)->{
-			testDao.insertUest();
+			performanceService.insertUest();
 		});
 		Result result = new Result();
 		result.setData(duration);
