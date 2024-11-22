@@ -94,7 +94,8 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>1.2.2</version>
 				<configuration>
-					<imageName>registry.maqiang777.com/quincy/ducati</imageName>
+					<!--<imageName>registry.maqiang777.com/quincy/ducati</imageName>-->
+					<imageName>quincy/ducati</imageName>
 					<imageTags>
 						<imageTag>1.0</imageTag>
 					</imageTags>
@@ -102,7 +103,7 @@
 
 					<!-- Dockerfile两种方式 -->
 					<!-- 方式一：插件自动生成 -->
-					<baseImage>openjdk:17</baseImage>
+					<baseImage>openjdk:21</baseImage>
 					<workdir>/application/quincy</workdir>
 					<cmd>["java", "-version"]</cmd>
 					<entryPoint>["java", "-jar", "${project.build.finalName}.jar"]</entryPoint>

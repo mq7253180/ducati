@@ -159,7 +159,7 @@ public class TransactionTest {
 //			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb BETWEEN 12 AND 21;");
 //			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb BETWEEN 10 AND 25;");
 //			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE id=1;");
-//			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb=15;");
+			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb=15;");
 //			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb=17;");
 //			stat = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_xxx') WHERE bbb BETWEEN 15 AND 15;");
 //			stat = conn.prepareStatement("INSERT INTO test VALUES(11, 'aaa11', 17);");
@@ -167,23 +167,23 @@ public class TransactionTest {
 //			stat = conn.prepareStatement("DELETE FROM test WHERE bbb=17;");
 //			stat = conn.prepareStatement("DELETE FROM test WHERE id=1;");
 //			stat = conn.prepareStatement("DELETE FROM test WHERE bbb BETWEEN 10 AND 25;");
-//			System.out.println("R----------"+stat.executeUpdate());
-			stat = conn.prepareStatement("SELECT * FROM test WHERE bbb BETWEEN 10 AND 25 ORDER BY bbb;");
+			System.out.println("R----------"+stat.executeUpdate());
+//			stat = conn.prepareStatement("SELECT * FROM test WHERE bbb BETWEEN 10 AND 25 ORDER BY bbb;");
 //			stat = conn.prepareStatement("SELECT * FROM test WHERE id=11;");
-			ResultSet rs = stat.executeQuery();
-			while(rs.next())
-				System.out.println(rs.getString("aaa")+"---"+rs.getInt("bbb"));
-			rs.close();
-			System.out.println("--------------------");
+//			ResultSet rs = stat.executeQuery();
+//			while(rs.next())
+//				System.out.println(rs.getString("aaa")+"---"+rs.getInt("bbb"));
+//			rs.close();
+//			System.out.println("--------------------");
 
-			stat2 = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_www');");
-			System.out.println("R----------"+stat2.executeUpdate());
-			stat2.close();
+//			stat2 = conn.prepareStatement("UPDATE test SET aaa=CONCAT(aaa, '_www');");
+//			System.out.println("R----------"+stat2.executeUpdate());
+//			stat2.close();
 
-			rs = stat.executeQuery();
-			while(rs.next())
-				System.out.println(rs.getString("aaa")+"---"+rs.getInt("bbb"));
-			rs.close();
+//			rs = stat.executeQuery();
+//			while(rs.next())
+//				System.out.println(rs.getString("aaa")+"---"+rs.getInt("bbb"));
+//			rs.close();
 			conn.commit();
 		} catch (Exception e) {
 			conn.rollback();
@@ -205,20 +205,21 @@ public class TransactionTest {
 
 	public static void main(String[] args) throws Exception {
 		TransactionTest test = new TransactionTest();
-		new Thread(()->{
-			try {
-				test.opt2(76);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}).start();
-		Thread.sleep(200);
-		new Thread(()->{
-			try {
-				test.opt2(88);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}).start();
+		test.opt4();
+//		new Thread(()->{
+//			try {
+//				test.opt2(76);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}).start();
+//		Thread.sleep(200);
+//		new Thread(()->{
+//			try {
+//				test.opt2(88);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}).start();
 	}
 }
