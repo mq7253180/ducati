@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +16,9 @@ import com.hce.ducati.service.PerformanceService;
 import com.quincy.sdk.Result;
 import com.quincy.sdk.helper.HttpClientHelper;
 
-@RefreshScope
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/ppp")
 public class PerformaceController {
@@ -88,7 +89,9 @@ public class PerformaceController {
 			synchronized(lock) {
 				lock.wait(100);
 			}
-		return System.currentTimeMillis()-start;
+		long duration = System.currentTimeMillis()-start;
+		log.warn("PERFORMANCE_TEST================{}", duration);
+		return duration;
 	}
 
 	private static interface Task {
