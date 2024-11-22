@@ -76,7 +76,11 @@ public class PerformaceController {
 		for(int i=0;i<count;i++) {
 			int index = i;
 			threads.add(new Thread(()->{
-				task.run(index);
+				try {
+					task.run(index);
+				} catch(Throwable e) {
+					log.error("ERROR===============", e);
+				}
 				synchronized(lock) {
 					finished++;
 					lock.notifyAll();
@@ -87,13 +91,6 @@ public class PerformaceController {
 			thread.start();
 		while(finished<count)
 			synchronized(lock) {
-//				int f = 0;
-//				for(int i=0;i<threads.size();i++) {
-//					Thread thread = threads.get(i);
-//					if(thread.getState().equals(Thread.State.TERMINATED))
-//						f++;
-//				}
-//				log.info("FINISHED---{}", f);
 				lock.wait(100);
 			}
 		long duration = System.currentTimeMillis()-start;
