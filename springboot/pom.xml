@@ -175,6 +175,19 @@
 				<eureka.instance.hostname>10.27.74.163</eureka.instance.hostname>
 			</properties>
 		</profile>
+		<profile>
+			<id>pro2</id>
+			<properties>
+				<env>pro</env>
+				<spring.pid.file>/logs/ducati/ducatid.pid</spring.pid.file>
+				<path.log.logback>/logs/ducati</path.log.logback>
+				<log.level>WARN</log.level>
+				<spring.freemarker.cache>true</spring.freemarker.cache>
+				<prefix.resource>https://static.jep8566.com</prefix.resource>
+				<eureka.addr>localhost:8761</eureka.addr>
+				<eureka.instance.hostname>10.27.74.163</eureka.instance.hostname>
+			</properties>
+		</profile>
 	</profiles>
 	<repositories>
 		<repository>
