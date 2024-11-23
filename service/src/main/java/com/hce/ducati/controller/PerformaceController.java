@@ -103,11 +103,9 @@ public class PerformaceController {
 	}
 
 	public static void main(String[] args) throws InterruptedException, IOException {
-		long duration = multiThreads(20, (index)->{
+		long duration = multiThreads(30, (index)->{
 			try {
-				System.out.println("---"+index);
-				HttpClientHelper.get("https://demo.jep8566.com/api/ppp/uuu?id=12345&c=1", null);
-				System.out.println("==="+index);
+				System.out.println(index+"---"+HttpClientHelper.get("https://demo.jep8566.com/api/ppp/uuu?id=12345&c=1", null));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
