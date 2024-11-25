@@ -44,4 +44,6 @@ public interface TestDao {
 	public int insertUest();
 	@ExecuteQuery(sql = "SELECT * FROM uest WHERE ddd BETWEEN ? AND ?;", returnItemType = UestDto.class)
 	public List<UestDto> findUest(Integer start, Integer end);
+	@ExecuteQuery(sql = "SELECT * FROM uest WHERE id=?;", returnItemType = UestDto.class)
+	public UestDto findUest(Long id);
 }

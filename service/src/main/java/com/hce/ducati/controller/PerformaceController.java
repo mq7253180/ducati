@@ -70,9 +70,11 @@ public class PerformaceController {
 
 	@RequestMapping("/sss")
 	@ResponseBody
-	public Result sss(@RequestParam(required = true, value = "c")int c) throws InterruptedException  {
+	public Result sss(@RequestParam(required = true, value = "c")int c, @RequestParam(required = false, value = "id")Long id) throws InterruptedException  {
 		long duration = multiThreads(c, (index)->{
-			log.warn("R----{}", performanceService.findUest(5, 7));
+//			List<UestDto> list = performanceService.findUest(5, 7);
+//			log.warn("R----{}", list.size());
+			performanceService.findUest(id);
 		});
 		Result result = new Result();
 		result.setData(duration);

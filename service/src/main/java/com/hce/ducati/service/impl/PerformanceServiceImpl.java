@@ -35,4 +35,10 @@ public class PerformanceServiceImpl implements PerformanceService {
 	public List<UestDto> findUest(int start, int end) {
 		return testDao.findUest(start, end);
 	}
+
+	@ReadOnly
+	@Override
+	public UestDto findUest(Long id) {
+		return testDao.findUest(id);
+	}
 }

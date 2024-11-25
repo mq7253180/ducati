@@ -30,4 +30,9 @@ public class PerformanceServiceShardingImpl implements PerformanceService {
 	public List<UestDto> findUest(int start, int end) {
 		return performanceServiceShardingProxy.findUest(0, start, end);
 	}
+
+	@Override
+	public UestDto findUest(Long id) {
+		return performanceServiceShardingProxy.findUest(0, id);
+	}
 }
