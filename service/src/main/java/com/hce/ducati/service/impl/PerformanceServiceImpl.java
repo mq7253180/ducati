@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hce.ducati.dao.TestDao;
 import com.hce.ducati.o.UestDto;
 import com.hce.ducati.service.PerformanceService;
+import com.quincy.sdk.annotation.jdbc.ReadOnly;
 
 @Service
 public class PerformanceServiceImpl implements PerformanceService {
@@ -29,7 +30,7 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return testDao.insertUest();
 	}
 
-	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@ReadOnly
 	@Override
 	public List<UestDto> findUest(int start, int end) {
 		return testDao.findUest(start, end);
