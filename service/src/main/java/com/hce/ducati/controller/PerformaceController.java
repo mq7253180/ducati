@@ -118,7 +118,7 @@ public class PerformaceController {
 	@RequestMapping("/ttt")
 	@ResponseBody
 	public Result ttt(@RequestParam(required = true, value = "c")int c) throws InterruptedException {
-		long duration = multiThreads(25, (index)->{
+		long duration = multiThreads(c, (index)->{
 			try {
 				System.out.println(index+"---"+HttpClientHelper.get("http://localhost:12080/ppp/qqq", null));
 			} catch (IOException e) {
