@@ -68,6 +68,17 @@ public class PerformaceController {
 		return result;
 	}
 
+	@RequestMapping("/sss")
+	@ResponseBody
+	public Result sss(@RequestParam(required = true, value = "c")int c) throws InterruptedException  {
+		long duration = multiThreads(c, (index)->{
+			log.warn("R----{}", performanceService.findUest(5, 7));
+		});
+		Result result = new Result();
+		result.setData(duration);
+		return result;
+	}
+
 	private static long multiThreads(int count, Task task) throws InterruptedException {
 		List<Thread> threads = new ArrayList<Thread>(count);
 		long start = System.currentTimeMillis();
@@ -105,7 +116,8 @@ public class PerformaceController {
 	public static void main(String[] args) throws InterruptedException, IOException {
 		long duration = multiThreads(30, (index)->{
 			try {
-				System.out.println(index+"---"+HttpClientHelper.get("https://demo.jep8566.com/api/ppp/uuu?id=12345&c=1", null));
+//				System.out.println(index+"---"+HttpClientHelper.get("https://demo.jep8566.com/api/ppp/uuu?id=12345&c=1", null));
+				System.out.println(index+"---"+HttpClientHelper.get("https://demo.jep8566.com/api/ppp/qqq", null));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

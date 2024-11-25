@@ -1,9 +1,12 @@
 package com.hce.ducati.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import com.hce.ducati.o.UestDto;
 import com.hce.ducati.service.PerformanceService;
 import com.hce.ducati.service.PerformanceServiceShardingProxy;
 
@@ -21,5 +24,10 @@ public class PerformanceServiceShardingImpl implements PerformanceService {
 	@Override
 	public int insertUest() {
 		return performanceServiceShardingProxy.insertUest(0);
+	}
+
+	@Override
+	public List<UestDto> findUest(int start, int end) {
+		return performanceServiceShardingProxy.findUest(end, start, end);
 	}
 }

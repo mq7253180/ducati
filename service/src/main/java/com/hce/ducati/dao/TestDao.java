@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.hce.ducati.o.OneSubTestDynamicFieldsDto;
 import com.hce.ducati.o.SubTestDto;
+import com.hce.ducati.o.UestDto;
 import com.hce.ducati.o.UserDto;
 import com.quincy.sdk.DynamicField;
 import com.quincy.sdk.annotation.jdbc.ExecuteQuery;
@@ -41,4 +42,6 @@ public interface TestDao {
 	public int updateUest(Long id);
 	@ExecuteUpdate(sql = "INSERT INTO uest(ccc, ddd) VALUES ('bcdefg', 21);")
 	public int insertUest();
+	@ExecuteQuery(sql = "SELECT COUNT(*) FROM uest WHERE ddd BETWEEN ? AND ?;", returnItemType = UestDto.class)
+	public List<UestDto> findUest(Integer start, Integer end);
 }
