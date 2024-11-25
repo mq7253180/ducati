@@ -115,8 +115,23 @@ public class PerformaceController {
 		public void run(int index);
 	}
 
+	@RequestMapping("/ttt")
+	@ResponseBody
+	public Result ttt(@RequestParam(required = true, value = "c")int c) throws InterruptedException {
+		long duration = multiThreads(25, (index)->{
+			try {
+				System.out.println(index+"---"+HttpClientHelper.get("http://localhost:12080/ppp/qqq", null));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		Result result = new Result();
+		result.setData(duration);
+		return result;
+	}
+
 	public static void main(String[] args) throws InterruptedException, IOException {
-		long duration = multiThreads(30, (index)->{
+		long duration = multiThreads(25, (index)->{
 			try {
 //				System.out.println(index+"---"+HttpClientHelper.get("https://demo.jep8566.com/api/ppp/uuu?id=12345&c=1", null));
 				System.out.println(index+"---"+HttpClientHelper.get("https://demo.jep8566.com/api/ppp/qqq", null));
