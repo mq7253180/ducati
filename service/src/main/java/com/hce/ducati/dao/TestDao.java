@@ -42,6 +42,6 @@ public interface TestDao {
 	public int updateUest(Long id);
 	@ExecuteUpdate(sql = "INSERT INTO uest(ccc, ddd) VALUES ('bcdefg', 21);")
 	public int insertUest();
-	@ExecuteQuery(sql = "SELECT COUNT(*) FROM uest WHERE ddd BETWEEN ? AND ?;", returnItemType = UestDto.class)
+	@ExecuteQuery(sql = "SELECT * FROM uest WHERE ddd BETWEEN ? AND ?;", returnItemType = UestDto.class)
 	public List<UestDto> findUest(Integer start, Integer end);
 }
