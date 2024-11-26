@@ -120,7 +120,24 @@ public class PerformaceController {
 	public Result ttt(@RequestParam(required = true, value = "c")int c) throws InterruptedException {
 		long duration = multiThreads(c, (index)->{
 			try {
-				System.out.println(index+"---"+HttpClientHelper.get("http://localhost:12080/ppp/qqq", null));
+				log.warn(index+"---"+HttpClientHelper.get("http://localhost:12080/ppp/qqq", null));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		Result result = new Result();
+		result.setData(duration);
+		return result;
+	}
+
+	private final static String[] IPS = {"192.168.2.1", "192.168.0.5", "192.168.0.3"};
+
+	@RequestMapping("/ttt2")
+	@ResponseBody
+	public Result ttt2(@RequestParam(required = true, value = "c")int c, @RequestParam(required = true, value = "ip")int ip) throws InterruptedException {
+		long duration = multiThreads(c, (index)->{
+			try {
+				log.warn(index+"---"+HttpClientHelper.get("http://"+IPS[ip]+":12080/ppp/qqq", null));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -131,7 +148,7 @@ public class PerformaceController {
 	}
 
 	public static void main(String[] args) throws InterruptedException, IOException {
-		long duration = multiThreads(25, (index)->{
+		long duration = multiThreads(30, (index)->{
 			try {
 //				System.out.println(index+"---"+HttpClientHelper.get("https://demo.jep8566.com/api/ppp/uuu?id=12345&c=1", null));
 				System.out.println(index+"---"+HttpClientHelper.get("https://demo.jep8566.com/api/ppp/qqq", null));
