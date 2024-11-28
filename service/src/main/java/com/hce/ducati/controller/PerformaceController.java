@@ -147,11 +147,23 @@ public class PerformaceController {
 		return result;
 	}
 
+	@RequestMapping("/xxx")
+	@ResponseBody
+	public Result xxx(@RequestParam(required = true, value = "c")int c) throws InterruptedException {
+		long duration = multiThreads(c, (index)->{
+			performanceService.test(c, "adsfas");
+		});
+		Result result = new Result();
+		result.setData(duration);
+		return result;
+	}
+
 	public static void main(String[] args) throws InterruptedException, IOException {
-		long duration = multiThreads(30, (index)->{
+		long duration = multiThreads(35, (index)->{
 			try {
 //				System.out.println(index+"---"+HttpClientHelper.get("https://demo.jep8566.com/api/ppp/uuu?id=12345&c=1", null));
-				System.out.println(index+"---"+HttpClientHelper.get("https://demo.jep8566.com/api/ppp/qqq", null));
+//				System.out.println(index+"---"+HttpClientHelper.get("https://demo.jep8566.com/api/ppp/qqq", null));
+				HttpClientHelper.get("https://demo.jep8566.com/api/ppp/qqq", null);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

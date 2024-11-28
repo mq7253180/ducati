@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hce.ducati.dao.TestDao;
 import com.hce.ducati.o.UestDto;
 import com.hce.ducati.service.PerformanceService;
+import com.quincy.sdk.annotation.DurationLog;
 import com.quincy.sdk.annotation.jdbc.ReadOnly;
 
 @Service
@@ -40,5 +41,11 @@ public class PerformanceServiceImpl implements PerformanceService {
 	@Override
 	public UestDto findUest(Long id) {
 		return testDao.findUest(id);
+	}
+
+	@DurationLog
+	@Override
+	public void test(int a, String b) {
+		
 	}
 }

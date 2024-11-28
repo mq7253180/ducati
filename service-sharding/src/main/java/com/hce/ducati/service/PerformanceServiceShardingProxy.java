@@ -9,4 +9,5 @@ public interface PerformanceServiceShardingProxy {
 	public int insertUest(long shardingKey);
 	public List<UestDto> findUest(long shardingKey, int start, int end);
 	public UestDto findUest(long shardingKey, Long id);
+	public void test(long shardingKey, int a, String b);
 }

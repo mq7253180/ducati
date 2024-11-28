@@ -35,4 +35,9 @@ public class PerformanceServiceShardingImpl implements PerformanceService {
 	public UestDto findUest(Long id) {
 		return performanceServiceShardingProxy.findUest(0, id);
 	}
+
+	@Override
+	public void test(int a, String b) {
+		performanceServiceShardingProxy.test(0, a, b);
+	}
 }

@@ -9,4 +9,5 @@ public interface PerformanceService {
 	public int insertUest();
 	public List<UestDto> findUest(int start, int end);
 	public UestDto findUest(Long id);
+	public void test(int a, String b);
 }

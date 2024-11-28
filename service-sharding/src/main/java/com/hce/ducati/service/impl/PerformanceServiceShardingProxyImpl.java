@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hce.ducati.o.UestDto;
 import com.hce.ducati.service.PerformanceServiceShardingProxy;
+import com.quincy.sdk.annotation.DurationLog;
 import com.quincy.sdk.annotation.jdbc.ReadOnly;
 import com.quincy.sdk.annotation.sharding.ShardingKey;
 
@@ -36,5 +37,11 @@ public class PerformanceServiceShardingProxyImpl extends PerformanceServiceImpl 
 	@Override
 	public UestDto findUest(@ShardingKey long shardingKey, Long id) {
 		return this.findUest(id);
+	}
+
+	@DurationLog
+	@Override
+	public void test(@ShardingKey long shardingKey, int a, String b) {
+		this.test(a, b);
 	}
 }
