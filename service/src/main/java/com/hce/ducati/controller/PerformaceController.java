@@ -89,14 +89,14 @@ public class PerformaceController {
 	private static ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(1024, 1024, 5, TimeUnit.SECONDS, blockingQueue);
 
 	private static long multiThreads(int count, Task task) throws InterruptedException {
-		List<Thread> threads = new ArrayList<Thread>(count);
-//		List<Runnable> tasks = new ArrayList<Runnable>(count);
+		List<Runnable> tasks = new ArrayList<Runnable>(count);
+//		List<Thread> threads = new ArrayList<Thread>(count);
 		finished = 0;
 		Object lock = new Object();
 		long start = System.currentTimeMillis();
 		for(int i=0;i<count;i++) {
 			int index = i;
-			/*tasks.add(()->{
+			tasks.add(()->{
 				try {
 					task.run(index);
 				} catch(Throwable e) {
@@ -106,8 +106,8 @@ public class PerformaceController {
 					finished++;
 					lock.notifyAll();
 				}
-			});*/
-			threads.add(new Thread(()->{
+			});
+			/*threads.add(new Thread(()->{
 				try {
 					task.run(index);
 				} catch(Throwable e) {
@@ -117,14 +117,14 @@ public class PerformaceController {
 					finished++;
 					lock.notifyAll();
 				}
-			}));
+			}));*/
 		}
 		long creationDuration = System.currentTimeMillis()-start;
 		start = System.currentTimeMillis();
-		/*for(Runnable r:tasks)
-			threadPoolExecutor.execute(r);*/
-		for(Thread thread:threads)
-			thread.start();
+		for(Runnable r:tasks)
+			threadPoolExecutor.execute(r);
+		/*for(Thread thread:threads)
+			thread.start();*/
 		while(finished<count)
 			synchronized(lock) {
 				lock.wait(100);
