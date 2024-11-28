@@ -194,7 +194,6 @@
 				<env>pro</env>
 				<server.port>12080</server.port>
 				<access-control-allow-origin>https://demo.jep8566.com</access-control-allow-origin>
-				<eureka.addr>localhost:8761</eureka.addr>
 				<spring.datasource.url>localhost:3306/ducati</spring.datasource.url>
 				<spring.datasource.username>admin</spring.datasource.username>
 				<spring.datasource.password>nimda</spring.datasource.password>
