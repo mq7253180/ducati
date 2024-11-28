@@ -85,7 +85,6 @@
 				<env>dev</env>
 				<server.port>12081</server.port>
 				<access-control-allow-origin>http://127.0.0.1:9527</access-control-allow-origin>
-				<eureka.addr>47.93.89.0:8761</eureka.addr>
 				<spring.datasource.url>47.93.89.0:3306/ducati</spring.datasource.url>
 				<spring.datasource.username>admin</spring.datasource.username>
 				<spring.datasource.password>nimda</spring.datasource.password>
@@ -140,7 +139,6 @@
 				<env>pro</env>
 				<server.port>12080</server.port>
 				<access-control-allow-origin>https://demo.jep8566.com</access-control-allow-origin>
-				<eureka.addr>localhost:8761</eureka.addr>
 				<spring.datasource.url>localhost:3306/ducati</spring.datasource.url>
 				<spring.datasource.username>admin</spring.datasource.username>
 				<spring.datasource.password>nimda</spring.datasource.password>
