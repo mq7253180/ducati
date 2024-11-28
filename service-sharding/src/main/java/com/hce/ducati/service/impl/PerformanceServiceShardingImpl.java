@@ -1,5 +1,6 @@
 package com.hce.ducati.service.impl;
 
+import java.net.UnknownHostException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class PerformanceServiceShardingImpl implements PerformanceService {
 	}
 
 	@Override
-	public void test(int a, String b) {
-		performanceServiceShardingProxy.test(0, a, b);
+	public String test(int a, String b) throws UnknownHostException {
+		return performanceServiceShardingProxy.test(0, a, b);
 	}
 }

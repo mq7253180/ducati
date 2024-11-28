@@ -1,5 +1,7 @@
 package com.hce.ducati.service.impl;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +47,8 @@ public class PerformanceServiceImpl implements PerformanceService {
 
 	@DurationLog
 	@Override
-	public void test(int a, String b) {
-		
+	public String test(int a, String b) throws UnknownHostException {
+		InetAddress localHost = InetAddress.getLocalHost();
+		return localHost.getHostAddress();
 	}
 }

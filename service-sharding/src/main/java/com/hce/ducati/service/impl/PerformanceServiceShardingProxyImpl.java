@@ -1,5 +1,6 @@
 package com.hce.ducati.service.impl;
 
+import java.net.UnknownHostException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -41,7 +42,7 @@ public class PerformanceServiceShardingProxyImpl extends PerformanceServiceImpl 
 
 	@DurationLog
 	@Override
-	public void test(@ShardingKey long shardingKey, int a, String b) {
-		this.test(a, b);
+	public String test(@ShardingKey long shardingKey, int a, String b) throws UnknownHostException {
+		return this.test(a, b);
 	}
 }

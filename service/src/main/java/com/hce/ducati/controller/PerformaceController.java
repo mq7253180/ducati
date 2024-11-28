@@ -151,7 +151,11 @@ public class PerformaceController {
 	@ResponseBody
 	public Result xxx(@RequestParam(required = true, value = "c")int c) throws InterruptedException {
 		long duration = multiThreads(c, (index)->{
-			performanceService.test(c, "adsfas");
+			try {
+				performanceService.test(c, "adsfas");
+			} catch (UnknownHostException e) {
+				log.error("XXX==========", e);
+			}
 		});
 		Result result = new Result();
 		result.setData(duration);
