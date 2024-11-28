@@ -86,11 +86,11 @@ public class PerformaceController {
 	}
 
 	private static BlockingQueue<Runnable> blockingQueue = new LinkedBlockingQueue<Runnable>(Integer.MAX_VALUE);
-	private static ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(400, 400, 5, TimeUnit.SECONDS, blockingQueue);
+	private static ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(1024, 1024, 5, TimeUnit.SECONDS, blockingQueue);
 
 	private static long multiThreads(int count, Task task) throws InterruptedException {
-//		List<Thread> threads = new ArrayList<Thread>(count);
 		List<Runnable> tasks = new ArrayList<Runnable>(count);
+//		List<Thread> threads = new ArrayList<Thread>(count);
 		finished = 0;
 		Object lock = new Object();
 		for(int i=0;i<count;i++) {
