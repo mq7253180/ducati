@@ -93,6 +93,7 @@ public class PerformaceController {
 //		List<Runnable> tasks = new ArrayList<Runnable>(count);
 		finished = 0;
 		Object lock = new Object();
+		long start = System.currentTimeMillis();
 		for(int i=0;i<count;i++) {
 			int index = i;
 			/*tasks.add(()->{
@@ -118,7 +119,8 @@ public class PerformaceController {
 				}
 			}));
 		}
-		long start = System.currentTimeMillis();
+		long creationDuration = System.currentTimeMillis()-start;
+		start = System.currentTimeMillis();
 		/*for(Runnable r:tasks)
 			threadPoolExecutor.execute(r);*/
 		for(Thread thread:threads)
@@ -128,7 +130,7 @@ public class PerformaceController {
 				lock.wait(100);
 			}
 		long duration = System.currentTimeMillis()-start;
-		log.warn("PERFORMANCE_TEST================{}", duration);
+		log.warn("PERFORMANCE_TEST================{}---{}", creationDuration, duration);
 		return duration;
 	}
 
