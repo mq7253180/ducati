@@ -171,7 +171,7 @@
 				<log.level>WARN</log.level>
 				<spring.freemarker.cache>true</spring.freemarker.cache>
 				<prefix.resource>https://static.jep8566.com</prefix.resource>
-				<eureka.addr>localhost:8761</eureka.addr>
+				<eureka.addr>192.168.2.13:8761</eureka.addr>
 				<eureka.instance.hostname>10.27.74.163</eureka.instance.hostname>
 			</properties>
 		</profile>
