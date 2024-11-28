@@ -5,6 +5,10 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -81,14 +85,17 @@ public class PerformaceController {
 		return result;
 	}
 
+	private static BlockingQueue<Runnable> blockingQueue = new LinkedBlockingQueue<Runnable>(Integer.MAX_VALUE);
+	private static ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(200, 200, 5, TimeUnit.SECONDS, blockingQueue);
+
 	private static long multiThreads(int count, Task task) throws InterruptedException {
-		List<Thread> threads = new ArrayList<Thread>(count);
-		long start = System.currentTimeMillis();
+//		List<Thread> threads = new ArrayList<Thread>(count);
+		List<Runnable> tasks = new ArrayList<Runnable>(count);
 		finished = 0;
 		Object lock = new Object();
 		for(int i=0;i<count;i++) {
 			int index = i;
-			threads.add(new Thread(()->{
+			tasks.add(()->{
 				try {
 					task.run(index);
 				} catch(Throwable e) {
@@ -98,10 +105,24 @@ public class PerformaceController {
 					finished++;
 					lock.notifyAll();
 				}
-			}));
+			});
+			/*threads.add(new Thread(()->{
+				try {
+					task.run(index);
+				} catch(Throwable e) {
+					log.error("ERROR===============", e);
+				}
+				synchronized(lock) {
+					finished++;
+					lock.notifyAll();
+				}
+			}));*/
 		}
-		for(Thread thread:threads)
-			thread.start();
+		long start = System.currentTimeMillis();
+		for(Runnable r:tasks)
+			threadPoolExecutor.execute(r);
+		/*for(Thread thread:threads)
+			thread.start();*/
 		while(finished<count)
 			synchronized(lock) {
 				lock.wait(100);
