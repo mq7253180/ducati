@@ -153,7 +153,7 @@ public class PerformaceController {
 		return result;
 	}
 
-	private final static String[] IPS = {"192.168.0.4", "192.168.2.1", "192.168.0.5", "192.168.0.3"};
+	private final static String[] IPS = {"192.168.0.4", "192.168.0.2", "192.168.0.5", "192.168.0.3"};
 
 	@RequestMapping("/ttt2")
 	@ResponseBody
