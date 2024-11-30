@@ -201,22 +201,22 @@
 				<spring.datasource.url.slave>localhost:3306/ducati</spring.datasource.url.slave>
 				<spring.datasource.username.slave>finder</spring.datasource.username.slave>
 				<spring.datasource.password.slave>rednif</spring.datasource.password.slave>
-				<spring.datasource.sharding.0.master>192.168.0.1:3306/honda0</spring.datasource.sharding.0.master>
-				<spring.datasource.sharding.0.slave>192.168.0.1:3306/honda0</spring.datasource.sharding.0.slave>
-				<spring.datasource.sharding.1.master>192.168.0.1:3306/honda1</spring.datasource.sharding.1.master>
-				<spring.datasource.sharding.1.slave>192.168.0.1:3306/honda1</spring.datasource.sharding.1.slave>
-				<spring.datasource.sharding.2.master>192.168.0.1:3306/honda2</spring.datasource.sharding.2.master>
-				<spring.datasource.sharding.2.slave>192.168.0.1:3306/honda2</spring.datasource.sharding.2.slave>
-				<spring.datasource.sharding.3.master>192.168.0.1:3306/honda3</spring.datasource.sharding.3.master>
-				<spring.datasource.sharding.3.slave>192.168.0.1:3306/honda3</spring.datasource.sharding.3.slave>
-				<spring.datasource.sharding.4.master>192.168.0.1:3306/honda4</spring.datasource.sharding.4.master>
-				<spring.datasource.sharding.4.slave>192.168.0.1:3306/honda4</spring.datasource.sharding.4.slave>
-				<spring.datasource.sharding.5.master>192.168.0.1:3306/honda5</spring.datasource.sharding.5.master>
-				<spring.datasource.sharding.5.slave>192.168.0.1:3306/honda5</spring.datasource.sharding.5.slave>
-				<spring.datasource.sharding.6.master>192.168.0.1:3306/honda6</spring.datasource.sharding.6.master>
-				<spring.datasource.sharding.6.slave>192.168.0.1:3306/honda6</spring.datasource.sharding.6.slave>
-				<spring.datasource.sharding.7.master>192.168.0.1:3306/honda7</spring.datasource.sharding.7.master>
-				<spring.datasource.sharding.7.slave>192.168.0.1:3306/honda7</spring.datasource.sharding.7.slave>
+				<spring.datasource.sharding.0.master>192.168.0.4:3306/honda0</spring.datasource.sharding.0.master>
+				<spring.datasource.sharding.0.slave>192.168.0.4:3306/honda0</spring.datasource.sharding.0.slave>
+				<spring.datasource.sharding.1.master>192.168.0.4:3306/honda1</spring.datasource.sharding.1.master>
+				<spring.datasource.sharding.1.slave>192.168.0.4:3306/honda1</spring.datasource.sharding.1.slave>
+				<spring.datasource.sharding.2.master>192.168.0.4:3306/honda2</spring.datasource.sharding.2.master>
+				<spring.datasource.sharding.2.slave>192.168.0.4:3306/honda2</spring.datasource.sharding.2.slave>
+				<spring.datasource.sharding.3.master>192.168.0.4:3306/honda3</spring.datasource.sharding.3.master>
+				<spring.datasource.sharding.3.slave>192.168.0.4:3306/honda3</spring.datasource.sharding.3.slave>
+				<spring.datasource.sharding.4.master>192.168.0.4:3306/honda4</spring.datasource.sharding.4.master>
+				<spring.datasource.sharding.4.slave>192.168.0.4:3306/honda4</spring.datasource.sharding.4.slave>
+				<spring.datasource.sharding.5.master>192.168.0.4:3306/honda5</spring.datasource.sharding.5.master>
+				<spring.datasource.sharding.5.slave>192.168.0.4:3306/honda5</spring.datasource.sharding.5.slave>
+				<spring.datasource.sharding.6.master>192.168.0.4:3306/honda6</spring.datasource.sharding.6.master>
+				<spring.datasource.sharding.6.slave>192.168.0.4:3306/honda6</spring.datasource.sharding.6.slave>
+				<spring.datasource.sharding.7.master>192.168.0.4:3306/honda7</spring.datasource.sharding.7.master>
+				<spring.datasource.sharding.7.slave>192.168.0.4:3306/honda7</spring.datasource.sharding.7.slave>
 				<!-- <spring.rocketmq.nameServer>10.30.1.11:9876</spring.rocketmq.nameServer> -->
 				<spring.jpa.show-sql>false</spring.jpa.show-sql>
 				<expire.session>60</expire.session><!-- minutes -->
