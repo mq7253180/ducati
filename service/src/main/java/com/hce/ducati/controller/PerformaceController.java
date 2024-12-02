@@ -185,6 +185,21 @@ public class PerformaceController {
 		return result;
 	}
 
+	@RequestMapping("/hhh2")
+	@ResponseBody
+	public Result hhh2(@RequestParam(required = true, value = "c")int c) throws InterruptedException {
+		long duration = multiThreads(c, (index)->{
+			try {
+				log.warn(index+"---"+HttpClientHelper.get("http://test.jep8566.com/api/ppp/qqq", null));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		Result result = new Result();
+		result.setData(duration);
+		return result;
+	}
+
 	@RequestMapping("/xxx")
 	@ResponseBody
 	public Result xxx(@RequestParam(required = true, value = "c")int c) throws InterruptedException {
