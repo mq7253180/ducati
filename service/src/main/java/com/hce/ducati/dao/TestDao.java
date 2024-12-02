@@ -46,4 +46,8 @@ public interface TestDao {
 	public List<UestDto> findUest(Integer start, Integer end);
 	@ExecuteQuery(sql = "SELECT * FROM uest WHERE id=?;", returnItemType = UestDto.class)
 	public UestDto findUest(Long id);
+	@ExecuteUpdate(sql = "UPDATE west SET ddd=ddd+1 WHERE id=?")
+	public int updateWest(Long id);
+	@ExecuteUpdate(sql = "INSERT INTO west(ccc, ddd) VALUES (?, ?);")
+	public int insertWest(String ccc, Long ddd);
 }
