@@ -84,6 +84,7 @@
 			<properties>
 				<env>dev</env>
 				<server.port>12081</server.port>
+				<eureka.addr>47.93.89.0:8761</eureka.addr>
 				<access-control-allow-origin>http://127.0.0.1:9527</access-control-allow-origin>
 				<spring.datasource.url>47.93.89.0:3306/ducati</spring.datasource.url>
 				<spring.datasource.username>admin</spring.datasource.username>
@@ -115,6 +116,7 @@
 				<!-- redis.nodes>47.93.89.0:26379,47.93.89.0:26389,47.93.89.0:26399</redis.nodes-->
 				<redis.nodes>47.93.89.0:6379</redis.nodes>
 				<redis.pwd>foobared</redis.pwd>
+				<redis.host>47.93.89.0</redis.host>
 				<auth.center>http://127.0.0.1:12081</auth.center>
 				<mail.user>mq7253180@126.com</mail.user>
 				<mail.to>mq7253181@126.com</mail.to>
@@ -138,6 +140,7 @@
 			<properties>
 				<env>pro</env>
 				<server.port>12080</server.port>
+				<eureka.addr>localhost:8761</eureka.addr>
 				<access-control-allow-origin>https://demo.jep8566.com</access-control-allow-origin>
 				<spring.datasource.url>localhost:3306/ducati</spring.datasource.url>
 				<spring.datasource.username>admin</spring.datasource.username>
@@ -171,6 +174,7 @@
 				<redis.nodes>localhost:6379</redis.nodes>
 				<!-- <redis.nodes>localhost:26379,localhost:26389,localhost:26399</redis.nodes> -->
 				<redis.pwd>foobared</redis.pwd>
+				<redis.host>localhost</redis.host>
 				<auth.center>https://jep8566.com</auth.center>
 				<mail.user>mq7253180@126.com</mail.user>
 				<mail.to></mail.to>
@@ -191,6 +195,7 @@
 			<properties>
 				<env>pro</env>
 				<server.port>12080</server.port>
+				<eureka.addr>192.168.2.13:8761</eureka.addr>
 				<access-control-allow-origin>https://demo.jep8566.com</access-control-allow-origin>
 				<spring.datasource.url>localhost:3306/ducati</spring.datasource.url>
 				<spring.datasource.username>admin</spring.datasource.username>
@@ -224,6 +229,7 @@
 				<redis.nodes>localhost:6379</redis.nodes>
 				<!-- <redis.nodes>localhost:26379,localhost:26389,localhost:26399</redis.nodes> -->
 				<redis.pwd>foobared</redis.pwd>
+				<redis.host>192.168.2.13</redis.host>
 				<auth.center>https://jep8566.com</auth.center>
 				<mail.user>mq7253180@126.com</mail.user>
 				<mail.to></mail.to>
