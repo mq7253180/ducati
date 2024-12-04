@@ -61,6 +61,31 @@ public class PerformaceController {
 		return result;
 	}
 
+	@RequestMapping("/all")
+	@ResponseBody
+	public Result all(@RequestParam(required = true, value = "id")Long id) throws InterruptedException {
+		long start = System.currentTimeMillis();
+		performanceService.updateUest(id);
+		Result result = new Result();
+		result.setData(System.currentTimeMillis()-start);
+		return result;
+	}
+
+	@RequestMapping("/lll")
+	@ResponseBody
+	public Result lll(@RequestParam(required = true, value = "id")Long id, @RequestParam(required = true, value = "c")int c) throws InterruptedException {
+		long duration = multiThreads(c, (index)->{
+			try {
+				log.warn(index+"---"+HttpClientHelper.get("http://test.jep8566.com/api/ppp/all?id="+(id+index), null));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		Result result = new Result();
+		result.setData(duration);
+		return result;
+	}
+
 	@RequestMapping("/iii")
 	@ResponseBody
 	public Result iii(@RequestParam(required = true, value = "c")int c) throws InterruptedException {
