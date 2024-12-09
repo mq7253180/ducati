@@ -61,6 +61,17 @@ public class PerformaceController {
 		return result;
 	}
 
+	@RequestMapping("/uuu3")
+	@ResponseBody
+	public Result uuu3(@RequestParam(required = true, value = "id")Long id, @RequestParam(required = true, value = "o")int o, @RequestParam(required = true, value = "i")int i) throws InterruptedException {
+		long duration = multiThreads(o, i, (index)->{
+			performanceService.singleUpdateUest(id+index);
+		});
+		Result result = new Result();
+		result.setData(duration);
+		return result;
+	}
+
 	@RequestMapping("/all")
 	@ResponseBody
 	public Result all(@RequestParam(required = true, value = "id")Long id) throws InterruptedException {
@@ -114,35 +125,41 @@ public class PerformaceController {
 	private static ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(1024, 1024, 5, TimeUnit.SECONDS, blockingQueue);
 
 	private static long multiThreads(int count, Task task) throws InterruptedException {
-		List<Runnable> tasks = new ArrayList<Runnable>(count);
+		return multiThreads(1, count, task);
+	}
+
+	private static long multiThreads(int outerCount, int innerCount, Task task) throws InterruptedException {
+		List<Runnable> tasks = new ArrayList<Runnable>(innerCount);
 //		List<Thread> threads = new ArrayList<Thread>(count);
 		finished = 0;
 		Object lock = new Object();
 		long start = System.currentTimeMillis();
-		for(int i=0;i<count;i++) {
-			int index = i;
-			tasks.add(()->{
-				try {
-					task.run(index);
-				} catch(Throwable e) {
-					log.error("ERROR===============", e);
-				}
-				synchronized(lock) {
-					finished++;
-					lock.notifyAll();
-				}
-			});
-			/*threads.add(new Thread(()->{
-				try {
-					task.run(index);
-				} catch(Throwable e) {
-					log.error("ERROR===============", e);
-				}
-				synchronized(lock) {
-					finished++;
-					lock.notifyAll();
-				}
-			}));*/
+		for(int i=0;i<outerCount;i++) {
+			for(int j=0;j<innerCount;j++) {
+				int index = j;
+				tasks.add(()->{
+					try {
+						task.run(index);
+					} catch(Throwable e) {
+						log.error("ERROR===============", e);
+					}
+					synchronized(lock) {
+						finished++;
+						lock.notifyAll();
+					}
+				});
+				/*threads.add(new Thread(()->{
+					try {
+						task.run(index);
+					} catch(Throwable e) {
+						log.error("ERROR===============", e);
+					}
+					synchronized(lock) {
+						finished++;
+						lock.notifyAll();
+					}
+				}));*/
+			}
 		}
 		long creationDuration = System.currentTimeMillis()-start;
 		start = System.currentTimeMillis();
@@ -150,7 +167,7 @@ public class PerformaceController {
 			threadPoolExecutor.execute(r);
 		/*for(Thread thread:threads)
 			thread.start();*/
-		while(finished<count)
+		while(finished<innerCount)
 			synchronized(lock) {
 				lock.wait(100);
 			}

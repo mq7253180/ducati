@@ -31,6 +31,12 @@ public class PerformanceServiceImpl implements PerformanceService {
 
 	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
 	@Override
+	public int singleUpdateUest(Long id) {
+		return testDao.updateUest(id);
+	}
+
+	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
 	public int insertUest() {
 		return testDao.insertUest();
 	}

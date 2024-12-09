@@ -23,6 +23,11 @@ public class PerformanceServiceShardingImpl implements PerformanceService {
 	}
 
 	@Override
+	public int singleUpdateUest(Long id) {
+		return performanceServiceShardingProxy.singleUpdateUest(0, id);
+	}
+
+	@Override
 	public int insertUest() {
 		return performanceServiceShardingProxy.insertUest(0);
 	}

@@ -24,6 +24,12 @@ public class PerformanceServiceShardingProxyImpl extends PerformanceServiceImpl 
 
 	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
 	@Override
+	public int singleUpdateUest(@ShardingKey long shardingKey, Long id) {
+		return this.singleUpdateUest(id);
+	}
+
+	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+	@Override
 	public int insertUest(@ShardingKey long shardingKey) {
 		return this.insertUest();
 	}
