@@ -167,7 +167,8 @@ public class PerformaceController {
 			threadPoolExecutor.execute(r);
 		/*for(Thread thread:threads)
 			thread.start();*/
-		while(finished<innerCount)
+		int totalCount = outerCount*innerCount;
+		while(finished<totalCount)
 			synchronized(lock) {
 				lock.wait(100);
 			}
