@@ -41,9 +41,12 @@ public class PerformaceController {
 
 	@RequestMapping("/uuu")
 	@ResponseBody
-	public Result uuu(@RequestParam(required = true, value = "id")Long id, @RequestParam(required = true, value = "c")int c) throws InterruptedException {
+	public Result uuu(@RequestParam(required = true, value = "id")Long id, @RequestParam(required = true, value = "c")int c, @RequestParam(required = true, value = "s")boolean s) throws InterruptedException {
 		long duration = multiThreads(c, (index)->{
-			performanceService.updateUest(id);
+			if(s)
+				performanceService.singleUpdateUest(id);
+			else
+				performanceService.updateUest(id);
 		});
 		Result result = new Result();
 		result.setData(duration);
@@ -52,9 +55,12 @@ public class PerformaceController {
 
 	@RequestMapping("/uuu2")
 	@ResponseBody
-	public Result uuu2(@RequestParam(required = true, value = "id")Long id, @RequestParam(required = true, value = "c")int c) throws InterruptedException {
+	public Result uuu2(@RequestParam(required = true, value = "id")Long id, @RequestParam(required = true, value = "c")int c, @RequestParam(required = true, value = "s")boolean s) throws InterruptedException {
 		long duration = multiThreads(c, (index)->{
-			performanceService.updateUest(id+index);
+			if(s)
+				performanceService.singleUpdateUest(id+index);
+			else
+				performanceService.updateUest(id+index);
 		});
 		Result result = new Result();
 		result.setData(duration);
