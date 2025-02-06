@@ -47,8 +47,7 @@ public class XxxServiceShardingImpl implements XxxService {
 
 	@Override
 	public String classInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		return xxxServiceShardingProxy.classInfo();
 	}
 
 	@Override
