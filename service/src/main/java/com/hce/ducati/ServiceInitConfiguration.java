@@ -135,11 +135,6 @@ public class ServiceInitConfiguration {
 	public AuthActions authActions() {
 		return new AuthActions() {
 			@Override
-			public void onLogin(Long userId, Map<String, Serializable> attributes) {
-				attributes.put(AttributeKeys.MY_PARAMS, new MyParams().setXxx("wwwqqq"));
-			}
-
-			@Override
 			public void sms(String mobilePhone, String vcode, int expireMinuts) {
 				System.out.println(MessageFormat.format("已通过阿里云短信接口向{0}发送验证码: {1}, 失效时间{2}分钟", mobilePhone, new String(vcode), expireMinuts));
 			}

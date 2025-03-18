@@ -20,9 +20,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import com.quincy.sdk.Constants;
 import com.quincy.sdk.SnowFlake;
 import com.quincy.sdk.annotation.auth.EnableAnnotationAuth;
-import com.quincy.sdk.annotation.auth.EnablePermissionAndRole;
 import com.quincy.sdk.annotation.auth.EnableRedisSessionEviction;
-import com.quincy.sdk.annotation.auth.EnableShardingPermissionAndRole;
 
 //@EnableDubbo
 @EnableFeignClients
@@ -39,8 +37,6 @@ import com.quincy.sdk.annotation.auth.EnableShardingPermissionAndRole;
 @EnableScheduling
 @EnableAnnotationAuth
 @EnableRedisSessionEviction(pcBrowser = true, mobileBrowser = true, app = true)
-//@EnablePermissionAndRole
-@EnableShardingPermissionAndRole
 //@EnableMultiEnterprise
 //@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1234)
 @SpringBootApplication/*(exclude = {

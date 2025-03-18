@@ -26,7 +26,6 @@ import com.hce.ducati.service.CreditService;
 import com.quincy.sdk.Result;
 import com.quincy.sdk.annotation.auth.PermissionNeeded;
 import com.quincy.sdk.helper.CommonHelper;
-import com.quincy.sdk.o.XSession;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -49,23 +48,6 @@ public class CreditController {
 				.addObject("pageSize", ServiceConstants.PAGE_SIZE);
 	}
 
-	@PermissionNeeded("creditAdd")
-	@PostMapping(value = "/add")
-	@ResponseBody
-	public Result add(XSession session, Credit credit) throws Exception {
-		credit.setUserId(session.getUser().getId());
-		Credit permanent = creditService.add(credit);
-		Result result = new Result();
-		if(permanent==null) {
-			result.setStatus(0);
-			result.setMsg("已经存在币种为"+credit.getCurrency()+"的合同授信");
-		} else {
-			result.setStatus(1);
-			result.setMsg("成功");
-		}
-		return result;
-	}
-
 	@PermissionNeeded("creditUpdate")
 	@PostMapping(value = "/update")
 	@ResponseBody
@@ -80,13 +62,6 @@ public class CreditController {
 			result.setMsg("成功");
 		}
 		return result;
-	}
-
-	@PermissionNeeded("creditUpdateAmount")
-	@PostMapping(value = "/update/amount")
-	@ResponseBody
-	public void updateAmount(XSession session, Long id, BigDecimal amount) throws Exception {
-		creditService.update(id, amount, session.getUser().getId());
 	}
 
 	@PermissionNeeded("viewCreditHistory")

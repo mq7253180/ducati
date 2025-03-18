@@ -24,7 +24,6 @@ import com.quincy.sdk.AuthHelper;
 import com.quincy.sdk.annotation.DoNotWrap;
 import com.quincy.sdk.annotation.auth.LoginRequired;
 import com.quincy.sdk.helper.CommonHelper;
-import com.quincy.sdk.o.XSession;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -152,14 +151,5 @@ public class TestController {
 	@RequestMapping("/testww")
 	public String testww() {
 		return applicationContext.getMessage("status.error.500", null, CommonHelper.getLocale());
-	}
-
-	@LoginRequired
-	@ResponseBody
-	@RequestMapping("/test/update/{name}")
-	public void update(HttpServletRequest request, @PathVariable(required = true, name = "name")String name) {
-		XSession xs = AuthHelper.getSession(request);
-		xs.getUser().setName(name);
-		request.getSession().setAttribute(AuthConstants.ATTR_SESSION, xs);
 	}
 }

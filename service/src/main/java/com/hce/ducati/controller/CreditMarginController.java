@@ -23,7 +23,6 @@ import com.quincy.sdk.Pagination;
 import com.quincy.sdk.Result;
 import com.quincy.sdk.annotation.auth.PermissionNeeded;
 import com.quincy.sdk.helper.CommonHelper;
-import com.quincy.sdk.o.XSession;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -53,38 +52,6 @@ public class CreditMarginController {
 				.addObject("criterionTo", _to)
 				.addObject("criterionCompanyId", companyId)
 				.addObject("criterionCurrency", currency);
-	}
-
-	@PermissionNeeded("creditMarginAdd")
-	@PostMapping(value = "/add")
-	@ResponseBody
-	public Result add(XSession session, CreditMargin margin) throws Exception {
-		margin.setUserId(session.getUser().getId());
-		CreditMargin permanent = creditMarginService.add(margin);
-		Result result = new Result();
-		if(permanent==null) {
-			result.setStatus(0);
-			result.setMsg("已经存在币种为"+margin.getCurrency()+"的保证金");
-		} else {
-			result.setStatus(1);
-			result.setMsg("成功");
-		}
-		return result;
-	}
-
-	@PermissionNeeded("creditMarginUpdate")
-	@PostMapping(value = "/update")
-	@ResponseBody
-	public Result update(XSession session, CreditMargin margin) throws Exception {
-		margin.setUserId(session.getUser().getId());
-		return creditMarginService.update(margin);
-	}
-
-	@PermissionNeeded("creditMarginAudit")
-	@PostMapping(value = "/audit")
-	@ResponseBody
-	public Result audit(XSession session, CreditMargin margin) throws Exception {
-		return creditMarginService.audit(margin.getId(), session.getUser().getId(), margin.getCurrency(), margin.getAmount());
 	}
 
 	@PermissionNeeded("creditMarginDelete")

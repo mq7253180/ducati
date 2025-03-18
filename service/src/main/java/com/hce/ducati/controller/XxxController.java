@@ -4,8 +4,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hce.ducati.GlobalProperties;
 import com.hce.ducati.ServiceInitConfiguration;
 import com.hce.ducati.client.CenterFeign;
 //import com.hce.ducati.client.DucatiClient;
@@ -47,7 +44,6 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.quincy.auth.service.UserService;
 import com.quincy.auth.service.impl.UserServiceImpl;
 import com.quincy.core.InnerConstants;
-import com.quincy.sdk.Client;
 import com.quincy.sdk.DTransactionOptRegistry;
 import com.quincy.sdk.DynamicField;
 import com.quincy.sdk.Result;
@@ -57,12 +53,10 @@ import com.quincy.sdk.VCodeSender;
 import com.quincy.sdk.annotation.JedisSupport;
 import com.quincy.sdk.annotation.SignatureRequired;
 import com.quincy.sdk.annotation.VCodeRequired;
-import com.quincy.sdk.annotation.auth.LoginRequired;
 import com.quincy.sdk.annotation.auth.PermissionNeeded;
 import com.quincy.sdk.annotation.transaction.DTransactional;
 import com.quincy.sdk.helper.AopHelper;
 import com.quincy.sdk.helper.HttpClientHelper;
-import com.quincy.sdk.o.User;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -315,37 +309,6 @@ public class XxxController {
 	@ResponseBody
 	public Object findOneSubTest(@PathVariable(required = true, name = "id")String id) {
 		return xxxService.findOneSubTest(id);
-	}
-
-	@Autowired
-	private GlobalProperties globalProperties;
-
-	@LoginRequired
-	@GetMapping("/ddd/{limit}/{offset}")
-	@ResponseBody
-	public Object findSubTest(@PathVariable(required = true, name = "limit")int limit, @PathVariable(required = true, name = "offset")int offset) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, SQLException, IOException, CloneNotSupportedException {
-//		if(true)
-//			throw new RuntimeException("dsfafas");
-		System.out.println("GlobalProperties========="+globalProperties.getHost()+"---"+globalProperties.getPort()+"---"+globalProperties.getPassword());
-		return xxxService.findSubTests(limit, offset);
-		/*
-		Runnable task = new Runnable() {
-			@Override
-			public void run() {
-				try {
-					xxxService.findSubTests(limit, offset);
-				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-						| InvocationTargetException | NoSuchMethodException | SecurityException | SQLException
-						| IOException | CloneNotSupportedException e) {
-					e.printStackTrace();
-				}
-			}
-		};
-		for(int i=0;i<5;i++) {
-			new Thread(task).start();
-		}
-		return null;
-		*/
 	}
 
 	@GetMapping("/dddd/{limit}/{offset}")
