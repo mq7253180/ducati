@@ -161,7 +161,7 @@ public class ServiceInitConfiguration {
 			}
 
 			@Override
-			public <T extends Serializable> T userExt(User user) {
+			public Object userExt(User user) {
 				// TODO Auto-generated method stub
 				return null;
 			}
