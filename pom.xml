@@ -51,14 +51,15 @@
 		</resources>
 	</build>
 	<repositories>
-		<repository>
-            <id>mq</id><!--如果服务端是非匿名的，一定要和settings.xml中的serverId相对应-->
+		<!--如果服务端是非匿名的，mq一定要和settings.xml中的serverId相对应-->
+		<!--<repository>
+            <id>mq</id>
             <name>My Nexus</name>
             <url>https://nexus.maqiang777.com/repository/maven-releases/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </repository>
+        </repository>-->
 		<repository>
 			<id>aliyun</id>
 			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
