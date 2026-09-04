@@ -1,11 +1,7 @@
 package com.hce.ducati.service.impl;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.sql.SQLException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -14,18 +10,13 @@ import com.hce.ducati.entity.Zelation;
 import com.hce.ducati.o.Params;
 import com.hce.ducati.o.SubTestDto;
 import com.hce.ducati.service.XxxService;
-import com.hce.ducati.service.XxxServiceShardingProxy;
-import com.quincy.sdk.AuthHelper;
 import com.quincy.sdk.DynamicField;
-import com.quincy.sdk.o.User;
 
 import redis.clients.jedis.JedisCluster;
 
 @Primary
 @Service
 public class XxxServiceShardingImpl implements XxxService {
-	@Autowired
-	private XxxServiceShardingProxy xxxServiceShardingProxy;
 
 	@Override
 	public String testTx(String s, Params p) {
@@ -43,11 +34,6 @@ public class XxxServiceShardingImpl implements XxxService {
 	public void testRedisCluster(String arg0, JedisCluster jedis, String arg1, JedisCluster jedis2, String arg2) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public String classInfo() {
-		return xxxServiceShardingProxy.classInfo();
 	}
 
 	@Override
@@ -114,14 +100,6 @@ public class XxxServiceShardingImpl implements XxxService {
 	public void testUpdation4() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public Object findSubTests(int limit, int offset)
-			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
-			NoSuchMethodException, SecurityException, SQLException, IOException, CloneNotSupportedException {
-		User user = AuthHelper.getUser();
-		return xxxServiceShardingProxy.findSubTests(user.getShardingKey(), limit, offset);
 	}
 
 	@Override

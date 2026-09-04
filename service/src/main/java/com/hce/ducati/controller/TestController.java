@@ -34,8 +34,8 @@ import jakarta.servlet.http.HttpServletResponse;
 public class TestController {
 	@Value("${spring.pid.file}")
 	private String pid;
-	@Value("${ducati.host}")
-	private String host;
+//	@Value("${ducati.host}")
+//	private String host;
 //	@Value("${spring.mvc.pathmatch.matching-strategy}")
 //	private String matchingStrategy;
 //	@Value("${spring.freemarker.template-loader-path}")
@@ -61,11 +61,11 @@ public class TestController {
 		return "OK";
 	}
 
-	@RequestMapping("/test/honda")
+	/*@RequestMapping("/test/honda")
 	@ResponseBody
 	public String get() {
 		return this.host;
-	}
+	}*/
 
 	@RequestMapping("/pid")
 	@ResponseBody

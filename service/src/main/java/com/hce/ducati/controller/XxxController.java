@@ -70,8 +70,8 @@ import redis.clients.jedis.Jedis;
 public class XxxController {
 	@Autowired
 	private QuincyFeign quincyFeign;
-	@Autowired
-	private InnerFeign innerFeign;
+//	@Autowired
+//	private InnerFeign innerFeign;
 //	@Autowired(required = false)
 //	private DucatiSpringCloudClient ducatiSpringCloudClient;
 	@Autowired
@@ -95,14 +95,14 @@ public class XxxController {
 		zzzService.testTxQuery();
 	}
 
-	@Autowired
+	/*@Autowired
 	private CenterFeign centerFeign;
 
 	@RequestMapping("/testf")
 	@ResponseBody
 	public String testf() {
 		return centerFeign.actuator();
-	}
+	}*/
 
 	@GetMapping("/error/json")
 	@ResponseBody
@@ -113,14 +113,6 @@ public class XxxController {
 	@GetMapping("/error/page")
 	public String testErrPage() {
 		throw new RuntimeException("WWWWXXXXX");
-	}
-
-	@GetMapping("/proxy")
-	@ResponseBody
-	public String testProxy() {
-		String info = xxxService.classInfo();
-		log.info("\r\n"+info);
-		return info.replaceAll("\r\n", "<br/>");
 	}
 
 	@HystrixCommand(fallbackMethod = "hystrixFailure", commandProperties = {

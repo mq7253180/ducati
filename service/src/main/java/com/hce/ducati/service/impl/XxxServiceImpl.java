@@ -1,8 +1,5 @@
 package com.hce.ducati.service.impl;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +16,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 //import com.hce.ducati.client.DucatiClient;
-import com.hce.ducati.client.InnerFeign;
 import com.hce.ducati.dao.TestDao;
 import com.hce.ducati.dao.ZelationRepository;
 import com.hce.ducati.entity.Enterprise;
@@ -28,20 +24,15 @@ import com.hce.ducati.mapper.EnterpriseMapper;
 import com.hce.ducati.mapper.TestMapper;
 import com.hce.ducati.o.Params;
 import com.hce.ducati.o.SubTestDto;
-import com.hce.ducati.o.SubTestDynamicFieldsDto;
 import com.hce.ducati.service.XxxService;
 import com.hce.ducati.service.ZzzService;
 import com.hce.ducati.service.ZzzzService;
 //import com.quincy.sdk.annotation.ZooKeeperInjector;
 import com.quincy.sdk.annotation.transaction.DTransactional;
 import com.quincy.sdk.DynamicField;
-import com.quincy.sdk.JdbcDao;
-import com.quincy.sdk.annotation.L2Cache;
 //import com.quincy.sdk.ZKContext;
 //import com.quincy.sdk.annotation.ZkSynchronized;
-import com.quincy.sdk.annotation.DurationLog;
 import com.quincy.sdk.annotation.JedisSupport;
-import com.quincy.sdk.annotation.Cache;
 
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.JedisCluster;
@@ -53,8 +44,8 @@ public class XxxServiceImpl implements XxxService {
 //	private ZKContext zkContext;
 	@Value("${spring.application.name}")
 	private String appName;
-	@Autowired
-	private InnerFeign innerFeign;
+//	@Autowired
+//	private InnerFeign innerFeign;
 //	@DubboReference(version = "1.0.0")
 //	private DucatiClient ducatiClient;
 	@Autowired
@@ -90,31 +81,7 @@ public class XxxServiceImpl implements XxxService {
 		return this.testTx(s, p);
 	}
 
-	@Override
-	public String classInfo() {
-		return new StringBuilder(1000)
-				.append(this.classInfo(zzzService, "WITH_AOP"))
-				.append("\r\n")
-				.append(this.classInfo(zzzzService, "NO_AOP_AOP"))
-				.append("\r\n")
-				.append(this.classInfo(innerFeign, "SPRINGCLOUD_FEIGN"))
-//				.append("\r\n")
-//				.append(this.classInfo(ducatiClient, "DUBBO_CLIENT"))
-				.toString();
-	}
-
 	private final static String CLASS_INFO = "====================Name: %s---CanonicalName: %s---SimpleName: %s---TypeName: %s";
-
-	private String classInfo(Object obj, String flag) {
-		Class<?> clazz = obj.getClass();
-		Class<?> superClass = clazz.getSuperclass();
-		StringBuilder sb = new StringBuilder(300)
-				.append("%s_THIS")
-				.append(CLASS_INFO)
-				.append("\r\n%s_SUPER")
-				.append(CLASS_INFO);
-		return String.format(sb.toString(), flag, clazz.getName(), clazz.getCanonicalName(), clazz.getSimpleName(), clazz.getTypeName(), flag, superClass.getName(), superClass.getCanonicalName(), superClass.getSimpleName(), superClass.getTypeName());
-	}
 
 	public static void main(String[] args) {
 		System.out.println(String.format(CLASS_INFO, "xxx", "www", "xxx", "www"));
@@ -241,22 +208,6 @@ public class XxxServiceImpl implements XxxService {
 	public void testUpdation4() {
 		Date date = new Date();
 		testDao.testUpateRecord4("www", 6, "xxx", -1.23f, date, date, date, 21);
-	}
-
-	@Autowired
-	private JdbcDao jdbcDao;
-
-	@DurationLog
-	@Cache(expire = 60, retries = 10, millisBetweenRetries = 200)
-	@L2Cache(expire = 90)
-	@Override
-	public Object findSubTests(int limit, int offset) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, SQLException, IOException, CloneNotSupportedException {
-		try {
-			Thread.sleep(700);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return jdbcDao.executeQueryWithDynamicColumns("SELECT s.id,s.eee,s.fff,f.id,f.name,f.sort,v.value_decimal,v.value_str FROM (SELECT * FROM sub_test LIMIT "+limit+" OFFSET "+offset+")", "sub_test", SubTestDto.class, SubTestDynamicFieldsDto.class);
 	}
 
 	@Override

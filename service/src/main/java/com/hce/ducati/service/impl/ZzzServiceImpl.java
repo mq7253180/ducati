@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hce.ducati.dao.CompanyRepository;
 import com.hce.ducati.dao.TestDao;
 import com.hce.ducati.mapper.TestMapper;
 import com.hce.ducati.o.Params;
@@ -84,9 +83,6 @@ public class ZzzServiceImpl implements ZzzService {
 		}
 		log.info("==============CALL_DUBBO");
 	}
-
-	@Autowired
-	private CompanyRepository companyRepository;
 
 	public void confirmCallHttp(int _i, int[] ii, Params[] ps) throws IOException {
 		try {

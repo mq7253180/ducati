@@ -12,7 +12,7 @@ import com.hce.ducati.o.UestDto;
 import com.hce.ducati.service.PerformanceServiceShardingProxy;
 import com.quincy.sdk.annotation.DurationLog;
 import com.quincy.sdk.annotation.jdbc.ReadOnly;
-import com.quincy.sdk.annotation.sharding.ShardingKey;
+import com.quincy.sdk.annotation.jdbc.ShardingKey;
 
 @Service
 public class PerformanceServiceShardingProxyImpl extends PerformanceServiceImpl implements PerformanceServiceShardingProxy {
